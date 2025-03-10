@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.dba715f2.css",
-    "main.js": "/static/js/main.c90fb9fc.js",
+    "main.css": "/static/css/main.845b518a.css",
+    "main.js": "/static/js/main.6365ac61.js",
     "static/css/64.bba8fa55.chunk.css": "/static/css/64.bba8fa55.chunk.css",
     "static/js/64.56dc6704.chunk.js": "/static/js/64.56dc6704.chunk.js",
     "static/css/769.b3cbb36b.chunk.css": "/static/css/769.b3cbb36b.chunk.css",
@@ -22,16 +22,15 @@
     "static/media/saayaHealthLogo.webp": "/static/media/saayaHealthLogo.60b27d1f184fadfce43a.webp",
     "static/media/nextuLogo.webp": "/static/media/nextuLogo.e033dbfa4c58c0a906aa.webp",
     "index.html": "/index.html",
-    "static/media/talksCardBack.svg": "/static/media/talksCardBack.99241699e0279aeb0db7.svg",
-    "main.dba715f2.css.map": "/static/css/main.dba715f2.css.map",
-    "main.c90fb9fc.js.map": "/static/js/main.c90fb9fc.js.map",
+    "main.845b518a.css.map": "/static/css/main.845b518a.css.map",
+    "main.6365ac61.js.map": "/static/js/main.6365ac61.js.map",
     "64.bba8fa55.chunk.css.map": "/static/css/64.bba8fa55.chunk.css.map",
     "64.56dc6704.chunk.js.map": "/static/js/64.56dc6704.chunk.js.map",
     "769.b3cbb36b.chunk.css.map": "/static/css/769.b3cbb36b.chunk.css.map",
     "769.bda0d7b7.chunk.js.map": "/static/js/769.bda0d7b7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dba715f2.css",
-    "static/js/main.c90fb9fc.js"
+    "static/css/main.845b518a.css",
+    "static/js/main.6365ac61.js"
   ]
 }
