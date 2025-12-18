@@ -1,0 +1,83 @@
+Nirmit Hitendra Dagli
+760 Mix Avenue, 6T05, Hamden CT | 475-317-4538 | ndagli@quinnipiac.edu |GitHub | LinkedIn
+EDUCATION
+Quinnipiac University| Master of Computer Science | GPA 3.8/4 	May 2026
+Relevant Courses: Computer Networks, GenAI & Quantum Computing, and working on research related to Quantum Computing and Generative AI.
+University of Mumbai, India | Bachelor of Engineering in Information Technology | GPA: 3.1/4 	May 2020
+Relevant Courses: Python, Cloud Computing, Operating Systems, Software Development, IoT.
+TECHNICAL SKILLS
+Programming and Scripting Languages: Python, Java, C++, Bash, and YAML.
+Frameworks & Technologies: AWS, GCP, Azure, Docker, Kubernetes, Storage, DevOps, Networks, Linux, ELK, DevOps, Cybersecurity, IAC.
+System Administration: CentOS, Red Hat, Kali, Ubuntu, Oracle Linux, Microsoft Windows Server, VMware, KVM, Ovirt, OpenShift.
+Tools: Palo Alto, FortiGate, Pfsense, Veeam Backup, Jenkins, Ansible, GitHub, Grafana, Dynatrace, Jira, Prometheus, Zscaler, CrowdStrike,
+Cribble, CyberArk, Argocd, MongoDB, PostgreSQL, Terraform, Grafana, Rancher, NetApp, Kyverno, OPA, Velero, Draw.io.
+AI Tools & Technologies: Cursor, Multimodal, Bedrock, Azure AI Foundry, Amazon Q, Hugging Face, Ollama, Langchain, RAG & Vector Database
+Product Tools: Jira, GitHub, Confluence, MS Teams.
+Soft Skills: Program Management, Leadership, Communication, Teamwork, Problem-Solving, Time Management, and Critical Thinking.
+WORK EXPERIENCE
+Cloud and AI Engineer Intern | State Street | Boston, USA 	June 2025 - August 2025
+ 	Managed delivery of an AI chatbot project using Azure AI Foundry; coordinated Logic Apps workflow and Teams integration for AWS
+Federation support.
+ 	Championed GitHub Copilot adoption, engaging developers and tracking productivity improvements.
+ 	Oversaw rollout of Amazon Q across 44 AWS accounts, ensuring stakeholder enablement and successful adoption.
+ 	Coordinated validation of Terraform modules and OPA policies with security teams, reducing delivery risks.
+Research Assistant | Quinnipiac University| Hamden, Connecticut 	August 2025
+ 	Led SPARK framework project (Generative AI + RAG) as a product initiative, coordinating design, experimentation, and deployment on
+AWS Bedrock & GCP.
+ 	PrivAItect development (privacy threat model platform), aligning MITRE PANOPTIC standards with research and product use cases.
+ 	Coordinated cross-functional collaboration on Quantum–Classical algorithm benchmarking, aligning outcomes with academic and
+enterprise research goals.
+Graduate Assistant | Quinnipiac University| North Haven, Connecticut 	August 2024
+ 	Assisted professors and staff with projects, resolved student queries, and automated workflows, reducing manual clerical work by 60%
+through scripting and process optimization.
+DevOps Engineer | Ini8 Labs| Bangalore, India 	January 2021 – Jun 2024
+ 	Oversaw delivery of Infrastructure-as-Code and DevSecOps implementations for client projects.
+ 	Facilitated Agile sprint planning, mentored junior engineers, and produced documentation for sustainable knowledge transfer.
+ 	Coordinated release schedules and stakeholder expectations during multi-cloud migrations.
+Senior SaaS Infrastructure Engineer | Zycus Pvt. Ltd. | Mumbai, India 	January 2021 – Jun 2024
+ 	Directed cloud infrastructure programs across AWS, Azure, and VMware, overseeing design and deployment of services (EC2,
+EKS, VPC, IAM, Route 53, CloudFront) for mission-critical applications while driving cost optimization strategies.
+ 	Led automation and AI-driven transformation, delivering 80% IT task reduction and improving system availability by 70%
+through Generative AI agents (Azure OpenAI & GCP).
+ 	Managed Kubernetes modernization initiative, migrating and optimizing 50+ clusters; coordinated CI/CD pipeline rollout and
+middleware automation, reducing manual intervention by 50%.
+ 	Coordinated enterprise security and disaster recovery efforts, including ransomware recovery, strengthening defenses with
+CyberArk, Zscaler, and CrowdStrike, and implementing enterprise-grade backup systems.
+ 	Delivered multi-cloud architecture & SRE improvements, integrating AWS, Azure, and GCP for high availability, and enhancing
+reliability with proactive monitoring (OpsGenie, CloudWatch, ELK), cutting incident resolution times.
+ 	Collaborated with cross-functional teams (product, infra, security, operations) to align infrastructure upgrades with
+organizational goals, ensuring smooth change management and stakeholder adoption
+ACADEMIC PROJECTS
+SPARK Plug and Play Framework – Generative AI | Hugging Face Models, Python, Bedrock, Nvidia and GCP 	May 2025
+ 	Built an AI Tutor platform providing 24/7 academic support across multiple subjects using generative AI, LLMs, and RAG. Designed and integrated
+knowledge ingestion, subject-specific tutoring, and interactive Q&A with scalable deployment on AWS Bedrock & GCP.
+
+-- 1 of 2 --
+
+PrivAItect: Privacy Management - Generative AI | Python, Bedrock, MITRE PANOPTIC, LINDDUN 	May 2025
+ 	Developed PrivAItect, an AI-powered platform that transforms user system descriptions into threat-aware architectures using LINDDUN,
+ThreatModeler, and MITRE PANOPTIC, leveraging Amazon Bedrock for real-time privacy risk analysis.
+Database Convertor | Python, AWS and Flask 	December 2024
+ 	Built a web app to transform datasets across AWS databases (RDS, DynamoDB, Neptune, Document DB) via a user-friendly UI. Configured the
+system on Linux servers, automating database migration and ensuring seamless functionality
+Grover’s Algorithm for String Search and Its Practical Limits 	August 2025
+ 	Implemented and analyzed Grover’s quantum search algorithm for string matching, benchmarking speedups against classical search
+approaches on IBM Qiskit and Google Cirq simulators.
+CERTIFICATION, RESEARCH PAPER & EXTRACURRICULAR ACTIVITIES
+ 	Generative AI: SPARK – Smart Plug-and-play AI framework for RAG & Knowledge, Published in IEEE. 	October 2025
+ 	Quantum Computing: Grover’s Algorithm for String Search and Its Practical Limits, Published in SEET, Springer. 	August 2025
+ 	Single Sign On, Published in IRJET. 	April 2020
+ 	Langchain for LLM Application Development Certified, DeepLearning.AI 	June 2025
+ 	Certified Kubernetes Application Developer – CKAD 	January 2025
+ 	Certified Kubernetes Administrator - CKA 	March 2024
+ 	AWS Certified Solution Architect. 	November 2022
+ 	Single Sign On, Published in IRJET. 	April 2020
+ 	REDHAT Certified System Administrator RHCSA - apshah/fcsllp/2018-19/rhcsa-003. 	April 2018
+ 	IEEE Student Group: Active contributor to academic and professional initiatives.
+ 	Quantum Research Group: Collaborating on projects with IBM and Google Quantum platforms.
+ 	I am an active member of the International Student Advisory Board and OISS, contributing to student initiatives and
+academic improvements, and engaged in various extracurricular activities, fostering leadership, teamwork, and community
+involvement.
+
+-- 2 of 2 --
+

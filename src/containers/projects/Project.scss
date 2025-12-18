@@ -1,0 +1,71 @@
+@import "../../_globalColor";
+
+// Theme colors
+$accent-yellow: #FFD700;
+$accent-yellow-dark: #b8860b;
+
+.project-title {
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: normal;
+  color: #FFFFFF;
+}
+
+.project-subtitle {
+  color: $accent-yellow;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.startup-project-text img {
+  max-width: 100%;
+  height: auto;
+}
+
+.repo-cards-div-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Light Mode */
+.light-mode {
+  .project-title {
+    color: #1a1a2e;
+  }
+
+  .project-subtitle {
+    color: $accent-yellow-dark;
+  }
+}
+
+/* Media Query */
+@media (max-width: 1380px) {
+  .project-title {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-title {
+    font-size: 30px;
+    text-align: center;
+  }
+  
+  .project-subtitle {
+    text-align: center;
+  }
+  
+  .repo-cards-div-main {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .repo-cards-div-main {
+    grid-template-columns: 1fr;
+  }
+}

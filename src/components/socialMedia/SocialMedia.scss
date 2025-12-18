@@ -1,0 +1,164 @@
+@import "../../_globalColor";
+
+// SHUBHZ TECHWORK Theme
+$accent-yellow: #FFD700;
+$bg-dark: #1A1A1E;
+
+.social-media-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.icon-button {
+  margin-bottom: 0;
+  display: inline-flex;
+}
+
+.icon-button i {
+  color: #FFFFFF;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  height: 3rem;
+  width: 3rem;
+  position: relative;
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Social Media Icon Colors */
+.facebook i,
+.linkedin i,
+.github i,
+.gitlab i,
+.google i,
+.twitter i,
+.medium i,
+.stack-overflow i,
+.kaggle i,
+.instagram i {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Hover Effects - Yellow glow */
+.icon-button i:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.25);
+  color: $accent-yellow;
+}
+
+.facebook i:hover {
+  background: rgba($faceBook, 0.2);
+  border-color: rgba($faceBook, 0.5);
+  color: $faceBook;
+  box-shadow: 0 8px 25px rgba($faceBook, 0.3);
+}
+
+.linkedin i:hover {
+  background: rgba($linkedin, 0.2);
+  border-color: rgba($linkedin, 0.5);
+  color: $linkedin;
+  box-shadow: 0 8px 25px rgba($linkedin, 0.3);
+}
+
+.github i:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.gitlab i:hover {
+  background: rgba($gitlab, 0.2);
+  border-color: rgba($gitlab, 0.5);
+  color: $gitlab;
+  box-shadow: 0 8px 25px rgba($gitlab, 0.3);
+}
+
+.google i:hover {
+  background: rgba($google, 0.2);
+  border-color: rgba($google, 0.5);
+  color: $google;
+  box-shadow: 0 8px 25px rgba($google, 0.3);
+}
+
+.twitter i:hover {
+  background: rgba($twitter, 0.2);
+  border-color: rgba($twitter, 0.5);
+  color: $twitter;
+  box-shadow: 0 8px 25px rgba($twitter, 0.3);
+}
+
+.medium i:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.stack-overflow i:hover {
+  background: rgba($stackoverflow, 0.2);
+  border-color: rgba($stackoverflow, 0.5);
+  color: $stackoverflow;
+  box-shadow: 0 8px 25px rgba($stackoverflow, 0.3);
+}
+
+.kaggle i:hover {
+  background: rgba($kaggle, 0.2);
+  border-color: rgba($kaggle, 0.5);
+  color: $kaggle;
+  box-shadow: 0 8px 25px rgba($kaggle, 0.3);
+}
+
+.instagram i:hover {
+  background: rgba($instagram, 0.2);
+  border-color: rgba($instagram, 0.5);
+  color: $instagram;
+  box-shadow: 0 8px 25px rgba($instagram, 0.3);
+}
+
+/* Active state */
+.icon-button i:active {
+  transform: translateY(-2px);
+}
+
+/* Media Query */
+@media (max-width: 768px) {
+  .social-media-div {
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .icon-button i {
+    height: 2.75rem;
+    width: 2.75rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-media-div {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .icon-button i {
+    height: 2.5rem;
+    width: 2.5rem;
+    font-size: 0.9rem;
+  }
+}

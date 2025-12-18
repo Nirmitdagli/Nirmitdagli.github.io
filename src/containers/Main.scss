@@ -1,0 +1,21 @@
+@import "../_globalColor";
+
+/* Light Mode - Default */
+.light-mode {
+  background-color: #FFFFFF;
+  color: #1a1a2e;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: #121214;
+  color: #FFFFFF;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure all sections have consistent background */
+section,
+.main-div {
+  background-color: inherit;
+}

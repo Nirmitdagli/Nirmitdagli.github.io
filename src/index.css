@@ -1,0 +1,141 @@
+/* Google Fonts - SHUBHZ TECHWORK Typography */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@font-face {
+  font-family: "Agustina Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Agustina Regular"),
+    url("./assets/fonts/Agustina.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url("./assets/fonts/Montserrat-Regular.ttf") format("woff");
+  font-display: swap;
+}
+
+/* CSS Reset & Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+  background: #121214;
+  color: #E5E5E5;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Light Mode Body */
+.light-mode {
+  background: #FFFFFF;
+  color: #1a1a2e;
+}
+
+/* Dark Mode Body */
+.dark-mode {
+  background: #121214;
+  color: #FFFFFF;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Plus Jakarta Sans", "Montserrat", sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode h3, 
+.dark-mode h4, .dark-mode h5, .dark-mode h6 {
+  color: #FFFFFF;
+}
+
+.light-mode h1, .light-mode h2, .light-mode h3, 
+.light-mode h4, .light-mode h5, .light-mode h6 {
+  color: #1a1a2e;
+}
+
+code {
+  font-family: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Selection Styling - Yellow Theme */
+::selection {
+  background: rgba(255, 215, 0, 0.3);
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background: rgba(255, 215, 0, 0.3);
+  color: #FFFFFF;
+}
+
+/* Scrollbar Styling - Yellow Theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A1A1E;
+}
+
+.light-mode ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FFD700, #E5C100);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FFE44D, #FFD700);
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #FFD700;
+}
+
+.light-mode a:hover {
+  color: #b8860b;
+}
+
+/* Media Query */
+@media (max-width: 1380px) {
+  html,
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}

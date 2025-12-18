@@ -1,0 +1,138 @@
+@import "../../_globalColor";
+
+// Theme colors
+$accent-yellow: #FFD700;
+$accent-yellow-dark: #b8860b;
+
+.dev-icons {
+  padding-left: 0;
+  list-style: none;
+  font-size: 3rem;
+  margin-bottom: 0px;
+  margin-top: 1rem;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.software-skill-inline {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 15px;
+  padding: 15px;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Staggered animation on load */
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  animation: skillIconReveal 0.6s ease forwards;
+}
+
+/* Stagger delays for each skill */
+.software-skill-inline:nth-child(1) { animation-delay: 0.1s; }
+.software-skill-inline:nth-child(2) { animation-delay: 0.15s; }
+.software-skill-inline:nth-child(3) { animation-delay: 0.2s; }
+.software-skill-inline:nth-child(4) { animation-delay: 0.25s; }
+.software-skill-inline:nth-child(5) { animation-delay: 0.3s; }
+.software-skill-inline:nth-child(6) { animation-delay: 0.35s; }
+.software-skill-inline:nth-child(7) { animation-delay: 0.4s; }
+.software-skill-inline:nth-child(8) { animation-delay: 0.45s; }
+.software-skill-inline:nth-child(9) { animation-delay: 0.5s; }
+.software-skill-inline:nth-child(10) { animation-delay: 0.55s; }
+.software-skill-inline:nth-child(11) { animation-delay: 0.6s; }
+.software-skill-inline:nth-child(12) { animation-delay: 0.65s; }
+
+@keyframes skillIconReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.software-skill-inline:hover {
+  transform: translateY(-8px) scale(1.1);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.software-skill-inline > i {
+  color: #9CA3AF;
+  transition: all 0.3s ease;
+  font-size: 2.5rem;
+}
+
+.software-skill-inline:hover > i {
+  color: $accent-yellow;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  transform: scale(1.1);
+}
+
+.software-skill-inline > p {
+  color: #9CA3AF;
+  font-size: 0.75rem;
+  margin-top: 8px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.software-skill-inline:hover > p {
+  color: $accent-yellow;
+}
+
+/* Light Mode */
+.light-mode {
+  .software-skill-inline > i {
+    color: #555577;
+  }
+
+  .software-skill-inline:hover {
+    background: rgba(184, 134, 11, 0.1);
+  }
+
+  .software-skill-inline:hover > i {
+    color: $accent-yellow-dark;
+    text-shadow: 0 0 20px rgba(184, 134, 11, 0.3);
+  }
+
+  .software-skill-inline > p {
+    color: #555577;
+  }
+
+  .software-skill-inline:hover > p {
+    color: $accent-yellow-dark;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dev-icons {
+    font-size: 2.5rem;
+  }
+
+  .software-skill-inline {
+    margin: 8px 10px;
+    padding: 10px;
+  }
+
+  .software-skill-inline > i {
+    font-size: 2rem;
+  }
+
+  .software-skill-inline > p {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .software-skill-inline {
+    margin: 5px 8px;
+    padding: 8px;
+  }
+
+  .software-skill-inline > i {
+    font-size: 1.75rem;
+  }
+}

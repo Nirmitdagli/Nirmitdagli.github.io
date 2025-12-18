@@ -1,0 +1,251 @@
+/* Terminal Loading Screen - SHUBHZ TECHWORK Theme */
+
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0c;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Background Effects */
+.splash-bg-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.splash-bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Content Container */
+.splash-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+}
+
+/* Logo */
+.splash-logo {
+  font-size: 2.5rem;
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  animation: logoGlow 2s ease-in-out infinite alternate;
+}
+
+.logo-bracket {
+  color: #6b7280;
+}
+
+.logo-name {
+  color: #FFD700;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes logoGlow {
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.2); }
+}
+
+/* Terminal Window */
+.splash-terminal {
+  width: 100%;
+  background: #1a1a1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 215, 0, 0.1),
+    0 0 100px rgba(255, 215, 0, 0.05);
+  animation: terminalFloat 3s ease-in-out infinite;
+}
+
+@keyframes terminalFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 12px 16px;
+  background: #121214;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-btn.red {
+  background: #ff5f56;
+  box-shadow: 0 0 10px rgba(255, 95, 86, 0.5);
+}
+
+.terminal-btn.yellow {
+  background: #ffbd2e;
+  box-shadow: 0 0 10px rgba(255, 189, 46, 0.5);
+}
+
+.terminal-btn.green {
+  background: #27ca40;
+  box-shadow: 0 0 10px rgba(39, 202, 64, 0.5);
+}
+
+.terminal-title {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.terminal-body {
+  padding: 1.5rem;
+  min-height: 200px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.terminal-line {
+  color: #9CA3AF;
+  margin-bottom: 4px;
+  animation: lineAppear 0.3s ease-out;
+}
+
+@keyframes lineAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.terminal-line.command {
+  color: #FFD700;
+}
+
+.terminal-line.success {
+  color: #4ADE80;
+}
+
+.terminal-line--current {
+  color: #E5E5E5;
+}
+
+.terminal-cursor {
+  color: #FFD700;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Progress Bar */
+.splash-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.splash-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #FFD700, #FFE44D);
+  border-radius: 4px;
+  transition: width 0.3s ease-out;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .splash-logo {
+    font-size: 1.8rem;
+  }
+
+  .splash-terminal {
+    border-radius: 8px;
+  }
+
+  .terminal-body {
+    padding: 1rem;
+    min-height: 180px;
+    font-size: 0.8rem;
+  }
+
+  .terminal-header {
+    padding: 10px 12px;
+  }
+
+  .terminal-btn {
+    width: 10px;
+    height: 10px;
+  }
+
+  .terminal-title {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-logo {
+    font-size: 1.5rem;
+  }
+
+  .terminal-body {
+    font-size: 0.75rem;
+    min-height: 160px;
+    padding: 0.75rem;
+  }
+
+  .splash-content {
+    gap: 1.5rem;
+  }
+}

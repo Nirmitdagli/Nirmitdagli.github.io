@@ -1,0 +1,72 @@
+@import "../../_globalColor";
+
+// Theme colors
+$accent-yellow: #FFD700;
+$accent-yellow-dark: #b8860b;
+
+.experience-cards-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.5rem;
+}
+
+.experience-heading {
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.experience-subtitle {
+  color: $accent-yellow;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.experience-container {
+  display: flex;
+  width: 90%;
+  padding: 20px 10px;
+  margin: 0px auto;
+  margin-top: 2rem;
+}
+
+.experience-container > * {
+  flex: 1;
+}
+
+/* Light Mode */
+.light-mode {
+  .experience-heading {
+    color: #1a1a2e;
+  }
+
+  .experience-subtitle {
+    color: $accent-yellow-dark;
+  }
+}
+
+/* Media Query */
+@media (max-width: 1380px) {
+  .experience-heading {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .experience-heading {
+    font-size: 30px;
+    text-align: center;
+  }
+  
+  .experience-subtitle {
+    text-align: center;
+  }
+  
+  .experience-container {
+    flex-direction: column;
+    width: 100%;
+  }
+}

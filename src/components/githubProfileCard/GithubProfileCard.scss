@@ -1,0 +1,140 @@
+@import "../../_globalColor";
+
+// Theme colors
+$accent-yellow: #FFD700;
+$accent-yellow-dark: #b8860b;
+
+.profile-image {
+  border-radius: 50%;
+  border: 0.4rem solid $accent-yellow;
+  margin-left: auto;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease-out;
+}
+
+.profile-image:hover {
+  box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+  transform: scale(1.02);
+}
+
+.prof-title {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.location-div {
+  color: #9CA3AF;
+  font-size: 1rem;
+}
+
+.opp-div {
+  padding-bottom: 1rem;
+  color: #9CA3AF;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.main-content-profile {
+  flex: 70%;
+}
+
+.image-content-profile {
+  text-align: right;
+  flex: 30%;
+  max-width: 100%;
+  height: auto;
+}
+
+.bio-text {
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: #9CA3AF;
+}
+
+.desc-prof {
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #9CA3AF;
+}
+
+.subTitle {
+  color: $accent-yellow;
+}
+
+/* Light Mode */
+.light-mode {
+  .profile-image {
+    border-color: $accent-yellow-dark;
+    box-shadow: 0 0 30px rgba(184, 134, 11, 0.2);
+  }
+
+  .profile-image:hover {
+    box-shadow: 0 0 50px rgba(184, 134, 11, 0.3);
+  }
+
+  .prof-title {
+    color: #1a1a2e;
+  }
+
+  .location-div,
+  .opp-div,
+  .bio-text,
+  .desc-prof {
+    color: #555577;
+  }
+
+  .subTitle {
+    color: $accent-yellow-dark;
+  }
+}
+
+@media (max-width: 768px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .main-content-profile {
+    text-align: center;
+    order: 2;
+  }
+
+  .bio-text {
+    font-size: 0.95rem;
+  }
+
+  .image-content-profile {
+    margin-left: auto;
+    margin-right: auto;
+    order: 1;
+  }
+
+  .desc-prof {
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+
+  .profile-image {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+  }
+
+  .prof-title {
+    padding-bottom: 0.5rem;
+    text-align: center;
+  }
+}

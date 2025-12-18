@@ -1,0 +1,126 @@
+@import "../../_globalColor";
+
+// Theme colors
+$accent-yellow: #FFD700;
+$accent-yellow-dark: #b8860b;
+
+.card-image {
+  max-width: 100%;
+  height: auto;
+  width: 250px;
+}
+
+.card-title {
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 700;
+  margin: 15px 0 0 0;
+}
+
+.card-subtitle {
+  color: #9CA3AF;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.certificate-card {
+  background-color: #1a1a1e;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.certificate-detail-div {
+  text-align: center;
+}
+
+.certificate-card:hover {
+  box-shadow: 0 8px 30px rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+/* Light Mode */
+.light-mode .certificate-card {
+  background-color: #f8f9fc;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.light-mode .certificate-card:hover {
+  box-shadow: 0 8px 30px rgba(184, 134, 11, 0.15);
+  border-color: rgba(184, 134, 11, 0.3);
+}
+
+.light-mode .card-title {
+  color: #1a1a2e;
+}
+
+.light-mode .card-subtitle {
+  color: #555577;
+}
+
+.certificate-image-div {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+.achievement-cards-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.certificate-card-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.certificate-card-footer span.certificate-tag {
+  background: $accent-yellow;
+  color: #121214;
+  vertical-align: middle;
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  font-size: 0.75rem;
+  height: 2em;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 1.5;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0 0.75em;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  font-weight: 600;
+}
+
+span.certificate-tag:hover {
+  background: #FFE44D;
+}
+
+.light-mode .certificate-card-footer span.certificate-tag {
+  background: $accent-yellow-dark;
+  color: #FFFFFF;
+}
+
+.light-mode span.certificate-tag:hover {
+  background: #a07608;
+}
+
+@media (max-width: 768px) {
+  .achievement-cards-div {
+    grid-template-columns: 1fr;
+  }
+}

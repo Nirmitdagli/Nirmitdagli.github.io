@@ -1,0 +1,132 @@
+@import "../../_globalColor";
+
+// Theme colors
+$accent-yellow: #FFD700;
+$accent-yellow-dark: #b8860b;
+
+.card-image {
+  max-width: 100%;
+  height: auto;
+  width: 250px;
+}
+
+.card-title {
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 700;
+  margin: 15px 0 0 0;
+}
+
+.card-subtitle {
+  color: #9CA3AF;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1e;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.project-card-light {
+  background-color: #f8f9fc;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.project-card-light .card-title {
+  color: #1a1a2e;
+}
+
+.project-card-light .card-subtitle {
+  color: #555577;
+}
+
+.project-card-dark {
+  box-shadow: 0px 10px 30px -15px rgba(255, 215, 0, 0.1);
+}
+
+.project-detail {
+  text-align: center;
+}
+
+.project-card-light:hover {
+  box-shadow: 0 8px 30px rgba(184, 134, 11, 0.15);
+  border-color: rgba(184, 134, 11, 0.3);
+}
+
+.project-card-dark:hover {
+  box-shadow: 0px 20px 30px -10px rgba(255, 215, 0, 0.15);
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.project-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card-footer span.project-tag {
+  background: $accent-yellow;
+  color: #121214;
+  vertical-align: middle;
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  font-size: 0.75rem;
+  height: 2em;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 1.5;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0 0.75em;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  font-weight: 600;
+}
+
+.project-card-footer span.project-tag:hover {
+  background: #FFE44D;
+}
+
+/* Light Mode */
+.light-mode {
+  .project-card-footer span.project-tag {
+    background: $accent-yellow-dark;
+    color: #FFFFFF;
+  }
+
+  .project-card-footer span.project-tag:hover {
+    background: #a07608;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-subtitle {
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+}

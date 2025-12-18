@@ -1,0 +1,319 @@
+@import "./_globalColor";
+
+// Theme colors
+$bg-dark: #121214;
+$bg-light: #FFFFFF;
+$text-dark: #1a1a2e;
+$text-light: #FFFFFF;
+$accent-yellow: #FFD700;
+$accent-yellow-dark: #b8860b;
+$gray-light: #6b7280;
+
+.App {
+  text-align: center;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: $appHeaderBG;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(0.625rem + 2vmin);
+  color: $textColorDark;
+}
+
+.App-link {
+  color: $appLink;
+}
+
+/* Global Section Styles */
+section,
+.main {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive container widths */
+.main {
+  width: 90%;
+  max-width: 1400px;
+  padding: 60px 20px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .main {
+    width: 92%;
+    padding: 50px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    width: 95%;
+    padding: 40px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    width: 100%;
+    padding: 30px 15px;
+  }
+}
+
+/* ============================================
+   DARK MODE - Default Theme
+   ============================================ */
+.dark-mode {
+  background-color: $bg-dark;
+  color: $text-light;
+
+  .subTitle {
+    color: $accent-yellow !important;
+  }
+}
+
+/* ============================================
+   LIGHT MODE - Comprehensive Overrides
+   ============================================ */
+.light-mode {
+  background-color: $bg-light;
+  color: $text-dark;
+
+  /* Section backgrounds */
+  section,
+  .main,
+  .skills-main-div,
+  .education-section,
+  .experience-section,
+  .projects-section,
+  .opensource-section,
+  .achievement-section,
+  .contact-div-main,
+  .footer-div {
+    background-color: $bg-light;
+  }
+
+  /* All headings */
+  h1, h2, h3, h4, h5, h6,
+  .skills-heading,
+  .education-heading,
+  .experience-heading,
+  .project-heading,
+  .achievement-heading,
+  .contact-heading,
+  .blog-heading,
+  .opensource-heading {
+    color: $text-dark !important;
+  }
+
+  /* Subtitles and accent text */
+  .subTitle {
+    color: $accent-yellow-dark !important;
+  }
+
+  /* Body text */
+  p,
+  .skills-text,
+  .education-text,
+  .experience-text,
+  .project-description,
+  .contact-subtitle,
+  .greeting-text-p,
+  .experience-description {
+    color: #555577 !important;
+  }
+
+  /* Cards */
+  .experience-card,
+  .education-card,
+  .project-card,
+  .achievement-card,
+  .repo-card-div {
+    background-color: #f8f9fc !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .experience-card:hover,
+  .education-card:hover,
+  .project-card:hover,
+  .achievement-card:hover,
+  .repo-card-div:hover {
+    box-shadow: 0 8px 30px rgba(184, 134, 11, 0.15) !important;
+  }
+
+  /* Card text */
+  .experience-card h3,
+  .education-card h3,
+  .project-card h3,
+  .achievement-card h3,
+  .repo-card-div h3 {
+    color: $text-dark !important;
+  }
+
+  .experience-card p,
+  .education-card p,
+  .project-card p,
+  .achievement-card p,
+  .repo-card-div p {
+    color: #555577 !important;
+  }
+
+  /* Contact section */
+  .contact-title {
+    color: $text-dark !important;
+  }
+
+  .contact-subtitle {
+    color: $accent-yellow-dark !important;
+  }
+
+  .contact-detail {
+    color: #555577 !important;
+  }
+
+  .contact-detail:hover {
+    color: $accent-yellow-dark !important;
+  }
+
+  /* Footer */
+  .footer-text {
+    color: #555577 !important;
+  }
+
+  /* Profile/GitHub section */
+  .profile-image-div {
+    border-color: $accent-yellow-dark !important;
+  }
+
+  .dev-icons i {
+    color: $text-dark !important;
+  }
+
+  .dev-icons i:hover {
+    color: $accent-yellow-dark !important;
+  }
+
+  /* Social icons in light mode */
+  .icon-button i {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: $text-dark !important;
+  }
+
+  .icon-button i:hover {
+    background: rgba(184, 134, 11, 0.1) !important;
+    border-color: $accent-yellow-dark !important;
+    color: $accent-yellow-dark !important;
+  }
+
+  /* Buttons */
+  .main-button {
+    background: $accent-yellow !important;
+    color: $text-dark !important;
+    border-color: $accent-yellow !important;
+  }
+
+  .main-button:hover {
+    background: transparent !important;
+    color: $accent-yellow-dark !important;
+    border-color: $accent-yellow-dark !important;
+  }
+
+  .download-link-button .main-button {
+    background: transparent !important;
+    color: $accent-yellow-dark !important;
+    border-color: $accent-yellow-dark !important;
+  }
+
+  .download-link-button .main-button:hover {
+    background: $accent-yellow !important;
+    color: $text-dark !important;
+  }
+
+  /* Progress bars */
+  .meter > span {
+    background: linear-gradient(90deg, $accent-yellow, $accent-yellow-dark) !important;
+  }
+
+  .meter {
+    background: rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Software skills icons */
+  .software-skill-inline i {
+    color: $text-dark !important;
+  }
+
+  .software-skill-inline i:hover {
+    color: $accent-yellow-dark !important;
+  }
+
+  .software-skill-inline p {
+    color: #555577 !important;
+  }
+
+  /* GitHub repo cards */
+  .repo-name-div,
+  .repo-description {
+    color: $text-dark !important;
+  }
+
+  .repo-stats span {
+    color: #555577 !important;
+  }
+
+  /* Work Experience */
+  .experience-text-role {
+    color: $text-dark !important;
+  }
+
+  .experience-text-company {
+    color: $accent-yellow-dark !important;
+  }
+
+  .experience-text-date {
+    color: #6b7280 !important;
+  }
+
+  .experience-text-desc {
+    color: #555577 !important;
+  }
+
+  /* Education */
+  .education-text-school {
+    color: $text-dark !important;
+  }
+
+  .education-text-subHeader {
+    color: $accent-yellow-dark !important;
+  }
+
+  .education-text-duration {
+    color: #6b7280 !important;
+  }
+
+  .education-text-desc {
+    color: #555577 !important;
+  }
+
+  /* Scroll to top button */
+  .top-btn-style {
+    background: $accent-yellow !important;
+    color: $text-dark !important;
+  }
+
+  .top-btn-style:hover {
+    background: $accent-yellow-dark !important;
+  }
+}
