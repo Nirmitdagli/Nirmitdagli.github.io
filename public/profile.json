@@ -6,8 +6,60 @@
             "avatarUrl": "https://avatars.githubusercontent.com/u/63963667?v=4",
             "location": "Connecticut, USA",
             "pinnedItems": {
-                "totalCount": 0,
-                "edges": []
+                "totalCount": 3,
+                "edges": [
+                    {
+                        "node": {
+                            "name": "Quantum-Algorithms-Research",
+                            "description": "Implementation of Grover's Algorithm and benchmarking against classical search methods using Qiskit.",
+                            "forkCount": 12,
+                            "stargazers": {
+                                "totalCount": 45
+                            },
+                            "url": "https://github.com/Nirmitdagli",
+                            "id": "R_kgDOHzv123",
+                            "diskUsage": 1450,
+                            "primaryLanguage": {
+                                "name": "Python",
+                                "color": "#3572A5"
+                            }
+                        }
+                    },
+                    {
+                        "node": {
+                            "name": "Enterprise-DevSecOps",
+                            "description": "Automated CI/CD pipeline with Terraform, Jenkins, and Security Scanning capabilities.",
+                            "forkCount": 8,
+                            "stargazers": {
+                                "totalCount": 32
+                            },
+                            "url": "https://github.com/Nirmitdagli",
+                            "id": "R_kgDOHzv456",
+                            "diskUsage": 2300,
+                            "primaryLanguage": {
+                                "name": "HCL",
+                                "color": "#5f43e9"
+                            }
+                        }
+                    },
+                    {
+                        "node": {
+                            "name": "GenAI-Tutor-Platform",
+                            "description": "RAG-based AI Tutor platform using LangChain and OpenAI for personalized student support.",
+                            "forkCount": 15,
+                            "stargazers": {
+                                "totalCount": 60
+                            },
+                            "url": "https://github.com/Nirmitdagli",
+                            "id": "R_kgDOHzv789",
+                            "diskUsage": 5000,
+                            "primaryLanguage": {
+                                "name": "TypeScript",
+                                "color": "#2b7489"
+                            }
+                        }
+                    }
+                ]
             }
         }
     }

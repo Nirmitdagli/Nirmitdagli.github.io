@@ -46,72 +46,46 @@ const socialMediaLinks = {
 };
 
 // Skills Section
-
 const skillsSection = {
-  title: "What I do",
-  subTitle: "CLOUD, DEVOPS, AI & QUANTUM COMPUTING ENTHUSIAST",
+  title: "What I Do",
+  subTitle: "CLOUD, DEVOPS, AI & QUANTUM COMPUTING ENGINEER",
+
   skills: [
     emoji(
-      "⚡ Cloud Infrastructure & DevOps Automation (AWS, Azure, GCP, Kubernetes)"
-    ),
-    emoji("⚡ Generative AI & Large Language Models (Bedrock, Hugging Face, LangChain)"),
-    emoji(
-      "⚡ Quantum Computing Research & Algorithms"
+      "⚡ Design, automate, and scale secure multi-cloud infrastructure using AWS, Azure, GCP, Kubernetes, Terraform, and CI/CD pipelines"
     ),
     emoji(
-      "⚡ Full Stack Development & System Administration"
+      "⚡ Build production-grade Generative AI systems using LLMs, RAG, Amazon Bedrock, Azure AI Foundry, Hugging Face, and LangChain"
+    ),
+    emoji(
+      "⚡ Research and implement quantum computing algorithms including Grover’s Algorithm and hybrid quantum–classical models"
+    ),
+    emoji(
+      "⚡ Develop backend-heavy platforms and system tooling with strong Linux, networking, and system administration foundations"
     )
   ],
 
-  /* Make Sure to include correct Font Awesome Classname to view your icon
-https://fontawesome.com/icons?d=gallery */
-
   softwareSkills: [
-    {
-      skillName: "Python",
-      fontAwesomeClassname: "fab fa-python"
-    },
-    {
-      skillName: "Java",
-      fontAwesomeClassname: "fab fa-java"
-    },
-    {
-      skillName: "AWS",
-      fontAwesomeClassname: "fab fa-aws"
-    },
-    {
-      skillName: "Docker",
-      fontAwesomeClassname: "fab fa-docker"
-    },
-    {
-      skillName: "Kubernetes",
-      fontAwesomeClassname: "fas fa-dharmachakra"
-    },
-    {
-      skillName: "Jenkins",
-      fontAwesomeClassname: "fab fa-jenkins"
-    },
-    {
-      skillName: "Linux",
-      fontAwesomeClassname: "fab fa-linux"
-    },
-    {
-      skillName: "Git",
-      fontAwesomeClassname: "fab fa-git"
-    },
-    {
-      skillName: "ReactJS",
-      fontAwesomeClassname: "fab fa-react"
-    },
-    {
-      skillName: "NodeJS",
-      fontAwesomeClassname: "fab fa-node"
-    }
+    { skillName: "Python", fontAwesomeClassname: "fab fa-python" },
+    { skillName: "Java", fontAwesomeClassname: "fab fa-java" },
+    { skillName: "AWS", fontAwesomeClassname: "fab fa-aws" },
+    { skillName: "Azure", fontAwesomeClassname: "fas fa-cloud" },
+    { skillName: "GCP", fontAwesomeClassname: "fab fa-google" },
+    { skillName: "Docker", fontAwesomeClassname: "fab fa-docker" },
+    { skillName: "Kubernetes", fontAwesomeClassname: "fas fa-dharmachakra" },
+    { skillName: "Terraform", fontAwesomeClassname: "fas fa-cubes" },
+    { skillName: "Jenkins", fontAwesomeClassname: "fab fa-jenkins" },
+    { skillName: "Linux", fontAwesomeClassname: "fab fa-linux" },
+    { skillName: "Git", fontAwesomeClassname: "fab fa-git" },
+    { skillName: "Grafana", fontAwesomeClassname: "fas fa-chart-line" },
+    { skillName: "Prometheus", fontAwesomeClassname: "fas fa-fire" },
+    { skillName: "ReactJS", fontAwesomeClassname: "fab fa-react" },
+    { skillName: "NodeJS", fontAwesomeClassname: "fab fa-node" }
   ],
-  display: true // Set false to hide this section, defaults to true
+
+  display: true
 };
 
-// Education Section
 
 const educationInfo = {
   display: true, // Set false to hide this section, defaults to true
@@ -166,53 +140,52 @@ const workExperiences = {
   display: true, //Set it to true to show workExperiences Section
   experience: [
     {
-      role: "Cloud and AI Engineer Intern",
+      role: "Cloud and AI Intern",
       company: "State Street",
-      companylogo: require("./assets/images/facebookLogo.png"),
+      companylogo: require("./assets/images/statestreet.jpeg"),
       date: "June 2025 - August 2025",
-      desc: "Managed delivery of an AI chatbot project using Azure AI Foundry. Championed GitHub Copilot adoption. Oversaw rollout of Amazon Q across 44 AWS accounts.",
+      desc: "Built Azure AI chatbots & rolled out Amazon Q across 44 AWS accounts.",
       descBullets: [
-        "Coordinated validation of Terraform modules and OPA policies with security teams, reducing delivery risks."
+        "Validated Terraform modules & OPA policies for security compliance."
       ]
     },
     {
       role: "Research Assistant",
       company: "Quinnipiac University",
-      companylogo: require("./assets/images/quoraLogo.png"),
+      companylogo: require("./assets/images/quinnipiac-new.png"),
       date: "August 2025",
-      desc: "Led SPARK framework project (Generative AI + RAG). PrivAItect development (privacy threat model platform).",
+      desc: "Developed SPARK (GenAI/RAG) & PrivAItect privacy frameworks.",
       descBullets: [
-        "Coordinated cross-functional collaboration on Quantum–Classical algorithm benchmarking."
+        "Benchmarked Quantum–Classical algorithms."
       ]
     },
     {
       role: "Graduate Assistant",
       company: "Quinnipiac University",
-      companylogo: require("./assets/images/airbnbLogo.png"),
+      companylogo: require("./assets/images/quinnipiac-logo.png"),
       date: "August 2024",
-      desc: "Assisted professors and staff with projects, resolved student queries, and automated workflows, reducing manual clerical work by 60%.",
+      desc: "Automated workflows reducing clerical tasks by 60%.",
       descBullets: []
     },
     {
       role: "DevOps Engineer",
       company: "Ini8 Labs",
-      companylogo: require("./assets/images/facebookLogo.png"),
+      companylogo: require("./assets/images/image copy 4.png"),
       date: "January 2021 – Jun 2024",
-      desc: "Oversaw delivery of Infrastructure-as-Code and DevSecOps implementations. Facilitated Agile sprint planning.",
+      desc: "Implemented IaC & DevSecOps pipelines. Facilitated Agile sprints.",
       descBullets: [
-        "Coordinated release schedules and stakeholder expectations during multi-cloud migrations."
+        "Orchestrated multi-cloud migration schedules."
       ]
     },
     {
       role: "Senior SaaS Infrastructure Engineer",
       company: "Zycus Pvt. Ltd.",
-      companylogo: require("./assets/images/quoraLogo.png"),
+      companylogo: require("./assets/images/image copy 2.png"),
       date: "January 2021 – Jun 2024",
-      desc: "Directed cloud infrastructure programs across AWS, Azure, and VMware. Led automation and AI-driven transformation, delivering 80% IT task reduction.",
+      desc: "Architected multi-cloud infrastructure & automation, reducing IT tasks by 80%.",
       descBullets: [
-        "Managed Kubernetes modernization initiative, migrating and optimizing 50+ clusters.",
-        "Coordinated enterprise security and disaster recovery efforts.",
-        "Delivered multi-cloud architecture & SRE improvements."
+        "Migrated & optimized 50+ Kubernetes clusters.",
+        "Led Enterprise Security & Disaster Recovery initiatives."
       ]
     }
   ]
@@ -233,25 +206,25 @@ const bigProjects = {
   subtitle: "ACADEMIC & PROFESSIONAL PROJECTS",
   projects: [
     {
-      image: require("./assets/images/saayaHealthLogo.webp"),
+      image: require("./assets/images/spark-logo.png"),
       projectName: "SPARK Plug and Play Framework",
       projectDesc: "Built an AI Tutor platform providing 24/7 academic support across multiple subjects using generative AI, LLMs, and RAG.",
       footerLink: []
     },
     {
-      image: require("./assets/images/nextuLogo.webp"),
+      image: require("./assets/images/image copy 5.png"),
       projectName: "PrivAItect",
       projectDesc: "AI-powered platform that transforms user system descriptions into threat-aware architectures using LINDDUN and MITRE PANOPTIC.",
       footerLink: []
     },
     {
-      image: require("./assets/images/saayaHealthLogo.webp"),
+      image: require("./assets/images/DB_Convertor.png"),
       projectName: "Database Convertor",
       projectDesc: "Web app to transform datasets across AWS databases (RDS, DynamoDB, Neptune, Document DB) via a user-friendly UI.",
       footerLink: []
     },
     {
-      image: require("./assets/images/nextuLogo.webp"),
+      image: require("./assets/images/GroversAlgo.png"),
       projectName: "Grover’s Algorithm Research",
       projectDesc: "Implemented and analyzed Grover’s quantum search algorithm for string matching, benchmarking speedups against classical approaches.",
       footerLink: []
@@ -270,7 +243,7 @@ const achievementSection = {
     {
       title: "Certified Kubernetes Application Developer(CKAD)",
       subtitle: "Completed Certification from Linux Foundation",
-      image: require("./assets/images/codeInLogo.webp"),
+      image: require("./assets/images/CKAD.png"),
       imageAlt: "CKAD Logo",
       footerLink: [
         {
@@ -282,7 +255,7 @@ const achievementSection = {
     {
       title: "Certified Kubernetes Administrator(CKA)",
       subtitle: "Completed Certification from Linux Foundation.",
-      image: require("./assets/images/codeInLogo.webp"),
+      image: require("./assets/images/CKA.png"),
       imageAlt: "CKA Logo",
       footerLink: [
         {
@@ -294,7 +267,7 @@ const achievementSection = {
     {
       title: "AWS Solutions Architect Associate",
       subtitle: "Completed Certification from Amazon Web Services",
-      image: require("./assets/images/googleAssistantLogo.webp"),
+      image: require("./assets/images/SolutionsAssociate.png"),
       imageAlt: "AWS Logo",
       footerLink: [
         {
@@ -306,7 +279,7 @@ const achievementSection = {
     {
       title: "RedHat Certified System Administrator",
       subtitle: "Completed Certification from A.P. Shah Institute of Technology",
-      image: require("./assets/images/googleAssistantLogo.webp"),
+      image: require("./assets/images/RHCSA.png"),
       imageAlt: "RedHat Logo",
       footerLink: [
         {
@@ -318,7 +291,7 @@ const achievementSection = {
     {
       title: "LangChain for LLM Application Development",
       subtitle: "Completed Certification from DeepLearning.AI",
-      image: require("./assets/images/googleAssistantLogo.webp"),
+      image: require("./assets/images/LangChain.png"),
       imageAlt: "LangChain Logo",
       footerLink: [
         {
@@ -330,7 +303,7 @@ const achievementSection = {
     {
       title: "SPARK Publication (IEEE)",
       subtitle: "Published research paper on AI Tutor Framework at IEEE Conference",
-      image: require("./assets/images/codeInLogo.webp"),
+      image: require("./assets/images/Spark_IEEE.png"),
       imageAlt: "IEEE Logo",
       footerLink: [
         {
@@ -342,7 +315,7 @@ const achievementSection = {
     {
       title: "Grover's Algorithm (Springer)",
       subtitle: "Published research on Quantum Computing algorithms with Springer",
-      image: require("./assets/images/codeInLogo.webp"),
+      image: require("./assets/images/Grovers_algo.png"),
       imageAlt: "Springer Logo",
       footerLink: [
         {
@@ -354,7 +327,7 @@ const achievementSection = {
     {
       title: "Single Sign On (IRJET)",
       subtitle: "Published paper on SSO implementation in IRJET Journal",
-      image: require("./assets/images/codeInLogo.webp"),
+      image: require("./assets/images/SSO.png"),
       imageAlt: "IRJET Logo",
       footerLink: [
         {

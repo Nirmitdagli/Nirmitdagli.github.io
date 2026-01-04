@@ -7,14 +7,15 @@ $bg-dark: #121214;
 $bg-card: #1a1a1e;
 
 .contact-margin-top {
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .contact-div-main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  padding: 80px 5%;
+  gap: 2rem;
+  padding: 30px 5% 15px 5%;
+  /* Reduced bottom padding from 80px */
   background: $bg-dark;
   align-items: start;
 }
@@ -31,7 +32,7 @@ $bg-card: #1a1a1e;
   font-weight: 700;
   color: #FFFFFF;
   margin-bottom: 1rem;
-  
+
   &.light {
     color: #1a1a2e;
   }
@@ -64,16 +65,16 @@ $bg-card: #1a1a1e;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
-  
+
   &:hover {
     border-color: rgba(255, 215, 0, 0.3);
     transform: translateX(10px);
     box-shadow: 0 5px 20px rgba(255, 215, 0, 0.1);
   }
-  
+
   &.location {
     cursor: default;
-    
+
     &:hover {
       transform: none;
     }
@@ -88,7 +89,7 @@ $bg-card: #1a1a1e;
   justify-content: center;
   background: rgba(255, 215, 0, 0.1);
   border-radius: 10px;
-  
+
   i {
     font-size: 1.25rem;
     color: $accent-yellow;
@@ -150,13 +151,13 @@ $bg-card: #1a1a1e;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  
+
   label {
     font-size: 0.85rem;
     color: #9CA3AF;
     font-weight: 500;
   }
-  
+
   input,
   textarea {
     background: rgba(255, 255, 255, 0.05);
@@ -167,11 +168,11 @@ $bg-card: #1a1a1e;
     color: #FFFFFF;
     font-family: 'Inter', sans-serif;
     transition: all 0.3s ease;
-    
+
     &::placeholder {
       color: #6b7280;
     }
-    
+
     &:focus {
       outline: none;
       border-color: $accent-yellow;
@@ -179,7 +180,7 @@ $bg-card: #1a1a1e;
       background: rgba(255, 215, 0, 0.05);
     }
   }
-  
+
   textarea {
     resize: vertical;
     min-height: 120px;
@@ -202,26 +203,26 @@ $bg-card: #1a1a1e;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 0.5rem;
-  
+
   i {
     font-size: 0.9rem;
     transition: transform 0.3s ease;
   }
-  
+
   &:hover {
     background: #FFE44D;
     transform: translateY(-2px);
     box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
-    
+
     i {
       transform: translateX(5px);
     }
   }
-  
+
   &:active {
     transform: translateY(0);
   }
-  
+
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
@@ -238,7 +239,9 @@ $bg-card: #1a1a1e;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .submit-message {
@@ -253,65 +256,65 @@ $bg-card: #1a1a1e;
   .contact-div-main {
     background: #FFFFFF;
   }
-  
+
   .contact-title {
     color: #1a1a2e;
   }
-  
+
   .contact-subtitle {
     color: $accent-yellow-dark;
   }
-  
+
   .contact-info-card {
     background: #f8f9fc;
     border-color: rgba(0, 0, 0, 0.1);
-    
+
     &:hover {
       border-color: rgba(184, 134, 11, 0.3);
       box-shadow: 0 5px 20px rgba(184, 134, 11, 0.1);
     }
   }
-  
+
   .contact-icon {
     background: rgba(184, 134, 11, 0.1);
-    
+
     i {
       color: $accent-yellow-dark;
     }
   }
-  
+
   .contact-label {
     color: #6b7280;
   }
-  
+
   .contact-value {
     color: #1a1a2e;
   }
-  
+
   .contact-form-container {
     background: #f8f9fc;
     border-color: rgba(0, 0, 0, 0.1);
   }
-  
+
   .form-title {
     color: #1a1a2e;
   }
-  
+
   .form-group {
     label {
       color: #555577;
     }
-    
+
     input,
     textarea {
       background: #FFFFFF;
       border-color: rgba(0, 0, 0, 0.15);
       color: #1a1a2e;
-      
+
       &::placeholder {
         color: #9CA3AF;
       }
-      
+
       &:focus {
         border-color: $accent-yellow-dark;
         box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
@@ -319,17 +322,17 @@ $bg-card: #1a1a1e;
       }
     }
   }
-  
+
   .submit-btn {
     background: $accent-yellow-dark;
     color: #FFFFFF;
-    
+
     &:hover {
       background: #a07608;
       box-shadow: 0 5px 20px rgba(184, 134, 11, 0.3);
     }
   }
-  
+
   .submit-message {
     color: $accent-yellow-dark;
   }
@@ -339,10 +342,10 @@ $bg-card: #1a1a1e;
 @media (max-width: 1024px) {
   .contact-div-main {
     grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 60px 4%;
+    gap: 2rem;
+    padding: 30px 4% 15px 4%;
   }
-  
+
   .contact-form-container {
     order: 2;
   }
@@ -350,30 +353,30 @@ $bg-card: #1a1a1e;
 
 @media (max-width: 768px) {
   .contact-div-main {
-    padding: 50px 5%;
-    gap: 2.5rem;
+    padding: 25px 5% 12px 5%;
+    gap: 2rem;
   }
-  
+
   .contact-title {
     text-align: center;
   }
-  
+
   .contact-subtitle {
     text-align: center;
   }
-  
+
   .contact-info-card:hover {
     transform: translateY(-3px);
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .contact-form-container {
     padding: 1.5rem;
   }
-  
+
   .contact-social {
     display: flex;
     justify-content: center;
@@ -382,29 +385,30 @@ $bg-card: #1a1a1e;
 
 @media (max-width: 480px) {
   .contact-div-main {
-    padding: 40px 4%;
+    padding: 20px 4% 10px 4%;
   }
-  
+
   .contact-info-card {
     padding: 0.875rem 1rem;
   }
-  
+
   .contact-icon {
     width: 44px;
     height: 44px;
-    
+
     i {
       font-size: 1.1rem;
     }
   }
-  
+
   .form-group {
+
     input,
     textarea {
       padding: 0.75rem;
     }
   }
-  
+
   .submit-btn {
     width: 100%;
     padding: 0.875rem 1.5rem;

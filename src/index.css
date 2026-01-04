@@ -1,141 +1,182 @@
-/* Google Fonts - SHUBHZ TECHWORK Typography */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Google Fonts - Enterprise Terminal Typography */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-@font-face {
-  font-family: "Agustina Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Agustina Regular"),
-    url("./assets/fonts/Agustina.woff") format("woff");
-  font-display: swap;
-}
+/* Base structure */
 
-@font-face {
-  font-family: "Montserrat";
-  src: local("Montserrat"),
-    url("./assets/fonts/Montserrat-Regular.ttf") format("woff");
-  font-display: swap;
-}
-
-/* CSS Reset & Base Styles */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* Optimize cursor for "interactive" feel */
 }
 
 html {
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
-  background: #121214;
-  color: #E5E5E5;
-  line-height: 1.6;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  /* Force Terminal Font */
+  background-color: var(--terminal-bg);
+  color: #e0e0e0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* Light Mode Body */
-.light-mode {
-  background: #FFFFFF;
-  color: #1a1a2e;
-}
-
-/* Dark Mode Body */
-.dark-mode {
-  background: #121214;
-  color: #FFFFFF;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Plus Jakarta Sans", "Montserrat", sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.dark-mode h1, .dark-mode h2, .dark-mode h3, 
-.dark-mode h4, .dark-mode h5, .dark-mode h6 {
-  color: #FFFFFF;
-}
-
-.light-mode h1, .light-mode h2, .light-mode h3, 
-.light-mode h4, .light-mode h5, .light-mode h6 {
-  color: #1a1a2e;
-}
-
-code {
-  font-family: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-/* Selection Styling - Yellow Theme */
-::selection {
-  background: rgba(255, 215, 0, 0.3);
-  color: #FFFFFF;
-}
-
-::-moz-selection {
-  background: rgba(255, 215, 0, 0.3);
-  color: #FFFFFF;
-}
-
-/* Scrollbar Styling - Yellow Theme */
+/* Scrollbar - Digital Look */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1A1A1E;
-}
-
-.light-mode ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  width: 6px;
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #FFD700, #E5C100);
-  border-radius: 10px;
+  background: var(--terminal-dim);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #FFE44D, #FFD700);
+  background: var(--terminal-green);
+  box-shadow: 0 0 10px var(--terminal-green);
 }
 
-/* Links */
+/* Selection - High Visibility Terminal */
+::selection {
+  background: var(--terminal-green);
+  color: #000;
+}
+
+/* CRT Scanline Effect Overlay */
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 9999;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Global Link Styles */
 a {
-  color: inherit;
   text-decoration: none;
-  transition: color 0.3s ease;
+  color: inherit;
+  transition: all 0.2s ease-in-out;
+  position: relative;
 }
 
 a:hover {
-  color: #FFD700;
+  color: var(--terminal-green);
+  text-shadow: 0 0 8px var(--terminal-green);
 }
 
-.light-mode a:hover {
-  color: #b8860b;
-}
+/* Utility Animations */
+@keyframes blink {
 
-/* Media Query */
-@media (max-width: 1380px) {
-  html,
-  body {
-    font-size: 15px;
-    line-height: 1.6;
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
   }
 }
 
-@media (max-width: 768px) {
-  html,
-  body {
-    font-size: 14px;
+.cursor-blink {
+  display: inline-block;
+  width: 10px;
+  height: 1em;
+  background: var(--terminal-green);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+/* Glitch Effect Class */
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -1px 0 #00fff9;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(3px, 9999px, 89px, 0);
   }
+
+  5% {
+    clip: rect(66px, 9999px, 12px, 0);
+  }
+
+  10% {
+    clip: rect(62px, 9999px, 9px, 0);
+  }
+
+  /* ... simplified for performance ... */
+  100% {
+    clip: rect(98px, 9999px, 57px, 0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(63px, 9999px, 31px, 0);
+  }
+
+  5% {
+    clip: rect(2px, 9999px, 5px, 0);
+  }
+
+  10% {
+    clip: rect(82px, 9999px, 43px, 0);
+  }
+
+  100% {
+    clip: rect(38px, 9999px, 2px, 0);
+  }
+}
+
+/* Dark/Light Mode Overrides applied at Body level */
+.dark-mode {
+  background-color: var(--terminal-bg);
+  color: #e0e0e0;
+}
+
+.light-mode {
+  /* Even for light mode, we keep a "clean" tech look, maybe High Contrast White/Black */
+  background-color: #f0f0f0;
+  color: #111;
+  --terminal-green: #000;
+  /* In light mode, terminal accent becomes black */
 }

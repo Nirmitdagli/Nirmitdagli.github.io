@@ -1,96 +1,98 @@
-/* SHUBHZ TECHWORK Theme - Dark Mode with Yellow Accent */
+/* SHUBHZ TECHWORK Theme - Enterprise Terminal / Cyberpunk */
 
-// Primary accent colors - Yellow/Gold theme
-$accent-yellow: #FFD700;
-$accent-yellow-light: #FFE44D;
-$accent-yellow-dark: #E5C100;
-$accent-green: #4ADE80;
-$accent-red: #EF4444;
+// Primary accent colors - Cyber Yellow / Gold
+$accent-primary: #FFD700; // Cyber Yellow
+$accent-secondary: #FFAA00; // Deep Amber
+$accent-cyan: #00dbde; // Modern Cyber Cyan
+$accent-purple: #fc00ff; // Synthwave Purple
+$accent-yellow: #fceE09; // Warning Yellow
+
+// Mappings
+$accent-green: $accent-primary; // Map green to yellow for consistency
+$accent-gold: $accent-primary;
+
+// Theme Backgrounds
+$bg-dark: #050505; // Deep Black
+$bg-darker: #000000;
+$bg-card: #0a0f0d; // Slightly refreshing black
+
+// Text Colors
+$text-white: #E0E0E0;
+$text-gray: #8b9bb4;
+$text-highlight: $accent-primary;
 
 // Legacy variable mappings for compatibility
-$accent-cyan: $accent-yellow;
-$accent-purple: #FFD700;
-$accent-coral: #FF6B6B;
-$accent-gold: #FFD700;
+$buttonColor: $accent-primary;
+$buttonHover: $accent-secondary;
+$topButtonHover: $accent-cyan;
 
-// button colors - Yellow theme
-$buttonColor: #FFD700;
-$buttonHover: #FFE44D;
-$topButtonHover: #FFD700;
-
-// text colors light theme
 $titleColor: #FFFFFF;
-$textColor: #E5E5E5;
-$subTitle: #9CA3AF;
-$cardSubtitle: #9CA3AF;
-$talkCardSubTitle: #9CA3AF;
-$blogCardTitleColor: #FFFFFF;
+$textColor: #cccccc;
+$subTitle: #8892b0;
+$cardSubtitle: #8892b0;
+$talkCardSubTitle: #8892b0;
+$blogCardTitleColor: $accent-primary;
 
-// text color dark theme
 $textColorDark: #FFFFFF;
 
-// toggle switch colors
-$toggleCheck: #FFD700;
-$toggleSwitchSliderBG: #374151;
+$toggleCheck: $accent-primary;
+$toggleSwitchSliderBG: #112240;
 
-// githubRepo specific colors
-$githubRepoCardLanguageColorBG: $accent-yellow;
-$githubRepoCardColor: #9CA3AF;
-$githubRepoCardRepoCardStatsColor: #9CA3AF;
+// GitHub Cards
+$githubRepoCardLanguageColorBG: $accent-primary;
+$githubRepoCardColor: #8892b0;
+$githubRepoCardRepoCardStatsColor: #8892b0;
 $githubRepoCardRepoNameColor: #FFFFFF;
-$githubProfileCardLocationTS: $accent-yellow;
-$githubProfileCardBorder: $accent-yellow;
+$githubProfileCardLocationTS: $accent-cyan;
+$githubProfileCardBorder: $accent-primary;
 
-// light background colors (now dark theme)
-$lightBackground1: #121214;
-$lightBackground2: #1A1A1E;
-$lightBackground3: #222226;
-$blogCardContainerColor: #9CA3AF;
+// Background Colors
+$lightBackground1: $bg-dark;
+$lightBackground2: #0d1117;
+$lightBackground3: #161b22;
+$blogCardContainerColor: #8892b0;
 
-// dark background colors
-$darkBackground: #0A0A0C;
+$darkBackground: $bg-darker;
 
-// light theme box shadows
+// Box Shadows (Neon Glows)
 $lightBoxShadowDark: rgba(255, 215, 0, 0.15);
-$lightBoxShadow: rgba(0, 0, 0, 0.3);
-$lightBoxShadowDarker: rgba(0, 0, 0, 0.5);
+$lightBoxShadow: rgba(0, 0, 0, 0.5);
+$lightBoxShadowDarker: 0 0 10px rgba(255, 215, 0, 0.2);
 
-// dark theme box shadows
-$darkBoxShadow: rgba(255, 215, 0, 0.1);
-$darkBoxShadow2: rgba(255, 255, 255, 0.05);
+$darkBoxShadow: 0 0 15px rgba(255, 215, 0, 0.1);
+$darkBoxShadow2: 0 0 20px rgba(0, 219, 222, 0.1);
 
-// linear gradients
-$experienceCardBlurredDivLG: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
-$experienceCardBannerLG: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(255, 215, 0, 0.1));
+// Gradients
+$experienceCardBlurredDivLG: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
+$experienceCardBannerLG: linear-gradient(135deg, #000000, rgba(255, 215, 0, 0.1));
 
-// borders
+// Borders
 $progressBarBackground: rgba(255, 215, 0, 0.1);
-$lightBorder1: rgba(255, 215, 0, 0.15);
-$educationCardBorder: $accent-yellow;
+$lightBorder1: rgba(255, 215, 0, 0.3);
+$educationCardBorder: $accent-primary;
 
-// hovers
-$achievementCertificateCardHoverDark: rgba(255, 215, 0, 0.15);
-$blogCardHoverSmallColor: rgba(255, 255, 255, 0.9);
+// Hovers
+$achievementCertificateCardHoverDark: rgba(255, 215, 0, 0.1);
+$blogCardHoverSmallColor: #ffffff;
 $headerHoverBG: rgba(255, 215, 0, 0.1);
-$contactDetailHoverTS: $accent-yellow;
+$contactDetailHoverTS: $accent-cyan;
 
-// misc backgrounds
-$progressBarSpanBG: linear-gradient(135deg, $accent-yellow, $accent-yellow-dark);
-$iconBackground: #1A1A1E;
-$appHeaderBG: #0A0A0C;
+// Misc
+$progressBarSpanBG: linear-gradient(90deg, $accent-primary, $accent-cyan);
+$iconBackground: #112240;
+$appHeaderBG: rgba(5, 5, 5, 0.95);
 
-// misc colors
-$skillsColor: $accent-yellow;
-$appLink: $accent-yellow;
+$skillsColor: $accent-primary;
+$appLink: $accent-cyan;
 
-// social media icons
+// Socials - Make them monochromatic or neon in the CSS
 $faceBook: #1877f2;
-$linkedin: #0a66c2;
-$github: #FFFFFF;
+$linkedin: #0077b5;
+$github: #ffffff;
 $gitlab: #fc6d26;
 $google: #ea4335;
 $twitter: #1da1f2;
-$medium: #FFFFFF;
+$medium: #ffffff;
 $stackoverflow: #f48024;
-$instagram: #e4405f;
+$instagram: #e1306c;
 $kaggle: #20beff;
