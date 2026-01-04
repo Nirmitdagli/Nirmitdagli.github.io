@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/header/Header";
 import Greeting from "./greeting/Greeting";
 import Skills from "./skills/Skills";
@@ -16,9 +16,10 @@ import ScrollToTopButton from "./topbutton/Top";
 import Twitter from "./twitter-embed/twitter";
 import Profile from "./profile/Profile";
 import SplashScreen from "./splashScreen/SplashScreen";
-import {splashScreen} from "../portfolio";
-import {StyleProvider} from "../contexts/StyleContext";
-import {useLocalStorage} from "../hooks/useLocalStorage";
+import ScrollReveal from "../components/scrollReveal/ScrollReveal";
+import { splashScreen } from "../portfolio";
+import { StyleProvider } from "../contexts/StyleContext";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import "./Main.scss";
 
 const Main = () => {
@@ -44,27 +45,74 @@ const Main = () => {
   };
 
   return (
-    <div className={isDark ? "dark-mode" : null}>
-      <StyleProvider value={{isDark: isDark, changeTheme: changeTheme}}>
+    <div className={isDark ? "dark-mode" : "light-mode"}>
+      <StyleProvider value={{ isDark: isDark, changeTheme: changeTheme }}>
         {isShowingSplashAnimation && splashScreen.enabled ? (
           <SplashScreen />
         ) : (
           <>
             <Header />
-            <Greeting />
-            <Skills />
-            <StackProgress />
-            <Education />
-            <WorkExperience />
-            <Projects />
-            <StartupProject />
-            <Achievement />
-            <Blogs />
-            <Talks />
-            <Twitter />
-            <Podcast />
-            <Profile />
-            <Footer />
+            <div className="scroll-snap-container">
+              <Greeting />
+
+              {/* Skills Section */}
+              <ScrollReveal animation="fade-up" duration={800}>
+                <Skills />
+              </ScrollReveal>
+
+              {/* Skill Progress */}
+              <ScrollReveal animation="fade-up" delay={100} duration={800}>
+                <StackProgress />
+              </ScrollReveal>
+
+              {/* Education */}
+              <ScrollReveal animation="fade-up" duration={800}>
+                <Education />
+              </ScrollReveal>
+
+              {/* Work Experience */}
+              <ScrollReveal animation="fade-up" duration={800}>
+                <WorkExperience />
+              </ScrollReveal>
+
+              {/* Open Source Projects */}
+              <ScrollReveal animation="fade-up" duration={800}>
+                <Projects />
+              </ScrollReveal>
+
+              {/* Startup Projects */}
+              <ScrollReveal animation="fade-up" duration={800}>
+                <StartupProject />
+              </ScrollReveal>
+
+              {/* Achievements */}
+              <ScrollReveal animation="fade-up" duration={800}>
+                <Achievement />
+              </ScrollReveal>
+
+              {/* Blogs - hidden but kept for structure */}
+              <Blogs />
+
+              {/* Talks - hidden but kept for structure */}
+              <Talks />
+
+              {/* Twitter - hidden */}
+              <Twitter />
+
+              {/* Podcast - hidden */}
+              <Podcast />
+
+              {/* Profile/Contact */}
+              <ScrollReveal animation="fade-up" duration={800}>
+                <Profile />
+              </ScrollReveal>
+
+              {/* Footer */}
+              <ScrollReveal animation="fade" duration={600}>
+                <Footer />
+              </ScrollReveal>
+            </div>
+
             <ScrollToTopButton />
           </>
         )}

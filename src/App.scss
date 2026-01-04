@@ -1,30 +1,99 @@
-@import "./globalColor";
+@import "./_globalColor";
 
 .App {
   text-align: center;
   width: 100%;
   overflow-x: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  background-color: $bg-dark;
 }
 
-.App-logo {
-  height: 40vmin;
+/* Global Container */
+.main {
+  width: 90%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  margin: 0 auto;
+
+  /* Add border for 'window' feel on larger screens */
+  @media (min-width: 1400px) {
+    border-left: 1px dashed rgba($accent-primary, 0.2);
+    border-right: 1px dashed rgba($accent-primary, 0.2);
+    min-height: 100vh;
+  }
 }
 
-.App-header {
-  background-color: $appHeaderBG;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(0.625rem + 2vmin);
-  color: $textColorDark;
+/* Dark Mode (Default for Terminal Theme) */
+.dark-mode {
+  background-color: $bg-dark;
+  color: $text-white;
+
+  .subTitle {
+    color: $text-gray !important;
+  }
 }
 
-.App-link {
-  color: $appLink;
+/* Light Mode (High Contrast Enterprise) */
+.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+
+  // Invert accents for visibility
+  section,
+  .main {
+    background-color: #ffffff;
+  }
+
+  // Cards
+  .experience-card,
+  .education-card,
+  .project-card,
+  .repo-card-div {
+    background: #f4f4f4 !important;
+    border: 1px solid #000 !important;
+    box-shadow: 4px 4px 0px #000 !important; // Brutalist shadow
+    color: #000 !important;
+
+    &:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #000 !important;
+    }
+  }
 }
 
-.subTitle {
-  color: $subTitle;
+/* Common Section Headers */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Button Global Styles */
+button,
+.main-button {
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 0 !important; // Sharp edges
+}
+
+/* Override existing soft shadows for specific components */
+.experience-card,
+.education-card,
+.repo-card-div {
+  border-radius: 2px !important;
+  border: 1px solid rgba($accent-primary, 0.3);
+  background: rgba(10, 15, 13, 0.6);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $accent-primary;
+    box-shadow: 0 0 15px rgba($accent-primary, 0.15);
+  }
 }

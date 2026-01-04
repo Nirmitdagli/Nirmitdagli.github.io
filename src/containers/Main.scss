@@ -1,7 +1,76 @@
 @import "../_globalColor";
 
+/* Light Mode - Default */
+.light-mode {
+  background-color: #FFFFFF;
+  color: #1a1a2e;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
 .dark-mode {
-  background-color: $darkBackground;
-  color: white;
-  transition: "0.1s";
+  background-color: #121214;
+  color: #FFFFFF;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure all sections have consistent background */
+section,
+.main-div {
+  background-color: inherit;
+}
+
+/* Scroll Snap Container */
+.scroll-snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+
+  /* Hide scrollbar for cleaner look */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Scroll Snap Sections */
+/* Targeting the wrappers of our main components */
+.scroll-snap-container>div,
+.scroll-snap-container>section,
+.scroll-snap-container .scroll-reveal {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  /* Ensure content is centered if it's shorter than viewport */
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+
+  /* Hover Animation Base Styles */
+  border: 1px solid transparent;
+  /* Invisible border initially */
+  transition: all 0.4s ease-in-out;
+  padding: 0 20px;
+  /* Prevent border jump jitter */
+}
+
+/* Hover Effect - Active State */
+.scroll-snap-container>div:hover,
+.scroll-snap-container>section:hover,
+.scroll-snap-container .scroll-reveal:hover {
+  border-color: rgba(255, 215, 0, 0.3);
+  /* Subtle Yellow Border */
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.01);
+  /* Very subtle lighten */
+}
+
+.light-mode .scroll-snap-container>div:hover,
+.light-mode .scroll-snap-container>section:hover,
+.light-mode .scroll-snap-container .scroll-reveal:hover {
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.02);
 }
