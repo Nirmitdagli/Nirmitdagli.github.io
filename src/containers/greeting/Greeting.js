@@ -36,8 +36,8 @@ export default function Greeting() {
       {/* Floating particles background */}
       <div className="particles-container">
         {[...Array(15)].map((_, i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             className="particle"
             style={{
               '--delay': `${Math.random() * 8}s`,
@@ -84,13 +84,13 @@ export default function Greeting() {
         <div className="hero-cta">
           <Button text="Contact me" href="#contact" />
           {greeting.resumeLink && (
-            <a
-              href={require("./resume.pdf")}
+            <Button
+              text="Download Resume"
+              newTab={true}
+              href={greeting.resumeLink}
               download="Resume.pdf"
               className="download-link-button"
-            >
-              <Button text="Download Resume" />
-            </a>
+            />
           )}
         </div>
 
