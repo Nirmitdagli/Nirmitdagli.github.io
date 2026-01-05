@@ -20,7 +20,6 @@ import ScrollReveal from "../components/scrollReveal/ScrollReveal";
 import { splashScreen } from "../portfolio";
 import { StyleProvider } from "../contexts/StyleContext";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import "./Main.scss";
 
 const Main = () => {
   // Default to dark mode
@@ -51,66 +50,64 @@ const Main = () => {
         ) : (
           <>
             <Header />
-            <div className="scroll-snap-container">
-              <Greeting />
+            <Greeting />
 
-              {/* Skills Section */}
-              <ScrollReveal animation="fade-up" duration={800}>
-                <Skills />
-              </ScrollReveal>
+            {/* Skills Section */}
+            <ScrollReveal animation="fade-up" duration={800}>
+              <Skills />
+            </ScrollReveal>
 
-              {/* Skill Progress */}
-              <ScrollReveal animation="fade-up" delay={100} duration={800}>
-                <StackProgress />
-              </ScrollReveal>
+            {/* Skill Progress */}
+            <ScrollReveal animation="fade-up" delay={100} duration={800}>
+              <StackProgress />
+            </ScrollReveal>
 
-              {/* Education */}
-              <ScrollReveal animation="fade-up" duration={800}>
-                <Education />
-              </ScrollReveal>
+            {/* Education */}
+            <ScrollReveal animation="fade-up" duration={800}>
+              <Education />
+            </ScrollReveal>
 
-              {/* Work Experience */}
-              <ScrollReveal animation="fade-up" duration={800}>
-                <WorkExperience />
-              </ScrollReveal>
+            {/* Work Experience */}
+            <ScrollReveal animation="fade-up" duration={800}>
+              <WorkExperience />
+            </ScrollReveal>
 
-              {/* Open Source Projects */}
-              <ScrollReveal animation="fade-up" duration={800}>
-                <Projects />
-              </ScrollReveal>
+            {/* Open Source Projects */}
+            <ScrollReveal animation="fade-up" duration={800}>
+              <Projects />
+            </ScrollReveal>
 
-              {/* Startup Projects */}
-              <ScrollReveal animation="fade-up" duration={800}>
-                <StartupProject />
-              </ScrollReveal>
+            {/* Startup Projects */}
+            <ScrollReveal animation="fade-up" duration={800}>
+              <StartupProject />
+            </ScrollReveal>
 
-              {/* Achievements */}
-              <ScrollReveal animation="fade-up" duration={800}>
-                <Achievement />
-              </ScrollReveal>
+            {/* Achievements */}
+            <ScrollReveal animation="fade-up" duration={800}>
+              <Achievement />
+            </ScrollReveal>
 
-              {/* Blogs - hidden but kept for structure */}
-              <Blogs />
+            {/* Blogs - hidden but kept for structure */}
+            <Blogs />
 
-              {/* Talks - hidden but kept for structure */}
-              <Talks />
+            {/* Talks - hidden but kept for structure */}
+            <Talks />
 
-              {/* Twitter - hidden */}
-              <Twitter />
+            {/* Twitter - hidden */}
+            <Twitter />
 
-              {/* Podcast - hidden */}
-              <Podcast />
+            {/* Podcast - hidden */}
+            <Podcast />
 
-              {/* Profile/Contact */}
-              <ScrollReveal animation="fade-up" duration={800}>
-                <Profile />
-              </ScrollReveal>
+            {/* Profile/Contact */}
+            <ScrollReveal animation="fade-up" duration={800}>
+              <Profile />
+            </ScrollReveal>
 
-              {/* Footer */}
-              <ScrollReveal animation="fade" duration={600}>
-                <Footer />
-              </ScrollReveal>
-            </div>
+            {/* Footer */}
+            <ScrollReveal animation="fade" duration={600}>
+              <Footer />
+            </ScrollReveal>
 
             <ScrollToTopButton />
           </>
