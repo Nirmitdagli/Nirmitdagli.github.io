@@ -92,7 +92,7 @@ const educationInfo = {
   schools: [
     {
       schoolName: "Quinnipiac University",
-      logo: require("./assets/images/harvardLogo.png"),
+      logo: require("./assets/images/quinnipiac-new.png"),
       subHeader: "Master of Computer Science",
       duration: "May 2026",
       desc: "GPA: 3.8/4. Relevant Courses: Computer Networks, GenAI & Quantum Computing.",
@@ -100,7 +100,7 @@ const educationInfo = {
     },
     {
       schoolName: "University of Mumbai",
-      logo: require("./assets/images/stanfordLogo.png"),
+      logo: require("./assets/images/MumbaiUNI.png"),
       subHeader: "Bachelor of Engineering in Information Technology",
       duration: "May 2020",
       desc: "GPA: 3.1/4. Relevant Courses: Python, Cloud Computing, Operating Systems, Software Development, IoT.",

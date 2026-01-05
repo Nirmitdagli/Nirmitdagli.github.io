@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.835902b9.css",
-    "main.js": "/static/js/main.915a3bd8.js",
+    "main.js": "/static/js/main.e61d2ca0.js",
     "static/css/487.0e6683f9.chunk.css": "/static/css/487.0e6683f9.chunk.css",
     "static/js/487.9779af71.chunk.js": "/static/js/487.9779af71.chunk.js",
     "static/css/990.f977ec3e.chunk.css": "/static/css/990.f977ec3e.chunk.css",
@@ -9,14 +9,13 @@
     "static/media/spark-logo.png": "/static/media/spark-logo.39f4415265ca090deb0b.png",
     "static/media/GroversAlgo.png": "/static/media/GroversAlgo.55c80970880bbc926ee3.png",
     "static/media/Grovers_algo.png": "/static/media/Grovers_algo.84944be484c63b53a044.png",
-    "static/media/stanfordLogo.png": "/static/media/stanfordLogo.5a8e3a0a00949c93a9b8.png",
     "static/media/SSO.png": "/static/media/SSO.a8e7ba615a9efd4860a3.png",
     "static/media/DB_Convertor.png": "/static/media/DB_Convertor.5fc1fb77290af3775021.png",
     "static/media/image copy 5.png": "/static/media/image copy 5.6f4dc5daa1c3640ad346.png",
-    "static/media/harvardLogo.png": "/static/media/harvardLogo.542dab89bfb35b7f5c0d.png",
     "static/media/Spark_IEEE.png": "/static/media/Spark_IEEE.bd9c14f458969909acb5.png",
     "static/media/SolutionsAssociate.png": "/static/media/SolutionsAssociate.a53726a91afdfbb6554d.png",
     "static/media/developerActivity.svg": "/static/media/developerActivity.2c0445cae86f4243433a2f5a22b2c031.svg",
+    "static/media/MumbaiUNI.png": "/static/media/MumbaiUNI.53a366d45e8e793443c3.png",
     "static/media/LangChain.png": "/static/media/LangChain.1f8e542d0c37a9d4ee56.png",
     "static/media/RHCSA.png": "/static/media/RHCSA.865dcf70615cc7be5043.png",
     "static/media/image copy 4.png": "/static/media/image copy 4.e9556388eb831739af66.png",
@@ -26,7 +25,7 @@
     "index.html": "/index.html",
     "static/media/talksCardBack.svg": "/static/media/talksCardBack.99241699e0279aeb0db7.svg",
     "main.835902b9.css.map": "/static/css/main.835902b9.css.map",
-    "main.915a3bd8.js.map": "/static/js/main.915a3bd8.js.map",
+    "main.e61d2ca0.js.map": "/static/js/main.e61d2ca0.js.map",
     "487.0e6683f9.chunk.css.map": "/static/css/487.0e6683f9.chunk.css.map",
     "487.9779af71.chunk.js.map": "/static/js/487.9779af71.chunk.js.map",
     "990.f977ec3e.chunk.css.map": "/static/css/990.f977ec3e.chunk.css.map",
@@ -34,6 +33,6 @@
   },
   "entrypoints": [
     "static/css/main.835902b9.css",
-    "static/js/main.915a3bd8.js"
+    "static/js/main.e61d2ca0.js"
   ]
 }
