@@ -8,12 +8,32 @@ import StyleContext from "../../contexts/StyleContext";
 export default function Greeting() {
     const { isDark } = useContext(StyleContext);
     const [isVisible, setIsVisible] = useState(false);
+    const [displayedText, setDisplayedText] = useState("");
+    const [isTypingComplete, setIsTypingComplete] = useState(false);
     const containerRef = useRef(null);
 
     useEffect(() => {
         // Trigger entrance animation after mount
         const timer = setTimeout(() => setIsVisible(true), 100);
         return () => clearTimeout(timer);
+    }, []);
+
+    // Typewriter effect
+    useEffect(() => {
+        const text = greeting.title;
+        let currentIndex = 0;
+
+        const typingInterval = setInterval(() => {
+            if (currentIndex < text.length) {
+                setDisplayedText(text.substring(0, currentIndex + 1));
+                currentIndex++;
+            } else {
+                setIsTypingComplete(true);
+                clearInterval(typingInterval);
+            }
+        }, 80); // Typing speed in ms
+
+        return () => clearInterval(typingInterval);
     }, []);
 
     const handleMouseMove = (e) => {
@@ -35,7 +55,7 @@ export default function Greeting() {
 
     return (
         <div
-            className={`hero-section ${isDark ? 'dark-mode' : ''} ${isVisible ? 'visible' : ''}`}
+            className={`hero-section ${isDark ? 'dark-mode' : 'light-mode'} ${isVisible ? 'visible' : ''}`}
             id="greeting"
             ref={containerRef}
             onMouseMove={handleMouseMove}
@@ -45,9 +65,9 @@ export default function Greeting() {
 
             {/* Main Terminal Window which tilts */}
             <div className="hero-content">
-                <h1 className="hero-title glitch-text" data-text={greeting.title}>
-                    {greeting.title}
-                    <span className="cursor-blink">_</span>
+                <h1 className="hero-title">
+                    {displayedText}
+                    <span className={`typewriter-cursor ${isTypingComplete ? 'blink' : ''}`}>|</span>
                 </h1>
 
                 <p className="hero-subtitle">

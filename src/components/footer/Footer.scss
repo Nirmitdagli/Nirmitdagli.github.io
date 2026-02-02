@@ -1,53 +1,25 @@
 @import "../../_globalColor";
 
-// Theme colors
-$accent-yellow: #FFD700;
-$accent-yellow-dark: #b8860b;
-
 .footer-div {
   margin-top: 0;
   padding: 1.5rem 0;
-  background: #121214;
-  border-top: 1px solid rgba(255, 215, 0, 0.1);
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 .footer-text {
   text-align: center;
-  color: #9CA3AF !important;
+  color: var(--text-secondary) !important;
   font-size: 0.9rem;
 }
 
 .footer-text a {
-  color: $accent-yellow;
+  color: var(--accent-primary);
   transition: color 0.3s ease;
 }
 
 .footer-text a:hover {
-  color: #FFE44D;
-}
-
-.dark-mode .footer-div {
-  background: #121214;
-}
-
-.dark-mode .footer-text {
-  color: #9CA3AF !important;
-}
-
-/* Light Mode */
-.light-mode .footer-div {
-  background: #f8f9fc;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.light-mode .footer-text {
-  color: #555577 !important;
-}
-
-.light-mode .footer-text a {
-  color: $accent-yellow-dark;
-}
-
-.light-mode .footer-text a:hover {
-  color: #a07608;
+  color: var(--accent-secondary);
+  text-shadow: 0 0 5px var(--shadow-color);
 }

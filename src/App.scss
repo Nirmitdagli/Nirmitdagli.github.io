@@ -5,59 +5,31 @@
   width: 100%;
   overflow-x: hidden;
   font-family: 'JetBrains Mono', monospace;
-  background-color: $bg-dark;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Light mode app background */
+.light-mode .App,
+.light-mode.App {
+  background-color: var(--bg-primary);
 }
 
 /* Global Container */
 .main {
   width: 90%;
-  max-width: 1200px;
-  padding: 40px 20px;
+  max-width: 1250px;
+  /* Slightly wider for modern screens */
+  padding: 60px 20px;
   margin: 0 auto;
+  position: relative;
 
   /* Add border for 'window' feel on larger screens */
   @media (min-width: 1400px) {
-    border-left: 1px dashed rgba($accent-primary, 0.2);
-    border-right: 1px dashed rgba($accent-primary, 0.2);
+    border-left: 1px dashed var(--border-color);
+    border-right: 1px dashed var(--border-color);
     min-height: 100vh;
-  }
-}
-
-/* Dark Mode (Default for Terminal Theme) */
-.dark-mode {
-  background-color: $bg-dark;
-  color: $text-white;
-
-  .subTitle {
-    color: $text-gray !important;
-  }
-}
-
-/* Light Mode (High Contrast Enterprise) */
-.light-mode {
-  background-color: #ffffff;
-  color: #000000;
-
-  // Invert accents for visibility
-  section,
-  .main {
-    background-color: #ffffff;
-  }
-
-  // Cards
-  .experience-card,
-  .education-card,
-  .project-card,
-  .repo-card-div {
-    background: #f4f4f4 !important;
-    border: 1px solid #000 !important;
-    box-shadow: 4px 4px 0px #000 !important; // Brutalist shadow
-    color: #000 !important;
-
-    &:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0px #000 !important;
-    }
   }
 }
 
@@ -67,33 +39,45 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', sans-serif;
+  /* Modern Identity */
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+}
+
+/* Keep code font for smaller details */
+.code-font,
+button,
+.main-button {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 /* Button Global Styles */
 button,
 .main-button {
-  font-family: 'JetBrains Mono', monospace;
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 1px;
-  border-radius: 0 !important; // Sharp edges
 }
 
 /* Override existing soft shadows for specific components */
-.experience-card,
-.education-card,
 .repo-card-div {
-  border-radius: 2px !important;
-  border: 1px solid rgba($accent-primary, 0.3);
-  background: rgba(10, 15, 13, 0.6);
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
+  /* Glass Styling Applied Directly */
+
+  border-radius: 8px;
+  /* Modern rounding */
+  border: 1px solid var(--glass-border);
+  background: var(--glass-surface);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: var(--shadow-glass);
 
   &:hover {
-    border-color: $accent-primary;
-    box-shadow: 0 0 15px rgba($accent-primary, 0.15);
+    border-color: var(--accent-primary);
+    box-shadow: 0 5px 20px -5px var(--accent-glow);
+    transform: translateY(-3px);
   }
 }

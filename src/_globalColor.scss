@@ -1,98 +1,105 @@
 /* SHUBHZ TECHWORK Theme - Enterprise Terminal / Cyberpunk */
 
 // Primary accent colors - Cyber Yellow / Gold
-$accent-primary: #FFD700; // Cyber Yellow
-$accent-secondary: #FFAA00; // Deep Amber
-$accent-cyan: #00dbde; // Modern Cyber Cyan
-$accent-purple: #fc00ff; // Synthwave Purple
-$accent-yellow: #fceE09; // Warning Yellow
+$accent-primary: var(--accent-primary); // Cyber Yellow
+$accent-secondary: var(--accent-secondary); // Deep Amber
+$accent-cyan: var(--accent-cyan); // Modern Cyber Cyan
+$accent-purple: var(--accent-purple); // Synthwave Purple
+$accent-yellow: var(--accent-primary); // Warning Yellow (Mapped to Gold)
 
 // Mappings
-$accent-green: $accent-primary; // Map green to yellow for consistency
-$accent-gold: $accent-primary;
+$accent-green: var(--accent-primary); // Map green to yellow for consistency
+$accent-gold: var(--accent-primary);
 
 // Theme Backgrounds
-$bg-dark: #050505; // Deep Black
-$bg-darker: #000000;
-$bg-card: #0a0f0d; // Slightly refreshing black
+$bg-dark: var(--bg-primary); // Deep Black
+$bg-darker: var(--bg-secondary);
+$bg-card: var(--bg-card); // Glassmorphism
 
 // Text Colors
-$text-white: #E0E0E0;
-$text-gray: #8b9bb4;
-$text-highlight: $accent-primary;
+$text-white: var(--text-primary);
+$text-gray: var(--text-secondary);
+$text-highlight: var(--text-highlight);
+
+// Semantic text colors (for cross-mode usage)
+$text-heading: var(--text-primary);
+$text-body: var(--text-secondary);
+
+// Light mode accent (darker gold for contrast)
+$accent-yellow-light: var(--text-highlight);
 
 // Legacy variable mappings for compatibility
-$buttonColor: $accent-primary;
-$buttonHover: $accent-secondary;
-$topButtonHover: $accent-cyan;
+$buttonColor: var(--accent-primary);
+$buttonHover: var(--accent-secondary);
+$topButtonHover: var(--accent-cyan);
 
-$titleColor: #FFFFFF;
-$textColor: #cccccc;
-$subTitle: #8892b0;
-$cardSubtitle: #8892b0;
-$talkCardSubTitle: #8892b0;
-$blogCardTitleColor: $accent-primary;
+$titleColor: var(--text-primary);
+$textColor: var(--text-primary);
+$subTitle: var(--text-secondary);
+$cardSubtitle: var(--text-secondary);
+$talkCardSubTitle: var(--text-secondary);
+$blogCardTitleColor: var(--accent-primary);
 
-$textColorDark: #FFFFFF;
+$textColorDark: var(--text-primary);
 
-$toggleCheck: $accent-primary;
-$toggleSwitchSliderBG: #112240;
+$toggleCheck: var(--accent-primary);
+$toggleSwitchSliderBG: var(--terminal-dim);
 
 // GitHub Cards
-$githubRepoCardLanguageColorBG: $accent-primary;
-$githubRepoCardColor: #8892b0;
-$githubRepoCardRepoCardStatsColor: #8892b0;
-$githubRepoCardRepoNameColor: #FFFFFF;
-$githubProfileCardLocationTS: $accent-cyan;
-$githubProfileCardBorder: $accent-primary;
+$githubRepoCardLanguageColorBG: var(--accent-primary);
+$githubRepoCardColor: var(--text-secondary);
+$githubRepoCardRepoCardStatsColor: var(--text-secondary);
+$githubRepoCardRepoNameColor: var(--text-primary);
+$githubProfileCardLocationTS: var(--accent-cyan);
+$githubProfileCardBorder: var(--accent-primary);
 
 // Background Colors
-$lightBackground1: $bg-dark;
-$lightBackground2: #0d1117;
-$lightBackground3: #161b22;
-$blogCardContainerColor: #8892b0;
+$lightBackground1: var(--bg-primary);
+$lightBackground2: var(--bg-secondary);
+$lightBackground3: var(--text-secondary); // This might be used for text in some places, keeping safe
+$blogCardContainerColor: var(--glass-surface);
 
-$darkBackground: $bg-darker;
+$darkBackground: var(--bg-primary);
 
 // Box Shadows (Neon Glows)
-$lightBoxShadowDark: rgba(255, 215, 0, 0.15);
-$lightBoxShadow: rgba(0, 0, 0, 0.5);
-$lightBoxShadowDarker: 0 0 10px rgba(255, 215, 0, 0.2);
+$lightBoxShadowDark: var(--shadow-color);
+$lightBoxShadow: var(--shadow-glass);
+$lightBoxShadowDarker: 0 0 10px var(--accent-glow);
 
-$darkBoxShadow: 0 0 15px rgba(255, 215, 0, 0.1);
+$darkBoxShadow: 0 0 15px var(--accent-glow);
 $darkBoxShadow2: 0 0 20px rgba(0, 219, 222, 0.1);
 
 // Gradients
-$experienceCardBlurredDivLG: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
-$experienceCardBannerLG: linear-gradient(135deg, #000000, rgba(255, 215, 0, 0.1));
+$experienceCardBlurredDivLG: linear-gradient(135deg, var(--glass-border), transparent);
+$experienceCardBannerLG: linear-gradient(135deg, var(--bg-primary), var(--glass-border));
 
 // Borders
-$progressBarBackground: rgba(255, 215, 0, 0.1);
-$lightBorder1: rgba(255, 215, 0, 0.3);
-$educationCardBorder: $accent-primary;
+$progressBarBackground: var(--glass-border);
+$lightBorder1: var(--border-color);
+$educationCardBorder: var(--accent-primary);
 
 // Hovers
-$achievementCertificateCardHoverDark: rgba(255, 215, 0, 0.1);
-$blogCardHoverSmallColor: #ffffff;
-$headerHoverBG: rgba(255, 215, 0, 0.1);
-$contactDetailHoverTS: $accent-cyan;
+$achievementCertificateCardHoverDark: var(--glass-border);
+$blogCardHoverSmallColor: var(--bg-primary);
+$headerHoverBG: var(--glass-border);
+$contactDetailHoverTS: var(--accent-cyan);
 
 // Misc
-$progressBarSpanBG: linear-gradient(90deg, $accent-primary, $accent-cyan);
-$iconBackground: #112240;
-$appHeaderBG: rgba(5, 5, 5, 0.95);
+$progressBarSpanBG: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
+$iconBackground: var(--bg-secondary);
+$appHeaderBG: var(--bg-header);
 
-$skillsColor: $accent-primary;
-$appLink: $accent-cyan;
+$skillsColor: var(--accent-primary);
+$appLink: var(--accent-cyan);
 
-// Socials - Make them monochromatic or neon in the CSS
+// Socials - Update to use vars where possible or keep specific brand colors if needed
 $faceBook: #1877f2;
 $linkedin: #0077b5;
-$github: #ffffff;
+$github: var(--text-primary);
 $gitlab: #fc6d26;
 $google: #ea4335;
 $twitter: #1da1f2;
-$medium: #ffffff;
+$medium: var(--text-primary);
 $stackoverflow: #f48024;
 $instagram: #e1306c;
 $kaggle: #20beff;

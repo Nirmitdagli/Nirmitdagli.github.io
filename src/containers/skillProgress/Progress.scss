@@ -1,16 +1,11 @@
 @import "../../_globalColor";
 
-// Theme colors
-$accent-yellow: #FFD700;
-$accent-yellow-dark: #b8860b;
-$bg-dark: #121214;
-
 .skills-container {
   display: flex;
   width: 90%;
   padding: 60px 10px;
   margin: 0px auto;
-  background: $bg-dark;
+  background: var(--bg-primary);
   align-items: center;
   gap: 4rem;
 }
@@ -29,7 +24,7 @@ $bg-dark: #121214;
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 2rem;
 }
 
@@ -37,11 +32,12 @@ $bg-dark: #121214;
   margin-bottom: 1.75rem;
 }
 
-.skill-name {
+.skill-name,
+.skill p {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 500;
-  color: #E5E5E5;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   display: block;
 }
@@ -58,7 +54,7 @@ $bg-dark: #121214;
   display: block;
   height: 100%;
   border-radius: 20px;
-  background: linear-gradient(90deg, $accent-yellow, #FFE44D);
+  background: linear-gradient(90deg, var(--accent-primary), #FFE44D);
   position: relative;
   overflow: hidden;
   transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -103,23 +99,24 @@ $bg-dark: #121214;
 /* Light Mode */
 .light-mode {
   .skills-container {
-    background: #FFFFFF;
+    background: var(--bg-primary);
   }
-  
+
   .skill-bars-heading {
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
-  
-  .skill-name {
-    color: #1a1a2e;
+
+  .skill-name,
+  .skill p {
+    color: var(--text-primary);
   }
-  
+
   .meter {
     background: rgba(184, 134, 11, 0.1);
   }
-  
+
   .meter > span {
-    background: linear-gradient(90deg, $accent-yellow-dark, $accent-yellow);
+    background: linear-gradient(90deg, var(--text-highlight), var(--accent-primary));
     box-shadow: 0 0 15px rgba(184, 134, 11, 0.3);
   }
 }
@@ -173,7 +170,8 @@ $bg-dark: #121214;
     padding: 30px 4%;
   }
   
-  .skill-name {
+  .skill-name,
+  .skill p {
     font-size: 0.9rem;
   }
   

@@ -1,12 +1,8 @@
 @import "../../_globalColor";
 
-// Theme colors
-$accent-yellow: #FFD700;
-$accent-yellow-dark: #b8860b;
-
 .experience-card {
   position: relative;
-  background-color: #f8f9fc;
+  background-color: var(--bg-card);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -20,7 +16,7 @@ $accent-yellow-dark: #b8860b;
 
 .experience-card-dark {
   position: relative;
-  background-color: #1a1a1e;
+  background-color: var(--bg-card);
   box-shadow: 0 4px 20px rgba(255, 215, 0, 0.05);
   border-radius: 12px;
   border: 1px solid rgba(255, 215, 0, 0.1);
@@ -104,7 +100,7 @@ $accent-yellow-dark: #b8860b;
   text-align: center;
   padding: 1.5rem;
   margin: 0;
-  color: #1a1a2e;
+  color: var(--text-primary);
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
@@ -114,7 +110,7 @@ $accent-yellow-dark: #b8860b;
 }
 
 .experience-card-dark .experience-text-company {
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 .experience-roundedimg {
@@ -134,7 +130,7 @@ $accent-yellow-dark: #b8860b;
 
 .experience-text-role {
   text-align: center;
-  color: #1a1a2e;
+  color: var(--text-primary);
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 1.3rem;
@@ -144,12 +140,12 @@ $accent-yellow-dark: #b8860b;
 }
 
 .dark-mode-text {
-  color: #FFFFFF !important;
+  color: var(--text-primary) !important;
 }
 
 .experience-text-date {
   text-align: center;
-  color: $accent-yellow-dark;
+  color: var(--text-highlight);
   font-size: 1rem;
   margin: 0px;
   padding-top: 0.75rem;
@@ -157,18 +153,18 @@ $accent-yellow-dark: #b8860b;
 }
 
 .experience-card-dark .experience-text-date {
-  color: $accent-yellow;
+  color: var(--accent-primary);
 }
 
 .experience-text-desc {
   text-align: center;
-  color: #555577;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
 }
 
 .experience-card-dark .experience-text-desc {
-  color: #9CA3AF;
+  color: var(--text-secondary);
 }
 
 .experience-text-details {

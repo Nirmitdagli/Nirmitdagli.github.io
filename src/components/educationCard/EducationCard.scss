@@ -1,14 +1,10 @@
 @import "../../_globalColor";
 
-// Theme colors
-$accent-yellow: #FFD700;
-$accent-yellow-dark: #b8860b;
-
 .education-card {
   display: flex;
   flex-direction: row;
   padding: 1.5rem;
-  background: #1a1a1e;
+  background: var(--bg-card);
   border-radius: 12px;
   border: 1px solid rgba(255, 215, 0, 0.1);
   margin-bottom: 1.5rem;
@@ -38,7 +34,7 @@ $accent-yellow-dark: #b8860b;
 }
 
 .education-card:hover + .education-card-border {
-  border-color: $accent-yellow;
+  border-color: var(--accent-primary);
   width: 100%;
 }
 
@@ -60,7 +56,7 @@ $accent-yellow-dark: #b8860b;
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-primary);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -78,7 +74,7 @@ $accent-yellow-dark: #b8860b;
 }
 
 .education-card:hover .education-roundedimg {
-  border-color: $accent-yellow;
+  border-color: var(--accent-primary);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
 }
 
@@ -87,7 +83,7 @@ $accent-yellow-dark: #b8860b;
 }
 
 .education-text-subHeader {
-  color: $accent-yellow;
+  color: var(--text-highlight);
   font-weight: 600;
   font-size: 1.1rem;
   margin: 0px;
@@ -96,7 +92,7 @@ $accent-yellow-dark: #b8860b;
 }
 
 .education-text-duration {
-  color: #9CA3AF;
+  color: var(--text-secondary);
   font-size: 1rem;
   margin: 0px;
   padding-top: 0.5rem;
@@ -105,20 +101,20 @@ $accent-yellow-dark: #b8860b;
 .education-text-desc {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  color: #9CA3AF;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .education-text-bullets > ul {
   margin-top: 0.5rem;
-  color: #9CA3AF;
+  color: var(--text-secondary);
 }
 
 /* Light Mode */
 .light-mode {
   .education-card {
-    background: #f8f9fc;
-    border-color: rgba(0, 0, 0, 0.1);
+    background: var(--bg-card);
+    border-color: var(--border-color);
   }
 
   .education-card:hover {
@@ -131,7 +127,7 @@ $accent-yellow-dark: #b8860b;
   }
 
   .education-text-school {
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
 
   .education-roundedimg {
@@ -139,18 +135,18 @@ $accent-yellow-dark: #b8860b;
   }
 
   .education-card:hover .education-roundedimg {
-    border-color: $accent-yellow-dark;
+    border-color: var(--text-highlight);
     box-shadow: 0 0 20px rgba(184, 134, 11, 0.2);
   }
 
   .education-text-subHeader {
-    color: $accent-yellow-dark;
+    color: var(--text-highlight);
   }
 
   .education-text-duration,
   .education-text-desc,
   .education-text-bullets > ul {
-    color: #555577;
+    color: var(--text-secondary);
   }
 }
 
@@ -159,7 +155,7 @@ $accent-yellow-dark: #b8860b;
   .education-card {
     flex-direction: column;
     padding: 1.25rem;
-    transform: translateY(-30px);
+    /* Animation handles the initial transform state */
   }
 
   @keyframes eduCardReveal {

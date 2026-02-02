@@ -1,11 +1,5 @@
 @import "../../_globalColor";
 
-// Theme colors
-$accent-yellow: #FFD700;
-$accent-yellow-dark: #b8860b;
-$bg-dark: #121214;
-$bg-card: #1a1a1e;
-
 .contact-margin-top {
   margin-top: 2rem;
 }
@@ -16,7 +10,7 @@ $bg-card: #1a1a1e;
   gap: 2rem;
   padding: 30px 5% 15px 5%;
   /* Reduced bottom padding from 80px */
-  background: $bg-dark;
+  background: var(--bg-primary);
   align-items: start;
 }
 
@@ -30,18 +24,18 @@ $bg-card: #1a1a1e;
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 
   &.light {
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
 }
 
 .contact-subtitle {
   font-size: 1rem;
   letter-spacing: 0.05em;
-  color: $accent-yellow;
+  color: var(--text-highlight);
   margin-bottom: 2.5rem;
   text-transform: uppercase;
 }
@@ -59,7 +53,7 @@ $bg-card: #1a1a1e;
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background: $bg-card;
+  background: var(--bg-card);
   border-radius: 12px;
   border: 1px solid rgba(255, 215, 0, 0.1);
   text-decoration: none;
@@ -92,7 +86,7 @@ $bg-card: #1a1a1e;
 
   i {
     font-size: 1.25rem;
-    color: $accent-yellow;
+    color: var(--accent-primary);
   }
 }
 
@@ -104,14 +98,14 @@ $bg-card: #1a1a1e;
 
 .contact-label {
   font-size: 0.75rem;
-  color: #9CA3AF;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
 .contact-value {
   font-size: 1rem;
-  color: #FFFFFF;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -121,7 +115,7 @@ $bg-card: #1a1a1e;
 
 /* Right Side - Contact Form */
 .contact-form-container {
-  background: $bg-card;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 2.5rem;
   border: 1px solid rgba(255, 215, 0, 0.1);
@@ -131,7 +125,7 @@ $bg-card: #1a1a1e;
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
 }
 
@@ -154,7 +148,7 @@ $bg-card: #1a1a1e;
 
   label {
     font-size: 0.85rem;
-    color: #9CA3AF;
+    color: var(--text-secondary);
     font-weight: 500;
   }
 
@@ -165,7 +159,7 @@ $bg-card: #1a1a1e;
     border-radius: 8px;
     padding: 0.875rem 1rem;
     font-size: 1rem;
-    color: #FFFFFF;
+    color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     transition: all 0.3s ease;
 
@@ -175,7 +169,7 @@ $bg-card: #1a1a1e;
 
     &:focus {
       outline: none;
-      border-color: $accent-yellow;
+      border-color: var(--accent-primary);
       box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
       background: rgba(255, 215, 0, 0.05);
     }
@@ -192,7 +186,7 @@ $bg-card: #1a1a1e;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  background: $accent-yellow;
+  background: var(--accent-primary);
   color: #121214;
   border: none;
   border-radius: 8px;
@@ -246,7 +240,7 @@ $bg-card: #1a1a1e;
 
 .submit-message {
   text-align: center;
-  color: $accent-yellow;
+  color: var(--text-highlight);
   font-size: 0.9rem;
   margin-top: 0.5rem;
 }
@@ -254,20 +248,20 @@ $bg-card: #1a1a1e;
 /* Light Mode */
 .light-mode {
   .contact-div-main {
-    background: #FFFFFF;
+    background: var(--bg-primary);
   }
 
   .contact-title {
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
 
   .contact-subtitle {
-    color: $accent-yellow-dark;
+    color: var(--text-highlight);
   }
 
   .contact-info-card {
-    background: #f8f9fc;
-    border-color: rgba(0, 0, 0, 0.1);
+    background: var(--bg-card);
+    border-color: var(--border-color);
 
     &:hover {
       border-color: rgba(184, 134, 11, 0.3);
@@ -279,44 +273,44 @@ $bg-card: #1a1a1e;
     background: rgba(184, 134, 11, 0.1);
 
     i {
-      color: $accent-yellow-dark;
+      color: var(--text-highlight);
     }
   }
 
   .contact-label {
-    color: #6b7280;
+    color: var(--text-secondary);
   }
 
   .contact-value {
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
 
   .contact-form-container {
-    background: #f8f9fc;
-    border-color: rgba(0, 0, 0, 0.1);
+    background: var(--bg-card);
+    border-color: var(--border-color);
   }
 
   .form-title {
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
 
   .form-group {
     label {
-      color: #555577;
+      color: var(--text-secondary);
     }
 
     input,
     textarea {
-      background: #FFFFFF;
-      border-color: rgba(0, 0, 0, 0.15);
-      color: #1a1a2e;
+      background: var(--bg-primary);
+      border-color: var(--border-color);
+      color: var(--text-primary);
 
       &::placeholder {
         color: #9CA3AF;
       }
 
       &:focus {
-        border-color: $accent-yellow-dark;
+        border-color: var(--text-highlight);
         box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
         background: rgba(184, 134, 11, 0.02);
       }
@@ -324,7 +318,7 @@ $bg-card: #1a1a1e;
   }
 
   .submit-btn {
-    background: $accent-yellow-dark;
+    background: var(--text-highlight);
     color: #FFFFFF;
 
     &:hover {
@@ -334,7 +328,7 @@ $bg-card: #1a1a1e;
   }
 
   .submit-message {
-    color: $accent-yellow-dark;
+    color: var(--text-highlight);
   }
 }
 

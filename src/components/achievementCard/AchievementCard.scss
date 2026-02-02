@@ -1,9 +1,5 @@
 @import "../../_globalColor";
 
-// Theme colors
-$accent-yellow: #FFD700;
-$accent-yellow-dark: #b8860b;
-
 .card-image {
   max-width: 100%;
   height: auto;
@@ -11,7 +7,7 @@ $accent-yellow-dark: #b8860b;
 }
 
 .card-title {
-  color: #FFFFFF;
+  color: var(--text-primary);
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-size: 1.25rem;
   line-height: 1.4;
@@ -20,13 +16,13 @@ $accent-yellow-dark: #b8860b;
 }
 
 .card-subtitle {
-  color: #9CA3AF;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
 }
 
 .certificate-card {
-  background-color: #1a1a1e;
+  background-color: var(--bg-card);
   box-shadow: 0 4px 20px rgba(255, 215, 0, 0.05);
   padding: 1.5rem;
   border-radius: 12px;
@@ -45,7 +41,7 @@ $accent-yellow-dark: #b8860b;
 
 /* Light Mode */
 .light-mode .certificate-card {
-  background-color: #f8f9fc;
+  background-color: var(--bg-card);
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
@@ -56,11 +52,11 @@ $accent-yellow-dark: #b8860b;
 }
 
 .light-mode .card-title {
-  color: #1a1a2e;
+  color: var(--text-primary);
 }
 
 .light-mode .card-subtitle {
-  color: #555577;
+  color: var(--text-secondary);
 }
 
 .certificate-image-div {
@@ -88,7 +84,7 @@ $accent-yellow-dark: #b8860b;
 }
 
 .certificate-card-footer span.certificate-tag {
-  background: $accent-yellow;
+  background: var(--accent-primary);
   color: #121214;
   vertical-align: middle;
   align-items: center;
@@ -111,7 +107,7 @@ span.certificate-tag:hover {
 }
 
 .light-mode .certificate-card-footer span.certificate-tag {
-  background: $accent-yellow-dark;
+  background: var(--text-highlight);
   color: #FFFFFF;
 }
 

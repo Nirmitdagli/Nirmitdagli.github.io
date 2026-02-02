@@ -4,7 +4,7 @@
   position: relative;
   background: $buttonColor;
   border: 2px solid $buttonColor;
-  color: #121214;
+  color: var(--bg-primary);
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
   font-weight: 600;
   width: max-content;
@@ -55,7 +55,7 @@
 .main-button.outline:hover,
 .download-link-button .main-button:hover {
   background: $buttonColor;
-  color: #121214;
+  color: #050505;
   box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 

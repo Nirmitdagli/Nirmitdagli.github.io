@@ -1,16 +1,12 @@
 @import "../../_globalColor";
 
-// Theme colors
-$accent-yellow: #FFD700;
-$accent-yellow-dark: #b8860b;
-
 .achievement-heading {
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 700;
   line-height: normal;
   margin: 0px;
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 .achievement-subtitle {
@@ -19,22 +15,22 @@ $accent-yellow-dark: #b8860b;
   margin-bottom: 50px;
   font-size: 0.9rem;
   letter-spacing: 0.1em;
-  color: $accent-yellow;
+  color: var(--text-highlight);
 }
 
 .subTitle {
-  color: $accent-yellow;
+  color: var(--text-highlight);
 }
 
 /* Light Mode */
 .light-mode {
   .achievement-heading {
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
 
   .achievement-subtitle,
   .achievement-subtitle.subTitle {
-    color: $accent-yellow-dark;
+    color: var(--text-highlight);
   }
 }
 

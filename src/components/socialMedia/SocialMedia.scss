@@ -1,9 +1,5 @@
 @import "../../_globalColor";
 
-// SHUBHZ TECHWORK Theme
-$accent-yellow: #FFD700;
-$bg-dark: #1A1A1E;
-
 .social-media-div {
   display: flex;
   align-items: center;
@@ -17,7 +13,7 @@ $bg-dark: #1A1A1E;
 }
 
 .icon-button i {
-  color: #FFFFFF;
+  color: var(--text-primary);
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -58,7 +54,7 @@ $bg-dark: #1A1A1E;
   background: rgba(255, 215, 0, 0.15);
   border-color: rgba(255, 215, 0, 0.4);
   box-shadow: 0 8px 25px rgba(255, 215, 0, 0.25);
-  color: $accent-yellow;
+  color: var(--accent-primary);
 }
 
 .facebook i:hover {

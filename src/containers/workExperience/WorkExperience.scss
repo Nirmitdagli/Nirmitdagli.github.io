@@ -1,9 +1,5 @@
 @import "../../_globalColor";
 
-// Theme colors
-$accent-yellow: #FFD700;
-$accent-yellow-dark: #b8860b;
-
 .experience-cards-div {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -14,11 +10,11 @@ $accent-yellow-dark: #b8860b;
   font-family: 'Plus Jakarta Sans', 'Montserrat', sans-serif;
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-primary);
 }
 
 .experience-subtitle {
-  color: $accent-yellow;
+  color: var(--text-highlight);
   font-size: 0.9rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -40,11 +36,11 @@ $accent-yellow-dark: #b8860b;
 /* Light Mode */
 .light-mode {
   .experience-heading {
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
 
   .experience-subtitle {
-    color: $accent-yellow-dark;
+    color: var(--text-highlight);
   }
 }
 

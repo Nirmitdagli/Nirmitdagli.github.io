@@ -26,6 +26,17 @@ const Main = () => {
   const [isDark, setIsDark] = useLocalStorage("isDark", true);
   const [isShowingSplashAnimation, setIsShowingSplashAnimation] = useState(true);
 
+  // Sync theme class to body element for CSS variable switching
+  useEffect(() => {
+    if (isDark) {
+      document.body.classList.remove("light-mode");
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+      document.body.classList.add("light-mode");
+    }
+  }, [isDark]);
+
   useEffect(() => {
     if (splashScreen.enabled) {
       const splashTimer = setTimeout(

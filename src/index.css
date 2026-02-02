@@ -16,16 +16,104 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Global CSS Variables - Source of Truth */
+:root {
+  /* Dark Theme (Default) - Modern Cyber-Glass */
+  --bg-primary: #050505;
+  /* Deep Black (Preserved) */
+  --bg-secondary: #0a0f0d;
+  /* Slightly lighter black */
+  --bg-tertiary: #111111;
+  /* For depth */
+
+  /* Glassmorphism Layers */
+  --glass-surface: rgba(10, 15, 13, 0.7);
+  --glass-border: rgba(255, 215, 0, 0.15);
+  /* Subtle Gold Border */
+  --glass-highlight: rgba(255, 255, 255, 0.05);
+
+  --bg-card: var(--glass-surface);
+  --bg-header: rgba(5, 5, 5, 0.85);
+  /* More transparent for glass effect */
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #94a3b8;
+  /* Cool gray for contrast */
+  --text-highlight: #FFD700;
+
+  /* Accents - Retaining Identity */
+  --accent-primary: #FFD700;
+  /* Gold */
+  --accent-secondary: #FFAA00;
+  /* Deep Amber */
+  --accent-cyan: #00dbde;
+  /* Cyber Cyan */
+  --accent-purple: #fc00ff;
+  /* Synthwave Purple */
+  --accent-glow: rgba(255, 215, 0, 0.4);
+
+  /* Modern Shadows */
+  --shadow-color: rgba(255, 215, 0, 0.15);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --border-color: rgba(255, 215, 0, 0.2);
+
+  /* Terminal theme colors */
+  --terminal-dim: #333333;
+  --terminal-green: #FFD700;
+  --terminal-bg: #050505;
+}
+
+/* Light Theme Overrides */
+body.light-mode {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  /* Slate 50 */
+  --bg-tertiary: #f1f5f9;
+
+  --glass-surface: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.8);
+
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-header: rgba(255, 255, 255, 0.85);
+
+  --text-primary: #0f172a;
+  /* Slate 900 */
+  --text-secondary: #475569;
+  /* Slate 600 */
+  --text-highlight: #b45309;
+  /* Darker Gold */
+
+  --accent-primary: #fbbf24;
+  /* Amber 400 */
+  --accent-secondary: #f59e0b;
+  /* Amber 500 */
+  --accent-cyan: #0891b2;
+  /* Cyan 600 */
+  --accent-purple: #9333ea;
+  /* Purple 600 */
+  --accent-glow: rgba(251, 191, 36, 0.4);
+
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --shadow-glass: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.1);
+
+  --terminal-dim: #cbd5e1;
+  --terminal-green: #b45309;
+  --terminal-bg: #ffffff;
+}
+
 body {
   margin: 0;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   /* Force Terminal Font */
-  background-color: var(--terminal-bg);
-  color: #e0e0e0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Scrollbar - Digital Look */
@@ -168,15 +256,76 @@ a:hover {
 }
 
 /* Dark/Light Mode Overrides applied at Body level */
+/* These class-based rules reinforce the CSS variable-based theming */
 .dark-mode {
-  background-color: var(--terminal-bg);
-  color: #e0e0e0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
-.light-mode {
-  /* Even for light mode, we keep a "clean" tech look, maybe High Contrast White/Black */
-  background-color: #f0f0f0;
-  color: #111;
-  --terminal-green: #000;
-  /* In light mode, terminal accent becomes black */
+/* Light mode - clean, high-contrast tech aesthetic */
+body.light-mode {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Disable CRT scanline effect in light mode for cleaner look */
+body.light-mode::after {
+  opacity: 0;
+}
+
+/* Light mode scrollbar adjustments */
+body.light-mode ::-webkit-scrollbar {
+  background: #f0f0f0;
+}
+
+body.light-mode ::-webkit-scrollbar-thumb {
+  background: var(--terminal-dim);
+}
+
+body.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-green);
+}
+
+/* --- Modern Pro Max Utilities --- */
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: var(--glass-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-header {
+  background: var(--bg-header);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Text Gradients */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, #00e5ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Neon Glows */
+.glow-gold {
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.hover-glow-gold:hover {
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
