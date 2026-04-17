@@ -1,1 +1,107 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>DeveloperFolio | Developer Portfolio Template</title><meta name="title" content="DeveloperFolio | Developer Portfolio Template"><meta name="description" content="Software Developer Portfolio Template that helps you showcase your work and skills as a software developer"><meta property="og:type" content="website"><meta property="og:url" content="https://developerfolio.js.org/"><meta property="og:title" content="DeveloperFolio | Developer Portfolio Template"><meta property="og:description" content="Software Developer Portfolio Template that helps you showcase your work and skills as a software developer"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://developerfolio.js.org/"><meta property="twitter:title" content="DeveloperFolio | Developer Portfolio Template"><meta property="twitter:description" content="Software Developer Portfolio Template that helps you showcase your work and skills as a software developer"><meta name="msapplication-TileColor" content="#603cba"><meta name="theme-color" content="#6c63ff"/><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v8=qAJ44G5Bm7"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v8=qAJ44G5Bm7"><link rel="mask-icon" href="/safari-pinned-tab.svg?v8=qAJ44G5Bm7" color="#885bd5"><link rel="shortcut icon" href="/favicon.ico?v8=qAJ44G5Bm7"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v8=qAJ44G5Bm7"><link rel="manifest" href="/manifest.json"/><link rel="preload" href="/static/media/Montserrat-Regular.ee653992.ttf" as="font" type="font/woff" crossorigin><link rel="preload" href="/static/media/Agustina.21f233e1.woff" as="font" type="font/woff" crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-135618960-2"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-135618960-2")</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.4/css/all.min.css"><script defer="defer" src="/static/js/main.f471c84f.js"></script><link href="/static/css/main.dba715f2.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fafaf8" />
+    <meta
+      name="description"
+      content="Nirmit Dagli — Cloud Infrastructure & Security Engineer. MS Computer Science (3.9 GPA). CKA, CKAD, AWS, RHCSA certified. IEEE-published researcher."
+    />
+    <meta property="og:title" content="Nirmit Dagli — Cloud Infrastructure & Security Engineer" />
+    <meta property="og:description" content="3.5 years building multi-cloud infrastructure, Kubernetes clusters, and security systems for enterprise SaaS." />
+    <meta property="og:type" content="website" />
+    <title>Nirmit Dagli — Cloud Infrastructure & Security Engineer</title>
+
+    <!-- Preconnects for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts: Instrument Serif (display), Inter (body), JetBrains Mono (code) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind via CDN (Play CDN). Production build would swap to compiled Tailwind,
+         but CDN keeps this repo dead-simple to deploy. -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
+    <script>
+      // Tailwind theme extension — keeps the warm, airy palette centralized.
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              paper: {
+                50: '#fefefd',
+                100: '#fafaf8',
+                200: '#f5f5f0',
+                300: '#ededE6',
+                400: '#e1e1d8',
+                500: '#c9c9bf',
+              },
+              ink: {
+                900: '#1a1a1a',
+                800: '#2a2a28',
+                700: '#4a4a47',
+                600: '#6b6b66',
+                500: '#8a8a85',
+                400: '#a8a8a3',
+              },
+              teal: {
+                50:  '#f0fdfa',
+                100: '#ccfbf1',
+                200: '#99f6e4',
+                300: '#5eead4',
+                400: '#2dd4bf',
+                500: '#14b8a6',
+                600: '#0d9488',
+                700: '#0f766e',
+                800: '#115e59',
+                900: '#134e4a',
+              },
+              amber: {
+                50:  '#fffbeb',
+                100: '#fef3c7',
+                200: '#fde68a',
+                300: '#fcd34d',
+                400: '#fbbf24',
+                500: '#f59e0b',
+                600: '#d97706',
+                700: '#b45309',
+              },
+            },
+            fontFamily: {
+              display: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
+              sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+            },
+            boxShadow: {
+              soft: '0 1px 2px rgba(20,20,20,0.04), 0 4px 16px rgba(20,20,20,0.04)',
+              lift: '0 2px 4px rgba(20,20,20,0.04), 0 12px 32px rgba(20,20,20,0.06)',
+              glow: '0 0 0 1px rgba(13,148,136,0.08), 0 8px 32px rgba(13,148,136,0.10)',
+            },
+            backgroundImage: {
+              'grain': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            },
+            keyframes: {
+              blink: {
+                '0%, 50%': { opacity: '1' },
+                '51%, 100%': { opacity: '0' },
+              },
+            },
+            animation: {
+              blink: 'blink 1s step-end infinite',
+            },
+          },
+        },
+      };
+    </script>
+    <script type="module" crossorigin src="/assets/index-BgNUBEHF.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BueWZQn2.css">
+  </head>
+  <body class="antialiased">
+    <div id="root"></div>
+  </body>
+</html>
