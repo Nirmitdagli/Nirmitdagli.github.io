@@ -3,36 +3,62 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useCountUp } from '../hooks/useCountUp.js';
 import { useInView } from '../hooks/useInView.js';
 
+// Role reel — cycles through the full polymath surface. Cloud-infra first
+// because it's the anchor, but everything else gets a turn so the reader
+// sees the range before they scroll.
 const SUBTITLES = [
   'Cloud Infrastructure & Security Engineer',
+  'DevOps + Platform Engineer',
+  'Network & Zero-Trust Architect',
+  'AI Engineer \u2014 LLMs, RAG, Agents',
+  'Quantum Computing Researcher (IEEE)',
 ];
 
 // Premium easing — borrowed from findworkhappiness.com's slow, considered feel.
 const EASE = [0.19, 1, 0.22, 1];
 
-// Hook: types out a given string character by character.
-function useTypewriter(text, { speed = 55, startDelay = 400 } = {}) {
-  const [out, setOut] = useState('');
+// Hook: cycles through an array of phrases, typing each one out and then
+// backspacing before the next. If given a single string, acts like a plain
+// typewriter. Pauses after each phrase is fully typed so the reader can
+// actually read it — these are role titles, not flavor text.
+function useTypewriter(phrases, { speed = 55, deleteSpeed = 28, holdMs = 1800, startDelay = 400 } = {}) {
+  const list = Array.isArray(phrases) ? phrases : [phrases];
+  const [out, setOut]   = useState('');
+  const [idx, setIdx]   = useState(0);
   const [done, setDone] = useState(false);
+
   useEffect(() => {
+    let timer;
     let i = 0;
-    let startT;
-    const kickoff = setTimeout(() => {
-      startT = setInterval(() => {
+    let deleting = false;
+    const current = list[idx];
+
+    const kickoff = setTimeout(function tick() {
+      if (!deleting) {
         i += 1;
-        setOut(text.slice(0, i));
-        if (i >= text.length) {
-          clearInterval(startT);
-          setDone(true);
+        setOut(current.slice(0, i));
+        if (i >= current.length) {
+          // Full phrase — if only one phrase, stop here. Otherwise hold, then delete.
+          if (list.length === 1) { setDone(true); return; }
+          timer = setTimeout(() => { deleting = true; tick(); }, holdMs);
+          return;
         }
-      }, speed);
+        timer = setTimeout(tick, speed);
+      } else {
+        i -= 1;
+        setOut(current.slice(0, i));
+        if (i <= 0) {
+          setIdx((n) => (n + 1) % list.length);
+          return;
+        }
+        timer = setTimeout(tick, deleteSpeed);
+      }
     }, startDelay);
-    return () => {
-      clearTimeout(kickoff);
-      if (startT) clearInterval(startT);
-    };
-  }, [text, speed, startDelay]);
-  return { out, done };
+
+    return () => { clearTimeout(kickoff); clearTimeout(timer); };
+  }, [idx]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return { out, done: done || list.length > 1 };
 }
 
 function StatTile({ end, suffix = '', label, start, delay = 0 }) {
@@ -234,7 +260,8 @@ function Portrait() {
 }
 
 export default function Hero() {
-  const { out: typed, done: typedDone } = useTypewriter(SUBTITLES[0]);
+  // Pass the full role reel \u2014 the hook cycles through each phrase, types, holds, deletes.
+  const { out: typed, done: typedDone } = useTypewriter(SUBTITLES);
   const [statsRef, statsInView] = useInView({ threshold: 0.35 });
 
   return (
@@ -279,9 +306,9 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-60" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-600" />
               </span>
-              Currently building <span className="font-semibold">SPARK AI Platform</span>
-              <span className="text-ink-400">·</span>
-              Open to Opportunities
+              Cloud \u00b7 DevOps \u00b7 Security \u00b7 Network \u00b7 AI \u00b7 Quantum
+              <span className="text-ink-400">\u2014</span>
+              <span className="font-semibold">one engineer, full stack of the stack</span>
             </motion.div>
 
             {/* Name — extreme scale, tight leading (editorial nod to findworkhappiness) */}
@@ -346,22 +373,28 @@ export default function Hero() {
                   Eng.
                 </span>
                 {typed}
-                {!typedDone && (
-                  <span className="w-[2px] h-[1.1em] bg-teal-600 ml-1 inline-block animate-blink" />
-                )}
+                {/* Cursor blinks forever when reel is cycling; steady-on during the delay. */}
+                <span className="w-[2px] h-[1.1em] bg-teal-600 ml-1 inline-block animate-blink" />
               </h2>
             </div>
 
-            {/* Bio */}
+            {/* Bio \u2014 told as a story: infra spine \u2192 AI brain \u2192 quantum edge */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 1.2 }}
               className="mt-6 max-w-xl text-[1rem] md:text-[1.05rem] leading-relaxed text-ink-700"
             >
-              MS Computer Science (3.9 GPA) at Quinnipiac University.
-              3.5 years building multi-cloud infrastructure, Kubernetes clusters, and security systems for enterprise SaaS.
-              IEEE-published researcher. <span className="text-ink-900 font-semibold">CKA & AWS certified.</span>
+              I build the <span className="font-semibold text-ink-900">spine</span> most apps sit on \u2014
+              multi-cloud Kubernetes, Terraform, zero-trust networks, CI/CD with OIDC,
+              and the security posture that lets you sleep at 2 AM.
+              Then I bolt on the <span className="font-semibold text-ink-900">brain</span>:
+              LLM agents, RAG pipelines, threat-modeling copilots.
+              Then, because the academic in me won\u2019t let it go, a little
+              <span className="font-semibold text-ink-900"> quantum on the edge</span> \u2014
+              Grover\u2019s Algorithm as an honest-to-goodness retrieval layer.
+              MS CS @ Quinnipiac (3.9 GPA) \u00b7
+              <span className="text-ink-900 font-semibold"> CKA \u00b7 AWS SAA \u00b7 IEEE-published \u00d73.</span>
             </motion.p>
 
             {/* Contact pills */}
@@ -405,9 +438,9 @@ export default function Hero() {
           className="mt-12 flex flex-wrap items-center gap-x-3 text-[12px] font-mono text-ink-500"
         >
           <span className="text-teal-600">◆</span>
-          <span>Teacher · Poet · Midfielder · Opening Batter —</span>
+          <span>Cloud-native by day · LLM-wrangler by evening · Grover's oracle by midnight —</span>
           <a href="#beyond" className="text-teal-700 hover:text-teal-800 underline underline-offset-4 decoration-teal-600/40 hover:decoration-teal-600">
-            the other half of the discipline ↓
+            and a teacher, poet & midfielder underneath it all ↓
           </a>
         </motion.div>
 

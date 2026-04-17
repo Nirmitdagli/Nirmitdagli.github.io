@@ -127,6 +127,43 @@ export default function ProjectCard({ project, index }) {
                 ))}
               </div>
 
+              {/* Repo + demo links */}
+              {project.links && (project.links.github || project.links.demo) && (
+                <div className="mt-5 flex flex-wrap items-center gap-2">
+                  {project.links.github && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="pill pill-teal font-mono text-[11.5px] hover:-translate-y-0.5 transition-transform"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" className="opacity-80">
+                        <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.33c-2.22.48-2.7-1.07-2.7-1.07-.36-.93-.9-1.18-.9-1.18-.73-.5.06-.49.06-.49.81.06 1.24.83 1.24.83.72 1.24 1.9.88 2.36.67.07-.52.28-.88.5-1.08-1.77-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.21c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                      </svg>
+                      {project.links.githubLabel || 'View on GitHub'}
+                      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" className="opacity-60">
+                        <path d="M2 9 L9 2 M4 2 H9 V7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                      </svg>
+                    </a>
+                  )}
+                  {project.links.demo && (
+                    <a
+                      href={project.links.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="pill pill-amber font-mono text-[11.5px] hover:-translate-y-0.5 transition-transform"
+                    >
+                      Live demo
+                      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" className="opacity-60">
+                        <path d="M2 9 L9 2 M4 2 H9 V7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              )}
+
               {/* Architecture + Code — stacked on mobile, side-by-side on wide screens */}
               <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Architecture column — supports multiple views via tabs */}
