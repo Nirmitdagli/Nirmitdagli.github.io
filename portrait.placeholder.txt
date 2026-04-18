@@ -1,0 +1,14 @@
+Save your portrait photo at this exact path:
+
+    public/portrait.jpg
+
+Recommended specs:
+  • 800x800 px or larger, roughly square
+  • JPEG (or swap to .png/.webp and update src in src/components/Hero.jsx → Portrait)
+  • File size under 300 KB for fast load
+
+The photo you sent in chat (circular-cropped, dark suit, holding the MSME award)
+is perfect — just save that image as portrait.jpg in this folder.
+
+Until the file exists, the hero shows a teal "ND" monogram fallback. As soon as
+the file is saved and the page reloads, the photo will slide in automatically.
