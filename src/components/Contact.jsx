@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 const CHANNELS = [
   {
     label: 'Email',
-    value: 'ndagli@quinnipiac.edu',
-    href: 'mailto:ndagli@quinnipiac.edu',
+    value: 'daglinirmit@gmail.com',
+    href: 'mailto:daglinirmit@gmail.com',
   },
   {
     label: 'Phone',
@@ -20,8 +20,8 @@ const CHANNELS = [
   },
   {
     label: 'LinkedIn',
-    value: 'linkedin.com/in/nirmitdagli',
-    href: 'https://linkedin.com/in/nirmitdagli',
+    value: 'linkedin.com/in/nirmit-dagli-62857916a/',
+    href: 'https://linkedin.com/in/nirmit-dagli-62857916a/',
     external: true,
   },
 ];
@@ -50,12 +50,12 @@ export default function Contact() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.45 }}
             >
-              <div className="eyebrow">05 · Contact</div>
+              <div className="eyebrow">Contact</div>
               <h2 className="h-section mt-2">Let's Build Something</h2>
               <p className="mt-5 text-[1.05rem] leading-relaxed text-ink-700">
-                Open to infrastructure, security, and platform engineering roles.
-                Available <span className="text-ink-900 font-medium">May 2026</span>.
-                Willing to relocate anywhere.
+                Currently a Cybersecurity & Platform Engineer at Sidecoach Sports.
+                Open to platform engineering, cloud infrastructure, DevOps, and cloud security
+                opportunities across the United States.
               </p>
             </motion.div>
 
@@ -97,18 +97,18 @@ export default function Contact() {
               className="mt-10 flex flex-wrap gap-3"
             >
               <a
-                href="mailto:ndagli@quinnipiac.edu"
+                href="mailto:daglinirmit@gmail.com"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-teal-600 text-white text-[14px] font-medium shadow-soft hover:shadow-lift hover:bg-teal-700 transition-all"
               >
                 Say hello →
               </a>
               <a
-                href="/resume.pdf"
+                href="mailto:daglinirmit@gmail.com?subject=Resume%20request"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white border border-ink-900/10 text-ink-900 text-[14px] font-medium hover:border-teal-600 transition-colors"
               >
-                Download résumé
+                Request résumé
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M6 1v8m0 0l3-3m-3 3l-3-3M2 11h8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

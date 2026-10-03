@@ -3,28 +3,30 @@
  *  - header copy (title, subtitle, tag, tech pills, description)
  *  - metrics: 4 numbers shown at the top of the expanded view
  *  - architecture | architectures[]: layered diagram(s)
+ *  - reactFlow: optional interactive (draw.io-style) diagram ref
  *  - code | codeBlocks[]: source snippet(s)
  *
  * Architecture renders as stacked cards connected with flow arrows (not images).
  * Code renders with line numbers + a filename tab, Prism-free light tokenization.
  */
 
+import { ransomwareDiagram, sparkDiagram } from './reactFlowDiagrams.js';
+
 export const projects = [
   // ------------------------------------------------------------------
-  // 00 — SideCoach Blueprint. Custom-tailored showcase for the
-  //      Cloud Infrastructure & Security Engineer role. Two architecture
-  //      diagrams (runtime + delivery) and three code snippets that
-  //      directly match the job's tech stack: Azure / Terraform / Entra ID /
-  //      Key Vault / Cloudflare / GitHub Actions OIDC. Real code lives at
-  //      github.com/Nirmitdagli/sidecoach-blueprint-infra.
+  // 00 — Azure SaaS Blueprint. A forward-looking reference architecture
+  //      for a multi-tenant SaaS on Azure. Two architecture diagrams
+  //      (runtime + delivery) and three code snippets: Azure / Terraform /
+  //      Entra ID / Key Vault / Cloudflare / GitHub Actions OIDC.
+  //      Real code lives at github.com/Nirmitdagli/azure-saas-blueprint.
   // ------------------------------------------------------------------
   {
-    id: 'sidecoach-blueprint',
-    title: 'SideCoach Blueprint',
-    subtitle: 'Multi-Tenant Azure SaaS — what I\u2019d build Day One',
-    tag: { label: 'Tailored for this role', accent: 'amber' },
+    id: 'azure-saas-blueprint',
+    title: 'Azure SaaS Blueprint',
+    subtitle: 'Multi-Tenant Azure Reference Architecture',
+    tag: { label: 'Infrastructure Reference', accent: 'amber' },
     links: {
-      github: 'https://github.com/Nirmitdagli/sidecoach-blueprint-infra',
+      github: 'https://github.com/Nirmitdagli/azure-saas-blueprint',
       githubLabel: 'View infra repo',
     },
     tech: [
@@ -33,12 +35,12 @@ export const projects = [
       'GitHub Actions (OIDC)', 'Datadog', 'Application Insights',
     ],
     description:
-      'A forward-looking reference architecture for SideCoach\u2019s multi-tenant platform serving university athletic programs. Two views \u2014 runtime (platform) and delivery (secure CI/CD) \u2014 plus three IaC and workflow snippets, all in Terraform. Grounded in 3.5 years of similar work on enterprise SaaS at Zycus. Every line is runnable \u2014 the companion repo boots a full dev environment in under eight minutes.',
+      'A reference project exploring tenant isolation, managed identity, and secure delivery on Azure. Includes runtime and delivery diagrams, Terraform examples, and GitHub Actions workflows. This is a portfolio reference architecture, separate from my production work at Sidecoach Sports.',
     metrics: [
       { label: 'Tenant Isolation', value: 'Row-level',  sub: 'per-tenant RLS' },
       { label: 'Secrets',          value: 'Zero',       sub: 'in code or disk' },
-      { label: 'Compliance',       value: 'Ready',      sub: 'FERPA · COPPA' },
-      { label: 'Deploy',           value: '< 8 min',    sub: 'dev \u2192 prod' },
+      { label: 'Identity',         value: 'Managed',    sub: 'Entra ID' },
+      { label: 'Delivery',         value: 'CI/CD',      sub: 'GitHub Actions' },
     ],
     architectures: [
       {
@@ -98,7 +100,7 @@ export const projects = [
           '  description = "Environment: dev | staging | prod"',
           '  type        = string',
           '}',
-          'variable "prefix"         { type = string  default = "sidecoach" }',
+          'variable "prefix"         { type = string  default = "tenantapp" }',
           'variable "location"       { type = string  default = "eastus" }',
           'variable "resource_group" { type = string }',
           '',
@@ -203,7 +205,7 @@ export const projects = [
           '          terraform -chdir=infra init',
           '          terraform -chdir=infra apply -auto-approve \\',
           '            -var="env_name=staging" \\',
-          '            -var="resource_group=sidecoach-staging-rg"',
+          '            -var="resource_group=tenantapp-staging-rg"',
           '',
           '  deploy-prod:',
           '    needs: deploy-staging',
@@ -222,12 +224,12 @@ export const projects = [
           '          terraform -chdir=infra init',
           '          terraform -chdir=infra apply -auto-approve \\',
           '            -var="env_name=prod" \\',
-          '            -var="resource_group=sidecoach-prod-rg"',
+          '            -var="resource_group=tenantapp-prod-rg"',
           '      - name: Blue/green slot swap',
           '        run: |',
           '          az webapp deployment slot swap \\',
-          '            -g sidecoach-prod-rg \\',
-          '            -n sidecoach-prod-app --slot staging',
+          '            -g tenantapp-prod-rg \\',
+          '            -n tenantapp-prod-app --slot staging',
         ],
       },
       {
@@ -261,7 +263,7 @@ export const projects = [
           '# WAF \u2014 OWASP managed rules at the edge',
           'resource "cloudflare_ruleset" "waf" {',
           '  zone_id     = var.zone_id',
-          '  name        = "sidecoach-waf"',
+          '  name        = "tenantapp-waf"',
           '  kind        = "zone"',
           '  phase       = "http_request_firewall_managed"',
           '',
@@ -394,9 +396,8 @@ export const projects = [
     title: 'SPARK',
     subtitle: 'AI Tutoring Platform',
     tag: { label: 'IEEE Published', accent: 'teal' },
-    links: {
-      github: 'https://github.com/Nirmitdagli/spark-ai-platform',
-    },
+    // Paper on IEEE Xplore; source not yet public. Omit GitHub link.
+    reactFlow: sparkDiagram,
     tech: [
       'Python', 'AWS', 'GCP', 'Terraform', 'Docker',
       'Kubernetes', 'REST APIs', 'RAG',
@@ -466,9 +467,7 @@ export const projects = [
     title: 'PrivAItect',
     subtitle: 'Privacy Threat Modeling Platform',
     tag: { label: 'Amazon Bedrock', accent: 'amber' },
-    links: {
-      github: 'https://github.com/Nirmitdagli/privaitect',
-    },
+    // Active development; source not yet public. Omit GitHub link.
     tech: [
       'Python', 'AWS Bedrock', 'LINDDUN', 'MITRE PANOPTIC', 'REST APIs', 'Docker',
     ],
@@ -532,11 +531,11 @@ export const projects = [
       'Jenkins', 'ArgoCD', 'Prometheus', 'Grafana',
     ],
     description:
-      'Architected and managed multi-cloud infrastructure for enterprise multi-tenant SaaS platform serving global customers. 50+ Kubernetes clusters, 200+ Linux servers, CI/CD pipelines supporting 15+ engineering teams with continuous delivery.',
+      'Architected and managed multi-cloud infrastructure for enterprise multi-tenant SaaS platform serving global customers. 50+ Kubernetes clusters, Linux servers, CI/CD pipelines supporting 15+ engineering teams with continuous delivery.',
     metrics: [
       { label: 'Uptime',         value: '99.9%' },
       { label: 'K8s Clusters',   value: '50+' },
-      { label: 'Servers',        value: '200+' },
+      { label: 'Provisioning',   value: 'IaC' },
       { label: 'MTTR Reduction', value: '35%' },
     ],
     architecture: [
@@ -545,7 +544,7 @@ export const projects = [
       { name: 'Load Balancing', accent: 'amber',
         items: ['Nginx', 'HAProxy', 'Tenant Routing'] },
       { name: 'Compute',        accent: 'teal',
-        items: ['50+ K8s Clusters (EKS/AKS)', '200+ Linux Servers', 'Consul Service Mesh'] },
+        items: ['50+ K8s Clusters (EKS/AKS)', 'Linux Servers', 'Consul Service Mesh'] },
       { name: 'Data',           accent: 'amber',
         items: ['PostgreSQL', 'MySQL', 'Redis', 'Elasticsearch', 'Tenant Isolation'] },
       { name: 'Platform',       accent: 'teal',
@@ -601,13 +600,14 @@ export const projects = [
     title: 'Ransomware Incident Response & Hardening',
     subtitle: 'Security Recovery & Defense-in-Depth',
     tag: { label: 'Security', accent: 'red' },
+    reactFlow: ransomwareDiagram,
     tech: [
       'CrowdStrike', 'CyberArk', 'Zscaler', 'Palo Alto', 'PfSense', 'FortiGate', 'Veeam',
     ],
     description:
-      'Led recovery from live ransomware attack on production systems. Debugged breach path, executed staged recovery from verified backups, then hardened 200+ servers with defense-in-depth security stack including EDR, PAM, zero-trust, and enterprise firewalls.',
+      'Led recovery from live ransomware attack on production systems. Debugged breach path, executed staged recovery from verified backups, then hardened servers with defense-in-depth security stack including EDR, PAM, zero-trust, and enterprise firewalls.',
     metrics: [
-      { label: 'Servers Hardened', value: '200+' },
+      { label: 'Hardening',        value: 'Layered' },
       { label: 'Recovery',         value: 'Staged', sub: '& verified' },
       { label: 'Restore Tests',    value: 'Monthly' },
       { label: 'Zero Trust',       value: 'Full',   sub: 'deployed' },
@@ -633,7 +633,7 @@ export const projects = [
         '  tool: CrowdStrike Falcon',
         '  coverage: all_production_servers',
         '  policy: prevent_mode',
-        '  targets: 200+ servers',
+        '  targets: production servers',
         '',
         'privileged_access:',
         '  tool: CyberArk',

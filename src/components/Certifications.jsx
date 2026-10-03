@@ -47,7 +47,7 @@ function PublicationRow({ pub, index }) {
       transition={{ duration: 0.4, delay: index * 0.06 }}
       className="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-3 border-b border-ink-900/5 last:border-b-0"
     >
-      <span className="font-display text-[1.05rem] text-ink-900">{pub.title}</span>
+      <a href={pub.url} target="_blank" rel="noreferrer" className="font-display text-[1.05rem] text-ink-900 underline underline-offset-4 hover:text-teal-700">{pub.title} ↗</a>
       <span className="text-ink-500 font-mono text-[11px]">—</span>
       <span className="text-ink-700 text-[13.5px]">{pub.venue}</span>
       {pub.location && (
@@ -73,13 +73,13 @@ export default function Credentials() {
           className="max-w-2xl"
         >
           <div className="eyebrow">04 · Credentials</div>
-          <h2 className="h-section mt-2">Certifications & Publications</h2>
+          <h2 className="h-section mt-2">Credentials & Research</h2>
         </motion.div>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-5 gap-8">
           {/* Certifications: wider column */}
           <div className="lg:col-span-3">
-            <h3 className="eyebrow mb-4">Certifications</h3>
+            <h3 className="eyebrow mb-4">Certifications & training earned</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {certifications.map((c, i) => (
                 <CertBadge key={c.short} cert={c} index={i} />
@@ -89,7 +89,7 @@ export default function Credentials() {
 
           {/* Publications */}
           <div className="lg:col-span-2">
-            <h3 className="eyebrow mb-4">Publications</h3>
+            <h3 className="eyebrow mb-4">Selected publications</h3>
             <div className="surface p-5">
               <ul>
                 {publications.map((p, i) => (

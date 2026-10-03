@@ -1,10 +1,23 @@
 // Experience timeline — most recent first.
 export const experience = [
   {
+    role: 'Cybersecurity & Platform Engineer',
+    company: 'Sidecoach Sports',
+    period: 'Aug 2026 – Present',
+    current: true,
+    tech: ['Azure', 'Terraform', 'Git', 'DevOps', 'Zero Trust', 'Network Security'],
+    bullets: [
+      'Reduced Azure cloud costs by 50% through resource resizing and environment separation.',
+      'Introduced Terraform infrastructure as code and Git-based workflows, helping establish a DevOps culture.',
+      'Implemented defense-in-depth and Zero Trust security across cloud, platform, and network layers, including firewall controls.',
+      'Personally implemented technical controls supporting FERPA and COPPA compliance.',
+    ],
+  },
+  {
     role: 'Research Assistant',
     company: 'Quinnipiac University',
-    period: 'Aug 2025 – Present',
-    current: true,
+    period: 'Started Aug 2025',
+    current: false,
     tech: ['AWS', 'GCP', 'Terraform', 'Docker', 'Kubernetes', 'Amazon Bedrock'],
     bullets: [
       'Built SPARK AI platform with scalable microservices on AWS & GCP using Terraform-managed infrastructure; published at IEEE UEMCON at IBM Watson Research Center (Oct 2025).',
@@ -46,7 +59,7 @@ export const experience = [
     ],
     bullets: [
       'Configured and managed AWS services (EC2, S3, EFS, EKS, Route 53, CloudFront, VPC, IAM, ELB, Autoscaling) hosting business-critical applications across multiple domains with cost-management strategies baked into provisioning.',
-      'Automated 80% of IT tasks using Generative AI with Azure OpenAI and GCP — enhancing system availability by 30% and cutting server provisioning time by 40%.',
+      'Automated infrastructure operations and server provisioning with Terraform, Ansible, and Jenkins.',
       'Managed 50+ Kubernetes clusters on AWS, Azure, Rancher and VMware with CI/CD pipelines, middleware (Nginx, HAProxy, AMQ, Solr, Consul), and Terraform / Ansible / Jenkins IaC — reducing manual effort by 50%.',
       'Led ransomware incident response and recovery: CyberArk, Zscaler, and CrowdStrike rollout; administered RHEL/CentOS/Ubuntu and Windows; deployed Palo Alto, PfSense and FortiGate firewalls; managed SAN/NAS with NetApp and Veeam Backup.',
       'Designed multi-cloud architectures integrating AWS, Azure, and GCP with OpsGenie, CloudWatch, ELK, and Dynatrace monitoring — engineered for security, scalability, and high availability.',

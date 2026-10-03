@@ -57,16 +57,17 @@ export default function ProjectCard({ project, index }) {
       transition={{ duration: 0.4, delay: index * 0.05, ease: 'easeOut' }}
       className={`surface ${open ? 'shadow-lift' : 'surface-hover'}`}
       style={{ borderRadius: 20 }}
-      aria-expanded={open}
     >
       {/* Collapsed header — acts as the toggle */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={project.id + "-details"}
         className="w-full text-left p-6 md:p-7"
       >
         <div className="flex items-start gap-4 flex-wrap">
-          <div className="flex-1 min-w-[260px]">
+          <div className="flex-1 min-w-0 basis-[240px]">
             <div className="flex items-center gap-2 flex-wrap">
               <span className={`pill ${tagClass}`}>{project.tag.label}</span>
               <span className="font-mono text-[11px] text-ink-500">0{index + 1}</span>
@@ -111,6 +112,7 @@ export default function ProjectCard({ project, index }) {
         {open && (
           <motion.div
             key="body"
+            id={project.id + "-details"}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
