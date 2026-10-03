@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 /**
  * ArchitectureDiagram
@@ -34,11 +33,7 @@ export default function ArchitectureDiagram({ layers = [], phased = false }) {
           const accent = ACCENT[layer.accent] || ACCENT.teal;
           return (
             <React.Fragment key={idx}>
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.35, delay: idx * 0.05, ease: 'easeOut' }}
+              <div
                 className="surface px-5 py-4 relative"
               >
                 {/* accent bar on the left edge */}
@@ -47,8 +42,8 @@ export default function ArchitectureDiagram({ layers = [], phased = false }) {
                   className={`absolute left-0 top-3 bottom-3 w-1 rounded-r ${accent.bar} opacity-80`}
                 />
 
-                <div className="flex items-start justify-between gap-4 pl-2">
-                  <div className="min-w-[140px]">
+                <div className="flex flex-col xl:flex-row items-start justify-between gap-4 pl-2">
+                  <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <span className={`w-1.5 h-1.5 rounded-full ${accent.dot}`} />
                       <span className="eyebrow">
@@ -60,18 +55,18 @@ export default function ArchitectureDiagram({ layers = [], phased = false }) {
                     </h4>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5 justify-end flex-1">
+                  <div className="flex flex-wrap gap-1.5 justify-start xl:justify-end flex-1 min-w-0">
                     {layer.items.map((item, i) => (
                       <span
                         key={i}
-                        className={`text-[11.5px] px-2.5 py-1 rounded-md border ${accent.chip} font-medium whitespace-nowrap`}
+                        className={`text-[11.5px] px-2.5 py-1 rounded-md border ${accent.chip} font-medium break-words max-w-full`}
                       >
                         {item}
                       </span>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
               {/* flow caret between layers */}
               {idx < layers.length - 1 && (

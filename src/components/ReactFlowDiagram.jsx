@@ -198,7 +198,7 @@ export default function ReactFlowDiagram({ nodes = [], edges = [], height = 620 
         borderRadius: 14,
         overflow: 'hidden',
       }}
-      className="surface"
+      className="surface diagram-canvas"
     >
       <ReactFlow
         nodes={enhancedNodes}

@@ -73,7 +73,7 @@ export default function Architectures() {
           transition={{ duration: 0.45 }}
           className="max-w-2xl"
         >
-          <div className="eyebrow">03 · Architectures</div>
+          <div className="eyebrow">Systems & architecture</div>
           <h2 className="h-section mt-2">Systems I've Built</h2>
           <p className="mt-4 text-ink-700 leading-relaxed">
             Explore architecture overviews from my cloud, security, and AI work.
