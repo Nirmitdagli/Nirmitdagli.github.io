@@ -11,12 +11,19 @@ export default defineConfig({
     }),
   ],
   base: '/',
+  // Ensure React is singleton — reactflow (and any future dep) must share the
+  // same React instance as the app. Without this Vite pre-bundles a second
+  // copy of React, causing "Invalid hook call" inside ReactFlowWrapper.
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
   esbuild: {
     loader: 'jsx',
     include: [/src\/.*\.jsx?$/],
     exclude: [],
   },
   optimizeDeps: {
+    include: ['react', 'react-dom', 'reactflow'],
     esbuildOptions: {
       loader: { '.js': 'jsx' },
     },

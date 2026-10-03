@@ -57,7 +57,7 @@ function ExperienceCard({ item, index }) {
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-24 md:py-32">
+    <section id="experience" className="relative pt-10 md:pt-14 pb-24 md:pb-32">
       <div className="max-w-6xl mx-auto px-5 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -69,8 +69,8 @@ export default function Experience() {
           <div className="eyebrow">02 · Experience</div>
           <h2 className="h-section mt-2">Where I've Built</h2>
           <p className="mt-4 text-ink-700 leading-relaxed">
-            Four roles across research, enterprise SaaS, and big-bank cloud.
-            Common thread: multi-cloud infrastructure, automation, and security at scale.
+            Hands-on engineering across a sports platform, enterprise SaaS, financial services, and university research.
+            My focus: infrastructure, automation, and security.
           </p>
         </motion.div>
 
