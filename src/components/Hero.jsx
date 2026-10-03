@@ -1,52 +1,36 @@
 import React from 'react';
+import { roles } from '../data/roles.js';
 
-const FOCUS = ['Azure & AWS', 'Terraform & IaC', 'Kubernetes', 'DevOps', 'Zero Trust', 'Network Security'];
-
-export default function Hero() {
+export default function Hero({ onSelectRole }) {
   return (
-    <section id="about" className="relative pt-28 md:pt-36 pb-16">
-      <div className="max-w-6xl mx-auto px-5 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-16 items-center">
-          <div>
-            <div className="eyebrow">Platform · Infrastructure · Security</div>
-            <h1 className="font-display mt-5 text-ink-900 text-[4rem] sm:text-[5.5rem] leading-[0.95] tracking-tight">
-              Nirmit <span className="relative whitespace-nowrap">Dagli<span aria-hidden="true" className="absolute left-0 right-0 bottom-1 h-4 bg-yellow-300/50 -z-10" /></span>
-            </h1>
-            <h2 className="mt-6 text-xl md:text-2xl font-medium text-teal-800">Platform & Cloud Security Engineer</h2>
-            <p className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-ink-700">
-              I build and secure cloud infrastructure, automate how teams ship,
-              and reduce the cost of running it.
-            </p>
-            <p className="mt-4 max-w-xl leading-relaxed text-ink-700">
-              Currently at <strong className="text-ink-900">Sidecoach Sports</strong>,
-              working across Azure, Terraform, DevOps, and platform security.
-              I cut cloud costs by <strong className="text-ink-900">50%</strong> through
-              resource resizing and environment separation, and implemented controls
-              supporting FERPA and COPPA compliance.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <a href="#impact" className="inline-flex px-5 py-3 rounded-full bg-teal-700 text-white font-medium hover:bg-teal-800 transition-colors">Explore my work ↓</a>
-              <a href="mailto:daglinirmit@gmail.com" className="inline-flex px-5 py-3 rounded-full border border-ink-900/15 bg-white/70 font-medium hover:border-teal-700 transition-colors">Get in touch ↗</a>
+    <section id="about" className="hero-shell">
+      <div className="site-container">
+        <div className="hero-layout">
+          <div className="hero-copy">
+            <div className="eyebrow">Nirmit Dagli / Engineering portfolio</div>
+            <h1>Building what<br /><span>AI runs on.</span></h1>
+            <p className="hero-lead">Cloud infrastructure. Reliable platforms.<br className="hidden sm:block" /> Security at every layer.</p>
+            <p className="hero-description">I connect infrastructure, automation, and cybersecurity to help teams build and run intelligent products. Currently Cybersecurity & Platform Engineer at Sidecoach Sports.</p>
+            <div className="hero-actions">
+              <a className="button-primary" href="#projects">Explore selected work <span aria-hidden="true">↗</span></a>
+              <a className="button-secondary" href="mailto:daglinirmit@gmail.com">Let’s talk</a>
             </div>
-            <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-700">
-              <a className="underline underline-offset-4 hover:text-teal-700" href="https://github.com/Nirmitdagli" target="_blank" rel="noreferrer">GitHub ↗</a>
-              <a className="underline underline-offset-4 hover:text-teal-700" href="https://www.linkedin.com/in/nirmit-dagli-62857916a/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-              <span>Open to opportunities across the US</span>
-            </div>
+            <div className="hero-availability"><span className="status-dot" aria-hidden="true" /> Open to opportunities across the United States</div>
           </div>
-          <div className="relative max-w-sm w-full mx-auto">
-            <div aria-hidden="true" className="absolute -inset-8 rounded-full bg-yellow-200/35 blur-2xl" />
-            <img src="/portrait.jpg" alt="Nirmit Dagli" width="440" height="440" fetchPriority="high" className="relative aspect-square w-full object-cover rounded-full border-8 border-white/80 shadow-lift" />
-            <div className="relative surface mt-[-24px] mx-4 px-6 py-5">
-              <div className="eyebrow">Current role · Since August 2026</div>
-              <div className="mt-2 font-display text-2xl">Cybersecurity & Platform Engineer</div>
-              <div className="mt-1 text-ink-700">Sidecoach Sports</div>
+          <aside className="profile-panel" aria-label="About Nirmit Dagli">
+            <div className="profile-photo"><img src="/portrait.jpg" alt="Nirmit Dagli at a conference" width="440" height="440" fetchPriority="high" /><span className="photo-caption">Engineer. Researcher. Builder.</span></div>
+            <div className="profile-details">
+              <div><span className="eyebrow">Currently</span><p>Sidecoach Sports</p><span className="profile-role">Cybersecurity & Platform Engineer</span></div>
+              <div className="profile-links"><a href="https://github.com/Nirmitdagli" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/nirmit-dagli-62857916a/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
             </div>
-          </div>
+          </aside>
         </div>
-        <div className="mt-12 pt-7 border-t border-ink-900/10 flex flex-wrap items-center gap-2">
-          <span className="eyebrow mr-3">Engineering focus</span>
-          {FOCUS.map((item) => <span key={item} className="pill">{item}</span>)}
+        <div className="role-intro"><span className="eyebrow">Three areas of focus</span><span>Explore the work behind each role</span></div>
+        <div className="role-grid">
+          {roles.map((role) => <a key={role.id} href="#projects" className="role-card" onClick={() => onSelectRole(role.id)}>
+            <div className="role-card-top"><span>{role.number}</span><span aria-hidden="true">↗</span></div>
+            <h2>{role.title}</h2><p>{role.description}</p><div className="role-proof">{role.proof}</div>
+          </a>)}
         </div>
       </div>
     </section>

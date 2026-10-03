@@ -23,7 +23,7 @@ function CertBadge({ cert, index }) {
         className={`shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br ${grad} grid place-items-center text-white font-display shadow-soft relative`}
         aria-hidden="true"
       >
-        <span className="text-[1.05rem] leading-none px-1 text-center">
+        <span className="leading-none px-1 text-center" style={{ fontSize: cert.short.length > 5 ? 11 : 17 }}>
           {cert.short}
         </span>
         <span className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/25" />
@@ -72,7 +72,7 @@ export default function Credentials() {
           transition={{ duration: 0.45 }}
           className="max-w-2xl"
         >
-          <div className="eyebrow">04 · Credentials</div>
+          <div className="eyebrow">Research & credentials</div>
           <h2 className="h-section mt-2">Credentials & Research</h2>
         </motion.div>
 

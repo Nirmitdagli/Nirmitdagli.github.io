@@ -66,8 +66,8 @@ export default function Experience() {
           transition={{ duration: 0.45 }}
           className="max-w-2xl"
         >
-          <div className="eyebrow">02 · Experience</div>
-          <h2 className="h-section mt-2">Where I've Built</h2>
+          <div className="eyebrow">Experience</div>
+          <h2 className="h-section mt-2">Engineering, in practice.</h2>
           <p className="mt-4 text-ink-700 leading-relaxed">
             Hands-on engineering across a sports platform, enterprise SaaS, financial services, and university research.
             My focus: infrastructure, automation, and security.
