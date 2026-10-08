@@ -1,3 +1,0 @@
-Drop your actual résumé at `public/resume.pdf`.
-The nav link and hero CTA both point to `/resume.pdf`.
-No code changes needed once the file is in place.
