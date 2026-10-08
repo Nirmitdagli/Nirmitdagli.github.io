@@ -14,6 +14,132 @@ import { ransomwareDiagram, sparkDiagram } from './reactFlowDiagrams.js';
 
 export const projects = [
   // ------------------------------------------------------------------
+  // 00 · LLM Kernels. Hand-written GPU kernels for transformer hot paths.
+  //      Code below is copied verbatim from github.com/Nirmitdagli/llm-kernels.
+  // ------------------------------------------------------------------
+  {
+    id: 'llm-kernels',
+    title: 'LLM Kernels',
+    subtitle: 'Fused Triton Ops and a Tiled CUDA GEMM',
+    tag: { label: 'GPU Kernels', accent: 'red' },
+    links: {
+      github: 'https://github.com/Nirmitdagli/llm-kernels',
+      githubLabel: 'View kernels repo',
+    },
+    tech: [
+      'Triton', 'CUDA C++', 'PyTorch', 'torch.autograd.Function', 'torch.compile',
+      'cuBLAS', 'JAX', 'XLA', 'Kernel fusion', 'Shared-memory tiling', 'Autotuning',
+    ],
+    description:
+      'Hand-written GPU kernels for the hot paths of transformer models. Softmax, RMSNorm and SwiGLU are fused in Triton (forward and backward) and exposed as PyTorch autograd functions, so they train inside a model. A CUDA C++ GEMM is optimized one bottleneck at a time and measured against cuBLAS, and the same ops are compiled with jax.jit to compare XLA fusion with hand-written kernels. Every kernel is checked against a PyTorch, cuBLAS or NumPy reference.',
+    metrics: [
+      { label: 'Fused Ops',    value: '3',        sub: 'softmax · RMSNorm · SwiGLU' },
+      { label: 'Passes',       value: 'Fwd+Bwd',  sub: 'autograd-tested' },
+      { label: 'GEMM Stages',  value: '4',        sub: 'naive → float4' },
+      { label: 'Baselines',    value: '3',        sub: 'eager · compile · cuBLAS' },
+    ],
+    architectures: [
+      {
+        title: 'GEMM: Removing One Bottleneck per Step',
+        phased: true,
+        layers: [
+          { name: 'Step 1 · Naive',            accent: 'red',
+            items: ['One thread per output', 'Every multiply reads A and B from HBM', '2N global loads per output'] },
+          { name: 'Step 2 · Shared-memory tiling', accent: 'amber',
+            items: ['TILE x TILE tiles staged on-chip', 'Each value reused TILE times', '__syncthreads() before and after use'] },
+          { name: 'Step 3 · Register blocking',  accent: 'teal',
+            items: ['64x64 block tile, 4x4 thread tile', '8 loads per 16 FMAs', '256 threads per block'] },
+          { name: 'Step 4 · float4 loads',       accent: 'yellow',
+            items: ['16-byte vectorized loads and stores', 'A tile transposed in shared memory', 'Contiguous inner-loop reads'] },
+          { name: 'Step 5 · Measure vs cuBLAS', accent: 'teal',
+            items: ['cuBLAS SGEMM', 'Max abs error per variant', 'GFLOP/s and % of cuBLAS'] },
+        ],
+      },
+      {
+        title: 'Triton: Fused, Memory-Bound Ops',
+        layers: [
+          { name: 'Model',        accent: 'teal',
+            items: ['TritonRMSNorm (nn.Module)', 'softmax()', 'swiglu()'] },
+          { name: 'Autograd',     accent: 'amber',
+            items: ['torch.autograd.Function', 'save_for_backward (y, rstd)', 'loss.backward() runs our kernels'] },
+          { name: 'Kernels',      accent: 'red',
+            items: ['One program per row', 'fp32 math, fp16 storage', 'Masked loads for any width', 'Autotuned block size (SwiGLU)'] },
+          { name: 'Validation',   accent: 'teal',
+            items: ['Outputs and grads vs PyTorch autograd', 'Odd sizes: 4x7 · 16x128 · 8x1000', 'CPU via TRITON_INTERPRET=1'] },
+          { name: 'Benchmarks',   accent: 'amber',
+            items: ['vs PyTorch eager', 'vs torch.compile', 'vs jax.jit (XLA)', 'GB/s against peak bandwidth'] },
+        ],
+      },
+    ],
+    codeBlocks: [
+      { filename: 'triton_kernels.py · softmax', language: 'python', lines: [
+          "@triton.jit",
+          "def softmax_fwd_kernel(x_ptr, y_ptr, stride, n_cols, BLOCK: tl.constexpr):",
+          "    row = tl.program_id(0)                       # which row this program owns",
+          "    cols = tl.arange(0, BLOCK)                   # column indices 0..BLOCK-1",
+          "    mask = cols < n_cols                         # BLOCK is a power of 2; the row may be shorter",
+          "",
+          "    # Padding = -inf so it never wins the max, and exp(-inf) = 0 adds nothing to the sum.",
+          "    x = tl.load(x_ptr + row * stride + cols, mask=mask, other=-float(\"inf\")).to(tl.float32)",
+          "    x = x - tl.max(x, axis=0)                    # numerical stability: largest value becomes 0",
+          "    num = tl.exp(x)",
+          "    y = num / tl.sum(num, axis=0)",
+          "    tl.store(y_ptr + row * stride + cols, y.to(y_ptr.dtype.element_ty), mask=mask)",
+        ] },
+      { filename: 'triton_kernels.py · RMSNorm backward', language: 'python', lines: [
+          "@triton.jit",
+          "def rmsnorm_bwd_kernel(x_ptr, w_ptr, dy_ptr, rstd_ptr, dx_ptr, dw_part_ptr, stride, n_cols,",
+          "                       BLOCK: tl.constexpr):",
+          "    row = tl.program_id(0)",
+          "    cols = tl.arange(0, BLOCK)",
+          "    mask = cols < n_cols",
+          "",
+          "    x = tl.load(x_ptr + row * stride + cols, mask=mask, other=0.0).to(tl.float32)",
+          "    w = tl.load(w_ptr + cols, mask=mask, other=0.0).to(tl.float32)",
+          "    dy = tl.load(dy_ptr + row * stride + cols, mask=mask, other=0.0).to(tl.float32)",
+          "    rstd = tl.load(rstd_ptr + row)",
+          "",
+          "    xhat = x * rstd",
+          "    dyw = dy * w",
+          "    c = tl.sum(dyw * xhat, axis=0) / n_cols",
+          "    dx = (dyw - xhat * c) * rstd",
+          "    tl.store(dx_ptr + row * stride + cols, dx.to(dx_ptr.dtype.element_ty), mask=mask)",
+          "",
+          "    # dw needs a sum over ALL rows. Each program writes its row's share (fp32);",
+          "    # the host sums the [rows, cols] partials with one torch.sum. Simple and deterministic.",
+          "    tl.store(dw_part_ptr + row * n_cols + cols, dy * xhat, mask=mask)",
+        ] },
+      { filename: 'gemm.cu · shared-memory tiling', language: 'cuda', lines: [
+          "template <int TILE>",
+          "__global__ void gemm_tiled(const float* A, const float* B, float* C, int N) {",
+          "    __shared__ float As[TILE][TILE];",
+          "    __shared__ float Bs[TILE][TILE];",
+          "",
+          "    int tx = threadIdx.x, ty = threadIdx.y;",
+          "    int row = blockIdx.y * TILE + ty;",
+          "    int col = blockIdx.x * TILE + tx;",
+          "    float acc = 0.0f;",
+          "",
+          "    for (int t = 0; t < (N + TILE - 1) / TILE; ++t) {",
+          "        // Cooperative load: each thread brings in one element of each tile.",
+          "        int a_col = t * TILE + tx;",
+          "        int b_row = t * TILE + ty;",
+          "        As[ty][tx] = (row < N && a_col < N) ? A[row * N + a_col] : 0.0f;",
+          "        Bs[ty][tx] = (b_row < N && col < N) ? B[b_row * N + col] : 0.0f;",
+          "        __syncthreads();                     // 1st sync: tiles fully loaded before anyone reads",
+          "",
+          "        #pragma unroll",
+          "        for (int k = 0; k < TILE; ++k)",
+          "            acc += As[ty][k] * Bs[k][tx];    // all reads hit shared memory",
+          "        __syncthreads();                     // 2nd sync: nobody overwrites a tile still being read",
+          "    }",
+          "    if (row < N && col < N) C[row * N + col] = acc;",
+          "}",
+        ] },
+    ],
+  },
+
+  // ------------------------------------------------------------------
   // 00 — Azure SaaS Blueprint. A forward-looking reference architecture
   //      for a multi-tenant SaaS on Azure. Two architecture diagrams
   //      (runtime + delivery) and three code snippets: Azure / Terraform /

@@ -9,8 +9,8 @@ export default function Hero({ onSelectRole }) {
           <div className="hero-copy">
             <div className="eyebrow">Nirmit Dagli / Engineering portfolio</div>
             <h1>Building what<br /><span>AI runs on.</span></h1>
-            <p className="hero-lead">Cloud infrastructure. Reliable platforms.<br className="hidden sm:block" /> Security at every layer.</p>
-            <p className="hero-description">I connect infrastructure, automation, and cybersecurity to help teams build and run intelligent products. Currently Cybersecurity & Platform Engineer at Sidecoach Sports.</p>
+            <p className="hero-lead">GPU kernels. Reliable platforms.<br className="hidden sm:block" /> Security at every layer.</p>
+            <p className="hero-description">I work across the AI stack, from CUDA and Triton kernels and LLM serving on GPUs to the cloud platforms and security controls that keep them running. Currently Cybersecurity & Platform Engineer at Sidecoach Sports.</p>
             <div className="hero-actions">
               <a className="button-primary" href="#projects">Explore selected work <span aria-hidden="true">↗</span></a>
               <a className="button-secondary" href="mailto:daglinirmit@gmail.com">Let’s talk</a>

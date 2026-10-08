@@ -1,7 +1,7 @@
 export const roles = [
   { id: 'ai', title: 'AI Infrastructure Engineer', label: 'AI infrastructure', number: '01',
-    description: 'Cloud foundations for AI applications, containerized services, and RAG systems.',
-    proof: 'SPARK · QGPT · Amazon Bedrock', projects: ['spark', 'qgpt', 'privaitect'], stack: ['Kubernetes', 'AWS', 'Docker', 'Python'] },
+    description: 'GPU kernels, LLM serving, and the cloud foundations that AI workloads run on.',
+    proof: 'LLM Kernels · SPARK · QGPT', projects: ['llm-kernels', 'spark', 'qgpt', 'privaitect'], stack: ['CUDA', 'Triton', 'PyTorch', 'Kubernetes'] },
   { id: 'platform', title: 'Platform Engineer', label: 'Platform engineering', number: '02',
     description: 'Infrastructure as code, repeatable delivery, and cost-conscious cloud operations.',
     proof: 'Sidecoach Sports · Zycus · Azure SaaS Blueprint', projects: ['azure-saas-blueprint', 'zycus'], stack: ['Terraform', 'Azure', 'Git', 'CI/CD'] },

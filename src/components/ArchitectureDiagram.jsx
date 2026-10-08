@@ -51,7 +51,7 @@ export default function ArchitectureDiagram({ layers = [], phased = false }) {
                       </span>
                     </div>
                     <h4 className="mt-1 font-display text-[1.25rem] text-ink-900 leading-tight">
-                      {phased ? layer.name.replace(/^Phase \d+ · /, '') : layer.name}
+                      {phased ? layer.name.replace(/^(Phase|Step) \d+ · /, '') : layer.name}
                     </h4>
                   </div>
 

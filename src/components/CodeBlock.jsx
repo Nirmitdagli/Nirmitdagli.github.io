@@ -9,7 +9,7 @@ import React, { useMemo } from 'react';
  *
  * Props:
  *   filename  — shown in the tab header
- *   language  — one of: hcl, python, groovy, yaml
+ *   language  — one of: hcl, python, groovy, yaml, cuda
  *   lines     — array<string>, one entry per line
  */
 
@@ -30,6 +30,10 @@ const KEYWORDS = {
     'parallel', 'def', 'return', 'if', 'else', 'true', 'false', 'null', 'sh',
     'credentials', 'kubernetes', 'label',
   ],
+  cuda: [
+    '__global__', '__shared__', '__syncthreads', 'template', 'typename', 'constexpr',
+    'const', 'int', 'float', 'float4', 'void', 'for', 'if', 'return', 'struct',
+  ],
   yaml: [],
 };
 
@@ -42,7 +46,7 @@ function tokenize(line, language) {
       return [{ kind: 'comment', text: line }];
     }
   }
-  if (language === 'groovy' && line.trimStart().startsWith('//')) {
+  if ((language === 'groovy' || language === 'cuda') && line.trimStart().startsWith('//')) {
     return [{ kind: 'comment', text: line }];
   }
   if (language === 'hcl' && line.trimStart().startsWith('#')) {

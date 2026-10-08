@@ -4,7 +4,7 @@ import { projects } from '../data/projects.js';
 import { roles } from '../data/roles.js';
 export default function Projects({ selectedRole, onSelectRole }) {
   const role = roles.find(item => item.id === selectedRole);
-  const selected = role ? role.projects.map(id => projects.find(p => p.id === id)) : ['spark', 'azure-saas-blueprint', 'ransomware', 'qgpt', 'zycus', 'privaitect'].map(id => projects.find(p => p.id === id));
+  const selected = role ? role.projects.map(id => projects.find(p => p.id === id)) : ['llm-kernels', 'spark', 'azure-saas-blueprint', 'ransomware', 'qgpt', 'zycus', 'privaitect'].map(id => projects.find(p => p.id === id));
   return <section id="projects" className="work-section">
     <div className="site-container">
       <div className="section-heading"><div><div className="eyebrow">Selected work</div><h2 className="h-section">From infrastructure to intelligence.</h2></div><p>Explore the architecture, implementation,<br />and engineering decisions behind the work.</p></div>
