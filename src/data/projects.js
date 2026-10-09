@@ -157,12 +157,12 @@ export const projects = [
       'AWQ int4', 'nvidia-smi', 'Docker (NGC)', 'pytest',
     ],
     description:
-      'A repeatable harness that compares LLM serving engines on the same GPU with the same model, prompts and memory budget. An async load generator streams every response from the OpenAI-compatible endpoint and times each token, then sweeps concurrency to show how continuous batching trades per-user latency for total throughput. Runs full-precision and 4-bit AWQ models, and is tested without a GPU against a mock server with known timings.',
+      'A repeatable harness that compares LLM serving engines on the same GPU with the same model, prompts and memory budget. An async load generator streams every response from the OpenAI-compatible endpoint and times each token, then sweeps concurrency to show how continuous batching trades per-user latency for total throughput. Runs full-precision and 4-bit AWQ models, and is tested without a GPU against a mock server with known timings. On a Tesla T4, 4-bit AWQ cut vLLM decode time 2.3x for a single user but added only 5% throughput at 64 users, where KV-cache traffic dominates.',
     metrics: [
-      { label: 'Engines',      value: '3',      sub: 'vLLM · SGLang · TRT-LLM' },
-      { label: 'Latency',      value: 'TTFT',   sub: '+ TPOT · E2E · p50/p99' },
-      { label: 'Load Levels',  value: '4',      sub: '1 · 4 · 16 · 64 users' },
-      { label: 'Precision',    value: '2',      sub: 'fp16 · AWQ int4' },
+      { label: 'Batching Gain',  value: '12x',    sub: '1 → 64 users · vLLM fp16' },
+      { label: 'AWQ Decode',     value: '2.3x',   sub: '20 → 8.5 ms/token' },
+      { label: 'vLLM vs SGLang', value: '1.6x',   sub: 'throughput · 64 users · T4' },
+      { label: 'Requests',       value: '1,024',  sub: 'all succeeded · 4 runs' },
     ],
     architecture: [
       { name: 'Suite Runner', accent: 'amber',
