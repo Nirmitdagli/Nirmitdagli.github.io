@@ -31,12 +31,12 @@ export const projects = [
       'cuBLAS', 'JAX', 'XLA', 'Kernel fusion', 'Shared-memory tiling', 'Autotuning',
     ],
     description:
-      'Hand-written GPU kernels for the hot paths of transformer models. Softmax, RMSNorm and SwiGLU are fused in Triton (forward and backward) and exposed as PyTorch autograd functions, so they train inside a model. A CUDA C++ GEMM is optimized one bottleneck at a time and measured against cuBLAS, and the same ops are compiled with jax.jit to compare XLA fusion with hand-written kernels. Every kernel is checked against a PyTorch, cuBLAS or NumPy reference.',
+      'Hand-written GPU kernels for the hot paths of transformer models. Softmax, RMSNorm and SwiGLU are fused in Triton (forward and backward) and exposed as PyTorch autograd functions, so they train inside a model. A CUDA C++ GEMM is optimized one bottleneck at a time and measured against cuBLAS, and the same ops are compiled with jax.jit to compare XLA fusion with hand-written kernels. Every kernel is checked against a PyTorch, cuBLAS or NumPy reference. On a Tesla T4 the fused kernels reach 70 to 78% of peak memory bandwidth and run 4.9x to 10.7x faster than PyTorch eager.',
     metrics: [
-      { label: 'Fused Ops',    value: '3',        sub: 'softmax · RMSNorm · SwiGLU' },
-      { label: 'Passes',       value: 'Fwd+Bwd',  sub: 'autograd-tested' },
-      { label: 'GEMM Stages',  value: '4',        sub: 'naive → float4' },
-      { label: 'Baselines',    value: '3',        sub: 'eager · compile · cuBLAS' },
+      { label: 'Vs PyTorch Eager', value: '10.7x', sub: 'fused RMSNorm · T4 fp16' },
+      { label: 'Bandwidth',        value: '78%',   sub: 'of T4 peak (249 GB/s)' },
+      { label: 'Of cuBLAS',        value: '93%',   sub: 'GEMM N=1024 · 64% at 4096' },
+      { label: 'Training Step',    value: '7.8x',  sub: 'RMSNorm fwd + bwd' },
     ],
     architectures: [
       {
