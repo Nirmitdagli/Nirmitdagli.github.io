@@ -162,7 +162,7 @@ export const projects = [
       { label: 'Batching Gain',  value: '12x',    sub: '1 → 64 users · vLLM fp16' },
       { label: 'AWQ Decode',     value: '2.3x',   sub: '20 → 8.5 ms/token' },
       { label: 'vLLM vs SGLang', value: '1.6x',   sub: 'throughput · 64 users · T4' },
-      { label: 'Requests',       value: '1,024',  sub: 'all succeeded · 4 runs' },
+      { label: 'Requests',       value: '2,048',  sub: 'all succeeded · 4 runs' },
     ],
     architecture: [
       { name: 'Suite Runner', accent: 'amber',
