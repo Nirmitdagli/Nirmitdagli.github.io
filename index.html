@@ -36,6 +36,14 @@
   </script>
   <style>
     html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
+    body { background-image: linear-gradient(rgba(20,22,26,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(20,22,26,.05) 1px, transparent 1px); background-size: 40px 40px; background-position: 0 0; }
+    .hero-wrap { position: relative; isolation: isolate; }
+    .hero-wrap > canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+    .hero-in > * { opacity: 0; transform: translateY(14px); animation: heroIn .8s cubic-bezier(.2,.7,.2,1) forwards; }
+    .hero-in > *:nth-child(1) { animation-delay: .05s; } .hero-in > *:nth-child(2) { animation-delay: .15s; } .hero-in > *:nth-child(3) { animation-delay: .28s; }
+    .hero-in > *:nth-child(4) { animation-delay: .4s; } .hero-in > *:nth-child(5) { animation-delay: .5s; } .hero-in > *:nth-child(6) { animation-delay: .6s; }
+    @keyframes heroIn { to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .hero-in > * { opacity: 1; transform: none; animation: none; } }
     html { scroll-behavior: smooth; }
     section[id], [id=experience] { scroll-margin-top: 4.5rem; }
     .journey { border-left: 1px solid #E6E4DD; padding-left: 1.4rem; }
@@ -172,9 +180,10 @@
 
   <main id="main">
     <!-- INTRO -->
-    <section id="top" class="mx-auto max-w-5xl px-5 pb-12 pt-14 sm:pt-20">
+    <div class="hero-wrap" id="hero-wrap"><canvas id="grid-fx" aria-hidden="true"></canvas>
+    <section id="top" class="mx-auto max-w-5xl px-5 pb-16 pt-14 sm:pt-20">
       <div class="grid items-end gap-10 md:grid-cols-[1.5fr_1fr]">
-        <div class="fade">
+        <div class="hero-in">
           <p class="kicker">AI infrastructure engineer · Austin, TX</p>
           <h1 class="mt-5 font-serif text-[2.9rem] leading-[1.02] sm:text-6xl md:text-[4.4rem]">I build and secure the infrastructure <em class="text-accent">production AI</em> runs on.</h1>
           <div class="mt-7 max-w-xl space-y-4 text-[1.05rem] leading-relaxed text-muted">
@@ -195,6 +204,7 @@
       </div>
 
     </section>
+    </div>
 
     <!-- DOORS -->
     <section id="work" class="mx-auto max-w-5xl px-5 pt-14">
@@ -733,6 +743,65 @@
       document.querySelectorAll('a[href="#oncall"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); open('devops', { scroll: 'oncall' }); }));
       const h = location.hash.slice(1);
       if (ids.includes(h)) { open(h, { hash: false }); requestAnimationFrame(() => document.getElementById('work').scrollIntoView()); }
+    })();
+
+    // Hero grid: packets of light along the page grid, glow follows the cursor
+    (function () {
+      const wrap = document.getElementById('hero-wrap'), cv = document.getElementById('grid-fx'); if (!cv) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const ctx = cv.getContext('2d'), G = 40, colors = ['36,83,214', '10,122,85', '36,83,214', '180,83,42'];
+      let W = 0, H = 0, dpr = 1, ox = 0, oy = 0, mx = -999, my = -999, run = true, last = 0, packets = [], pulses = [];
+      function size() {
+        const r = wrap.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
+        W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ox = (r.left + scrollX) % G; oy = (r.top + scrollY) % G; // align with the body grid
+      }
+      const lx = k => k * G - ox, ly = k => k * G - oy;
+      function spawn() {
+        const horiz = Math.random() < .55, dir = Math.random() < .5 ? 1 : -1;
+        const cols = Math.ceil(W / G) + 1, rows = Math.ceil(H / G) + 1;
+        const p = { horiz, dir, v: 70 + Math.random() * 90, len: 60 + Math.random() * 90, c: colors[(Math.random() * colors.length) | 0], life: 0 };
+        if (horiz) { p.y = ly(1 + ((Math.random() * (rows - 2)) | 0)); p.x = dir > 0 ? -p.len : W + p.len; }
+        else { p.x = lx(1 + ((Math.random() * (cols - 2)) | 0)); p.y = dir > 0 ? -p.len : H + p.len; }
+        return p;
+      }
+      function frame(t) {
+        if (!run) return;
+        const dt = Math.min(.05, (t - last) / 1000 || 0); last = t;
+        ctx.clearRect(0, 0, W, H);
+        // cursor glow: brighter grid near the pointer
+        if (mx > -500) {
+          const R = 170, x0 = Math.floor((mx - R + ox) / G), x1 = Math.ceil((mx + R + ox) / G), y0 = Math.floor((my - R + oy) / G), y1 = Math.ceil((my + R + oy) / G);
+          const g = ctx.createRadialGradient(mx, my, 0, mx, my, R); g.addColorStop(0, 'rgba(36,83,214,.38)'); g.addColorStop(1, 'rgba(36,83,214,0)');
+          ctx.strokeStyle = g; ctx.lineWidth = 1; ctx.beginPath();
+          for (let k = x0; k <= x1; k++) { const x = lx(k) + .5; ctx.moveTo(x, my - R); ctx.lineTo(x, my + R); }
+          for (let k = y0; k <= y1; k++) { const y = ly(k) + .5; ctx.moveTo(mx - R, y); ctx.lineTo(mx + R, y); }
+          ctx.stroke();
+          ctx.fillStyle = g;
+          for (let a = x0; a <= x1; a++) for (let b = y0; b <= y1; b++) { const x = lx(a), y = ly(b); if (Math.hypot(x - mx, y - my) < R) { ctx.beginPath(); ctx.arc(x + .5, y + .5, 1.6, 0, 6.283); ctx.fill(); } }
+        }
+        // packets with trails
+        while (packets.length < Math.max(8, Math.round(W / 110))) packets.push(spawn());
+        packets.forEach(p => {
+          if (p.horiz) p.x += p.dir * p.v * dt; else p.y += p.dir * p.v * dt;
+          const hx = p.x, hy = p.y, tx = p.horiz ? hx - p.dir * p.len : hx, ty = p.horiz ? hy : hy - p.dir * p.len;
+          const g = ctx.createLinearGradient(tx, ty, hx, hy); g.addColorStop(0, `rgba(${p.c},0)`); g.addColorStop(1, `rgba(${p.c},.55)`);
+          ctx.strokeStyle = g; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(tx + .5, ty + .5); ctx.lineTo(hx + .5, hy + .5); ctx.stroke();
+          ctx.fillStyle = `rgba(${p.c},.85)`; ctx.beginPath(); ctx.arc(hx + .5, hy + .5, 2.2, 0, 6.283); ctx.fill();
+          // occasionally light up the intersection it passes
+          const onX = p.horiz ? Math.abs(((hx + ox) % G + G) % G) < 2 : true, onY = p.horiz ? true : Math.abs(((hy + oy) % G + G) % G) < 2;
+          if (onX && onY && Math.random() < .04) pulses.push({ x: Math.round((hx + ox) / G) * G - ox, y: Math.round((hy + oy) / G) * G - oy, a: 1, c: p.c });
+        });
+        packets = packets.filter(p => p.horiz ? (p.x > -p.len * 2 && p.x < W + p.len * 2) : (p.y > -p.len * 2 && p.y < H + p.len * 2));
+        pulses.forEach(q => { q.a -= dt * 1.1; ctx.strokeStyle = `rgba(${q.c},${Math.max(0, q.a) * .5})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(q.x + .5, q.y + .5, 4 + (1 - q.a) * 10, 0, 6.283); ctx.stroke(); });
+        pulses = pulses.filter(q => q.a > 0);
+        requestAnimationFrame(frame);
+      }
+      size(); addEventListener('resize', size);
+      wrap.addEventListener('pointermove', e => { const r = wrap.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+      wrap.addEventListener('pointerleave', () => { mx = my = -999; });
+      if ('IntersectionObserver' in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; if (v && !run) { run = true; last = performance.now(); requestAnimationFrame(frame); } run = v; }).observe(wrap);
+      requestAnimationFrame(t => { last = t; frame(t); });
     })();
 
     // Doors swing open the first time they scroll into view
