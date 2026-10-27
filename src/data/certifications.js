@@ -40,6 +40,13 @@ export const publications = [
     date: 'Oct 2026',
   },
   {
+    title: 'HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads',
+    url: 'https://github.com/Nirmitdagli/quantum-thesis-demo',
+    venue: 'SEET-26 (accepted)',
+    location: null,
+    date: '2026',
+  },
+  {
     title: 'Energy-Efficient AI for Foundation Models: Algorithms, Hardware, and Data Center Infrastructure',
     url: 'https://doi.org/10.3390/computers15100660',
     venue: 'Computers (MDPI)',

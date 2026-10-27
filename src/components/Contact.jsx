@@ -7,7 +7,7 @@ export default function Contact() {
         <div className="contact-links">
           <a href="https://www.linkedin.com/in/nirmit-dagli-62857916a/" target="_blank" rel="noreferrer"><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
           <a href="https://github.com/Nirmitdagli" target="_blank" rel="noreferrer"><span>GitHub</span><span aria-hidden="true">↗</span></a>
-          <a href="mailto:daglinirmit@gmail.com?subject=Resume%20request"><span>Request résumé</span><span aria-hidden="true">↗</span></a>
+          <a href="/Nirmit_Dagli_Resume.pdf" download><span>Download résumé</span><span aria-hidden="true">↓</span></a>
           <a href="tel:+14753174538"><span>475.317.4538</span><span aria-hidden="true">↗</span></a>
         </div>
       </div>
