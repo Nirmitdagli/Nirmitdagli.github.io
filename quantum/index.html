@@ -83,9 +83,9 @@
       <div class="mt-12 grid gap-12 border-t border-line pt-10 md:grid-cols-2">
         <article class="fade">
           <p class="tag">Cybersecurity · KDD Cup 99 intrusion detection</p>
-          <p class="mt-4 font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">~13,000x</p>
+          <p class="mt-4 font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">~10,000x</p>
           <p class="mt-3 text-sm text-muted">less energy on classical hardware. Random Forest reached F1 0.998; the quantum SVM reached 0.667.</p>
-          <p class="prose-p mt-6">On cost, a Random Forest on a CPU comes to about <strong class="font-semibold text-ink">$1.99 per million classifications</strong>. The same workload on a quantum kernel through AWS Braket (Rigetti) comes to about <strong class="font-semibold text-ink">$2.1 million</strong>. For this problem, today, classical wins on every axis.</p>
+          <p class="prose-p mt-6">On cost, a classical SVM comes to about <strong class="font-semibold text-ink">$1.99 per million classifications</strong>. The quantum SVM comes to about <strong class="font-semibold text-ink">$2.1 million</strong> per million at 2026 cloud prices. For this problem, today, classical wins on every axis.</p>
         </article>
         <article class="fade">
           <p class="tag">Molecular simulation · H₂ ground state via VQE</p>
@@ -125,13 +125,73 @@
     <!-- PAPERS -->
     <section class="mx-auto max-w-5xl px-5 pt-24">
       <p class="kicker">Papers</p>
-      <ul class="mt-6 divide-y divide-line border-y border-line">
-        <li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"><div><p class="font-medium">HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</p><p class="mt-1 text-sm text-muted">QPU-aware placement of AI intrusion-detection jobs across CPU, GPU, cloud and edge. 72 to 98% less energy than cloud-only.</p></div><span class="text-sm text-muted">IEEE ISAIA 2026 · accepted</span></li>
-        <li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"><div><p class="font-medium">HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</p><p class="mt-1 text-sm text-muted">The measurement framework behind the thesis.</p></div><span class="text-sm text-muted">SEET-26 · accepted</span></li>
-        <li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"><div><a class="font-medium hover:text-accent" href="https://doi.org/10.1007/978-3-032-08977-9_40" target="_blank" rel="noopener">Quantum Computing: Grover's Algorithm for String Search and Its Practical Limits ↗</a><p class="mt-1 text-sm text-muted">Grover's quadratic speedup applied to string search, and the practical limits on today's hardware.</p></div><span class="text-sm text-muted">Springer · 2026</span></li>
-        <li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"><div><p class="font-medium">Hybrid Quantum-AI Models for Cybersecurity on Cloud Platforms: Accuracy, Latency, and Energy</p><p class="mt-1 text-sm text-muted">M.S. thesis. Advisor: Prof. Taskin.</p></div><span class="text-sm text-muted">Quinnipiac · May 2026</span></li>
-      </ul>
-      <p class="mt-5 text-sm text-muted">Also in AI: <a class="link" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models</a> (Computers, MDPI, 2026) and <a class="link" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK</a> (IEEE UEMCON 2025). I grew the research group from 2 to 10+ members across quantum computing, AI and cybersecurity.</p>
+      <h2 class="mt-3 font-serif text-4xl leading-[1.08] sm:text-[3.2rem]">What each paper asks, and what it found.</h2>
+
+      <article class="fade mt-12 grid gap-6 border-t border-line pt-10 md:grid-cols-[210px_1fr] md:gap-10">
+        <div>
+          <p class="tag">IEEE ISAIA 2026 · accepted</p>
+          <p class="mt-3 font-serif text-5xl leading-none">71.7–98%</p>
+          <p class="mt-2 text-sm text-muted">less energy than cloud-only routing</p>
+        </div>
+        <div class="max-w-2xl">
+          <h3 class="font-serif text-[1.9rem] leading-tight">HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</h3>
+          <p class="prose-p mt-4"><span class="font-medium text-ink">The question.</span> Intrusion detection for AI-enabled IoT now spans edge gateways, cloud AI accelerators and optional remote quantum services. For each security task, should it stay at the edge, escalate to cloud inference, or take a QPU-capable path, given latency, queue time and energy limits?</p>
+          <p class="prose-p mt-3"><span class="font-medium text-ink">The approach.</span> HERO-S tags every task with alert severity, asset criticality, uncertainty, response deadline, backend queue time, route confidence and an energy estimate, then picks a route with a constrained utility. Evaluated on TON_IoT, NSL-KDD, CICIDS2017 and IoT-23 over 30 seeds.</p>
+          <ul class="mt-4 space-y-2 text-[1rem] leading-relaxed text-[#474C57]">
+            <li>· The cloud model is the quality ceiling, but it breaks a 2.5 ms per-sample gateway budget.</li>
+            <li>· Inside that budget, HERO-S beats edge-only and a classical uncertainty-cascade baseline on F1 on the three non-trivial datasets, and stays near-perfect at the edge on IoT-23.</li>
+            <li>· At 250 ms QPU queue time it sends every sample to edge or cloud: the scheduler explicitly decides when a remote QPU isn't worth the wait.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="fade mt-12 grid gap-6 border-t border-line pt-10 md:grid-cols-[210px_1fr] md:gap-10">
+        <div>
+          <p class="tag">SEET-26 · accepted</p>
+          <p class="mt-3 font-serif text-5xl leading-none">0.998 vs 0.667</p>
+          <p class="mt-2 text-sm text-muted">F1, Random Forest vs quantum SVM</p>
+        </div>
+        <div class="max-w-2xl">
+          <h3 class="font-serif text-[1.9rem] leading-tight">HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</h3>
+          <p class="prose-p mt-4"><span class="font-medium text-ink">The question.</span> Clouds now rent CPU instances, NVIDIA H100 GPUs and QPU services (IBM Quantum, Amazon Braket) by the second. Given a workload, which tier gives the best mix of cost, energy and latency without losing accuracy?</p>
+          <p class="prose-p mt-3"><span class="font-medium text-ink">The approach.</span> A measurement framework run on two opposite case studies, each repeated 30 times against four classical baselines (SVM, Random Forest, gradient boosting, KNN).</p>
+          <ul class="mt-4 space-y-2 text-[1rem] leading-relaxed text-[#474C57]">
+            <li>· Intrusion detection (KDD Cup 99): the quantum SVM used about 10,000x more energy and cost about $2.1M per million classifications, against $1.99 for a classical SVM.</li>
+            <li>· Molecular simulation (H₂ via VQE): VQE reached chemical accuracy (0.007 Hartree error), but at 854,000x the energy of exact diagonalization at this size.</li>
+            <li>· From the measurements: a workload-aware tier allocation rule, and projected crossover points where quantum becomes the only feasible path.</li>
+          </ul>
+          <p class="mt-4 text-sm"><a class="link" href="https://github.com/Nirmitdagli/quantum-thesis-demo" target="_blank" rel="noopener">Framework, simulator and scripts (open source)</a></p>
+        </div>
+      </article>
+
+      <article class="fade mt-12 grid gap-6 border-t border-line pt-10 md:grid-cols-[210px_1fr] md:gap-10">
+        <div>
+          <p class="tag">Springer · 2026</p>
+          <p class="mt-3 font-serif text-5xl leading-none">O(√N)</p>
+          <p class="mt-2 text-sm text-muted">Grover's search, in practice</p>
+        </div>
+        <div class="max-w-2xl">
+          <h3 class="font-serif text-[1.9rem] leading-tight">Quantum Computing: Grover's Algorithm for String Search and Its Practical Limits</h3>
+          <p class="prose-p mt-4">Grover's algorithm promises a quadratic speedup for unstructured search: about √N queries instead of N. This paper applies it to string search and looks at the practical limits that decide whether that speedup survives on real hardware.</p>
+          <p class="mt-4 text-sm"><a class="link" href="https://doi.org/10.1007/978-3-032-08977-9_40" target="_blank" rel="noopener">Read on Springer ↗</a></p>
+        </div>
+      </article>
+
+      <article class="fade mt-12 grid gap-6 border-t border-line pt-10 md:grid-cols-[210px_1fr] md:gap-10">
+        <div>
+          <p class="tag">M.S. thesis · Quinnipiac · May 2026</p>
+          <p class="mt-3 font-serif text-5xl leading-none">~50 qubits</p>
+          <p class="mt-2 text-sm text-muted">where classical simulation runs out</p>
+        </div>
+        <div class="max-w-2xl">
+          <h3 class="font-serif text-[1.9rem] leading-tight">Hybrid Quantum-AI Models for Cybersecurity on Cloud Platforms: Accuracy, Latency, and Energy</h3>
+          <p class="prose-p mt-4">The full version of HERO. The central question: how should a workload be split across CPU, GPU and QPU tiers to optimize cost, energy and latency without sacrificing accuracy? Two opposite verdicts: classical wins intrusion detection today, while classical state-vector simulation of molecules scales as O(2ⁿ) and becomes infeasible beyond about 50 qubits, where VQE scales polynomially.</p>
+          <p class="prose-p mt-3">Includes Algorithm 1 (tier allocation), a Pareto-frontier selection method over cost, energy, latency and accuracy, and the projected feature dimension where quantum kernels become cost-competitive. Advisor: Prof. Taskin.</p>
+          <p class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm"><a class="link" href="https://nirmitdagli.github.io/quantum-thesis-demo/" target="_blank" rel="noopener">Thesis site and simulator</a><a class="link" href="https://github.com/Nirmitdagli/quantum-thesis-demo/blob/main/thesis/Thesis_Nirmit_Dagli_HERO.pdf" target="_blank" rel="noopener">Thesis PDF</a></p>
+        </div>
+      </article>
+
+      <p class="mt-12 border-t border-line pt-6 text-sm text-muted">Also in AI: <a class="link" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models</a> (Computers, MDPI, 2026) and <a class="link" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK</a> (IEEE UEMCON 2025). I grew the research group from 2 to 10+ members across quantum computing, AI and cybersecurity.</p>
     </section>
 
     <!-- CONTACT -->
