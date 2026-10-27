@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirmit Dagli · AI and GPU infrastructure</title>
+  <meta name="description" content="Nirmit Dagli, AI infrastructure engineer: Kubernetes GPU clusters, self-hosted LLMs, LLM serving benchmarks (vLLM, SGLang, TensorRT-LLM), fused Triton kernels, AI gateways and agents in production." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nirmitdagli.github.io/ai/" />
+  <meta property="og:title" content="Nirmit Dagli · AI and GPU infrastructure" />
+  <meta property="og:description" content="GPU clusters, LLM serving measured fairly, kernels, and AI gateways and agents in production." />
+  <meta property="og:image" content="https://nirmitdagli.github.io/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#FAFAF7" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { paper: '#FAFAF7', ink: '#14161A', muted: '#5B6170', line: '#E6E4DD', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A' },
+      fontFamily: { serif: ['"Instrument Serif"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'] } } } };
+  </script>
+  <style>
+    html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+    section[id] { scroll-margin-top: 4.5rem; }
+    ::selection { background: #DCE5FF; }
+    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; line-height: 1.7; }
+    .kicker { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: #5B6170; }
+    .kicker::before { content: ""; width: 22px; height: 1px; background: #B9B6AC; }
+    .prose-p { font-size: 1.06rem; line-height: 1.75; color: #474C57; }
+    .note { border-left: 2px solid #E0DCD1; padding-left: 1.1rem; }
+    .note dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #B4532A; }
+    .note dd { margin-top: .45rem; line-height: 1.65; color: #474C57; }
+    .link { color: #2453D6; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .link:hover { color: #14161A; }
+    .draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+    .in .draw { transition: stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1); stroke-dashoffset: 0; }
+    .fade { opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .7s ease; }
+    .fade.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .draw { stroke-dashoffset: 0 !important; transition: none !important; } .fade { opacity: 1; transform: none; transition: none; } }
+    @media print { header, .no-print { display: none !important; } body { background: #fff; } .fade { opacity: 1 !important; transform: none !important; } }
+  </style>
+</head>
+<body class="font-sans">
+  <header class="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur">
+    <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5" aria-label="Primary">
+      <a href="../index.html" class="font-serif text-xl leading-none">Nirmit Dagli</a>
+      <div class="flex items-center gap-5 text-sm text-muted">
+        <a class="hidden hover:text-ink md:inline" href="#gpu">GPU and serving</a>
+        <a class="hidden hover:text-ink md:inline" href="#production">AI in production</a>
+        <a class="hidden hover:text-ink sm:inline" href="../quantum/">Quantum</a>
+        <a class="rounded-full bg-accent px-4 py-1.5 font-medium text-white hover:bg-[#1B44B8]" href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="mx-auto max-w-5xl px-5 pb-10 pt-14 sm:pt-20">
+      <div class="grid items-end gap-10 md:grid-cols-[1.5fr_1fr]">
+        <div class="fade">
+          <p class="kicker">AI and GPU infrastructure · Austin, TX</p>
+          <h1 class="mt-5 font-serif text-[2.8rem] leading-[1.02] sm:text-6xl md:text-[4.2rem]">I run the infrastructure <em class="text-accent">LLMs</em> are served from.</h1>
+          <div class="mt-7 max-w-xl space-y-4 text-[1.05rem] leading-relaxed text-muted">
+            <p>In research I ran Kubernetes GPU clusters and self-hosted Llama 3, Mistral, Gemma and DeepSeek, then built a harness to measure which serving engine actually serves more users on the same GPU.</p>
+            <p>At work I put AI into production safely: an AI gateway, an MCP agent service and SRE agents at Sidecoach Sports, an internal AI assistant at State Street, and the first internal AI chatbot at Zycus.</p>
+          </div>
+          <div class="no-print mt-8 flex flex-wrap items-center gap-3">
+            <a href="#gpu" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">See the work</a>
+            <a href="../Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
+            <a href="https://github.com/Nirmitdagli" target="_blank" rel="noopener" class="rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline">GitHub</a>
+          </div>
+        </div>
+        <figure class="fade">
+          <img src="../portrait.jpg" alt="Nirmit Dagli" width="880" height="1100" class="aspect-[4/5] max-h-[420px] w-full rounded-2xl object-cover object-top md:max-h-none" fetchpriority="high" />
+          <figcaption class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted"><span>CKA</span><span>CKAD</span><span>AWS Solutions Architect</span><span>M.S. CS, Quinnipiac</span></figcaption>
+        </figure>
+      </div>
+      <div class="fade mt-14 grid grid-cols-2 gap-6 border-y border-line py-6 sm:grid-cols-4">
+        <div><p class="font-serif text-4xl leading-none sm:text-5xl">1.6x</p><p class="mt-2 text-xs text-muted">vLLM over SGLang at 64 users, same T4</p></div>
+        <div><p class="font-serif text-4xl leading-none sm:text-5xl">78%</p><p class="mt-2 text-xs text-muted">of T4 peak bandwidth, fused Triton kernels</p></div>
+        <div><p class="font-serif text-4xl leading-none sm:text-5xl">30s → 10s</p><p class="mt-2 text-xs text-muted">RAG latency after benchmarking GPU vs managed</p></div>
+        <div><p class="font-serif text-4xl leading-none sm:text-5xl">44</p><p class="mt-2 text-xs text-muted">AWS accounts on Amazon Q at State Street</p></div>
+      </div>
+    </section>
+
+    <!-- GPU AND SERVING -->
+    <section id="gpu" class="mx-auto max-w-5xl px-5 pt-16">
+      <p class="kicker">GPU and LLM serving</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.2rem]">Measure first, then decide where models run.</h2>
+
+      <!-- 01 -->
+      <article class="fade mt-12 border-t border-line pt-12">
+        <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
+          <div><p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">01</p><p class="tag mt-3">Open source</p></div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">LLM serving, measured fairly</h3>
+            <p class="prose-p mt-5">Every engine comparison I found used a different model, GPU or memory setting. llm-serving-bench runs vLLM and SGLang (TensorRT-LLM supported) on the same GPU, model, prompts and memory budget, and times every streamed token from 1 to 64 concurrent users.</p>
+            <div class="mt-9"><p class="font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">609 <span class="text-[#B8B3A6]">vs</span> 384</p><p class="mt-3 text-sm text-muted">tokens per second at 64 users, vLLM vs SGLang, same Tesla T4</p></div>
+            <p class="prose-p mt-8">4-bit AWQ made one user 2.3x faster but 64 users only 5% faster. On this GPU, quantization is a latency win, not a capacity win, which changes how you size a fleet.</p>
+          </div>
+        </div>
+        <figure class="mt-10 max-w-3xl md:ml-[210px]">
+          <div id="chart" role="img" aria-label="Line chart. vLLM fp16 throughput 51, 190, 424 and 609 tokens per second at 1, 4, 16 and 64 users. SGLang fp16 45, 164, 253 and 384. vLLM AWQ int4 106, 308, 535 and 637."></div>
+          <figcaption class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-3 text-xs text-muted">
+            <span class="text-ink">Fig. 1</span><span>Output throughput vs concurrent users. Tesla T4, Qwen2.5-1.5B, 512 in / 128 out.</span>
+            <span class="flex items-center gap-1.5"><span class="h-0.5 w-5 bg-accent"></span>vLLM fp16</span>
+            <span class="flex items-center gap-1.5"><span class="h-0.5 w-5 border-t-2 border-dashed border-metric"></span>vLLM AWQ int4</span>
+            <span class="flex items-center gap-1.5"><span class="h-0.5 w-5 bg-warm"></span>SGLang fp16</span>
+          </figcaption>
+        </figure>
+        <p class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm md:ml-[210px]"><a class="link" href="../writing/vllm-vs-sglang-t4.html">Read the write-up</a><a class="link" href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener">llm-serving-bench on GitHub</a></p>
+      </article>
+
+      <!-- 02 -->
+      <article class="fade mt-20 border-t border-line pt-12">
+        <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
+          <div><p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">02</p><p class="tag mt-3">Research<span class="md:hidden"> · </span><br class="hidden md:block" /> Quinnipiac, 2024 to 2026</p></div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">GPU clusters and self-hosted LLMs for a research group</h3>
+            <p class="prose-p mt-5">I ran Kubernetes GPU clusters with the NVIDIA GPU Operator and Cilium, and self-hosted Llama 3, Mistral, Gemma and DeepSeek with 4-bit quantization. CUDA out-of-memory failures kept taking models down, so I put them behind a process-isolated FastAPI server, which eliminated those failures.</p>
+            <p class="prose-p mt-4">For SPARK, our RAG framework, I benchmarked on-prem GPUs, GCP L4 and AWS Bedrock on the same workload. Average latency went from 30s to 15s to 10s, and the lab moved its inference to Bedrock.</p>
+            <dl class="mt-9 grid gap-8 sm:grid-cols-2">
+              <div class="note"><dt>The call I made</dt><dd>Recommend managed inference over our own GPUs once the benchmark showed it was faster for this workload, even though running those GPUs was my job.</dd></div>
+              <div class="note"><dt>What came of it</dt><dd>SPARK was published at IEEE UEMCON 2025, and the group grew from 2 to 10+ members across AI, quantum computing and cybersecurity.</dd></div>
+            </dl>
+          </div>
+        </div>
+        <figure class="mt-10 grid max-w-3xl grid-cols-2 gap-3 md:ml-[210px]">
+          <img src="../img/spark.jpg" alt="Nirmit presenting SPARK at IEEE UEMCON 2025" width="640" height="800" loading="lazy" class="aspect-[4/3] w-full rounded-xl object-cover" />
+          <img src="../img/podium.jpg" alt="Nirmit answering questions after the SPARK talk" width="640" height="800" loading="lazy" class="aspect-[4/3] w-full rounded-xl object-cover" />
+          <figcaption class="col-span-2 mt-1 text-xs text-muted">Presenting SPARK at IEEE UEMCON 2025, IBM Gerstner Center.</figcaption>
+        </figure>
+      </article>
+
+      <!-- 03 -->
+      <article class="fade mt-20 border-t border-line pt-12">
+        <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
+          <div><p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">03</p><p class="tag mt-3">Open source</p></div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">Kernels, to understand where the time goes</h3>
+            <p class="prose-p mt-5">llm-kernels has fused Triton kernels for softmax, RMSNorm and SwiGLU (forward and backward), and a tiled GEMM compared against cuBLAS. It is the inside view of what the benchmark shows: decode is memory-bound, which is also why quantization helped one user far more than 64.</p>
+            <div class="mt-9 grid gap-8 sm:grid-cols-2">
+              <div><p class="font-serif text-5xl leading-none">70–78%</p><p class="mt-2 text-sm text-muted">of the T4's peak memory bandwidth (223 to 250 GB/s)</p></div>
+              <div><p class="font-serif text-5xl leading-none">4.9–10.1x</p><p class="mt-2 text-sm text-muted">faster than the PyTorch eager reference</p></div>
+            </div>
+            <p class="mt-8 text-sm"><a class="link" href="https://github.com/Nirmitdagli/llm-kernels" target="_blank" rel="noopener">llm-kernels on GitHub</a></p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- AI IN PRODUCTION -->
+    <section id="production" class="mx-auto max-w-5xl px-5 pt-28">
+      <p class="kicker">AI in production</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.2rem]">Three companies, three ways of putting AI into production safely.</h2>
+
+      <div class="mt-12 divide-y divide-line border-y border-line">
+        <article class="fade grid gap-4 py-10 md:grid-cols-[210px_1fr] md:gap-10">
+          <div><p class="font-medium">Sidecoach Sports</p><p class="text-sm text-muted">Founding Platform Engineer · 2026</p></div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[1.9rem] leading-tight">An AI gateway and agents under COPPA and FERPA</h3>
+            <p class="prose-p mt-4">One gateway in front of every LLM call: Entra ID sign-in, per-team keys and spend limits, PII redaction so no student data reaches a model, and an OpenTelemetry trace per request. Behind it, an MCP agent service with RAG over internal content, and an SRE agent suite on Azure AI Foundry that triages alerts and opens Jira tickets.</p>
+            <p class="mt-5 font-serif text-2xl leading-snug">Nothing touches production until an engineer says yes.</p>
+          </div>
+        </article>
+        <article class="fade grid gap-4 py-10 md:grid-cols-[210px_1fr] md:gap-10">
+          <div><p class="font-medium">State Street</p><p class="text-sm text-muted">Cloud and AI Engineer Intern · 2025</p></div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[1.9rem] leading-tight">An internal AI assistant inside a bank</h3>
+            <p class="prose-p mt-4">The only intern to ship an internal AI assistant: Confluence RAG on Azure AI Foundry, delivered as a Microsoft Teams bot that answers access questions and helps developers write Terraform modules. It needed sign-off from the Confluence, Jira, Azure and network teams. I also rolled out Amazon Q across 44 AWS accounts with the security and compliance teams.</p>
+          </div>
+        </article>
+        <article class="fade grid gap-4 py-10 md:grid-cols-[210px_1fr] md:gap-10">
+          <div><p class="font-medium">Zycus</p><p class="text-sm text-muted">SaaS infrastructure · 2024</p></div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[1.9rem] leading-tight">The company's first internal AI chatbot</h3>
+            <p class="prose-p mt-4">Built on Azure OpenAI in 2024, on top of the platform I had spent three years running: 50+ Kubernetes clusters, and the network and security rebuilt after a ransomware attack. <a class="link" href="../index.html#work">That story is on the main page</a>.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- MORE -->
+    <section class="mx-auto max-w-5xl px-5 pt-24">
+      <p class="kicker">Also</p>
+      <ul class="mt-6 divide-y divide-line border-y border-line">
+        <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><a class="link font-medium" href="https://github.com/Nirmitdagli/qgpt" target="_blank" rel="noopener">QGPT</a><span class="text-muted">Multi-modal tutor on AWS Bedrock: RAG over course material, vision, image generation, and model routing by question type.</span><span class="text-sm text-muted">Open source</span></li>
+        <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><a class="font-medium hover:text-accent" href="../quantum/">HERO-S scheduler</a><span class="text-muted">Places AI jobs across CPU, GPU, cloud and edge by cost, energy and latency, with an 8×H100 cost model. IEEE ISAIA 2026.</span><span class="text-sm font-medium text-metric">72–98% less energy</span></li>
+        <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><a class="font-medium hover:text-accent" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI ↗</a><span class="text-muted">Energy-Efficient AI for Foundation Models: Algorithms, Hardware, and Data Center Infrastructure.</span><span class="text-sm text-muted">Computers (MDPI) · 2026</span></li>
+        <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><a class="font-medium hover:text-accent" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK ↗</a><span class="text-muted">Smart Plug-and-Play AI Framework for RAG and Knowledge.</span><span class="text-sm text-muted">IEEE UEMCON 2025</span></li>
+      </ul>
+      <p class="mt-5 text-sm text-muted"><span class="text-ink">Stack:</span> NVIDIA GPU Operator, Kubernetes (EKS, AKS, GKE), vLLM, SGLang, TensorRT-LLM, PyTorch, Triton, Hugging Face, AWS Bedrock, Azure AI Foundry, Azure OpenAI, OpenTelemetry, Prometheus, Grafana.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mx-auto max-w-5xl px-5 pb-16 pt-28">
+      <div class="fade border-t-2 border-ink pt-10">
+        <h2 class="max-w-3xl font-serif text-5xl leading-[1.05] sm:text-[4rem]">Working on AI infrastructure? <em class="text-accent">Let's talk.</em></h2>
+        <div class="mt-10 grid gap-8 sm:grid-cols-[1.2fr_1fr]">
+          <div class="space-y-3 text-[1.05rem]">
+            <p><a class="link text-xl" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a></p>
+            <p><a class="hover:text-accent" href="tel:+14753174538">475 317 4538</a></p>
+            <p class="text-muted">Austin, TX · open to relocating anywhere in the US</p>
+          </div>
+          <div class="no-print flex flex-wrap content-start gap-3">
+            <a class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]" href="../Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <p class="mt-12 text-sm text-muted">Platform, SRE and security work is on the <a class="link" href="../index.html">main portfolio</a>. Quantum research is <a class="link" href="../quantum/">here</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto flex max-w-5xl flex-wrap justify-between gap-2 px-5 pb-10 text-xs text-muted">
+    <p>© 2026 Nirmit Dagli</p>
+    <p>Built by hand with HTML and Tailwind.</p>
+  </footer>
+
+  <script>
+    (function () {
+      const users = [1, 4, 16, 64];
+      const series = [
+        { name: 'vLLM fp16', color: '#2453D6', dash: '', data: [51, 190, 424, 609] },
+        { name: 'vLLM AWQ int4', color: '#0A7A55', dash: '6 5', data: [106, 308, 535, 637] },
+        { name: 'SGLang fp16', color: '#B4532A', dash: '', data: [45, 164, 253, 384] },
+      ];
+      const W = 760, H = 340, L = 46, R = 60, T = 26, B = 34, max = 700;
+      const x = i => L + i * ((W - L - R) / (users.length - 1));
+      const y = v => T + (H - T - B) * (1 - v / max);
+      let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full" font-family="Inter, sans-serif">`;
+      for (let v = 0; v <= max; v += 100) {
+        svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#EEECE6"/>`;
+        svg += `<text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#8B8F99">${v}</text>`;
+      }
+      users.forEach((u, i) => { svg += `<text x="${x(i)}" y="${H - 12}" text-anchor="middle" font-size="11" fill="#8B8F99">${u} user${u > 1 ? 's' : ''}</text>`; });
+      svg += `<text x="${L - 8}" y="${T - 12}" text-anchor="end" font-size="11" fill="#8B8F99">tok/s</text>`;
+      series.forEach(s => {
+        const pts = s.data.map((v, i) => [x(i), y(v)]);
+        const d = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+        let len = 0; for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+        svg += `<path class="${s.dash ? '' : 'draw'}" style="--len:${Math.ceil(len)}" d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5" ${s.dash ? `stroke-dasharray="${s.dash}"` : ''} stroke-linecap="round"/>`;
+        pts.forEach((p, i) => { svg += `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#fff" stroke="${s.color}" stroke-width="2"><title>${s.name}, ${users[i]} users: ${s.data[i]} tok/s</title></circle>`; });
+        const last = pts[pts.length - 1];
+        const dy = s.name === 'vLLM fp16' ? 12 : (s.name === 'vLLM AWQ int4' ? -4 : 4);
+        svg += `<text x="${last[0] + 8}" y="${last[1] + dy}" font-size="12" font-weight="600" fill="${s.color}">${s.data[s.data.length - 1]}</text>`;
+      });
+      document.getElementById('chart').innerHTML = svg + '</svg>';
+    })();
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 }) : null;
+    document.querySelectorAll('.fade').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+  </script>
+</body>
+</html>

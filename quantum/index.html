@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirmit Dagli · Quantum computing research</title>
+  <meta name="description" content="Nirmit Dagli's quantum computing research: HERO, a framework for placing workloads across CPU, GPU and QPU by cost, energy and latency. 3 papers including IEEE ISAIA 2026 and Springer 2026." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nirmitdagli.github.io/quantum/" />
+  <meta property="og:title" content="Nirmit Dagli · Quantum computing research" />
+  <meta property="og:description" content="When does a QPU actually beat a CPU? A 30-seed measurement framework across CPU, GPU and QPU, and 3 papers." />
+  <meta property="og:image" content="https://nirmitdagli.github.io/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#FAFAF7" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { paper: '#FAFAF7', ink: '#14161A', muted: '#5B6170', line: '#E6E4DD', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A', violet: '#6B4FD8' },
+      fontFamily: { serif: ['"Instrument Serif"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'] } } } };
+  </script>
+  <style>
+    html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: #E4DDFF; }
+    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; line-height: 1.7; }
+    .kicker { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: #5B6170; }
+    .kicker::before { content: ""; width: 22px; height: 1px; background: #B9B6AC; }
+    .prose-p { font-size: 1.06rem; line-height: 1.75; color: #474C57; }
+    .note { border-left: 2px solid #E0DCD1; padding-left: 1.1rem; }
+    .note dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #6B4FD8; }
+    .note dd { margin-top: .45rem; line-height: 1.65; color: #474C57; }
+    .link { color: #2453D6; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .link:hover { color: #14161A; }
+    .fade { opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .7s ease; }
+    .fade.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .fade { opacity: 1; transform: none; transition: none; } }
+    @media print { header, .no-print { display: none !important; } body { background: #fff; } .fade { opacity: 1 !important; transform: none !important; } }
+  </style>
+</head>
+<body class="font-sans">
+  <header class="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur">
+    <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5" aria-label="Primary">
+      <a href="../index.html" class="font-serif text-xl leading-none">Nirmit Dagli</a>
+      <div class="flex items-center gap-5 text-sm text-muted">
+        <a class="hidden hover:text-ink sm:inline" href="../ai/">AI infrastructure</a>
+        <a class="hidden hover:text-ink sm:inline" href="../index.html">Platform and SRE</a>
+        <a class="rounded-full bg-accent px-4 py-1.5 font-medium text-white hover:bg-[#1B44B8]" href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="mx-auto max-w-5xl px-5 pb-10 pt-14 sm:pt-20">
+      <div class="grid items-end gap-10 md:grid-cols-[1.5fr_1fr]">
+        <div class="fade">
+          <p class="kicker">Quantum computing research · Quinnipiac University</p>
+          <h1 class="mt-5 font-serif text-[2.8rem] leading-[1.02] sm:text-6xl md:text-[4.2rem]">When does a quantum computer actually <em class="text-violet">beat</em> a classical one?</h1>
+          <div class="mt-7 max-w-xl space-y-4 text-[1.05rem] leading-relaxed text-muted">
+            <p>My M.S. thesis measured it, instead of assuming it. HERO runs the same workloads on CPU, GPU and QPU tiers and compares accuracy, latency, energy and cloud cost across 30 seeds each.</p>
+            <p>I come from infrastructure, so I treat a QPU the way I treat a GPU: one more tier a scheduler can place work on, if the numbers say it should.</p>
+          </div>
+          <div class="no-print mt-8 flex flex-wrap items-center gap-3">
+            <a href="https://nirmitdagli.github.io/quantum-thesis-demo/" target="_blank" rel="noopener" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">Thesis site and simulator</a>
+            <a href="https://github.com/Nirmitdagli/quantum-thesis-demo" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Code on GitHub</a>
+            <a href="../Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline">Résumé (PDF)</a>
+          </div>
+        </div>
+        <figure class="fade">
+          <img src="../img/grad.jpg" alt="Nirmit at his M.S. graduation from Quinnipiac University" width="640" height="800" class="aspect-[4/5] max-h-[420px] w-full rounded-2xl object-cover object-top md:max-h-none" />
+          <figcaption class="mt-3 text-xs text-muted">M.S. Computer Science, Quinnipiac University, 2026</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FINDINGS -->
+    <section class="mx-auto max-w-5xl px-5 pt-16">
+      <p class="kicker">What the thesis found</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.2rem]">Two workloads, two opposite answers.</h2>
+
+      <div class="mt-12 grid gap-12 border-t border-line pt-10 md:grid-cols-2">
+        <article class="fade">
+          <p class="tag">Cybersecurity · KDD Cup 99 intrusion detection</p>
+          <p class="mt-4 font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">~13,000x</p>
+          <p class="mt-3 text-sm text-muted">less energy on classical hardware. Random Forest reached F1 0.998; the quantum SVM reached 0.667.</p>
+          <p class="prose-p mt-6">On cost, a Random Forest on a CPU comes to about <strong class="font-semibold text-ink">$1.99 per million classifications</strong>. The same workload on a quantum kernel through AWS Braket (Rigetti) comes to about <strong class="font-semibold text-ink">$2.1 million</strong>. For this problem, today, classical wins on every axis.</p>
+        </article>
+        <article class="fade">
+          <p class="tag">Molecular simulation · H₂ ground state via VQE</p>
+          <p class="mt-4 font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">n &gt; 50</p>
+          <p class="mt-3 text-sm text-muted">qubits: the point where classical simulation hits its memory wall and quantum takes over.</p>
+          <p class="prose-p mt-6">For H₂ itself, exact diagonalization used 0.04 J against 29,833 J for VQE, so classical still wins at small sizes. But classical memory grows exponentially with system size, and past about 50 qubits it can't keep up. That is where a QPU earns its place.</p>
+        </article>
+      </div>
+
+      <dl class="mt-12 grid gap-8 sm:grid-cols-2">
+        <div class="note"><dt>Why this matters</dt><dd>Most quantum pitches skip the part where classical wins. A scheduler that knows both answers can route each job to the tier that is actually cheaper, faster or greener, and that is the useful version of hybrid computing.</dd></div>
+        <div class="note"><dt>How it was measured</dt><dd>QSVM, QAOA, Grover and VQE on Qiskit Aer, against SVM, Random Forest, gradient boosting and KNN baselines. 30 seeds per experiment, with cloud costs from AWS, IBM and Azure pricing.</dd></div>
+      </dl>
+    </section>
+
+    <!-- ALGORITHM -->
+    <section class="mx-auto max-w-5xl px-5 pt-24">
+      <div class="fade grid gap-8 border-t border-line pt-10 md:grid-cols-[1fr_1.2fr]">
+        <div>
+          <p class="tag">The scheduler</p>
+          <h3 class="mt-3 font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">Workload-aware tier allocation</h3>
+          <p class="prose-p mt-5">HERO picks a starting tier from the workload type and size, measures every tier, keeps the Pareto-optimal options on cost, energy, latency and accuracy, then picks one using the user's weights.</p>
+          <p class="prose-p mt-4">HERO-S extends it to AI workloads across CPU, GPU, cloud and edge, using an 8×H100 cost model. Against cloud-only placement it cut energy by 72 to 98%.</p>
+        </div>
+        <figure class="self-start">
+          <ol class="space-y-0 border-y border-line text-[.95rem]">
+            <li class="grid grid-cols-[7.8rem_1fr] gap-4 border-b border-line py-3"><span class="tag !leading-6">Molecular</span><span>QPU if n &gt; 30, else CPU</span></li>
+            <li class="grid grid-cols-[7.8rem_1fr] gap-4 border-b border-line py-3"><span class="tag !leading-6">Classical ML</span><span>CPU if d &lt; 100, GPU if d &lt; 10⁴, else measure</span></li>
+            <li class="grid grid-cols-[7.8rem_1fr] gap-4 border-b border-line py-3"><span class="tag !leading-6">Combinatorial</span><span>CPU if n &lt; 50, else QPU</span></li>
+            <li class="grid grid-cols-[7.8rem_1fr] gap-4 py-3"><span class="tag !leading-6">Then</span><span>Measure each tier ×30 → Pareto set → weighted pick</span></li>
+          </ol>
+          <figcaption class="mt-3 text-xs text-muted"><span class="text-ink">Fig. 1</span>&nbsp;&nbsp;Algorithm 1 from the thesis, simplified.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- PAPERS -->
+    <section class="mx-auto max-w-5xl px-5 pt-24">
+      <p class="kicker">Papers</p>
+      <ul class="mt-6 divide-y divide-line border-y border-line">
+        <li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"><div><p class="font-medium">HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</p><p class="mt-1 text-sm text-muted">QPU-aware placement of AI intrusion-detection jobs across CPU, GPU, cloud and edge. 72 to 98% less energy than cloud-only.</p></div><span class="text-sm text-muted">IEEE ISAIA 2026 · accepted</span></li>
+        <li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"><div><p class="font-medium">HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</p><p class="mt-1 text-sm text-muted">The measurement framework behind the thesis.</p></div><span class="text-sm text-muted">SEET-26 · accepted</span></li>
+        <li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"><div><a class="font-medium hover:text-accent" href="https://doi.org/10.1007/978-3-032-08977-9_40" target="_blank" rel="noopener">Quantum Computing: Grover's Algorithm for String Search and Its Practical Limits ↗</a><p class="mt-1 text-sm text-muted">Grover's quadratic speedup applied to string search, and the practical limits on today's hardware.</p></div><span class="text-sm text-muted">Springer · 2026</span></li>
+        <li class="grid gap-1 py-5 sm:grid-cols-[1fr_auto] sm:gap-6"><div><p class="font-medium">Hybrid Quantum-AI Models for Cybersecurity on Cloud Platforms: Accuracy, Latency, and Energy</p><p class="mt-1 text-sm text-muted">M.S. thesis. Advisor: Prof. Taskin.</p></div><span class="text-sm text-muted">Quinnipiac · May 2026</span></li>
+      </ul>
+      <p class="mt-5 text-sm text-muted">Also in AI: <a class="link" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models</a> (Computers, MDPI, 2026) and <a class="link" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK</a> (IEEE UEMCON 2025). I grew the research group from 2 to 10+ members across quantum computing, AI and cybersecurity.</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mx-auto max-w-5xl px-5 pb-16 pt-28">
+      <div class="fade border-t-2 border-ink pt-10">
+        <h2 class="max-w-3xl font-serif text-5xl leading-[1.05] sm:text-[4rem]">Building hybrid quantum systems? <em class="text-violet">Let's talk.</em></h2>
+        <div class="mt-10 grid gap-8 sm:grid-cols-[1.2fr_1fr]">
+          <div class="space-y-3 text-[1.05rem]">
+            <p><a class="link text-xl" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a></p>
+            <p><a class="hover:text-accent" href="tel:+14753174538">475 317 4538</a></p>
+            <p class="text-muted">Austin, TX · open to relocating anywhere in the US</p>
+          </div>
+          <div class="no-print flex flex-wrap content-start gap-3">
+            <a class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]" href="../Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <p class="mt-12 text-sm text-muted">The infrastructure side of my work (Kubernetes, GPU clusters, production security) is on the <a class="link" href="../index.html">main portfolio</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto flex max-w-5xl flex-wrap justify-between gap-2 px-5 pb-10 text-xs text-muted">
+    <p>© 2026 Nirmit Dagli</p>
+    <p>Built by hand with HTML and Tailwind.</p>
+  </footer>
+
+  <script>
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 }) : null;
+    document.querySelectorAll('.fade').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+  </script>
+</body>
+</html>
