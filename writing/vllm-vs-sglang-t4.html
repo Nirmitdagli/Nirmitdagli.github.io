@@ -7,25 +7,25 @@
   <meta name="description" content="Benchmarking vLLM and SGLang on a Tesla T4 in fp16 and AWQ int4: why vLLM served 609 vs 384 tok/s, and why 4-bit cut decode 2.3x for one user but only 5% at 64 users." />
   <meta property="og:title" content="vLLM vs SGLang on a T4: what 2,048 requests showed" />
   <meta property="og:type" content="article" />
-  <meta name="theme-color" content="#0B0F19" />
+  <meta name="theme-color" content="#000000" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     tailwind.config = { theme: { extend: {
-      colors: { ink: '#0B0F19', panel: '#111827', line: '#1F2937', accent: '#3B82F6', metric: '#10B981' },
+      colors: { ink: '#000000', panel: '#0A0A0B', line: '#1C1C20', accent: '#3B82F6', metric: '#10B981' },
       fontFamily: { sans: ['ui-sans-serif','system-ui','-apple-system','Segoe UI','Roboto','Helvetica Neue','Arial','sans-serif'], mono: ['ui-monospace','SFMono-Regular','Menlo','Consolas','monospace'] } } } };
   </script>
   <style>
-    html, body { background: #0B0F19; color: #E5E7EB; -webkit-font-smoothing: antialiased; }
+    html, body { background: #000000; color: #E5E7EB; -webkit-font-smoothing: antialiased; }
     .post p { margin: 1.1rem 0; line-height: 1.8; color: #D1D5DB; }
     .post h2 { margin: 2.6rem 0 0.6rem; font-size: 1.45rem; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
     .post ul { margin: 1rem 0; padding-left: 1.2rem; list-style: disc; color: #D1D5DB; }
     .post li { margin: 0.45rem 0; line-height: 1.7; }
     .post strong { color: #fff; }
-    .post code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; background: #111827; border: 1px solid #1F2937; border-radius: 6px; padding: 0.1em 0.4em; color: #93C5FD; }
+    .post code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; background: #0A0A0B; border: 1px solid #1C1C20; border-radius: 6px; padding: 0.1em 0.4em; color: #93C5FD; }
     .tbl { width: 100%; border-collapse: collapse; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
-    .tbl th { text-align: right; font-weight: 600; color: #9CA3AF; padding: 0.55rem 0.7rem; border-bottom: 1px solid #1F2937; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .tbl td { text-align: right; padding: 0.55rem 0.7rem; border-bottom: 1px solid #1F2937; color: #E5E7EB; }
+    .tbl th { text-align: right; font-weight: 600; color: #9CA3AF; padding: 0.55rem 0.7rem; border-bottom: 1px solid #1C1C20; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .tbl td { text-align: right; padding: 0.55rem 0.7rem; border-bottom: 1px solid #1C1C20; color: #E5E7EB; }
     .tbl th:first-child, .tbl td:first-child, .tbl th:nth-child(2), .tbl td:nth-child(2) { text-align: left; }
     .tbl tr.win td { color: #34D399; }
     .callout { border: 1px solid rgba(16,185,129,0.35); background: rgba(16,185,129,0.08); border-radius: 14px; padding: 1rem 1.2rem; }
