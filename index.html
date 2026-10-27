@@ -40,18 +40,41 @@
     section[id], [id=experience] { scroll-margin-top: 4.5rem; }
     .journey { border-left: 1px solid #E6E4DD; padding-left: 1.4rem; }
     .sec-h { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(2.3rem, 5vw, 3.4rem); line-height: 1.05; }
-    .door { display: flex; flex-direction: column; align-items: flex-start; gap: .25rem; text-align: left; padding: 1rem; border: 1px solid #DDD9CE; border-radius: 16px; background: #fff; transition: border-color .2s, box-shadow .2s, transform .2s; }
-    .door:hover { border-color: #2453D6; transform: translateY(-2px); }
-    .door[aria-selected="true"] { border-color: #14161A; box-shadow: 0 10px 30px -18px rgba(20,22,26,.45); }
-    .door[aria-selected="true"] .door-n { color: #2453D6; }
-    .door-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.6rem; line-height: 1; color: #C9C5BA; }
-    .door-t { font-weight: 600; font-size: .92rem; line-height: 1.25; }
-    .door-s { display: none; font-size: .8rem; color: #5B6170; }
-    @media (min-width: 640px) { .door { padding: 1.3rem 1.4rem; } .door-n { font-size: 2.4rem; } .door-t { font-size: 1.12rem; } .door-s { display: block; } }
-    .panel-door { margin-top: 2.5rem; animation: doorIn .45s ease both; }
-    @keyframes doorIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+    @media (min-width: 640px) { .doors { gap: 1.5rem; } }
+    .door { display: flex; flex-direction: column; gap: .7rem; text-align: left; background: none; border: 0; padding: 0; cursor: pointer; }
+    .dr-frame { position: relative; display: block; height: 150px; overflow: hidden; border-radius: 14px 14px 4px 4px; background: #E9E6DD; perspective: 1100px; box-shadow: inset 0 0 0 1px #DAD6CB; }
+    @media (min-width: 640px) { .dr-frame { height: 230px; } }
+    .dr-inside { position: absolute; inset: 6px; border-radius: 10px 10px 2px 2px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; gap: .35rem; padding: .8rem .8rem .8rem 24%; background: linear-gradient(180deg, #EEF2FF 0%, #FAFAF7 100%); }
+    .dr-glow { position: absolute; inset: -40% -20% auto; height: 120%; background: radial-gradient(closest-side, rgba(36,83,214,.22), transparent); opacity: 0; transition: opacity .8s ease .3s; }
+    .dr-live { position: relative; display: inline-flex; align-items: center; gap: .4rem; font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #0A7A55; }
+    .dr-dot { width: 7px; height: 7px; border-radius: 99px; background: #0A7A55; animation: pulse 1.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .3; } }
+    .dr-in-t { position: relative; font-family: "Instrument Serif", Georgia, serif; font-size: 1.1rem; line-height: 1.1; color: #14161A; }
+    @media (min-width: 640px) { .dr-in-t { font-size: 1.7rem; } }
+    .dr-leaf { position: absolute; inset: 6px; border-radius: 10px 10px 2px 2px; background: #fff; box-shadow: inset 0 0 0 1px #DAD6CB; transform-origin: left center; transform: rotateY(0deg); transition: transform 1s cubic-bezier(.2,.75,.2,1), box-shadow 1s; display: grid; grid-template-rows: 1fr 1.4fr; gap: 8px; padding: 12px; }
+    .dr-panel { border-radius: 6px; box-shadow: inset 0 0 0 1px #E6E2D8; }
+    .dr-knob { position: absolute; right: 12px; top: 52%; width: 9px; height: 9px; border-radius: 99px; background: #B4532A; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+    .dr-leaf-n { position: absolute; left: 14px; top: 12px; font-family: "Instrument Serif", Georgia, serif; font-size: 1.6rem; color: #C9C5BA; }
+    @media (min-width: 640px) { .dr-leaf-n { font-size: 2.4rem; } .dr-leaf { padding: 16px; } }
+    .doors.init .door .dr-leaf { transform: rotateY(0deg) !important; }
+    .doors.init .dr-glow { opacity: 0 !important; }
+    .door:hover .dr-leaf { transform: rotateY(14deg); }
+    .door[aria-selected="true"] .dr-leaf { transform: rotateY(84deg); box-shadow: inset 0 0 0 1px #DAD6CB, inset -18px 0 24px -12px rgba(20,22,26,.18); }
+    .door[aria-selected="true"] .dr-glow { opacity: 1; }
+    .dr-cap { display: flex; align-items: baseline; gap: .5rem; }
+    .dr-cap-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.3rem; color: #C9C5BA; }
+    .dr-cap-t { font-weight: 600; font-size: .86rem; line-height: 1.25; }
+    @media (min-width: 640px) { .dr-cap-t { font-size: 1.05rem; } }
+    .door[aria-selected="true"] .dr-cap-n { color: #2453D6; }
+    .door:focus-visible { outline: none; } .door:focus-visible .dr-frame { outline: 2px solid #2453D6; outline-offset: 3px; }
+    .demo { margin-top: 2.5rem; border-top: 1px solid #E6E4DD; border-bottom: 1px solid #E6E4DD; padding: 2.2rem 0 1.6rem; }
+    .bl-m[aria-checked="true"] { background: #14161A; color: #fff; } .bl-m[aria-checked="false"] { color: #5B6170; }
+    @media (prefers-reduced-motion: reduce) { .dr-leaf { transition: none; } .dr-dot { animation: none; } }
     .door-h { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.08; }
     .door-lede { margin-top: .8rem; max-width: 46rem; font-size: 1.06rem; line-height: 1.75; color: #474C57; }
+    .panel-door { margin-top: 2.5rem; animation: doorIn .45s ease both; }
+    @keyframes doorIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
     .feature { margin-top: 2.5rem; border-top: 1px solid #E6E4DD; padding-top: 2rem; }
     .cards { margin-top: 2.5rem; display: grid; gap: 1rem; }
     @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
@@ -178,21 +201,27 @@
       <h2 class="font-serif text-[2.6rem] leading-[1.04] sm:text-[3.6rem]">What are you hiring for?</h2>
       <p class="mt-3 text-muted">Pick a door. Each one opens the work that matters for that role.</p>
 
-      <div class="mt-8 grid grid-cols-3 gap-2 sm:gap-4" role="tablist" aria-label="Choose a role">
+      <div class="doors init mt-8" role="tablist" aria-label="Choose a role">
         <button class="door" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="true" data-door="ai">
-          <span class="door-n">01</span>
-          <span class="door-t">AI · GPU · LLM</span>
-          <span class="door-s">Serving, GPU clusters, agents</span>
+          <span class="dr-frame" aria-hidden="true">
+            <span class="dr-inside"><span class="dr-glow"></span><span class="dr-live"><span class="dr-dot"></span>Live demo</span><span class="dr-in-t">Race two LLM engines</span></span>
+            <span class="dr-leaf"><span class="dr-panel"></span><span class="dr-panel"></span><span class="dr-knob"></span><span class="dr-leaf-n">01</span></span>
+          </span>
+          <span class="dr-cap"><span class="dr-cap-n">01</span><span class="dr-cap-t">AI · GPU · LLM</span></span>
         </button>
         <button class="door" role="tab" id="tab-devops" aria-controls="panel-devops" aria-selected="false" data-door="devops">
-          <span class="door-n">02</span>
-          <span class="door-t">DevOps · Cloud · SRE</span>
-          <span class="door-s">Kubernetes, platforms, incidents</span>
+          <span class="dr-frame" aria-hidden="true">
+            <span class="dr-inside"><span class="dr-glow"></span><span class="dr-live"><span class="dr-dot"></span>Live demo</span><span class="dr-in-t">Migrate 2,000 servers</span></span>
+            <span class="dr-leaf"><span class="dr-panel"></span><span class="dr-panel"></span><span class="dr-knob"></span><span class="dr-leaf-n">02</span></span>
+          </span>
+          <span class="dr-cap"><span class="dr-cap-n">02</span><span class="dr-cap-t">DevOps · Cloud · SRE</span></span>
         </button>
         <button class="door" role="tab" id="tab-security" aria-controls="panel-security" aria-selected="false" data-door="security">
-          <span class="door-n">03</span>
-          <span class="door-t">Security</span>
-          <span class="door-s">Hardening, compliance, DevSecOps</span>
+          <span class="dr-frame" aria-hidden="true">
+            <span class="dr-inside"><span class="dr-glow"></span><span class="dr-live"><span class="dr-dot"></span>Live demo</span><span class="dr-in-t">Stop a ransomware spread</span></span>
+            <span class="dr-leaf"><span class="dr-panel"></span><span class="dr-panel"></span><span class="dr-knob"></span><span class="dr-leaf-n">03</span></span>
+          </span>
+          <span class="dr-cap"><span class="dr-cap-n">03</span><span class="dr-cap-t">Security</span></span>
         </button>
       </div>
 
@@ -306,6 +335,25 @@
       <div id="panel-devops" class="panel-door" role="tabpanel" aria-labelledby="tab-devops" hidden>
         <h3 class="door-h">DevOps · Cloud · SRE</h3>
         <p class="door-lede">I joined Zycus as a Linux trainee in 2021 and ended up running 50+ Kubernetes clusters across AWS, Azure, GCP and on-prem. Now I build platforms from zero as the first platform hire.</p>
+        <!-- MIGRATION DEMO -->
+        <div id="mig" class="demo no-print">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p class="flex items-center gap-2 text-sm font-medium text-metric"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-metric"></span>Live demo · Zycus, 2023</p>
+              <p class="mt-2 font-serif text-[2rem] leading-tight sm:text-[2.6rem]">Watch 2,000+ servers become 50+ clusters.</p>
+            </div>
+            <button id="mig-run" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">▶ Run migration</button>
+          </div>
+          <svg id="mig-svg" viewBox="0 0 800 330" class="mt-6 w-full" role="img" aria-label="Animation: 200 dots, each about 10 servers on VMware, KVM and bare metal, move into 50 Kubernetes clusters. Then a GitOps sync, policies and backups are applied to every cluster."></svg>
+          <div class="mt-4 grid grid-cols-2 gap-4 border-t border-line pt-4 sm:grid-cols-4">
+            <div><p class="font-serif text-3xl leading-none"><span id="mig-s">0</span></p><p class="mt-1 text-xs text-muted">servers moved</p></div>
+            <div><p class="font-serif text-3xl leading-none"><span id="mig-c">0</span></p><p class="mt-1 text-xs text-muted">clusters live</p></div>
+            <div><p class="font-serif text-3xl leading-none" id="mig-g">·</p><p class="mt-1 text-xs text-muted">ArgoCD, Kyverno, Velero</p></div>
+            <div><p class="font-serif text-3xl leading-none" id="mig-p">·</p><p class="mt-1 text-xs text-muted">provisioning time</p></div>
+          </div>
+          <p class="mt-3 text-xs text-muted">Illustration: each dot is about 10 servers. Clusters ran on EKS, AKS, GKE, Rancher and OpenShift.</p>
+        </div>
+
 
         <div class="feature">
           <div>
@@ -398,6 +446,29 @@
       <div id="panel-security" class="panel-door" role="tabpanel" aria-labelledby="tab-security" hidden>
         <h3 class="door-h">Security</h3>
         <p class="door-lede">I learned security the hard way, rebuilding a company's network after ransomware. Now I build it in from the start: identity, endpoints, CI/CD, and AI that can't leak data.</p>
+        <!-- BLAST RADIUS DEMO -->
+        <div id="blast" class="demo no-print">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p class="flex items-center gap-2 text-sm font-medium text-warm"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-warm"></span>Live demo · why we segmented</p>
+              <p class="mt-2 font-serif text-[2rem] leading-tight sm:text-[2.6rem]">Same attack, two networks.</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex rounded-full border border-line bg-white p-1 text-sm" role="radiogroup" aria-label="Network design">
+                <button class="bl-m rounded-full px-3.5 py-1.5" data-m="flat" role="radio" aria-checked="true">2022: flat</button>
+                <button class="bl-m rounded-full px-3.5 py-1.5" data-m="seg" role="radio" aria-checked="false">After: segmented</button>
+              </div>
+              <button id="bl-run" class="rounded-full bg-warm px-5 py-2.5 text-sm font-medium text-white hover:bg-[#93421F]">▶ Release it</button>
+            </div>
+          </div>
+          <svg id="bl-svg" viewBox="0 0 800 300" class="mt-6 w-full" role="img" aria-label="Simulation: 7 environments of servers. On a flat network an infection starting at the data server reaches every environment. With segmentation and firewalls between environments it stays in one."></svg>
+          <div class="mt-4 flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-4">
+            <p id="bl-verdict" class="max-w-2xl font-serif text-2xl leading-snug" aria-live="polite">Pick a network and release the attack.</p>
+            <p class="text-sm text-muted"><span id="bl-n" class="font-serif text-3xl text-ink">0</span> of 7 environments infected</p>
+          </div>
+          <p class="mt-3 text-xs text-muted">Illustration, not a recording. The 7 environments are real; node counts are simplified. After 2022: Transit Gateway, segmented VPCs and 20 Palo Alto firewalls.</p>
+        </div>
+
 
         <div class="feature">
           <div class="grid gap-8 md:grid-cols-[1fr_1fr]">
@@ -663,6 +734,112 @@
       document.querySelectorAll('a[href="#oncall"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); open('devops', { scroll: 'oncall' }); }));
       const h = location.hash.slice(1);
       if (ids.includes(h)) { open(h, { hash: false }); requestAnimationFrame(() => document.getElementById('work').scrollIntoView()); }
+    })();
+
+    // Doors swing open the first time they scroll into view
+    (function () {
+      const d = document.querySelector('.doors'); if (!d) return;
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) { d.classList.remove('init'); return; }
+      const o = new IntersectionObserver(es => { if (es[0].isIntersecting) { setTimeout(() => d.classList.remove('init'), 250); o.disconnect(); } }, { threshold: 0.5 });
+      o.observe(d);
+    })();
+
+    // Migration demo: ~200 dots (about 10 servers each) into 50 clusters
+    (function () {
+      const svg = document.getElementById('mig-svg'); if (!svg) return;
+      const NS = 'http://www.w3.org/2000/svg', N = 200, C = 50;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
+      const kinds = [['VMware', '#9A978E'], ['KVM', '#B8B3A6'], ['Bare metal', '#6E7380']];
+      svg.appendChild(el('text', { x: 20, y: 18, 'font-size': 12, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = 'Before: VMs and bare metal';
+      svg.appendChild(el('text', { x: 440, y: 18, 'font-size': 12, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = 'After: Kubernetes clusters';
+      kinds.forEach((k, i) => { svg.appendChild(el('circle', { cx: 26 + i * 92, cy: 318, r: 4, fill: k[1] })); svg.appendChild(el('text', { x: 34 + i * 92, y: 322, 'font-size': 11, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = k[0]; });
+      const home = [], dest = [], dots = [], cl = [];
+      for (let i = 0; i < N; i++) { const c = i % 20, r = Math.floor(i / 20); home.push([28 + c * 15.5, 44 + r * 25]); }
+      for (let j = 0; j < C; j++) { const c = j % 10, r = Math.floor(j / 10); const cx = 462 + c * 34, cy = 64 + r * 50;
+        const hex = el('polygon', { points: [0,1,2,3,4,5].map(k => { const a = Math.PI / 3 * k + Math.PI / 6; return (cx + 14 * Math.cos(a)).toFixed(1) + ',' + (cy + 14 * Math.sin(a)).toFixed(1); }).join(' '), fill: '#FAFAF7', stroke: '#D8D4C9', 'stroke-width': 1.5 });
+        svg.appendChild(hex); cl.push({ hex, cx, cy, n: 0 }); }
+      for (let i = 0; i < N; i++) { const j = Math.floor(i / 4), cc = cl[j], a = (i % 4) * Math.PI / 2 + .6; dest.push([cc.cx + 5 * Math.cos(a), cc.cy + 5 * Math.sin(a)]);
+        const d = el('circle', { cx: home[i][0], cy: home[i][1], r: 3.6, fill: kinds[(i * 7) % 3][1] }); svg.appendChild(d); dots.push(d); }
+      const sweep = el('rect', { x: 440, y: 40, width: 3, height: 250, fill: '#0A7A55', opacity: 0, rx: 1.5 }); svg.appendChild(sweep);
+      const $ = id => document.getElementById(id);
+      const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      let raf = 0, done = false;
+      function paint(t) { // t in seconds, 0..7
+        let moved = 0, live = 0;
+        cl.forEach(c => c.n = 0);
+        for (let i = 0; i < N; i++) {
+          const start = (i / N) * 3.2, p = Math.min(1, Math.max(0, (t - start) / 0.9)), e = ease(p);
+          const x = home[i][0] + (dest[i][0] - home[i][0]) * e, y = home[i][1] + (dest[i][1] - home[i][1]) * e - Math.sin(Math.PI * e) * 40;
+          dots[i].setAttribute('cx', x.toFixed(1)); dots[i].setAttribute('cy', y.toFixed(1));
+          if (p >= 1) { moved++; cl[Math.floor(i / 4)].n++; dots[i].setAttribute('fill', '#2453D6'); } else dots[i].setAttribute('fill', kinds[(i * 7) % 3][1]);
+        }
+        cl.forEach(c => { const on = c.n === 4; if (on) live++; c.hex.setAttribute('fill', on ? '#EEF2FF' : '#FAFAF7'); c.hex.setAttribute('stroke', on ? '#2453D6' : '#D8D4C9'); });
+        const sw = Math.min(1, Math.max(0, (t - 4.6) / 1.4));
+        sweep.setAttribute('opacity', sw > 0 && sw < 1 ? .8 : 0); sweep.setAttribute('x', 440 + sw * 350);
+        cl.forEach(c => { if (sw > 0 && c.cx < 440 + sw * 350) c.hex.setAttribute('stroke', '#0A7A55'); });
+        $('mig-s').textContent = t >= 4.2 ? '2,000+' : Math.round(moved * 10).toLocaleString('en-US');
+        $('mig-c').textContent = t >= 4.2 ? '50+' : String(live);
+        $('mig-g').textContent = sw >= 1 ? '✓ synced' : (sw > 0 ? 'syncing…' : '·');
+        $('mig-p').textContent = t >= 6.3 ? '~40% faster' : '·';
+      }
+      function run() { cancelAnimationFrame(raf); done = true; if (reduce) { paint(7); return; } const t0 = performance.now(); const tick = n => { const t = (n - t0) / 1000; paint(Math.min(7, t)); if (t < 7) raf = requestAnimationFrame(tick); }; raf = requestAnimationFrame(tick); }
+      paint(0);
+      $('mig-run').addEventListener('click', run);
+      if ('IntersectionObserver' in window) { const o = new IntersectionObserver(es => { if (es[0].isIntersecting && !done) { run(); o.disconnect(); } }, { threshold: 0.5 }); o.observe(svg); }
+    })();
+
+    // Blast-radius demo: flat vs segmented network, 7 environments
+    (function () {
+      const svg = document.getElementById('bl-svg'); if (!svg) return;
+      const NS = 'http://www.w3.org/2000/svg', Z = 7, PER = 8;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
+      const names = ['Prod 1', 'Prod 2', 'Prod 3', 'Prod 4', 'Staging', 'QA', 'Dev'];
+      const nodes = [], zoneEls = [], fw = [];
+      const zw = 104, gx = 10;
+      const gEdges = el('g', {}); svg.appendChild(gEdges);
+      for (let z = 0; z < Z; z++) {
+        const x0 = 12 + z * (zw + gx);
+        const r = el('rect', { x: x0, y: 30, width: zw, height: 236, rx: 10, fill: 'none', stroke: '#E0DCD1', 'stroke-dasharray': '4 4' }); svg.appendChild(r); zoneEls.push(r);
+        svg.appendChild(el('text', { x: x0 + zw / 2, y: 22, 'text-anchor': 'middle', 'font-size': 11, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = names[z];
+        for (let k = 0; k < PER; k++) { const cx = x0 + 28 + (k % 2) * 48, cy = 62 + Math.floor(k / 2) * 56; const c = el('circle', { cx, cy, r: 9, fill: '#fff', stroke: '#B9B6AC', 'stroke-width': 1.5 }); svg.appendChild(c); nodes.push({ z, k, cx, cy, c, t: Infinity }); }
+        if (z < Z - 1) { const fx = x0 + zw + gx / 2; const f = el('rect', { x: fx - 3, y: 40, width: 6, height: 216, rx: 3, fill: '#B4532A', opacity: 0 }); svg.appendChild(f); fw.push(f); }
+      }
+      // edges: within zone neighbours; across zones between facing nodes
+      const edges = [];
+      nodes.forEach((a, i) => nodes.forEach((b, j) => { if (j <= i) return;
+        const same = a.z === b.z && Math.hypot(a.cx - b.cx, a.cy - b.cy) < 80;
+        const cross = b.z === a.z + 1 && a.k % 2 === 1 && b.k % 2 === 0 && Math.floor(a.k / 2) === Math.floor(b.k / 2);
+        if (same || cross) { const l = el('line', { x1: a.cx, y1: a.cy, x2: b.cx, y2: b.cy, stroke: '#E0DCD1', 'stroke-width': 1.5 }); gEdges.appendChild(l); edges.push({ i, j, cross, l }); } }));
+      const $ = id => document.getElementById(id);
+      let mode = 'flat', raf = 0, started = false;
+      function setMode(m) { mode = m; document.querySelectorAll('.bl-m').forEach(b => b.setAttribute('aria-checked', String(b.dataset.m === m))); fw.forEach(f => f.setAttribute('opacity', m === 'seg' ? .9 : 0)); zoneEls.forEach(r => { r.setAttribute('stroke', m === 'seg' ? '#B4532A' : '#E0DCD1'); r.setAttribute('stroke-dasharray', m === 'seg' ? '' : '4 4'); r.setAttribute('stroke-opacity', m === 'seg' ? .35 : 1); }); edges.forEach(e => { e.l.setAttribute('stroke-dasharray', e.cross && m === 'seg' ? '2 5' : ''); e.l.setAttribute('stroke', e.cross && m === 'seg' ? '#D9B8A8' : '#E0DCD1'); }); reset(); }
+      function compute() { // BFS infection times (in hops) from the data server in Prod 1
+        nodes.forEach(n => n.t = Infinity); const src = 1; nodes[src].t = 0; const q = [src];
+        while (q.length) { const i = q.shift(); edges.forEach(e => { if (mode === 'seg' && e.cross) return; const j = e.i === i ? e.j : e.j === i ? e.i : -1; if (j < 0 || nodes[j].t !== Infinity) return; nodes[j].t = nodes[i].t + 1; q.push(j); }); }
+      }
+      function paint(h) { // h = hops elapsed
+        const hit = new Set();
+        nodes.forEach(n => { const on = n.t <= h; n.c.setAttribute('fill', on ? '#B4532A' : '#fff'); n.c.setAttribute('stroke', on ? '#93421F' : '#B9B6AC'); if (on) hit.add(n.z); });
+        $('bl-n').textContent = hit.size;
+        return hit.size;
+      }
+      function reset() { cancelAnimationFrame(raf); compute(); paint(-1); $('bl-verdict').textContent = mode === 'flat' ? 'A flat network, like 2022. Release the attack.' : 'Segmented, with firewalls between environments. Release the attack.'; }
+      function run() {
+        cancelAnimationFrame(raf); started = true; compute();
+        const maxH = Math.max(...nodes.filter(n => n.t !== Infinity).map(n => n.t));
+        const finish = () => { const z = paint(maxH); $('bl-verdict').textContent = mode === 'flat' ? 'All 7 environments infected. With nothing to isolate, the only stop button left is shutting everything down. That is what we did.' : 'Contained to ' + z + ' of 7 environments. The firewalls between segments give you a smaller stop button.'; };
+        if (reduce) return finish();
+        $('bl-verdict').textContent = 'Spreading…';
+        const t0 = performance.now(), per = mode === 'flat' ? 260 : 380;
+        const tick = n => { const h = Math.floor((n - t0) / per); if (h >= maxH) return finish(); paint(h); raf = requestAnimationFrame(tick); };
+        raf = requestAnimationFrame(tick);
+      }
+      document.querySelectorAll('.bl-m').forEach(b => b.addEventListener('click', () => { setMode(b.dataset.m); run(); }));
+      $('bl-run').addEventListener('click', run);
+      setMode('flat');
+      if ('IntersectionObserver' in window) { const o = new IntersectionObserver(es => { if (es[0].isIntersecting && !started) { run(); o.disconnect(); } }, { threshold: 0.5 }); o.observe(svg); }
     })();
 
     // GPU race: replays llm-serving-bench results (Tesla T4, Qwen2.5-1.5B, 512 in / 128 out)
