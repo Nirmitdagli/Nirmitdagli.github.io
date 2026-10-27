@@ -225,6 +225,14 @@
     }
 
     $('start').addEventListener('click', () => { $('intro').classList.add('hidden'); $('game').classList.remove('hidden'); render(); });
+    // Continue from the home-page teaser: oncall.html?from=1&score=0|1
+    const qs = new URLSearchParams(location.search);
+    if (qs.has('from')) {
+      i = Math.min(Math.max(parseInt(qs.get('from'), 10) || 0, 0), steps.length - 1);
+      score = Math.min(Math.max(parseInt(qs.get('score'), 10) || 0, 0), i);
+      $('score').textContent = score;
+      $('intro').classList.add('hidden'); $('game').classList.remove('hidden'); render();
+    }
     document.addEventListener('keydown', e => {
       if ($('game').classList.contains('hidden')) return;
       if (!answered && ['1', '2', '3'].includes(e.key)) pick(+e.key - 1);

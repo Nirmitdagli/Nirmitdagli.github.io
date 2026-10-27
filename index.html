@@ -39,6 +39,12 @@
     html { scroll-behavior: smooth; }
     section[id], [id=experience] { scroll-margin-top: 4.5rem; }
     .journey { border-left: 1px solid #E6E4DD; padding-left: 1.4rem; }
+    .tq-opt { display: grid; grid-template-columns: 2rem 1fr; gap: .75rem; align-items: start; width: 100%; text-align: left; padding: .95rem 1.05rem; border: 1px solid #DDD9CE; border-radius: 12px; background: #fff; transition: border-color .15s, transform .15s; }
+    .tq-opt:hover:not([disabled]) { border-color: #2453D6; transform: translateY(-1px); }
+    .tq-opt[disabled] { cursor: default; opacity: .5; }
+    .tq-opt.picked { opacity: 1; border-color: #14161A; }
+    .tq-key { display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 999px; border: 1px solid #DDD9CE; font-size: .8rem; color: #5B6170; }
+    .tq-opt.best .tq-key { background: #0A7A55; border-color: #0A7A55; color: #fff; }
     .jy { position: relative; }
     .jy::before { content: ""; position: absolute; top: .55rem; left: calc(-1.4rem - 5px); width: 9px; height: 9px; border-radius: 999px; background: #14161A; }
     @media (min-width: 1024px) {
@@ -122,7 +128,7 @@
             <a href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
             <button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline">Copy email</button>
           </div>
-          <a href="writing/oncall.html" class="no-print group mt-6 inline-flex items-center gap-2.5 text-sm"><span class="inline-block h-2 w-2 animate-pulse rounded-full bg-warm"></span><span class="font-medium group-hover:text-accent">You're on call. It's 07:00.</span><span class="text-muted">Play the 2-minute incident →</span></a>
+          <a href="#oncall" class="no-print group mt-6 inline-flex items-center gap-2.5 text-sm"><span class="inline-block h-2 w-2 animate-pulse rounded-full bg-warm"></span><span class="font-medium group-hover:text-accent">You're on call. It's 07:00.</span><span class="text-muted">Make the first call ↓</span></a>
           <p class="mt-8 max-w-xl border-t border-line pt-4 text-sm text-muted"><span class="text-ink">Right now:</span> building the AI gateway and SRE agents at Sidecoach, and the next llm-serving-bench round with open-loop load and 8K context.</p>
         </div>
         <figure class="fade">
@@ -142,6 +148,26 @@
           <li class="jy"><p class="font-serif text-3xl leading-none">2025</p><p class="mt-2 text-sm font-medium">Internal AI assistant</p><p class="text-xs text-muted">State Street · cloud and AI</p></li>
           <li class="jy"><p class="font-serif text-3xl leading-none text-accent">2026</p><p class="mt-2 text-sm font-medium">Founding platform engineer</p><p class="text-xs text-muted">Sidecoach · AI gateway, agents</p></li>
         </ol>
+      </div>
+    </section>
+
+    <!-- ON-CALL TEASER -->
+    <section id="oncall" class="no-print mt-6 bg-[#F2F0E9]">
+      <div class="mx-auto grid max-w-5xl gap-8 px-5 py-14 md:grid-cols-[1fr_1.2fr] md:gap-12">
+        <div>
+          <p class="flex items-center gap-2 text-sm font-medium text-warm"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-warm"></span>Your turn · built from a real incident</p>
+          <h2 class="mt-4 font-serif text-[2.6rem] leading-[1.02] sm:text-[3.4rem]">You're on call.<br />It's <em class="text-accent">07:00</em>.</h2>
+          <p class="mt-5 max-w-md leading-relaxed text-muted">Your phone rings. Someone says “something is down.” No system name, no error, no screenshot. In 2022, this call was the start of a ransomware attack on 1,500+ servers.</p>
+        </div>
+        <div>
+          <p class="font-serif text-3xl">What do you do?</p>
+          <div class="mt-5 space-y-3" id="tq" role="group" aria-label="What do you do?">
+            <button class="tq-opt" data-k="0" data-real="1"><span class="tq-key">1</span><span>Wait for a clearer report before escalating.</span></button>
+            <button class="tq-opt" data-k="1" data-best="1"><span class="tq-key">2</span><span>Treat it as a possible incident and start checking now.</span></button>
+            <button class="tq-opt" data-k="2"><span class="tq-key">3</span><span>Ask them to file a ticket.</span></button>
+          </div>
+          <div id="tq-result" class="hidden" aria-live="polite"></div>
+        </div>
       </div>
     </section>
 
@@ -450,6 +476,33 @@
       io.unobserve(e.target);
     }), { threshold: 0.15 }) : null;
     document.querySelectorAll('.fade, figure.panel').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+    // On-call teaser
+    (function () {
+      const box = document.getElementById('tq'); if (!box) return;
+      const res = document.getElementById('tq-result');
+      const copy = {
+        0: ['Same call we made, and it cost us', '#B4532A', 'It got the priority vague reports usually get. About three hours passed before we confirmed ransomware.'],
+        1: ['Best call', '#0A7A55', 'Better than what we did. We waited, and about three hours passed before we confirmed ransomware.'],
+        2: ['Not the best call', '#B4532A', 'A ticket queue is the slowest path there is. We actually waited for a clearer report, and lost about three hours.'],
+      };
+      box.querySelectorAll('.tq-opt').forEach(b => b.addEventListener('click', () => {
+        const k = +b.dataset.k, c = copy[k];
+        box.querySelectorAll('.tq-opt').forEach(x => {
+          x.disabled = true; if (x === b) x.classList.add('picked'); if (x.dataset.best) x.classList.add('best');
+          const tags = [x.dataset.best ? 'Best call' : '', x.dataset.real ? 'What we did' : ''].filter(Boolean);
+          if (tags.length) x.lastElementChild.insertAdjacentHTML('beforeend', `<span class="mt-1 block text-xs font-medium" style="color:${x.dataset.best ? '#0A7A55' : '#B4532A'}">${tags.join(' · ')}</span>`);
+        });
+        res.innerHTML = `<div class="mt-6 border-l-2 pl-5" style="border-color:${c[1]}">
+          <p class="tag" style="color:${c[1]}">${c[0]}</p>
+          <p class="mt-2 leading-relaxed text-[#474C57]">${c[2]}</p>
+          <p class="mt-4 font-serif text-xl leading-snug">Next: the main data server goes down. Then it gets worse.</p>
+          <a href="writing/oncall.html?from=1&score=${k === 1 ? 1 : 0}" class="mt-5 inline-block rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">Make the next 5 calls →</a>
+          <a href="writing/ransomware-recovery-postmortem.html" class="ml-3 text-sm text-accent hover:underline">or read the postmortem</a>
+        </div>`;
+        res.classList.remove('hidden');
+      }));
+    })();
 
     // Copy email
     const toast = document.getElementById('toast');
