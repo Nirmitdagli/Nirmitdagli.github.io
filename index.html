@@ -45,6 +45,11 @@
     .tq-opt.picked { opacity: 1; border-color: #14161A; }
     .tq-key { display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 999px; border: 1px solid #DDD9CE; font-size: .8rem; color: #5B6170; }
     .tq-opt.best .tq-key { background: #0A7A55; border-color: #0A7A55; color: #fff; }
+    .rc-u[aria-checked="true"] { background: #14161A; color: #fff; }
+    .rc-u[aria-checked="false"] { color: #5B6170; }
+    .rc-text .cur { display: inline-block; width: .5em; height: 1em; vertical-align: -.12em; background: currentColor; opacity: .5; animation: blink 1s steps(1) infinite; }
+    .rc-text .wait { color: #9A978E; font-style: italic; }
+    @keyframes blink { 50% { opacity: 0; } }
     .jy { position: relative; }
     .jy::before { content: ""; position: absolute; top: .55rem; left: calc(-1.4rem - 5px); width: 9px; height: 9px; border-radius: 999px; background: #14161A; }
     @media (min-width: 1024px) {
@@ -128,7 +133,7 @@
             <a href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
             <button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline">Copy email</button>
           </div>
-          <a href="#oncall" class="no-print group mt-6 inline-flex items-center gap-2.5 text-sm"><span class="inline-block h-2 w-2 animate-pulse rounded-full bg-warm"></span><span class="font-medium group-hover:text-accent">You're on call. It's 07:00.</span><span class="text-muted">Make the first call ↓</span></a>
+          <a href="#race" class="no-print group mt-6 inline-flex items-center gap-2.5 text-sm"><span class="inline-block h-2 w-2 animate-pulse rounded-full bg-metric"></span><span class="font-medium group-hover:text-accent">Race two LLM engines on a real GPU</span><span class="text-muted">↓</span></a>
           <p class="mt-8 max-w-xl border-t border-line pt-4 text-sm text-muted"><span class="text-ink">Right now:</span> building the AI gateway and SRE agents at Sidecoach, and the next llm-serving-bench round with open-loop load and 8K context.</p>
         </div>
         <figure class="fade">
@@ -151,24 +156,44 @@
       </div>
     </section>
 
-    <!-- ON-CALL TEASER -->
-    <section id="oncall" class="no-print mx-auto mt-6 max-w-5xl px-5"><div class="border-y border-line">
-      <div class="grid gap-8 py-14 md:grid-cols-[1fr_1.2fr] md:gap-12">
-        <div>
-          <p class="flex items-center gap-2 text-sm font-medium text-warm"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-warm"></span>Your turn · built from a real incident</p>
-          <h2 class="mt-4 font-serif text-[2.6rem] leading-[1.02] sm:text-[3.4rem]">You're on call.<br />It's <em class="text-accent">07:00</em>.</h2>
-          <p class="mt-5 max-w-md leading-relaxed text-muted">Your phone rings. Someone says “something is down.” No system name, no error, no screenshot. In 2022, this call was the start of a ransomware attack on 1,500+ servers.</p>
-        </div>
-        <div>
-          <p class="font-serif text-3xl">What do you do?</p>
-          <div class="mt-5 space-y-3" id="tq" role="group" aria-label="What do you do?">
-            <button class="tq-opt" data-k="0" data-real="1"><span class="tq-key">1</span><span>Wait for a clearer report before escalating.</span></button>
-            <button class="tq-opt" data-k="1" data-best="1"><span class="tq-key">2</span><span>Treat it as a possible incident and start checking now.</span></button>
-            <button class="tq-opt" data-k="2"><span class="tq-key">3</span><span>Ask them to file a ticket.</span></button>
+    <!-- GPU RACE -->
+    <section id="race" class="no-print mx-auto mt-4 max-w-5xl px-5">
+      <div class="fade border-y border-line py-12">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p class="flex items-center gap-2 text-sm font-medium text-metric"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-metric"></span>Live replay · real benchmark data</p>
+            <h2 class="mt-3 max-w-2xl font-serif text-[2.4rem] leading-[1.04] sm:text-[3.2rem]">Same GPU, same model. Which engine serves your users faster?</h2>
           </div>
-          <div id="tq-result" class="hidden" aria-live="polite"></div>
+          <div class="flex items-center gap-3">
+            <div class="flex rounded-full border border-line bg-white p-1 text-sm" role="radiogroup" aria-label="Concurrent users">
+              <button class="rc-u rounded-full px-3.5 py-1.5" data-u="1" role="radio" aria-checked="false">1 user</button>
+              <button class="rc-u rounded-full px-3.5 py-1.5" data-u="16" role="radio" aria-checked="false">16</button>
+              <button class="rc-u rounded-full px-3.5 py-1.5" data-u="64" role="radio" aria-checked="true">64</button>
+            </div>
+            <button id="rc-run" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">▶ Run</button>
+          </div>
         </div>
-      </div></div>
+
+        <div class="mt-10 grid gap-10 md:grid-cols-2">
+          <div class="rc-lane" data-e="vllm">
+            <div class="flex items-baseline justify-between gap-3"><p class="font-medium">vLLM <span class="font-normal text-muted">fp16</span></p><p class="text-sm text-muted"><span class="rc-tok font-serif text-3xl text-ink">0</span> tokens served</p></div>
+            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-[#ECE9E1]"><div class="rc-bar h-full w-0 rounded-full bg-accent"></div></div>
+            <div class="rc-text mt-4 h-[9.5rem] overflow-hidden text-[.95rem] leading-relaxed text-[#474C57]" aria-hidden="true"></div>
+            <p class="rc-stat mt-3 text-sm text-muted">&nbsp;</p>
+          </div>
+          <div class="rc-lane" data-e="sglang">
+            <div class="flex items-baseline justify-between gap-3"><p class="font-medium">SGLang <span class="font-normal text-muted">fp16</span></p><p class="text-sm text-muted"><span class="rc-tok font-serif text-3xl text-ink">0</span> tokens served</p></div>
+            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-[#ECE9E1]"><div class="rc-bar h-full w-0 rounded-full bg-warm"></div></div>
+            <div class="rc-text mt-4 h-[9.5rem] overflow-hidden text-[.95rem] leading-relaxed text-[#474C57]" aria-hidden="true"></div>
+            <p class="rc-stat mt-3 text-sm text-muted">&nbsp;</p>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-5">
+          <p id="rc-verdict" class="max-w-2xl font-serif text-2xl leading-snug" aria-live="polite">Press Run to replay the benchmark.</p>
+          <p class="text-xs text-muted"><span id="rc-clock">0.0</span>s real time · <span id="rc-speed">1</span>x playback · Tesla T4, Qwen2.5-1.5B, 512 in / 128 out per user · <a class="link" href="writing/vllm-vs-sglang-t4.html">method</a></p>
+        </div>
+      </div>
     </section>
 
     <!-- OPEN SOURCE -->
@@ -304,7 +329,26 @@
           </ol>
         </div>
 
-        <p class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm md:ml-[210px]"><a class="link" href="writing/oncall.html">Play it: make the calls yourself (2 min)</a><a class="link" href="writing/ransomware-recovery-postmortem.html">Read the postmortem</a></p>
+    <!-- ON-CALL TEASER (in Zycus case) -->
+    <div id="oncall" class="no-print mt-12 border-y border-line md:ml-[210px]">
+      <div class="grid gap-8 py-10 lg:grid-cols-[1fr_1.2fr] lg:gap-10">
+        <div>
+          <p class="flex items-center gap-2 text-sm font-medium text-warm"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-warm"></span>Your turn · built from a real incident</p>
+          <h2 class="mt-4 font-serif text-[2.6rem] leading-[1.02] sm:text-[3rem]">You're on call.<br />It's <em class="text-accent">07:00</em>.</h2>
+          <p class="mt-5 max-w-md leading-relaxed text-muted">Your phone rings. Someone says “something is down.” No system name, no error, no screenshot. In 2022, this call was the start of a ransomware attack on 1,500+ servers.</p>
+        </div>
+        <div>
+          <p class="font-serif text-3xl">What do you do?</p>
+          <div class="mt-5 space-y-3" id="tq" role="group" aria-label="What do you do?">
+            <button class="tq-opt" data-k="0" data-real="1"><span class="tq-key">1</span><span>Wait for a clearer report before escalating.</span></button>
+            <button class="tq-opt" data-k="1" data-best="1"><span class="tq-key">2</span><span>Treat it as a possible incident and start checking now.</span></button>
+            <button class="tq-opt" data-k="2"><span class="tq-key">3</span><span>Ask them to file a ticket.</span></button>
+          </div>
+          <div id="tq-result" class="hidden" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+        <p class="mt-6 text-sm md:ml-[210px]"><a class="link" href="writing/ransomware-recovery-postmortem.html">Read the full postmortem</a></p>
 
         <div class="mt-12 border-t border-line pt-6 md:ml-[210px]">
           <p class="tag">Recognition at Zycus</p>
@@ -476,6 +520,70 @@
       io.unobserve(e.target);
     }), { threshold: 0.15 }) : null;
     document.querySelectorAll('.fade, figure.panel').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+    // GPU race: replays llm-serving-bench results (Tesla T4, Qwen2.5-1.5B, 512 in / 128 out)
+    (function () {
+      const D = { // ttft and tpot in ms (p50), throughput in output tok/s
+        1:  { vllm: { ttft: 132.8,  tpot: 19.96,  tput: 51 },  sglang: { ttft: 255.6,  tpot: 20.07,  tput: 45 } },
+        16: { vllm: { ttft: 998.3,  tpot: 30.13,  tput: 424 }, sglang: { ttft: 2037.3, tpot: 44.94,  tput: 253 } },
+        64: { vllm: { ttft: 1789.5, tpot: 92.08,  tput: 609 }, sglang: { ttft: 7417.1, tpot: 108.54, tput: 384 } },
+      };
+      const VERDICT = {
+        1:  'One user: almost a tie. Both decode at 20 ms per token, but SGLang takes twice as long to start.',
+        16: 'At 16 users vLLM pulls away: 1.7x the throughput, and the first token arrives in 1.0 s instead of 2.0 s.',
+        64: 'At 64 users vLLM finishes in about 13.6 s. SGLang needs about 21.3 s, and its users wait 7.4 s for the first word.',
+      };
+      const words = 'Kubernetes schedules GPU workloads by treating each GPU as an extended resource. The NVIDIA device plugin advertises how many GPUs a node has, and the scheduler only places a pod where its request fits. For inference, the harder problem is not placement but batching: a serving engine keeps many requests in flight on one GPU and interleaves their decode steps, so total throughput rises while each user sees a slightly slower stream. That trade is the core of capacity planning. Measure time to first token, time per output token and tokens per second together, on your own hardware, before you choose an engine or a quantization format.'.split(' ');
+      const TOKENS = 128;
+      const lanes = [...document.querySelectorAll('.rc-lane')];
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let users = 64, raf = 0, started = false;
+      const $ = id => document.getElementById(id);
+      function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+      function setUsers(u) { users = u; document.querySelectorAll('.rc-u').forEach(b => b.setAttribute('aria-checked', String(+b.dataset.u === u))); }
+      function frame(state, tReal) {
+        lanes.forEach(l => {
+          const d = D[users][l.dataset.e];
+          const total = users * TOKENS, doneAt = d.ttft / 1000 + TOKENS * d.tpot / 1000;
+          const n = tReal * 1000 < d.ttft ? 0 : Math.min(TOKENS, Math.floor((tReal * 1000 - d.ttft) / d.tpot) + 1);
+          const served = users * n;
+          l.querySelector('.rc-tok').textContent = fmt(served);
+          l.querySelector('.rc-bar').style.width = (100 * served / total).toFixed(1) + '%';
+          const txt = l.querySelector('.rc-text');
+          if (n === 0) txt.innerHTML = '<span class="wait">Waiting for the first token… ' + (tReal).toFixed(1) + ' s</span>';
+          else txt.innerHTML = words.slice(0, Math.max(1, Math.round(n * words.length / TOKENS))).join(' ') + (n < TOKENS ? ' <span class="cur"></span>' : '');
+          txt.scrollTop = txt.scrollHeight;
+          const stat = l.querySelector('.rc-stat');
+          if (served >= total) stat.innerHTML = '<span class="font-medium text-ink">Done in ' + doneAt.toFixed(1) + ' s</span> · first token ' + (d.ttft / 1000).toFixed(1) + ' s · ' + d.tput + ' tok/s';
+          else stat.innerHTML = (users > 1 ? 'Showing user 1 of ' + users + ' · ' : '') + (n ? Math.round(1000 / d.tpot) + ' tokens/s for this user' : '&nbsp;');
+        });
+        $('rc-clock').textContent = tReal.toFixed(1);
+      }
+      function run() {
+        cancelAnimationFrame(raf); started = true;
+        const ends = lanes.map(l => { const d = D[users][l.dataset.e]; return d.ttft / 1000 + TOKENS * d.tpot / 1000 + 0.001; });
+        const realEnd = Math.max(...ends);
+        const speed = Math.max(1, realEnd / 6);
+        $('rc-speed').textContent = speed < 1.05 ? '1' : speed.toFixed(1);
+        $('rc-verdict').textContent = 'Running ' + users + (users > 1 ? ' concurrent users' : ' user') + ' on each engine…';
+        if (reduce) { frame(null, realEnd); $('rc-verdict').textContent = VERDICT[users]; return; }
+        const t0 = performance.now();
+        const tick = now => {
+          const tReal = Math.min(realEnd, (now - t0) / 1000 * speed);
+          frame(null, tReal);
+          if (tReal < realEnd) raf = requestAnimationFrame(tick); else $('rc-verdict').textContent = VERDICT[users];
+        };
+        raf = requestAnimationFrame(tick);
+      }
+      document.querySelectorAll('.rc-u').forEach(b => b.addEventListener('click', () => { setUsers(+b.dataset.u); run(); }));
+      $('rc-run').addEventListener('click', run);
+      setUsers(64); frame(null, 0);
+      const sec = $('race');
+      if ('IntersectionObserver' in window) {
+        const o = new IntersectionObserver(es => { if (es[0].isIntersecting && !started) { run(); o.disconnect(); } }, { threshold: 0.45 });
+        o.observe(sec);
+      }
+    })();
 
     // On-call teaser
     (function () {
