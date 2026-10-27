@@ -7,51 +7,60 @@
   <meta name="description" content="Benchmarking vLLM and SGLang on a Tesla T4 in fp16 and AWQ int4: why vLLM served 609 vs 384 tok/s, and why 4-bit cut decode 2.3x for one user but only 5% at 64 users." />
   <meta property="og:title" content="vLLM vs SGLang on a T4: what 2,048 requests showed" />
   <meta property="og:type" content="article" />
-  <meta name="theme-color" content="#FFFFFF" />
+  <meta name="theme-color" content="#FAFAF7" />
+  <meta property="og:image" content="https://nirmitdagli.github.io/og.png" />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     tailwind.config = { theme: { extend: {
-      colors: { ink: '#0F172A', panel: '#F8FAFC', line: '#E2E8F0', accent: '#2563EB', metric: '#059669' },
-      fontFamily: { sans: ['ui-sans-serif','system-ui','-apple-system','Segoe UI','Roboto','Helvetica Neue','Arial','sans-serif'], mono: ['ui-monospace','SFMono-Regular','Menlo','Consolas','monospace'] } } } };
+      colors: { paper: '#FAFAF7', ink: '#14161A', muted: '#5B6170', line: '#E6E4DD', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A' },
+      fontFamily: { serif: ['"Instrument Serif"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'] } } } };
   </script>
   <style>
-    html, body { background: #FFFFFF; color: #0F172A; -webkit-font-smoothing: antialiased; }
-    .post p { margin: 1.1rem 0; line-height: 1.8; color: #334155; }
-    .post h2 { margin: 2.6rem 0 0.6rem; font-size: 1.45rem; font-weight: 700; color: #0F172A; letter-spacing: -0.01em; }
-    .post ul { margin: 1rem 0; padding-left: 1.2rem; list-style: disc; color: #334155; }
-    .post li { margin: 0.45rem 0; line-height: 1.7; }
-    .post strong { color: #0F172A; }
-    .post code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 6px; padding: 0.1em 0.4em; color: #1D4ED8; }
-    .tbl { width: 100%; border-collapse: collapse; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
-    .tbl th { text-align: right; font-weight: 600; color: #64748B; padding: 0.55rem 0.7rem; border-bottom: 1px solid #E2E8F0; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .tbl td { text-align: right; padding: 0.55rem 0.7rem; border-bottom: 1px solid #E2E8F0; color: #0F172A; }
+    html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #DCE5FF; }
+    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; }
+    .post p { margin: 1.1rem 0; font-size: 1.08rem; line-height: 1.8; color: #474C57; }
+    .post h2 { margin: 3.2rem 0 .4rem; font-family: "Instrument Serif", Georgia, serif; font-size: 2.1rem; line-height: 1.15; color: #14161A; }
+    .post ul { margin: 1rem 0; padding-left: 1.2rem; list-style: disc; color: #474C57; }
+    .post li { margin: .5rem 0; line-height: 1.7; font-size: 1.04rem; }
+    .post strong { color: #14161A; font-weight: 600; }
+    .post a { color: #2453D6; text-decoration: underline; text-underline-offset: 3px; }
+    .post a:hover { color: #14161A; }
+    .post code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .86em; background: #F1EFE8; border-radius: 5px; padding: .1em .35em; color: #14161A; }
+    .tbl { width: 100%; border-collapse: collapse; font-size: .92rem; font-variant-numeric: tabular-nums; }
+    .tbl th { text-align: right; font-weight: 500; color: #7A7F8A; padding: .6rem .7rem; border-bottom: 1px solid #14161A; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; }
+    .tbl td { text-align: right; padding: .6rem .7rem; border-bottom: 1px solid #E6E4DD; color: #14161A; }
     .tbl th:first-child, .tbl td:first-child, .tbl th:nth-child(2), .tbl td:nth-child(2) { text-align: left; }
-    .tbl tr.win td { color: #047857; font-weight: 600; }
-    .callout { border: 1px solid #A7F3D0; background: #ECFDF5; border-radius: 14px; padding: 1rem 1.2rem; }
+    .tbl tr.win td { color: #0A7A55; font-weight: 600; }
+    .callout { border-left: 2px solid #0A7A55; padding-left: 1.1rem; }
+    @media print { header { display: none; } body { background: #fff; } }
   </style>
 </head>
 <body class="font-sans">
   <header class="border-b border-line">
-    <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4 sm:px-6">
-      <a href="../index.html" class="flex items-center gap-2 font-semibold"><span class="grid h-8 w-8 place-items-center rounded-lg bg-ink text-sm font-bold text-white">nd</span><span class="text-ink">Nirmit Dagli</span></a>
-      <a href="../index.html" class="text-sm text-slate-500 hover:text-ink">← Portfolio</a>
+    <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
+      <a href="../index.html" class="font-serif text-xl leading-none">Nirmit Dagli</a>
+      <a href="../index.html#projects" class="text-sm text-muted hover:text-ink">← Portfolio</a>
     </div>
   </header>
 
-  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-    <p class="font-mono text-xs uppercase tracking-[0.14em] text-blue-600">LLM serving · Benchmark · Oct 2026</p>
-    <h1 class="mt-4 text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">vLLM vs SGLang on a T4: what 2,048 requests showed</h1>
-    <p class="mt-4 text-lg text-slate-500">vLLM served 609 tokens per second to SGLang's 384 at 64 users. And 4-bit quantization made single-user decode 2.3x faster, but barely helped at 64 users. Here's why both happened.</p>
+  <main class="mx-auto max-w-3xl px-5 py-14 sm:py-20">
+    <p class="tag">LLM serving · Benchmark · Oct 2026</p>
+    <h1 class="mt-4 font-serif text-[2.6rem] leading-[1.05] sm:text-[3.6rem]">vLLM vs SGLang on a T4: what 2,048 requests showed</h1>
+    <p class="mt-5 text-lg leading-relaxed text-muted">vLLM served 609 tokens per second to SGLang's 384 at 64 users. And 4-bit quantization made single-user decode 2.3x faster, but barely helped at 64 users. Here's why both happened.</p>
 
-    <div class="mt-8 grid grid-cols-3 gap-3">
-      <div class="rounded-xl border border-line bg-white p-4 shadow-sm"><p class="font-mono text-2xl font-bold text-metric">609</p><p class="text-xs text-slate-500">vLLM tok/s at 64 users (SGLang: 384)</p></div>
-      <div class="rounded-xl border border-line bg-white p-4 shadow-sm"><p class="font-mono text-2xl font-bold text-metric">2.3x</p><p class="text-xs text-slate-500">faster decode with AWQ int4, 1 user</p></div>
-      <div class="rounded-xl border border-line bg-white p-4 shadow-sm"><p class="font-mono text-2xl font-bold text-metric">+5%</p><p class="text-xs text-slate-500">throughput gain from AWQ at 64 users</p></div>
+    <div class="mt-10 grid grid-cols-3 gap-6 border-y border-line py-6">
+      <div><p class="font-serif text-4xl leading-none sm:text-5xl">609</p><p class="mt-2 text-xs text-muted">vLLM tok/s at 64 users (SGLang: 384)</p></div>
+      <div><p class="font-serif text-4xl leading-none sm:text-5xl">2.3x</p><p class="mt-2 text-xs text-muted">faster decode with AWQ int4, 1 user</p></div>
+      <div><p class="font-serif text-4xl leading-none sm:text-5xl">+5%</p><p class="mt-2 text-xs text-muted">throughput from AWQ at 64 users</p></div>
     </div>
 
     <article class="post mt-10">
-      <p>Every serving-engine comparison I found online used a different model, a different GPU, or a different memory setting for each engine, so the numbers couldn't be compared. I wanted one harness I could point at any OpenAI-compatible server and trust. So I built <a class="text-blue-700 underline underline-offset-4 hover:text-ink" href="https://github.com/Nirmitdagli/llm-serving-bench">llm-serving-bench</a> and ran it on the GPU anyone can get for free: a Colab Tesla T4.</p>
+      <p>Every serving-engine comparison I found online used a different model, a different GPU, or a different memory setting for each engine, so the numbers couldn't be compared. I wanted one harness I could point at any OpenAI-compatible server and trust. So I built <a href="https://github.com/Nirmitdagli/llm-serving-bench">llm-serving-bench</a> and ran it on the GPU anyone can get for free: a Colab Tesla T4.</p>
 
       <h2>The setup</h2>
       <ul>
@@ -63,7 +72,7 @@
       <p>Three choices keep it fair. Every prompt is random and unique, so neither engine's prefix cache can make it look faster. Output length is fixed, so both engines do exactly the same work. And 8 warm-up requests run before timing, so CUDA graph capture isn't counted. I measured time to first token (TTFT), time per output token (TPOT), total output tokens per second, and peak GPU memory.</p>
 
       <h2>Result 1: vLLM led at every load level</h2>
-      <div class="overflow-x-auto rounded-xl border border-line">
+      <div class="overflow-x-auto">
         <table class="tbl">
           <thead><tr><th>Users</th><th>Engine</th><th>Output tok/s</th><th>TTFT p50 (ms)</th><th>TPOT p50 (ms)</th></tr></thead>
           <tbody>
@@ -83,7 +92,7 @@
       <p>Going from 1 to 64 concurrent users raised vLLM's total throughput 12x, from 51 to 609 tokens per second. The cost is per-user speed: decode went from 20 to 92 ms per token. That trade is the core of serving capacity planning. One GPU can serve many more users at once if each of them accepts a slower stream.</p>
 
       <h2>Result 3: 4-bit helps one user a lot and many users a little</h2>
-      <div class="overflow-x-auto rounded-xl border border-line">
+      <div class="overflow-x-auto">
         <table class="tbl">
           <thead><tr><th>Users</th><th>Engine</th><th>fp16 tok/s</th><th>AWQ tok/s</th><th>fp16 TPOT</th><th>AWQ TPOT</th></tr></thead>
           <tbody>
@@ -97,7 +106,7 @@
       <p>Decode is memory-bandwidth bound. To produce each token, the GPU has to read every weight once. AWQ shrinks the weights from 3.03 GB to 1.11 GB, so with one user each step moves far fewer bytes, and the step gets faster almost in proportion.</p>
       <p>With 64 users, the weights are still read once per step, but that one read is shared across the whole batch. What grows with the batch is attention and KV-cache traffic, and 4-bit weights don't shrink that. So the weight savings become a small slice of a much bigger step. Smaller weights do leave more room for KV cache: SGLang allocated 417K tokens of cache with AWQ against 346K with fp16.</p>
 
-      <div class="callout my-6"><p class="!m-0 text-sm text-slate-700"><strong class="text-metric">The practical rule:</strong> quantization is a latency tool for low-concurrency, interactive traffic. If you're throughput-bound at high concurrency, look at batching, KV-cache size and attention cost first.</p></div>
+      <div class="callout my-8"><p class="tag !m-0 !text-metric !text-[.72rem]">The practical rule</p><p class="!mt-2 font-serif !text-[1.5rem] !leading-snug !text-ink">Quantization is a latency tool for low-concurrency, interactive traffic. If you're throughput-bound at high concurrency, look at batching, KV-cache size and attention cost first.</p></div>
 
       <h2>Result 4: the kernel matters as much as the format</h2>
       <p>SGLang's AWQ run was slower than its own fp16 run on the T4: 35.7 against 20.1 ms per token for one user, while vLLM's AWQ run was 2.3x faster. Same checkpoint, same GPU. A 4-bit format only pays off if the engine has fast int4 kernels for that GPU architecture, and the T4 is an older one. "Use 4-bit" isn't a rule. You have to measure it on your hardware.</p>
@@ -109,14 +118,10 @@
         <li>One input and output shape (512 in, 128 out). Long-context prefill stresses engines differently.</li>
         <li>TensorRT-LLM is supported in the harness but not in these results: it runs from NVIDIA's container, which Colab can't start.</li>
       </ul>
-      <p>Next, I want to add open-loop load, an 8K-context sweep, speculative decoding, and a run on a newer GPU. The harness and every raw result are in the <a class="text-blue-700 underline underline-offset-4 hover:text-ink" href="https://github.com/Nirmitdagli/llm-serving-bench">repo</a>, and there's a Colab notebook that reproduces the vLLM and SGLang runs in one click.</p>
+      <p>Next, I want to add open-loop load, an 8K-context sweep, speculative decoding, and a run on a newer GPU. The harness and every raw result are in the <a href="https://github.com/Nirmitdagli/llm-serving-bench">repo</a>, and there's a Colab notebook that reproduces the vLLM and SGLang runs in one click.</p>
     </article>
 
-    <div class="mt-14 rounded-2xl border border-line bg-panel p-6">
-      <p class="text-sm text-slate-600">I'm Nirmit, an AI infrastructure engineer. I run GPU clusters and LLM serving, and build the platforms around them. If your team works on this, <a class="text-blue-700 underline underline-offset-4 hover:text-ink" href="mailto:daglinirmit@gmail.com">I'd like to hear from you</a>.</p>
-    </div>
+    <p class="mt-14 border-t border-line pt-6 text-sm text-muted">I'm Nirmit, an AI infrastructure engineer. I run GPU clusters and LLM serving, and build the platforms around them. If your team works on this, <a class="text-accent underline underline-offset-4 hover:text-ink" href="mailto:daglinirmit@gmail.com">I'd like to hear from you</a>.</p>
   </main>
-
-  <footer class="border-t border-line py-8 text-center text-xs text-slate-500">© 2026 Nirmit Dagli</footer>
 </body>
 </html>

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're on call: 07:00 | Nirmit Dagli</title>
+  <meta name="description" content="A two-minute game built from a real 2022 ransomware incident. Make the calls, then see what actually happened." />
+  <meta property="og:title" content="You're on call. It's 07:00." />
+  <meta property="og:description" content="A two-minute game built from a real ransomware incident. Make the calls, then see what actually happened." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nirmitdagli.github.io/og.png" />
+  <meta name="theme-color" content="#FAFAF7" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { paper: '#FAFAF7', ink: '#14161A', muted: '#5B6170', line: '#E6E4DD', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A' },
+      fontFamily: { serif: ['"Instrument Serif"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'] } } } };
+  </script>
+  <style>
+    html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #DCE5FF; }
+    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; }
+    .opt { display: grid; grid-template-columns: 2rem 1fr; gap: .75rem; align-items: start; width: 100%; text-align: left; padding: 1rem 1.1rem; border: 1px solid #DDD9CE; border-radius: 12px; background: #fff; transition: border-color .15s, transform .15s, background .15s; }
+    .opt:hover:not([disabled]) { border-color: #2453D6; transform: translateY(-1px); }
+    .opt:focus-visible { outline: 2px solid #2453D6; outline-offset: 2px; }
+    .opt .key { display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 999px; border: 1px solid #DDD9CE; font-size: .8rem; color: #5B6170; }
+    .opt[disabled] { cursor: default; opacity: .45; }
+    .opt.picked { opacity: 1; border-color: #14161A; background: #F4F2EC; }
+    .opt.real .key { background: #0A7A55; border-color: #0A7A55; color: #fff; }
+    .pip { width: 28px; height: 4px; border-radius: 99px; background: #E0DCD1; transition: background .3s; }
+    .pip.done { background: #14161A; } .pip.now { background: #2453D6; }
+    .appear { animation: appear .35s ease both; }
+    @keyframes appear { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .ring { animation: ring 1.2s ease-in-out 2; transform-origin: 50% 10%; }
+    @keyframes ring { 0%,100% { transform: rotate(0) } 20% { transform: rotate(-12deg) } 40% { transform: rotate(10deg) } 60% { transform: rotate(-6deg) } 80% { transform: rotate(4deg) } }
+    @media (prefers-reduced-motion: reduce) { .appear, .ring { animation: none; } .opt { transition: none; } }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- dynamic classes: border-metric border-warm !text-metric !text-warm -->
+  <header class="border-b border-line">
+    <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
+      <a href="../index.html" class="font-serif text-xl leading-none">Nirmit Dagli</a>
+      <a href="../index.html#work" class="text-sm text-muted hover:text-ink">← Portfolio</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-5 py-10 sm:py-14">
+    <!-- intro -->
+    <section id="intro">
+      <p class="tag">A 2-minute game · built from a real incident</p>
+      <h1 class="mt-4 font-serif text-[2.8rem] leading-[1.02] sm:text-[4rem]">You're on call.<br />It's <em class="text-accent">07:00</em>.</h1>
+      <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">An enterprise SaaS company, 7 environments, 1,500+ servers. Your phone rings. Six decisions follow. After each one you'll see what we actually did in 2022, and what it cost.</p>
+      <button id="start" class="mt-8 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white hover:bg-[#1B44B8]">Answer the phone</button>
+      <p class="mt-4 text-xs text-muted">Keyboard: press 1, 2 or 3 to choose, Enter to continue.</p>
+    </section>
+
+    <!-- game -->
+    <section id="game" class="hidden" aria-live="polite">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-1.5" id="pips" aria-hidden="true"></div>
+        <p class="text-sm text-muted"><span id="score">0</span> of 6 good calls</p>
+      </div>
+      <div class="mt-8 flex items-baseline gap-4">
+        <p id="clock" class="font-serif text-6xl leading-none sm:text-7xl">07:00</p>
+        <p id="phase" class="tag"></p>
+      </div>
+      <div id="scene" class="mt-6"></div>
+    </section>
+
+    <!-- end -->
+    <section id="end" class="hidden"></section>
+  </main>
+
+  <script>
+    const steps = [
+      {
+        clock: '07:00', phase: 'Day 1',
+        bell: true,
+        text: 'Your phone rings. Someone says “something is down.” No system name, no error, no screenshot.',
+        q: 'What do you do?',
+        options: [
+          { t: 'Wait for a clearer report before escalating.', real: true, r: 'This is what happened. The report got the priority vague reports usually get. It cost us about three hours.' },
+          { t: 'Treat it as a possible incident and start checking now.', best: true, r: 'The better call, in hindsight. The person calling wasn\'t the problem; we had no path that turned "something is down" into a severity call.' },
+          { t: 'Ask them to file a ticket.', r: 'A ticket queue is the slowest path there is. This one would have been read after the damage was done.' },
+        ],
+        lesson: 'The first signal is usually vague. A short checklist that turns a vague report into a severity call within minutes is worth more than any dashboard.'
+      },
+      {
+        clock: 'Morning', phase: 'Day 1',
+        text: 'The main data server goes down. Services that depend on it are slow, then failing. It looks like the slowness you have seen a dozen times.',
+        q: 'Your read?',
+        options: [
+          { t: 'Ordinary slowness. Keep an eye on it.', real: true, r: 'Honestly, this was my first read too. It held until about 10:00.' },
+          { t: 'Assume the worst. Look for signs of encryption or unusual access.', best: true, r: 'Right call. "It\'s probably nothing" is how incidents get a two-hour head start.' },
+          { t: 'Fail over to a replica.', r: 'Reasonable for a hardware fault. For ransomware, failing over can hand it a fresh target.' },
+        ],
+        lesson: 'When something familiar breaks in an unfamiliar way, rule out the scary explanation first.'
+      },
+      {
+        clock: '10:00', phase: 'Day 1',
+        text: 'Confirmed: it is ransomware, and it is spreading. The network is mostly flat. Production is serving global enterprise customers right now.',
+        q: 'You have minutes. What do you shut down?',
+        options: [
+          { t: 'Only the infected data server.', r: 'On a flat network, it has already moved. Isolating one box buys nothing.' },
+          { t: 'Everything. Take the whole fleet offline.', real: true, r: 'I went to the office, pulled the server and shut everything down. Every service went offline on purpose. It was the most expensive decision of the day and the one that made recovery possible.' },
+          { t: 'Keep production up and contain it piece by piece.', r: 'It feels responsible to customers. On a flat network it means watching the blast radius grow while you work.' },
+        ],
+        lesson: 'A flat network has one stop button. Segmentation is what gives you a smaller one.'
+      },
+      {
+        clock: 'Same day', phase: 'Day 1',
+        text: 'Everything is dark. You need to reach the data and VMware to start recovery, but you can\'t trust any machine that was on the network.',
+        q: 'How do you get in?',
+        options: [
+          { t: 'Log in from your usual workstation.', r: 'That workstation was on the same network. If it is infected, so is everything you touch from it.' },
+          { t: 'Build a single standalone machine, cut off from the network.', real: true, r: 'A clean, isolated machine to reach data and VMware without touching anything that might still be infected.' },
+          { t: 'Wait for the forensic team before touching anything.', r: 'You need forensics, and they were part of it. But waiting idle while every service is down costs the business hours you don\'t get back.' },
+        ],
+        lesson: 'Build the clean room before you need it: offline, ready, with a runbook next to it.'
+      },
+      {
+        clock: 'Days 1–7', phase: 'Recovery',
+        text: 'You have a clean way in, backups, and a forensic team working out how it got in. 7 environments to bring back.',
+        q: 'How do you restore?',
+        options: [
+          { t: 'Clean the old servers and turn everything back on.', r: 'One missed infection and you are back to 10:00 on day one, with less goodwill.' },
+          { t: 'Restore everything from backup in one go.', r: 'Fast, but if anything in the backups or the network is still compromised, it all comes back together.' },
+          { t: 'Break the infrastructure into pieces. Isolate, check and restore one piece at a time, on new servers.', real: true, r: 'With Zscaler rolled out immediately and the forensic findings closing the way in. By day 7, all 7 environments were back.' },
+        ],
+        lesson: 'You can\'t turn a compromised network back on and hope.'
+      },
+      {
+        clock: 'Months 1–4', phase: 'After',
+        text: 'All 7 environments are back online. The incident report is due.',
+        q: 'What now?',
+        options: [
+          { t: 'Write the report and get back to the roadmap.', r: 'This is how the same attack works twice.' },
+          { t: 'Fix why it could spread, from the cloud network down to the OS.', real: true, r: 'Over 4 months: Transit Gateway and segmented VPCs, 20 Palo Alto firewalls, CrowdStrike, Zscaler, CyberArk for privileged access, Veeam for DR, and OS upgrades across the fleet.' },
+          { t: 'Buy a security tool and call it done.', r: 'Tools were part of it. Without segmentation and a new network design, they would have been guarding a flat room.' },
+        ],
+        lesson: 'Restoring service is the urgent part. Making sure it can\'t spread the same way is the important part.'
+      },
+    ];
+
+    steps.forEach(st => { if (!st.options.some(o => o.best)) st.options.forEach(o => { if (o.real) o.best = true; }); });
+    const $ = id => document.getElementById(id);
+    let i = 0, score = 0, answered = false;
+    const pips = $('pips');
+    steps.forEach(() => { const p = document.createElement('span'); p.className = 'pip'; pips.appendChild(p); });
+
+    function render() {
+      const s = steps[i]; answered = false;
+      [...pips.children].forEach((p, k) => p.className = 'pip' + (k < i ? ' done' : k === i ? ' now' : ''));
+      $('clock').textContent = s.clock; $('phase').textContent = s.phase;
+      $('scene').innerHTML = `
+        <div class="appear">
+          ${s.bell ? '<p class="mb-4 flex items-center gap-2 text-sm font-medium text-warm"><span class="ring inline-block h-2.5 w-2.5 rounded-full bg-warm" aria-hidden="true"></span>Incoming call</p>' : ''}
+          <p class="text-[1.12rem] leading-relaxed">${s.text}</p>
+          <p class="mt-6 font-serif text-3xl">${s.q}</p>
+          <div class="mt-5 space-y-3" role="group" aria-label="${s.q}">
+            ${s.options.map((o, k) => `<button class="opt" data-k="${k}"><span class="key">${k + 1}</span><span>${o.t}</span></button>`).join('')}
+          </div>
+          <div id="result"></div>
+        </div>`;
+      $('scene').querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => pick(+b.dataset.k)));
+      $('scene').querySelector('.opt').focus({ preventScroll: true });
+    }
+
+    function pick(k) {
+      if (answered) return; answered = true;
+      const s = steps[i], o = s.options[k];
+      if (o.best) score++;
+      $('score').textContent = score;
+      $('scene').querySelectorAll('.opt').forEach((b, j) => {
+        const x = s.options[j]; b.disabled = true;
+        if (j === k) b.classList.add('picked');
+        if (x.best) b.classList.add('real');
+        const tags = [x.best ? 'Best call' : '', x.real ? 'What we did' : ''].filter(Boolean);
+        if (tags.length) b.lastElementChild.insertAdjacentHTML('beforeend', `<span class="mt-1 block text-xs font-medium ${x.best ? 'text-metric' : 'text-warm'}">${tags.join(' · ')}</span>`);
+      });
+      const real = s.options.find(x => x.real);
+      const label = o.best && o.real ? ['Same call we made', 'metric'] : o.best ? ['Better than what we did', 'metric'] : o.real ? ['Same call we made, and it cost us', 'warm'] : ['Not the best call', 'warm'];
+      $('result').innerHTML = `
+        <div class="appear mt-8 border-l-2 border-${label[1]} pl-5">
+          <p class="tag !text-${label[1]}">${label[0]}</p>
+          <p class="mt-2 leading-relaxed text-[#474C57]">${o.r}</p>
+          ${o.real ? '' : `<p class="mt-4 leading-relaxed text-[#474C57]"><span class="font-medium text-ink">What we did:</span> ${real.t} ${real.r}</p>`}
+          <p class="mt-5 font-serif text-xl leading-snug">${s.lesson}</p>
+          <button id="next" class="mt-6 rounded-full bg-ink/90 px-5 py-2.5 text-sm font-medium text-white hover:bg-accent">${i < steps.length - 1 ? 'Next' : 'See how you did'} →</button>
+        </div>`;
+      $('next').addEventListener('click', next);
+      $('next').focus({ preventScroll: true });
+      $('result').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+    }
+
+    function next() {
+      i++;
+      if (i < steps.length) { render(); window.scrollTo({ top: $('game').offsetTop - 20, behavior: 'smooth' }); return; }
+      $('game').classList.add('hidden');
+      const verdict = score === 6 ? 'Six for six. You beat us on the first two calls, which would have saved about three hours. We should talk.'
+        : score >= 4 ? 'Solid on-call instincts. The calls you missed are the ones that let an incident grow quietly.'
+        : 'Ransomware is unforgiving. The good news: every call here can be learned, and that is what the postmortem is for.';
+      $('end').innerHTML = `
+        <div class="appear">
+          <p class="tag">Incident closed</p>
+          <p class="mt-4 font-serif text-[4rem] leading-none sm:text-[5.5rem]">${score} <span class="text-[#B8B3A6]">of</span> 6</p>
+          <p class="mt-3 text-muted">good calls under pressure</p>
+          <p class="mt-8 max-w-xl text-[1.12rem] leading-relaxed">${verdict}</p>
+          <p class="mt-4 max-w-xl leading-relaxed text-muted">We got 4 of 6 ourselves: the first two calls cost us about three hours. The real outcome: 1,500+ servers back across 7 environments in 7 days, then 4 months of hardening.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="ransomware-recovery-postmortem.html" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">Read the full postmortem</a>
+            <a href="../Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
+            <a href="mailto:daglinirmit@gmail.com" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Email me</a>
+            <button id="again" class="rounded-full px-4 py-2.5 text-sm font-medium text-accent hover:underline">Play again</button>
+          </div>
+        </div>`;
+      $('end').classList.remove('hidden');
+      $('again').addEventListener('click', () => { i = 0; score = 0; $('score').textContent = 0; $('end').classList.add('hidden'); $('game').classList.remove('hidden'); render(); });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    $('start').addEventListener('click', () => { $('intro').classList.add('hidden'); $('game').classList.remove('hidden'); render(); });
+    document.addEventListener('keydown', e => {
+      if ($('game').classList.contains('hidden')) return;
+      if (!answered && ['1', '2', '3'].includes(e.key)) pick(+e.key - 1);
+    });
+  </script>
+</body>
+</html>
