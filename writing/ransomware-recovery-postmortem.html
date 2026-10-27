@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The morning ransomware took 1,500 servers down | Nirmit Dagli</title>
+  <meta name="description" content="A blameless postmortem of a 2022 ransomware incident at an enterprise SaaS company: the first three hours, the decision to shut everything down, rebuilding in pieces over 7 days, and 4 months of hardening." />
+  <meta property="og:title" content="The morning ransomware took 1,500 servers down" />
+  <meta property="og:description" content="A blameless postmortem: the first three hours, shutting everything down, rebuilding in 7 days, and what changed." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://nirmitdagli.github.io/og.png" />
+  <meta name="theme-color" content="#FAFAF7" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { paper: '#FAFAF7', ink: '#14161A', muted: '#5B6170', line: '#E6E4DD', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A' },
+      fontFamily: { serif: ['"Instrument Serif"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'] } } } };
+  </script>
+  <style>
+    html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #DCE5FF; }
+    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; }
+    .post p { margin: 1.1rem 0; font-size: 1.08rem; line-height: 1.8; color: #474C57; }
+    .post h2 { margin: 3.2rem 0 .4rem; font-family: "Instrument Serif", Georgia, serif; font-size: 2.1rem; line-height: 1.15; color: #14161A; }
+    .post strong { color: #14161A; font-weight: 600; }
+    .post ul { margin: 1rem 0; padding-left: 1.2rem; list-style: disc; color: #474C57; }
+    .post li { margin: .5rem 0; line-height: 1.7; font-size: 1.04rem; }
+    .tl { position: relative; margin: 1.6rem 0; border-left: 1px solid #E0DCD1; padding-left: 1.6rem; }
+    .tl > li { position: relative; list-style: none; margin: 0 0 1.5rem; }
+    .tl > li::before { content: ""; position: absolute; left: calc(-1.6rem - 5px); top: .55rem; width: 9px; height: 9px; border-radius: 999px; background: var(--dot, #2453D6); }
+    .tl time { display: block; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: #7A7F8A; }
+    .tl p { margin: .25rem 0 0; }
+    .lesson { border-left: 2px solid #E0DCD1; padding-left: 1.1rem; margin: 1.6rem 0; }
+    .lesson .tag { color: #B4532A; font-size: .72rem; line-height: 1.6; }
+    .lesson p { margin: .45rem 0 0; }
+    @media print { header { display: none; } body { background: #fff; } }
+  </style>
+</head>
+<body class="font-sans">
+  <header class="border-b border-line">
+    <div class="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
+      <a href="../index.html" class="font-serif text-xl leading-none">Nirmit Dagli</a>
+      <a href="../index.html#work" class="text-sm text-muted hover:text-ink">← Portfolio</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-5 py-14 sm:py-20">
+    <p class="tag">Incident review · Enterprise SaaS · 2022</p>
+    <h1 class="mt-4 font-serif text-[2.6rem] leading-[1.05] sm:text-[3.6rem]">The morning ransomware took 1,500 servers down</h1>
+    <p class="mt-5 text-lg leading-relaxed text-muted">A blameless postmortem. In 2022, ransomware took 1,500+ servers and 80 to 90 services per environment offline at Zycus, across 7 environments. We had the fleet back in 7 days and spent the next 4 months hardening it. I was one of the first responders.</p>
+
+    <div class="mt-10 grid grid-cols-3 gap-6 border-y border-line py-6">
+      <div><p class="font-serif text-4xl leading-none sm:text-5xl">~3 h</p><p class="mt-2 text-xs text-muted">from the first call to a confirmed attack</p></div>
+      <div><p class="font-serif text-4xl leading-none sm:text-5xl">7 days</p><p class="mt-2 text-xs text-muted">to restore all 7 environments</p></div>
+      <div><p class="font-serif text-4xl leading-none sm:text-5xl">4 mo</p><p class="mt-2 text-xs text-muted">of hardening afterwards</p></div>
+    </div>
+
+    <article class="post mt-6">
+      <p>Details that could help an attacker, like how it got in, are left out on purpose. What's here is the order things happened in, the decisions, and what changed.</p>
+
+      <h2>Day one</h2>
+      <ol class="tl">
+        <li style="--dot:#9A978E"><time>07:00</time><p>I get a call: something is down. The first report is vague, and it gets the priority vague reports usually get. Nobody treats it as an incident yet.</p></li>
+        <li style="--dot:#9A978E"><time>Morning</time><p>The main data server goes down. I trace the outage to it, and at first I read it as ordinary slowness.</p></li>
+        <li style="--dot:#B4532A"><time>About 10:00</time><p>We confirm it: this is ransomware, and it is spreading.</p></li>
+        <li style="--dot:#B4532A"><time>Next</time><p>I go to the office, pull the affected server and <strong>shut everything down</strong> to stop the blast radius. Every service is now offline, on purpose. It is the most expensive decision of the day and the one that made recovery possible.</p></li>
+        <li style="--dot:#2453D6"><time>Same day</time><p>I build a single standalone machine, cut off from the network, so we can reach data and VMware without touching anything that might still be infected.</p></li>
+      </ol>
+
+      <h2>Days 1 to 7: rebuild in pieces</h2>
+      <p>You can't turn a compromised network back on and hope. We disconnected the infrastructure into pieces, isolated and checked each one, and brought back only what was clean.</p>
+      <ul>
+        <li><strong>Isolate, check, restore.</strong> One piece at a time, so a missed infection couldn't reach everything again.</li>
+        <li><strong>Zscaler, immediately.</strong> Rolled out as part of the response, not as a later project.</li>
+        <li><strong>Backups and new servers.</strong> Restored from backup and rebuilt servers rather than cleaning the old ones.</li>
+        <li><strong>Forensics.</strong> I worked with the forensic team to understand how it got in, so the rebuild closed that path.</li>
+      </ul>
+      <p>By day 7, the fleet was back across all 7 environments.</p>
+
+      <h2>The next 4 months: hardening</h2>
+      <p>Restoring service was the urgent part. The bigger job was making sure the next one couldn't spread the same way, from the cloud network down to the OS on every server.</p>
+      <ul>
+        <li><strong>Network:</strong> re-architected around AWS Transit Gateway and segmented VPCs, with 20 Palo Alto firewalls between segments.</li>
+        <li><strong>Endpoints and access:</strong> CrowdStrike on servers and in CI/CD, Zscaler for access, CyberArk for privileged accounts.</li>
+        <li><strong>Recovery:</strong> Veeam for backup and disaster recovery.</li>
+        <li><strong>OS:</strong> fleet upgrades, including CentOS 7.4 to 7.9.</li>
+        <li><strong>Operations:</strong> restructured how the team ran day to day after the incident.</li>
+      </ul>
+
+      <h2>What I took from it</h2>
+      <div class="lesson"><p class="tag">The first signal is usually vague</p><p>About three hours passed between the first call and a confirmed attack. The person who called wasn't the problem. The process was: a vague report had no path to someone who would treat it as a possible incident. Now I want a short checklist that turns "something is down" into a severity call within minutes.</p></div>
+      <div class="lesson"><p class="tag">A flat network has one stop button</p><p>Shutting everything down was right, but it was right because there was nothing smaller to shut down. Segmentation means next time you isolate a segment, not the company.</p></div>
+      <div class="lesson"><p class="tag">Build the clean room before you need it</p><p>The standalone recovery machine was built under pressure on day one. It should exist in advance, offline, with a runbook taped to it.</p></div>
+      <div class="lesson"><p class="tag">Backups count only if the attack can't reach them</p><p>Recovery speed came down to having something clean to restore from. Backups that live on the same network as production are just more targets.</p></div>
+
+      <p class="mt-12 border-t border-line pt-6 text-sm text-muted">This is the security side of the work in <a class="text-accent underline underline-offset-4 hover:text-ink" href="../index.html#work">case study 03</a>. Questions about it are welcome: <a class="text-accent underline underline-offset-4 hover:text-ink" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a>.</p>
+    </article>
+  </main>
+</body>
+</html>
