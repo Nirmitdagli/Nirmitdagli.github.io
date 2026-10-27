@@ -110,7 +110,7 @@
           </div>
         </div>
         <figure class="fade">
-          <img src="portrait.jpg" alt="Nirmit Dagli" width="440" height="440" class="aspect-[4/5] max-h-[420px] w-full rounded-2xl object-cover object-top md:max-h-none" fetchpriority="high" />
+          <img src="portrait.jpg" alt="Nirmit Dagli" width="880" height="1100" class="aspect-[4/5] max-h-[420px] w-full rounded-2xl object-cover object-top md:max-h-none" fetchpriority="high" />
           <figcaption class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted"><span>CKA</span><span>CKAD</span><span>AWS Solutions Architect</span><span>RHCSA</span><span>M.S. CS, Quinnipiac</span></figcaption>
         </figure>
       </div>
@@ -284,7 +284,13 @@
     <!-- RESEARCH -->
     <section id="research" class="mx-auto max-w-5xl px-5 pt-20">
       <p class="kicker">Research · 5 papers</p>
-      <ul class="mt-6 divide-y divide-line border-y border-line">
+      <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+        <figure class="fade"><img src="img/spark.jpg" alt="Nirmit presenting the SPARK paper at IEEE UEMCON 2025" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Presenting SPARK, IEEE UEMCON 2025</figcaption></figure>
+        <figure class="fade"><img src="img/podium.jpg" alt="Nirmit answering questions after the SPARK talk" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Q&amp;A after the talk</figcaption></figure>
+        <figure class="fade"><img src="img/ibm.jpg" alt="Nirmit outside IBM's Louis V. Gerstner Jr. Center for Learning" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Conference venue, IBM Gerstner Center</figcaption></figure>
+        <figure class="fade"><img src="img/grad.jpg" alt="Nirmit at his M.S. graduation from Quinnipiac University" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover object-top" /><figcaption class="mt-2 text-xs text-muted">M.S. Computer Science, Quinnipiac</figcaption></figure>
+      </div>
+      <ul class="mt-8 divide-y divide-line border-y border-line">
         <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><span>HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</span><span class="text-sm text-muted">IEEE ISAIA 2026 · accepted</span></li>
         <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><span>HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</span><span class="text-sm text-muted">SEET-26 · accepted</span></li>
         <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models: Algorithms, Hardware, and Data Center Infrastructure ↗</a><span class="text-sm text-muted">Computers (MDPI) · 2026</span></li>
@@ -367,7 +373,7 @@
       ['Senior Software Engineer, SaaS Infra', 'Zycus', 'Jan 2021 – Jun 2024', 'Joined as a trainee on the Linux team; 50+ Kubernetes clusters, ransomware recovery, team of 5.'],
     ];
     document.getElementById('timeline').innerHTML = roles.map(([r, o, w, d]) => `
-      <li class="grid gap-1 py-5 sm:grid-cols-[1fr_1.4fr_auto] sm:gap-6">
+      <li class="grid gap-1 py-5 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_9.5rem] sm:gap-6">
         <div><p class="font-medium">${r}</p><p class="text-sm text-muted">${o}</p></div>
         <p class="text-[.95rem] text-muted">${d}</p>
         <p class="num text-xs text-muted sm:text-right">${w}</p>
