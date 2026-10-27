@@ -1,38 +1,391 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#080f1b" />
-    <meta
-      name="description"
-      content="Nirmit Dagli, AI Infrastructure Engineer: Kubernetes GPU clusters, LLM serving (vLLM, SGLang, TensorRT-LLM), platform and SRE. Founding Platform Engineer at Sidecoach Sports."
-    />
-    <meta property="og:title" content="Nirmit Dagli | AI Infrastructure Engineer" />
-    <meta property="og:description" content="GPU clusters, LLM serving benchmarks, and production platforms: Kubernetes, vLLM, SGLang, Terraform, Azure and AWS." />
-    <link rel="canonical" href="https://nirmitdagli.github.io/" />
-    <meta property="og:url" content="https://nirmitdagli.github.io/" />
-    <meta property="og:image" content="https://nirmitdagli.github.io/portrait.jpg" />
-    <meta property="og:type" content="website" />
-    <title>Nirmit Dagli | AI Infrastructure Engineer</title>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirmit Dagli | AI Infrastructure Engineer</title>
+  <meta name="description" content="Nirmit Dagli, AI Infrastructure Engineer. Kubernetes GPU clusters, LLM serving (vLLM, SGLang, TensorRT-LLM), AI gateways, DevSecOps and platform reliability." />
+  <meta property="og:title" content="Nirmit Dagli | AI Infrastructure Engineer" />
+  <meta property="og:description" content="GPU clusters, LLM serving benchmarks, AI gateways and secure production platforms." />
+  <meta property="og:url" content="https://nirmitdagli.github.io/" />
+  <meta property="og:image" content="https://nirmitdagli.github.io/portrait.jpg" />
+  <meta name="theme-color" content="#FFFFFF" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { ink: '#0F172A', muted: '#475569', soft: '#F8FAFC', line: '#E2E8F0', accent: '#2563EB', metric: '#059669' },
+          fontFamily: {
+            sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'Liberation Mono', 'monospace'],
+          },
+          boxShadow: { card: '0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -12px rgba(15,23,42,0.12)', lift: '0 2px 4px rgba(15,23,42,0.05), 0 18px 40px -16px rgba(37,99,235,0.28)' },
+        },
+      },
+    };
+  </script>
+  <style>
+    html, body { background: #FFFFFF; color: #0F172A; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #DBEAFE; color: #0F172A; }
+    .hero-bg {
+      background-image:
+        radial-gradient(ellipse 55% 60% at 10% 0%, rgba(37,99,235,0.10), transparent 60%),
+        radial-gradient(ellipse 40% 45% at 95% 15%, rgba(5,150,105,0.08), transparent 60%),
+        linear-gradient(rgba(15,23,42,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,0.045) 1px, transparent 1px);
+      background-size: auto, auto, 44px 44px, 44px 44px;
+    }
+    .card { background: #fff; border: 1px solid #E2E8F0; box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -12px rgba(15,23,42,0.12); transition: border-color .25s, box-shadow .25s, transform .25s; }
+    .card:hover { border-color: #BFDBFE; box-shadow: 0 2px 4px rgba(15,23,42,0.05), 0 18px 40px -16px rgba(37,99,235,0.28); transform: translateY(-2px); }
+    .label { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #2563EB; }
+    .metric-box { border: 1px solid #A7F3D0; background: #ECFDF5; border-radius: 12px; padding: 14px 16px; }
+    .marquee { mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+    .marquee-track { display: flex; width: max-content; animation: scroll 45s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .card:hover { transform: none; }
+    }
+  </style>
+</head>
+<body class="font-sans">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-md focus:bg-accent focus:px-3 focus:py-2 focus:text-white">Skip to content</a>
 
-    <!-- Preconnects for faster font loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- NAV -->
+  <header class="fixed inset-x-0 top-0 z-40 border-b border-line/80 bg-white/80 backdrop-blur">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6" aria-label="Primary">
+      <a href="#top" class="flex items-center gap-2.5 font-semibold tracking-tight">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-ink text-sm font-bold text-white">nd</span>
+        <span class="hidden sm:inline">Nirmit Dagli</span>
+      </a>
+      <div class="hidden items-center gap-7 text-sm text-muted md:flex">
+        <a class="hover:text-ink" href="#work">Work</a>
+        <a class="hover:text-ink" href="#writing">Writing</a>
+        <a class="hover:text-ink" href="#experience">Experience</a>
+        <a class="hover:text-ink" href="#research">Research</a>
+        <a class="rounded-lg bg-ink px-3.5 py-1.5 font-medium text-white hover:bg-slate-700" href="#contact">Get in touch</a>
+      </div>
+      <button id="menuBtn" class="rounded-lg border border-line px-3 py-1.5 text-sm md:hidden" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </nav>
+    <div id="mobileMenu" class="hidden border-t border-line bg-white px-4 pb-4 md:hidden">
+      <a class="block py-2 text-muted" href="#work">Work</a>
+      <a class="block py-2 text-muted" href="#writing">Writing</a>
+      <a class="block py-2 text-muted" href="#experience">Experience</a>
+      <a class="block py-2 text-muted" href="#research">Research</a>
+      <a class="block py-2 text-muted" href="#contact">Get in touch</a>
+    </div>
+  </header>
 
-    <!-- Google Fonts: Space Grotesk (display), Manrope (body), JetBrains Mono (code) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+  <main id="main">
+    <!-- HERO -->
+    <section id="top" class="hero-bg relative overflow-hidden pt-28 sm:pt-36">
+      <div class="mx-auto max-w-6xl px-4 pb-14 sm:px-6 sm:pb-20">
+        <div class="grid items-center gap-10 lg:grid-cols-[1.35fr_1fr]">
+          <div class="reveal">
+            <div class="mb-6 flex items-center gap-3">
+              <img src="portrait.jpg" alt="Nirmit Dagli" width="48" height="48" class="h-12 w-12 rounded-full border-2 border-white object-cover object-top shadow-card" />
+              <div>
+                <p class="text-sm font-semibold">Nirmit Dagli</p>
+                <p class="text-xs text-muted">AI Infrastructure Engineer · Austin, TX</p>
+              </div>
+            </div>
+            <h1 class="text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl lg:text-[3.6rem]">
+              I build and secure the infrastructure <span class="text-accent">production AI runs on.</span>
+            </h1>
+            <p class="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+              I run Kubernetes GPU clusters, benchmark and serve LLMs with vLLM, SGLang and TensorRT-LLM, and secure the platforms they run on: Zero Trust access, DevSecOps pipelines, AI gateways and incident response. I own systems end to end, from cluster design to the on-call runbook, and I measure every change before I claim it.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#work" class="rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-white shadow-lift hover:bg-blue-700">View Systems Architecture</a>
+              <a href="Nirmit_Dagli_Resume.pdf" download class="rounded-lg border border-line bg-white px-5 py-3 text-sm font-semibold hover:border-slate-400">Download CV</a>
+            </div>
+            <div class="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
+              <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-metric"></span>Founding Platform Engineer, Sidecoach Sports</span>
+              <span class="font-mono text-xs text-slate-500">CKA · CKAD · AWS SA · RHCSA · M.S. CS</span>
+            </div>
+          </div>
 
+          <div class="reveal space-y-3">
+            <div class="overflow-hidden rounded-2xl border border-slate-800 bg-[#0B1220] shadow-lift">
+              <div class="flex items-center gap-2 border-b border-white/10 px-4 py-2.5">
+                <span class="h-2.5 w-2.5 rounded-full bg-rose-400"></span><span class="h-2.5 w-2.5 rounded-full bg-amber-300"></span><span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+                <span class="ml-2 font-mono text-[11px] text-slate-400">llm-serving-bench · Tesla T4</span>
+              </div>
+              <pre id="term" class="min-h-[212px] whitespace-pre-wrap px-4 py-4 font-mono text-[12.5px] leading-6 text-slate-300" aria-label="Benchmark summary"></pre>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="card rounded-2xl p-4"><p class="font-mono text-2xl font-bold text-metric">50+</p><p class="mt-1 text-xs text-muted">Kubernetes clusters in production</p></div>
+              <div class="card rounded-2xl p-4"><p class="font-mono text-2xl font-bold text-metric">1,500+</p><p class="mt-1 text-xs text-muted">servers restored in 7 days</p></div>
+            </div>
+          </div>
+        </div>
 
-    <script type="module" crossorigin src="/assets/index-DdQzPrQb.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-D5_023FN.css">
-  </head>
-  <body class="antialiased">
-    <div id="root"></div>
-    <noscript>Nirmit Dagli, AI Infrastructure Engineer. Kubernetes GPU clusters, LLM serving, platform and SRE. Contact: daglinirmit@gmail.com. Enable JavaScript to explore the portfolio.</noscript>
-  </body>
+        <div class="reveal mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-line pt-6 text-sm">
+          <span class="label !text-slate-500">Built at</span>
+          <span class="font-semibold text-slate-700">Sidecoach Sports</span>
+          <span class="font-semibold text-slate-700">State Street</span>
+          <span class="font-semibold text-slate-700">Zycus</span>
+          <span class="font-semibold text-slate-700">Quinnipiac University</span>
+          <span class="font-semibold text-slate-700">IEEE · Springer · MDPI</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section aria-label="Core technologies" class="border-y border-line bg-soft py-5">
+      <div class="marquee overflow-hidden"><div id="marqueeTrack" class="marquee-track gap-3"></div></div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="work" class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <div class="reveal mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div><p class="label mb-3">Selected systems</p><h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Case studies</h2></div>
+        <p class="max-w-md text-sm text-muted">Context, constraint, what I built, and the number that proves it. Every metric traces back to a repo or a production system.</p>
+      </div>
+
+      <div class="grid gap-4 md:grid-cols-6">
+        <!-- CASE: LLM SERVING -->
+        <article class="card reveal rounded-2xl p-6 sm:p-8 md:col-span-6 lg:col-span-3">
+          <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-mono text-[11px] text-blue-700">GPU performance · open source</span>
+          <h3 class="mt-4 text-2xl font-bold tracking-tight">LLM Serving Bench and Fused GPU Kernels</h3>
+          <div class="mt-6 space-y-5">
+            <div><p class="label">The hardware context</p><p class="mt-2 text-sm leading-relaxed text-muted">NVIDIA Tesla T4 (16 GB, 320 GB/s). Qwen2.5-1.5B in fp16 and AWQ int4, 512 input and 128 output tokens, identical memory budget per engine.</p></div>
+            <div><p class="label">The memory constraint</p><p class="mt-2 text-sm leading-relaxed text-muted">Decode is memory-bandwidth bound: every step reads all weights and the KV cache. Softmax, RMSNorm and SwiGLU move far more bytes than they compute.</p></div>
+            <div><p class="label">My core contribution</p><p class="mt-2 text-sm leading-relaxed text-muted">An async load generator that times every streamed token and sweeps 1 to 64 concurrent users across vLLM and SGLang, plus fused Triton kernels (forward and backward) and a tiled GEMM checked against cuBLAS.</p></div>
+          </div>
+          <div class="metric-box mt-6"><p class="font-mono text-sm font-semibold text-emerald-800">AWQ int4 cut decode 2.3x (20.0 → 8.5 ms/token) · fused kernels reach 78% of T4 peak bandwidth</p></div>
+          <div class="mt-4 flex flex-wrap gap-4 text-sm font-medium">
+            <a class="text-accent hover:underline" href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener">llm-serving-bench ↗</a>
+            <a class="text-accent hover:underline" href="https://github.com/Nirmitdagli/llm-kernels" target="_blank" rel="noopener">llm-kernels ↗</a>
+            <a class="text-accent hover:underline" href="writing/vllm-vs-sglang-t4.html">Read the write-up →</a>
+          </div>
+        </article>
+
+        <!-- CASE: AI GATEWAY -->
+        <article class="card reveal rounded-2xl p-6 sm:p-8 md:col-span-6 lg:col-span-3">
+          <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-mono text-[11px] text-blue-700">AI in production · Sidecoach Sports</span>
+          <h3 class="mt-4 text-2xl font-bold tracking-tight">AI Gateway and Agent Platform</h3>
+          <div class="mt-6 space-y-5">
+            <div><p class="label">The agentic context</p><p class="mt-2 text-sm leading-relaxed text-muted">A youth sports platform adding LLM features and AI operations, under COPPA and FERPA, with no platform team before me.</p></div>
+            <div><p class="label">The security constraint</p><p class="mt-2 text-sm leading-relaxed text-muted">Every team needs its own access and spend limits, no student PII may reach a model, and every agent action has to be traceable and reversible.</p></div>
+            <div><p class="label">My core contribution</p><p class="mt-2 text-sm leading-relaxed text-muted">An AI gateway in front of LLM APIs (Entra ID OIDC, per-team API keys, PII redaction, OpenTelemetry tracing), an MCP agent service with RAG, and an SRE agent suite on Azure AI Foundry that triages alerts, summarizes incidents and runs runbooks behind approval gates.</p></div>
+          </div>
+          <div class="metric-box mt-6"><p class="font-mono text-sm font-semibold text-emerald-800">3 AI services in production within 3 months · human approval on every runbook action</p></div>
+        </article>
+
+        <!-- CASE: ZYCUS -->
+        <article class="card reveal rounded-2xl p-6 sm:p-8 md:col-span-6 lg:col-span-4">
+          <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-mono text-[11px] text-blue-700">Distributed platform · Zycus</span>
+          <h3 class="mt-4 text-2xl font-bold tracking-tight">Multi-Cloud Kubernetes Platform for Enterprise SaaS</h3>
+          <div class="mt-6 grid gap-5 sm:grid-cols-2">
+            <div><p class="label">The context</p><p class="mt-2 text-sm leading-relaxed text-muted">Enterprise procurement SaaS for global customers, across 7 environments (4 production) on AWS, Azure, GCP, Rancher and VMware.</p></div>
+            <div><p class="label">The scale constraint</p><p class="mt-2 text-sm leading-relaxed text-muted">2,000+ servers to move onto Kubernetes without downtime, then a ransomware attack that took 1,500+ servers and 80 to 90 services per environment offline.</p></div>
+            <div class="sm:col-span-2"><p class="label">My core contribution</p><p class="mt-2 text-sm leading-relaxed text-muted">Led the migration into 50+ clusters (EKS, AKS, GKE, Rancher, OpenShift) with ArgoCD GitOps, Kyverno policies and Velero backups. Led a team of 5 standardizing Terraform, Ansible and Jenkins provisioning. First responder in the recovery: restored the fleet, re-architected the network (Transit Gateway, segmented VPCs, 20 Palo Alto firewalls) and ran 4 months of hardening with Zscaler, CrowdStrike and CyberArk.</p></div>
+          </div>
+          <div class="metric-box mt-6"><p class="font-mono text-sm font-semibold text-emerald-800">Restored 1,500+ servers across 7 environments in 7 days · provisioning time cut about 40%</p></div>
+        </article>
+
+        <!-- TILE: SPARK -->
+        <article class="card reveal rounded-2xl p-6 md:col-span-6 lg:col-span-2">
+          <p class="label">Research · IEEE UEMCON 2025</p>
+          <h3 class="mt-3 text-xl font-bold">SPARK RAG Framework</h3>
+          <p class="mt-3 text-sm leading-relaxed text-muted">Model-agnostic RAG (FastAPI, LangChain, FAISS) with PII redaction. Benchmarked on-prem GPUs vs GCP L4 vs AWS Bedrock and moved inference to Bedrock.</p>
+          <p class="mt-5 font-mono text-2xl font-bold text-metric">30s → 10s</p>
+          <p class="text-xs text-muted">average latency · 90% answer accuracy</p>
+        </article>
+
+        <!-- SMALL TILES -->
+        <article class="card reveal rounded-2xl p-6 md:col-span-2">
+          <p class="label">Research · IEEE ISAIA 2026</p>
+          <h3 class="mt-3 text-lg font-bold">HERO-S Scheduler</h3>
+          <p class="mt-2 text-sm text-muted">Routes AI jobs across CPU, GPU, cloud and edge by cost, energy and latency (8×H100 cost model).</p>
+          <p class="mt-4 font-mono text-xl font-bold text-metric">72 to 98%</p>
+          <p class="text-xs text-muted">energy saved vs cloud-only</p>
+        </article>
+        <article class="card reveal rounded-2xl p-6 md:col-span-2">
+          <p class="label">Infrastructure as code</p>
+          <h3 class="mt-3 text-lg font-bold">Azure SaaS Blueprint</h3>
+          <p class="mt-2 text-sm text-muted">Terraform and GitHub Actions (OIDC) for a multi-tenant Azure SaaS: managed identity, row-level security, defense at the edge.</p>
+          <a class="mt-4 inline-block text-sm font-medium text-accent hover:underline" href="https://github.com/Nirmitdagli/azure-saas-blueprint" target="_blank" rel="noopener">View repo ↗</a>
+        </article>
+        <article class="card reveal rounded-2xl p-6 md:col-span-2">
+          <p class="label">Enterprise AI · State Street</p>
+          <h3 class="mt-3 text-lg font-bold">Confluence RAG Assistant</h3>
+          <p class="mt-2 text-sm text-muted">Internal assistant on Azure AI Foundry inside Microsoft Teams; rolled out Amazon Q across the bank's AWS accounts.</p>
+          <p class="mt-4 font-mono text-xl font-bold text-metric">44</p>
+          <p class="text-xs text-muted">AWS accounts onboarded to Amazon Q</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- WRITING -->
+    <section id="writing" class="border-t border-line bg-soft">
+      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+        <div class="reveal mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div><p class="label mb-3">Writing</p><h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Notes from the GPU</h2></div>
+          <p class="max-w-md text-sm text-muted">Write-ups of experiments I've run, with the numbers and the reasoning behind them.</p>
+        </div>
+        <a href="writing/vllm-vs-sglang-t4.html" class="card reveal group block rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div class="max-w-2xl">
+              <p class="font-mono text-xs text-slate-500">Oct 2026 · 6 min read · LLM serving</p>
+              <h3 class="mt-2 text-2xl font-bold tracking-tight group-hover:text-accent">vLLM vs SGLang on a T4: what 2,048 requests showed</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted">Why vLLM served 609 vs 384 tok/s at 64 users, why 4-bit made one user 2.3x faster but 64 users only 5% faster, and what that means for capacity planning.</p>
+            </div>
+            <div class="flex shrink-0 gap-3">
+              <div class="rounded-xl border border-line bg-white px-4 py-3 text-center"><p class="font-mono text-xl font-bold text-metric">1.6x</p><p class="text-[11px] text-slate-500">throughput</p></div>
+              <div class="rounded-xl border border-line bg-white px-4 py-3 text-center"><p class="font-mono text-xl font-bold text-metric">2.3x</p><p class="text-[11px] text-slate-500">decode</p></div>
+            </div>
+          </div>
+          <p class="mt-5 text-sm font-semibold text-accent">Read the post →</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <div class="reveal mb-12"><p class="label mb-3">Experience</p><h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Where I've built</h2></div>
+      <ol id="timeline" class="relative ml-2 border-l-2 border-line"></ol>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research" class="border-t border-line bg-soft">
+      <div class="mx-auto grid max-w-6xl gap-4 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-3">
+        <div class="card reveal rounded-2xl p-6 sm:p-8 lg:col-span-2">
+          <p class="label mb-4">Publications · 5 papers</p>
+          <ul class="divide-y divide-line text-sm">
+            <li class="py-3"><span class="font-semibold">HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</span><span class="block text-muted">IEEE ISAIA 2026 (accepted)</span></li>
+            <li class="py-3"><span class="font-semibold">HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</span><span class="block text-muted">SEET-26 (accepted)</span></li>
+            <li class="py-3"><a class="font-semibold hover:text-accent" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models: Algorithms, Hardware, and Data Center Infrastructure ↗</a><span class="block text-muted">Computers (MDPI), 2026</span></li>
+            <li class="py-3"><a class="font-semibold hover:text-accent" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK: Smart Plug-and-Play AI Framework for RAG &amp; Knowledge ↗</a><span class="block text-muted">IEEE UEMCON 2025, IBM Watson Research Center</span></li>
+            <li class="py-3"><a class="font-semibold hover:text-accent" href="https://doi.org/10.1007/978-3-032-08977-9_40" target="_blank" rel="noopener">Quantum Computing: Grover's Algorithm for String Search and Its Practical Limits ↗</a><span class="block text-muted">Springer, 2026</span></li>
+          </ul>
+        </div>
+        <div class="card reveal rounded-2xl p-6 sm:p-8">
+          <p class="label mb-4">Certifications &amp; education</p>
+          <ul class="space-y-3 text-sm text-muted">
+            <li><span class="font-semibold text-ink">CKA</span> · Certified Kubernetes Administrator</li>
+            <li><span class="font-semibold text-ink">CKAD</span> · Certified Kubernetes Application Developer</li>
+            <li><span class="font-semibold text-ink">AWS SA</span> · Solutions Architect Associate</li>
+            <li><span class="font-semibold text-ink">RHCSA</span> · Red Hat Certified System Administrator</li>
+            <li class="border-t border-line pt-3"><span class="font-semibold text-ink">M.S. Computer Science</span> · Quinnipiac University, 2026</li>
+            <li><span class="font-semibold text-ink">B.E.</span> · University of Mumbai</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <div class="reveal grid gap-10 overflow-hidden rounded-3xl bg-ink p-6 text-white sm:p-10 lg:grid-cols-2">
+        <div>
+          <p class="label mb-3 !text-blue-300">Get in touch</p>
+          <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Building AI infrastructure? Let's talk.</h2>
+          <p class="mt-4 text-slate-300">Email is the fastest way to reach me.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="mailto:daglinirmit@gmail.com?subject=Hello%20Nirmit" class="rounded-lg bg-white px-5 py-3 text-sm font-semibold text-ink hover:bg-blue-50">Email me</a>
+            <a href="Nirmit_Dagli_Resume.pdf" download class="rounded-lg border border-white/25 px-5 py-3 text-sm font-semibold hover:border-white">Download CV</a>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <a class="flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 hover:border-white/50" href="mailto:daglinirmit@gmail.com"><span>daglinirmit@gmail.com</span><span aria-hidden="true">↗</span></a>
+          <a class="flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 hover:border-white/50" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener"><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
+          <a class="flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 hover:border-white/50" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener"><span>GitHub</span><span aria-hidden="true">↗</span></a>
+          <p class="pt-3 text-sm text-slate-400">Austin, TX · open to relocating anywhere in the US. Outside work: taught science and math in Mumbai for 6 years, play midfield, and write poetry.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line py-8">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 text-xs text-slate-500 sm:flex-row sm:px-6">
+      <p>© <span id="year">2026</span> Nirmit Dagli. All rights reserved.</p>
+      <p>Built with HTML, Tailwind CSS and vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <script>
+    const skills = ['Python', 'Kubernetes', 'vLLM', 'SGLang', 'TensorRT-LLM', 'PyTorch', 'Triton', 'NVIDIA GPU Operator', 'Terraform', 'ArgoCD', 'Helm', 'Docker', 'AWS', 'Azure', 'GCP', 'Amazon Bedrock', 'Azure AI Foundry', 'MCP', 'LangChain', 'FastAPI', 'Prometheus', 'Grafana', 'OpenTelemetry', 'Linux', 'Cilium', 'DevSecOps', 'Zero Trust', 'Entra ID', 'CrowdStrike', 'Bash'];
+    const track = document.getElementById('marqueeTrack');
+    [...skills, ...skills].forEach((s, i) => {
+      const el = document.createElement('span');
+      el.className = 'whitespace-nowrap rounded-full border border-line bg-white px-4 py-1.5 font-mono text-sm text-slate-600';
+      el.textContent = s;
+      if (i >= skills.length) el.setAttribute('aria-hidden', 'true');
+      track.appendChild(el);
+    });
+
+    const roles = [
+      { role: 'Founding Platform Engineer', org: 'Sidecoach Sports', when: 'Aug 2026 – Present', now: true,
+        points: ['Built the Azure platform, CI/CD and dev, staging and prod from scratch as the first infrastructure and security hire.', 'Shipped an AI gateway, an MCP agent service and an SRE agent suite; moved the company to enforced MFA, Intune and Cloudflare WAF.'] },
+      { role: 'Research Assistant', org: 'Quinnipiac University', when: 'Sep 2024 – May 2026',
+        points: ['Ran Kubernetes GPU clusters and self-hosted Llama 3, Mistral, Gemma and DeepSeek with 4-bit quantization.', 'Built HERO and HERO-S schedulers and the SPARK RAG framework; grew the group from 2 to 10+ members.'] },
+      { role: 'Cloud and AI Engineer Intern', org: 'State Street', when: 'Jun 2025 – Aug 2025',
+        points: ['Only intern to ship an internal AI assistant (Confluence RAG in Teams).', 'Rolled out Amazon Q across 44 AWS accounts and built a Backstage developer portal.'] },
+      { role: 'DevOps Engineer (Freelance)', org: 'Ini8 Labs', when: 'Jun 2024 – Jul 2024',
+        points: ['Infrastructure as code for AWS and DigitalOcean, a k3s proof of concept, and security scanning in CI/CD.'] },
+      { role: 'Senior Software Engineer, SaaS Infra', org: 'Zycus', when: 'Jan 2021 – Jun 2024',
+        points: ['Migrated 2,000+ servers into 50+ Kubernetes clusters with ArgoCD, Kyverno and Velero; led a team of 5.', 'First responder in the ransomware recovery: 1,500+ servers restored in 7 days, then 4 months of hardening.'] },
+    ];
+    const tl = document.getElementById('timeline');
+    roles.forEach(r => {
+      const li = document.createElement('li');
+      li.className = 'reveal relative mb-10 pl-8 last:mb-0';
+      li.innerHTML = `
+        <span class="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full border-[3px] ${r.now ? 'border-emerald-200 bg-metric' : 'border-blue-100 bg-accent'}"></span>
+        <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+          <h3 class="text-lg font-semibold">${r.role} <span class="font-normal text-muted">· ${r.org}</span></h3>
+          <p class="font-mono text-xs text-slate-500">${r.when}</p>
+        </div>
+        <ul class="mt-2 space-y-1 text-sm text-muted">${r.points.map(p => `<li>${p}</li>`).join('')}</ul>`;
+      tl.appendChild(li);
+    });
+
+    const lines = [
+      ['$ ENGINES="vllm sglang" ./run_suite.sh', 'text-slate-100'],
+      ['  users=64  vllm    609 tok/s  ttft p50 1.79s', 'text-emerald-400'],
+      ['  users=64  sglang  384 tok/s  ttft p50 7.42s', 'text-slate-400'],
+      ['$ TAG=awq-int4 ./run_suite.sh', 'text-slate-100'],
+      ['  users=1   decode  20.0 -> 8.5 ms/token  (2.3x)', 'text-emerald-400'],
+      ['  users=64  thruput 609 -> 637 tok/s      (+5%)', 'text-slate-400'],
+      ['# 2,048 / 2,048 requests ok', 'text-sky-300'],
+    ];
+    const term = document.getElementById('term');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function paint(n, partial) {
+      term.innerHTML = lines.slice(0, n).map(([t, c]) => `<span class="${c}">${t}</span>`).join('\n')
+        + (partial !== undefined ? (n ? '\n' : '') + `<span class="${lines[n][1]}">${partial}</span><span class="animate-pulse text-slate-300">▍</span>` : '');
+    }
+    if (reduce) { paint(lines.length); } else {
+      let li = 0, ci = 0;
+      (function tick() {
+        if (li >= lines.length) { paint(lines.length); return; }
+        const text = lines[li][0];
+        ci++; paint(li, text.slice(0, ci));
+        if (ci >= text.length) { li++; ci = 0; setTimeout(tick, 380); } else { setTimeout(tick, text.startsWith('$') ? 28 : 9); }
+      })();
+    }
+
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 }) : null;
+    document.querySelectorAll('.reveal').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+
+    const btn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden') === false;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Close' : 'Menu';
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); btn.textContent = 'Menu'; }));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
