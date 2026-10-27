@@ -48,37 +48,28 @@
     section[id], [id=experience] { scroll-margin-top: 4.5rem; }
     .journey { border-left: 1px solid #E6E4DD; padding-left: 1.4rem; }
     .sec-h { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(2.3rem, 5vw, 3.4rem); line-height: 1.05; }
-    .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
-    @media (min-width: 640px) { .doors { gap: 1.5rem; } }
-    .door { display: flex; flex-direction: column; gap: .7rem; text-align: left; background: none; border: 0; padding: 0; cursor: pointer; }
-    .dr-frame { position: relative; display: block; height: 150px; overflow: hidden; border-radius: 14px 14px 4px 4px; background: #E9E6DD; perspective: 1100px; box-shadow: inset 0 0 0 1px #DAD6CB; }
-    @media (min-width: 640px) { .dr-frame { height: 230px; } }
-    .dr-inside { position: absolute; inset: 6px; border-radius: 10px 10px 2px 2px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; gap: .35rem; padding: .8rem .8rem .8rem 24%; background: linear-gradient(180deg, #EEF2FF 0%, #FAFAF7 100%); }
-    .dr-glow { position: absolute; inset: -40% -20% auto; height: 120%; background: radial-gradient(closest-side, rgba(36,83,214,.22), transparent); opacity: 0; transition: opacity .8s ease .3s; }
-    .dr-live { position: relative; display: inline-flex; align-items: center; gap: .4rem; font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #0A7A55; }
-    .dr-dot { width: 7px; height: 7px; border-radius: 99px; background: #0A7A55; animation: pulse 1.4s ease-in-out infinite; }
-    @keyframes pulse { 50% { opacity: .3; } }
-    .dr-in-t { position: relative; font-family: "Instrument Serif", Georgia, serif; font-size: 1.1rem; line-height: 1.1; color: #14161A; }
-    @media (min-width: 640px) { .dr-in-t { font-size: 1.7rem; } }
-    .dr-leaf { position: absolute; inset: 6px; border-radius: 10px 10px 2px 2px; background: #fff; box-shadow: inset 0 0 0 1px #DAD6CB; transform-origin: left center; transform: rotateY(0deg); transition: transform 1s cubic-bezier(.2,.75,.2,1), box-shadow 1s; display: grid; grid-template-rows: 1fr 1.4fr; gap: 8px; padding: 12px; }
-    .dr-panel { border-radius: 6px; box-shadow: inset 0 0 0 1px #E6E2D8; }
-    .dr-knob { position: absolute; right: 12px; top: 52%; width: 9px; height: 9px; border-radius: 99px; background: #B4532A; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
-    .dr-leaf-n { position: absolute; left: 14px; top: 12px; font-family: "Instrument Serif", Georgia, serif; font-size: 1.6rem; color: #C9C5BA; }
-    @media (min-width: 640px) { .dr-leaf-n { font-size: 2.4rem; } .dr-leaf { padding: 16px; } }
-    .doors.init .door .dr-leaf { transform: rotateY(0deg) !important; }
-    .doors.init .dr-glow { opacity: 0 !important; }
-    .door:hover .dr-leaf { transform: rotateY(14deg); }
-    .door[aria-selected="true"] .dr-leaf { transform: rotateY(84deg); box-shadow: inset 0 0 0 1px #DAD6CB, inset -18px 0 24px -12px rgba(20,22,26,.18); }
-    .door[aria-selected="true"] .dr-glow { opacity: 1; }
-    .dr-cap { display: flex; align-items: baseline; gap: .5rem; }
-    .dr-cap-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.3rem; color: #C9C5BA; }
-    .dr-cap-t { font-weight: 600; font-size: .86rem; line-height: 1.25; }
-    @media (min-width: 640px) { .dr-cap-t { font-size: 1.05rem; } }
-    .door[aria-selected="true"] .dr-cap-n { color: #2453D6; }
-    .door:focus-visible { outline: none; } .door:focus-visible .dr-frame { outline: 2px solid #2453D6; outline-offset: 3px; }
+    @property --trk-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+    .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+    @media (min-width: 640px) { .doors { gap: 1rem; } }
+    .door { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: .3rem; text-align: left; padding: .9rem .9rem 1rem; border-radius: 14px; background: #fff; border: 1px solid #DDD9CE; cursor: pointer; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    @media (min-width: 640px) { .door { padding: 1.3rem 1.4rem 1.4rem; } }
+    .door:hover { transform: translateY(-3px); border-color: #B9B6AC; box-shadow: 0 14px 30px -22px rgba(20,22,26,.5); }
+    .door[aria-selected="true"] { border-color: transparent; box-shadow: 0 16px 36px -22px rgba(36,83,214,.55); }
+    .door[aria-selected="true"]::before { content: ""; position: absolute; inset: -1px; border-radius: 15px; padding: 1.6px; background: conic-gradient(from var(--trk-a), #D8D4C9 0 62%, #2453D6 78%, #0A7A55 90%, #D8D4C9 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: trkSpin 3.2s linear infinite; pointer-events: none; }
+    @keyframes trkSpin { to { --trk-a: 360deg; } }
+    .trk-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.5rem; line-height: 1; color: #C9C5BA; transition: color .25s; }
+    .trk-t { font-weight: 600; font-size: .88rem; line-height: 1.25; }
+    .trk-s { display: none; align-items: center; gap: .45rem; font-size: .8rem; color: #5B6170; }
+    .trk-dot { width: 7px; height: 7px; border-radius: 99px; background: #C9C5BA; }
+    @media (min-width: 640px) { .trk-n { font-size: 2.6rem; } .trk-t { font-size: 1.15rem; margin-top: .4rem; } .trk-s { display: inline-flex; margin-top: .2rem; } }
+    .door[aria-selected="true"] .trk-n { color: #2453D6; }
+    .door[aria-selected="true"] .trk-dot { background: #0A7A55; animation: trkPulse 1.4s ease-in-out infinite; }
+    .door[aria-selected="true"] .trk-s { color: #0A7A55; }
+    @keyframes trkPulse { 50% { opacity: .3; } }
+    .door:focus-visible { outline: 2px solid #2453D6; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { .door[aria-selected="true"]::before, .trk-dot { animation: none !important; } .door:hover { transform: none; } }
     .demo { margin-top: 2.5rem; border-top: 1px solid #E6E4DD; border-bottom: 1px solid #E6E4DD; padding: 2.2rem 0 1.6rem; }
     .bl-m[aria-checked="true"] { background: #14161A; color: #fff; } .bl-m[aria-checked="false"] { color: #5B6170; }
-    @media (prefers-reduced-motion: reduce) { .dr-leaf { transition: none; } .dr-dot { animation: none; } }
     .door-h { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.08; }
     .door-lede { margin-top: .8rem; max-width: 46rem; font-size: 1.06rem; line-height: 1.75; color: #474C57; }
     .panel-door { margin-top: 2.5rem; animation: doorIn .45s ease both; }
@@ -208,29 +199,23 @@
 
     <!-- DOORS -->
     <section id="work" class="mx-auto max-w-5xl px-5 pt-14">
-      <p class="text-muted">Pick a door. Each one opens the work that matters for that role.</p>
+      <p class="text-muted">Pick a track. Each one opens a live demo and the work behind it.</p>
 
-      <div class="doors init mt-8" role="tablist" aria-label="Choose a role">
+      <div class="doors mt-6" role="tablist" aria-label="Choose a role">
         <button class="door" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="true" data-door="ai">
-          <span class="dr-frame" aria-hidden="true">
-            <span class="dr-inside"><span class="dr-glow"></span><span class="dr-live"><span class="dr-dot"></span>Live demo</span><span class="dr-in-t">Race two LLM engines</span></span>
-            <span class="dr-leaf"><span class="dr-panel"></span><span class="dr-panel"></span><span class="dr-knob"></span><span class="dr-leaf-n">01</span></span>
-          </span>
-          <span class="dr-cap"><span class="dr-cap-n">01</span><span class="dr-cap-t">AI · GPU · LLM</span></span>
+          <span class="trk-n">01</span>
+          <span class="trk-t">AI · GPU · LLM</span>
+          <span class="trk-s"><span class="trk-dot"></span>Live: race two LLM engines</span>
         </button>
         <button class="door" role="tab" id="tab-devops" aria-controls="panel-devops" aria-selected="false" data-door="devops">
-          <span class="dr-frame" aria-hidden="true">
-            <span class="dr-inside"><span class="dr-glow"></span><span class="dr-live"><span class="dr-dot"></span>Live demo</span><span class="dr-in-t">Migrate 2,000 servers</span></span>
-            <span class="dr-leaf"><span class="dr-panel"></span><span class="dr-panel"></span><span class="dr-knob"></span><span class="dr-leaf-n">02</span></span>
-          </span>
-          <span class="dr-cap"><span class="dr-cap-n">02</span><span class="dr-cap-t">DevOps · Cloud · SRE</span></span>
+          <span class="trk-n">02</span>
+          <span class="trk-t">DevOps · Cloud · SRE</span>
+          <span class="trk-s"><span class="trk-dot"></span>Live: migrate 2,000 servers</span>
         </button>
         <button class="door" role="tab" id="tab-security" aria-controls="panel-security" aria-selected="false" data-door="security">
-          <span class="dr-frame" aria-hidden="true">
-            <span class="dr-inside"><span class="dr-glow"></span><span class="dr-live"><span class="dr-dot"></span>Live demo</span><span class="dr-in-t">Stop a ransomware spread</span></span>
-            <span class="dr-leaf"><span class="dr-panel"></span><span class="dr-panel"></span><span class="dr-knob"></span><span class="dr-leaf-n">03</span></span>
-          </span>
-          <span class="dr-cap"><span class="dr-cap-n">03</span><span class="dr-cap-t">Security</span></span>
+          <span class="trk-n">03</span>
+          <span class="trk-t">Security</span>
+          <span class="trk-s"><span class="trk-dot"></span>Live: stop a ransomware spread</span>
         </button>
       </div>
 
@@ -802,14 +787,6 @@
       wrap.addEventListener('pointerleave', () => { mx = my = -999; });
       if ('IntersectionObserver' in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; if (v && !run) { run = true; last = performance.now(); requestAnimationFrame(frame); } run = v; }).observe(wrap);
       requestAnimationFrame(t => { last = t; frame(t); });
-    })();
-
-    // Doors swing open the first time they scroll into view
-    (function () {
-      const d = document.querySelector('.doors'); if (!d) return;
-      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) { d.classList.remove('init'); return; }
-      const o = new IntersectionObserver(es => { if (es[0].isIntersecting) { setTimeout(() => d.classList.remove('init'), 250); o.disconnect(); } }, { threshold: 0.5 });
-      o.observe(d);
     })();
 
     // Migration demo: ~200 dots (about 10 servers each) into 50 clusters
