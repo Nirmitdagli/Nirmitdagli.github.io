@@ -9,23 +9,23 @@ export default function Hero({ onSelectRole }) {
           <div className="hero-copy">
             <div className="eyebrow">Nirmit Dagli / Engineering portfolio</div>
             <h1>Building what<br /><span>AI runs on.</span></h1>
-            <p className="hero-lead">GPU kernels. Reliable platforms.<br className="hidden sm:block" /> Security at every layer.</p>
-            <p className="hero-description">I work across the AI stack, from CUDA and Triton kernels and LLM serving on GPUs to the cloud platforms and security controls that keep them running. Currently Cybersecurity & Platform Engineer at Sidecoach Sports.</p>
+            <p className="hero-lead">GPU clusters. LLM serving.<br className="hidden sm:block" /> Platforms that stay up.</p>
+            <p className="hero-description">I build and run the infrastructure LLM workloads run on: Kubernetes GPU clusters, model serving and benchmarking, and the platform and reliability work around them. Currently Founding Platform Engineer at Sidecoach Sports.</p>
             <div className="hero-actions">
               <a className="button-primary" href="#projects">Explore selected work <span aria-hidden="true">↗</span></a>
               <a className="button-secondary" href="mailto:daglinirmit@gmail.com">Let’s talk</a>
             </div>
-            <div className="hero-availability"><span className="status-dot" aria-hidden="true" /> Open to opportunities across the United States</div>
+            <div className="hero-availability"><span className="status-dot" aria-hidden="true" /> Open to AI infrastructure roles across the United States</div>
           </div>
           <aside className="profile-panel" aria-label="About Nirmit Dagli">
             <div className="profile-photo"><img src="/portrait.jpg" alt="Nirmit Dagli at a conference" width="440" height="440" fetchPriority="high" /><span className="photo-caption">Engineer. Researcher. Builder.</span></div>
             <div className="profile-details">
-              <div><span className="eyebrow">Currently</span><p>Sidecoach Sports</p><span className="profile-role">Cybersecurity & Platform Engineer</span></div>
+              <div><span className="eyebrow">Currently</span><p>Sidecoach Sports</p><span className="profile-role">Founding Platform Engineer</span></div>
               <div className="profile-links"><a href="https://github.com/Nirmitdagli" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/nirmit-dagli-62857916a/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
             </div>
           </aside>
         </div>
-        <div className="role-intro"><span className="eyebrow">Three areas of focus</span><span>Explore the work behind each role</span></div>
+        <div className="role-intro"><span className="eyebrow">AI infrastructure, end to end</span><span>Three layers, one job</span></div>
         <div className="role-grid">
           {roles.map((role) => <a key={role.id} href="#projects" className="role-card" onClick={() => onSelectRole(role.id)}>
             <div className="role-card-top"><span>{role.number}</span><span aria-hidden="true">↗</span></div>

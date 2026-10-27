@@ -4,16 +4,16 @@ import { motion } from 'framer-motion';
 const EASE = [0.19, 1, 0.22, 1];
 
 /**
- * Passions — teaching is the eight-year standout, the rest are honest hobbies.
+ * Passions — teaching is the six-year standout, the rest are honest hobbies.
  * Each card has a short narrative so the section earns its place.
  */
 const PASSIONS = [
   {
     icon: '✎',
     title: 'Teaching',
-    meta: '8 yrs · SSC & HSC',
+    meta: '6 yrs · SSC & HSC',
     body:
-      'Senior Lecturer at PPT, Mumbai — 2016 to 2024. Science, IT, English, and Math to 9th-through-12th graders. Lesson plans, progress tracking, curriculum help. Teaching taught me to pace an idea.',
+      'Senior Lecturer at PPT, Mumbai, 2017 to 2023. Science, IT, English, and Math to 9th-through-12th graders. Lesson plans, progress tracking, curriculum help. Teaching taught me to pace an idea.',
     accent: 'teal',
   },
   {
