@@ -139,31 +139,6 @@
       </div>
 
       <div class="grid gap-4 md:grid-cols-6">
-        <!-- CASE 1: SCALE -->
-        <article class="card reveal rounded-2xl p-6 sm:p-8 md:col-span-6 lg:col-span-4">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-[11px] text-blue-300">Distributed platform · Zycus</span>
-          </div>
-          <h3 class="mt-4 text-2xl font-bold tracking-tight">Multi-Cloud Kubernetes Platform for Enterprise SaaS</h3>
-          <div class="mt-6 grid gap-5 sm:grid-cols-2">
-            <div><p class="frame-label">The context</p><p class="mt-2 text-sm leading-relaxed text-gray-300">Enterprise procurement SaaS for global customers, across 7 environments (4 production) on AWS, Azure, GCP, Rancher and VMware.</p></div>
-            <div><p class="frame-label">The scale constraint</p><p class="mt-2 text-sm leading-relaxed text-gray-300">2,000+ servers to move onto Kubernetes without downtime, then a ransomware attack that took 1,500+ servers and 80 to 90 services per environment offline.</p></div>
-            <div class="sm:col-span-2"><p class="frame-label">My core technical contribution</p><p class="mt-2 text-sm leading-relaxed text-gray-300">Led the migration into 50+ clusters (EKS, AKS, GKE, Rancher, OpenShift) with ArgoCD GitOps, Kyverno policies and Velero backups. Led a team of 5 standardizing Terraform, Ansible and Jenkins provisioning. First responder in the recovery: restored the fleet, re-architected the network (Transit Gateway, segmented VPCs, 20 Palo Alto firewalls) and ran 4 months of hardening.</p></div>
-          </div>
-          <div class="mt-6 rounded-xl border border-metric/30 bg-metric/10 p-4">
-            <p class="font-mono text-sm font-semibold text-metric">Restored 1,500+ servers across 7 environments in 7 days · provisioning time cut about 40%</p>
-          </div>
-        </article>
-
-        <!-- SIDE TILE: SPARK -->
-        <article class="card reveal rounded-2xl p-6 md:col-span-3 lg:col-span-2">
-          <p class="frame-label">Research · IEEE UEMCON 2025</p>
-          <h3 class="mt-3 text-xl font-bold">SPARK RAG Framework</h3>
-          <p class="mt-3 text-sm leading-relaxed text-gray-300">Model-agnostic RAG (FastAPI, LangChain, FAISS) with PII redaction. Benchmarked on-prem GPUs vs GCP L4 vs AWS Bedrock and moved inference to Bedrock.</p>
-          <p class="mt-5 font-mono text-2xl font-bold text-metric">30s → 10s</p>
-          <p class="text-xs text-gray-400">average latency · 90% answer accuracy</p>
-        </article>
-
         <!-- CASE 2: PERFORMANCE -->
         <article class="card reveal rounded-2xl p-6 sm:p-8 md:col-span-6 lg:col-span-3">
           <div class="flex flex-wrap items-center gap-2">
@@ -198,6 +173,31 @@
           <div class="mt-6 rounded-xl border border-metric/30 bg-metric/10 p-4">
             <p class="font-mono text-sm font-semibold text-metric">3 AI services in production within 3 months · human approval on every runbook action</p>
           </div>
+        </article>
+
+        <!-- CASE 1: SCALE -->
+        <article class="card reveal rounded-2xl p-6 sm:p-8 md:col-span-6 lg:col-span-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-[11px] text-blue-300">Distributed platform · Zycus</span>
+          </div>
+          <h3 class="mt-4 text-2xl font-bold tracking-tight">Multi-Cloud Kubernetes Platform for Enterprise SaaS</h3>
+          <div class="mt-6 grid gap-5 sm:grid-cols-2">
+            <div><p class="frame-label">The context</p><p class="mt-2 text-sm leading-relaxed text-gray-300">Enterprise procurement SaaS for global customers, across 7 environments (4 production) on AWS, Azure, GCP, Rancher and VMware.</p></div>
+            <div><p class="frame-label">The scale constraint</p><p class="mt-2 text-sm leading-relaxed text-gray-300">2,000+ servers to move onto Kubernetes without downtime, then a ransomware attack that took 1,500+ servers and 80 to 90 services per environment offline.</p></div>
+            <div class="sm:col-span-2"><p class="frame-label">My core technical contribution</p><p class="mt-2 text-sm leading-relaxed text-gray-300">Led the migration into 50+ clusters (EKS, AKS, GKE, Rancher, OpenShift) with ArgoCD GitOps, Kyverno policies and Velero backups. Led a team of 5 standardizing Terraform, Ansible and Jenkins provisioning. First responder in the recovery: restored the fleet, re-architected the network (Transit Gateway, segmented VPCs, 20 Palo Alto firewalls) and ran 4 months of hardening.</p></div>
+          </div>
+          <div class="mt-6 rounded-xl border border-metric/30 bg-metric/10 p-4">
+            <p class="font-mono text-sm font-semibold text-metric">Restored 1,500+ servers across 7 environments in 7 days · provisioning time cut about 40%</p>
+          </div>
+        </article>
+
+        <!-- SIDE TILE: SPARK -->
+        <article class="card reveal rounded-2xl p-6 md:col-span-3 lg:col-span-2">
+          <p class="frame-label">Research · IEEE UEMCON 2025</p>
+          <h3 class="mt-3 text-xl font-bold">SPARK RAG Framework</h3>
+          <p class="mt-3 text-sm leading-relaxed text-gray-300">Model-agnostic RAG (FastAPI, LangChain, FAISS) with PII redaction. Benchmarked on-prem GPUs vs GCP L4 vs AWS Bedrock and moved inference to Bedrock.</p>
+          <p class="mt-5 font-mono text-2xl font-bold text-metric">30s → 10s</p>
+          <p class="text-xs text-gray-400">average latency · 90% answer accuracy</p>
         </article>
 
         <!-- SMALL TILES -->
