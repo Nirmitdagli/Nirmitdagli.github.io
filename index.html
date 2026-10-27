@@ -18,7 +18,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     tailwind.config = {
@@ -41,7 +41,12 @@
     .kicker { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: #5B6170; }
     .kicker::before { content: ""; width: 22px; height: 1px; background: #B9B6AC; }
     .rule { border-top: 1px solid #E6E4DD; }
-    .num { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+    .num { font-variant-numeric: tabular-nums; }
+    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; line-height: 1.7; }
+    .prose-p { font-size: 1.06rem; line-height: 1.75; color: #474C57; }
+    .note { border-left: 2px solid #E0DCD1; padding-left: 1.1rem; }
+    .note dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #B4532A; }
+    .note dd { margin-top: .45rem; line-height: 1.65; color: #474C57; }
     .panel { background: #fff; border: 1px solid #E6E4DD; border-radius: 14px; }
     .link { color: #2453D6; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
     .link:hover { color: #14161A; }
@@ -79,7 +84,7 @@
         <a class="hover:text-ink" href="#writing">Writing</a>
         <a class="hover:text-ink" href="#experience">Experience</a>
         <a class="hover:text-ink" href="#research">Research</a>
-        <a class="rounded-full bg-ink px-4 py-1.5 font-medium text-white hover:bg-[#2b2f37]" href="#contact">Contact</a>
+        <a class="rounded-full bg-accent px-4 py-1.5 font-medium text-white hover:bg-[#1B44B8]" href="#contact">Contact</a>
       </div>
       <button id="menuBtn" class="rounded-full border border-line px-3 py-1 text-sm md:hidden" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
     </nav>
@@ -104,10 +109,11 @@
             <p>Today I'm the first platform hire at Sidecoach Sports, where I build the AI gateway, the agents and the security around them. In my research I run GPU clusters and benchmark how LLMs are served.</p>
           </div>
           <div class="no-print mt-8 flex flex-wrap items-center gap-3">
-            <a href="#work" class="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white hover:bg-[#2b2f37]">See the work</a>
+            <a href="#work" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">See the work</a>
             <a href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
             <button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline">Copy email</button>
           </div>
+          <p class="mt-8 max-w-xl border-t border-line pt-4 text-sm text-muted"><span class="text-ink">Right now:</span> building the AI gateway and SRE agents at Sidecoach, and the next llm-serving-bench round with open-loop load and 8K context.</p>
         </div>
         <figure class="fade">
           <img src="portrait.jpg" alt="Nirmit Dagli" width="880" height="1100" class="aspect-[4/5] max-h-[420px] w-full rounded-2xl object-cover object-top md:max-h-none" fetchpriority="high" />
@@ -116,153 +122,171 @@
       </div>
     </section>
 
-    <!-- NOW -->
-    <section class="mx-auto max-w-5xl px-5 pb-6">
-      <div class="fade panel grid gap-4 p-5 sm:grid-cols-[110px_1fr] sm:p-6">
-        <p class="font-serif text-2xl leading-none">Now</p>
-        <ul class="grid gap-3 text-[.95rem] text-muted sm:grid-cols-3">
-          <li><span class="font-medium text-ink">Building</span><br />The AI gateway and SRE agents at Sidecoach Sports.</li>
-          <li><span class="font-medium text-ink">Benchmarking</span><br />The next llm-serving-bench round: open-loop load and 8K context.</li>
-          <li><span class="font-medium text-ink">Focused on</span><br />AI infrastructure: GPU clusters, LLM serving and agents.</li>
-        </ul>
-      </div>
-    </section>
-
     <!-- WORK -->
-    <section id="work" class="mx-auto max-w-5xl px-5 pt-20">
+    <section id="work" class="mx-auto max-w-5xl px-5 pt-16">
       <p class="kicker">Selected work</p>
-      <h2 class="mt-3 font-serif text-4xl sm:text-5xl">Things I've built, and what they did.</h2>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.4rem]">Three problems, what I decided, and what it did.</h2>
 
       <!-- 01 LLM SERVING -->
-      <article class="fade mt-12 grid gap-8 border-t border-line pt-10 md:grid-cols-[1fr_1.15fr]">
-        <div>
-          <p class="num text-sm text-muted">01 · Open source · GPU performance</p>
-          <h3 class="mt-2 font-serif text-3xl leading-tight">LLM serving, measured fairly</h3>
-          <p class="mt-4 leading-relaxed text-muted">Every engine comparison I found used a different model, GPU or memory setting. So I built a harness that runs vLLM and SGLang (TensorRT-LLM supported) on the same GPU, model, prompts and memory budget, timing every streamed token from 1 to 64 concurrent users.</p>
-          <dl class="mt-6 grid grid-cols-3 gap-4">
-            <div><dt class="text-xs text-muted">vLLM vs SGLang</dt><dd class="num mt-1 text-2xl font-medium text-metric">1.6x</dd><dd class="text-xs text-muted">throughput at 64 users</dd></div>
-            <div><dt class="text-xs text-muted">AWQ int4</dt><dd class="num mt-1 text-2xl font-medium text-metric">2.3x</dd><dd class="text-xs text-muted">faster decode, 1 user</dd></div>
-            <div><dt class="text-xs text-muted">Fused kernels</dt><dd class="num mt-1 text-2xl font-medium text-metric">78%</dd><dd class="text-xs text-muted">of T4 peak bandwidth</dd></div>
-          </dl>
-          <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm"><a class="link" href="writing/vllm-vs-sglang-t4.html">Read the write-up</a><a class="link" href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener">llm-serving-bench</a><a class="link" href="https://github.com/Nirmitdagli/llm-kernels" target="_blank" rel="noopener">llm-kernels</a></p>
+      <article class="fade mt-14 border-t border-line pt-12">
+        <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
+          <div>
+            <p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">01</p>
+            <p class="tag mt-3">Open source<span class="md:hidden"> · </span><br class="hidden md:block" /> GPU performance</p>
+          </div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">LLM serving, measured fairly</h3>
+            <p class="prose-p mt-5">Every engine comparison I found used a different model, GPU or memory setting, so none of them answered the question a platform team actually has: on <em>our</em> hardware, which engine serves more users? I built a harness that runs vLLM and SGLang (TensorRT-LLM supported) on the same GPU, model, prompts and memory budget, and times every streamed token from 1 to 64 concurrent users.</p>
+            <div class="mt-9">
+              <p class="font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">609 <span class="text-[#B8B3A6]">vs</span> 384</p>
+              <p class="mt-3 text-sm text-muted">tokens per second at 64 users, vLLM vs SGLang, same Tesla T4</p>
+            </div>
+            <p class="prose-p mt-8">The surprise was quantization. 4-bit AWQ made a single user 2.3x faster, but at 64 users it added only 5%. On this GPU it is a latency win, not a capacity win, which changes how you would size a fleet. Separately, my fused Triton kernels in llm-kernels reach 78% of the T4's peak memory bandwidth.</p>
+          </div>
         </div>
-        <figure class="panel p-4 sm:p-5">
-          <figcaption class="flex flex-wrap items-baseline justify-between gap-2">
-            <span class="text-sm font-medium">Output throughput vs concurrent users</span>
-            <span class="text-xs text-muted">Tesla T4 · Qwen2.5-1.5B · 512 in / 128 out</span>
-          </figcaption>
-          <div id="chart" class="mt-3" role="img" aria-label="Line chart. vLLM fp16 throughput 51, 190, 424 and 609 tokens per second at 1, 4, 16 and 64 users. SGLang fp16 45, 164, 253 and 384. vLLM AWQ int4 106, 308, 535 and 637."></div>
-          <div class="mt-3 flex flex-wrap gap-4 text-xs text-muted">
+
+        <figure class="mt-10 max-w-3xl md:ml-[210px]">
+          <div id="chart" role="img" aria-label="Line chart. vLLM fp16 throughput 51, 190, 424 and 609 tokens per second at 1, 4, 16 and 64 users. SGLang fp16 45, 164, 253 and 384. vLLM AWQ int4 106, 308, 535 and 637."></div>
+          <figcaption class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-line pt-3 text-xs text-muted">
+            <span class="text-ink">Fig. 1</span><span>Output throughput vs concurrent users. Tesla T4, Qwen2.5-1.5B, 512 in / 128 out.</span>
             <span class="flex items-center gap-1.5"><span class="h-0.5 w-5 bg-accent"></span>vLLM fp16</span>
             <span class="flex items-center gap-1.5"><span class="h-0.5 w-5 border-t-2 border-dashed border-metric"></span>vLLM AWQ int4</span>
             <span class="flex items-center gap-1.5"><span class="h-0.5 w-5 bg-warm"></span>SGLang fp16</span>
-          </div>
+          </figcaption>
         </figure>
+
+        <dl class="mt-10 grid gap-8 sm:grid-cols-2 md:ml-[210px]">
+          <div class="note"><dt>The call I made</dt><dd>Hold everything constant except the engine, or the numbers mean nothing. Same model, prompts and memory budget, and latency timed from the client side, token by token.</dd></div>
+          <div class="note"><dt>What it doesn't tell you yet</dt><dd>This is closed-loop load on one T4 with short prompts. The next round adds open-loop load and 8K context, where the ranking could change.</dd></div>
+        </dl>
+        <p class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm md:ml-[210px]"><a class="link" href="writing/vllm-vs-sglang-t4.html">Read the write-up</a><a class="link" href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener">llm-serving-bench on GitHub</a><a class="link" href="https://github.com/Nirmitdagli/llm-kernels" target="_blank" rel="noopener">llm-kernels on GitHub</a></p>
       </article>
 
       <!-- 02 AI GATEWAY + AGENTS -->
-      <article class="fade mt-16 grid gap-8 border-t border-line pt-10 md:grid-cols-[1fr_1.15fr]">
-        <div>
-          <p class="num text-sm text-muted">02 · Production · Sidecoach Sports</p>
-          <h3 class="mt-2 font-serif text-3xl leading-tight">An AI gateway and agents a youth sports company can trust</h3>
-          <p class="mt-4 leading-relaxed text-muted">The company wanted LLM features and AI operations, under COPPA and FERPA, with no platform team. Every team needed its own access and spend limits, no student data could reach a model, and every agent action had to be traceable.</p>
-          <ul class="mt-5 space-y-2 text-[.95rem] text-muted">
-            <li><span class="font-medium text-ink">AI gateway:</span> Entra ID sign-in, per-team API keys, PII redaction and OpenTelemetry tracing in front of every LLM call.</li>
-            <li><span class="font-medium text-ink">MCP agent service</span> with RAG over internal content.</li>
-            <li><span class="font-medium text-ink">SRE agent suite</span> on Azure AI Foundry that triages alerts and opens Jira tickets, with a human approval before any runbook runs.</li>
-          </ul>
+      <article class="fade mt-24 border-t border-line pt-12">
+        <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
+          <div>
+            <p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">02</p>
+            <p class="tag mt-3">Production<span class="md:hidden"> · </span><br class="hidden md:block" /> Sidecoach Sports</p>
+          </div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">An AI gateway and agents a youth sports company can trust</h3>
+            <p class="prose-p mt-5">The company wanted LLM features and AI operations, under COPPA and FERPA, with no platform team. Every team needed its own access and spend limits, no student data could reach a model, and every agent action had to be traceable. I was the first platform hire, so this was mine to design.</p>
+            <p class="prose-p mt-4">Instead of model keys living in every app, there is one gateway in front of every LLM call: Entra ID sign-in, per-team keys and limits, PII redaction, and an OpenTelemetry trace for each request. Behind it sit an MCP agent service with RAG over internal content, and an SRE agent suite on Azure AI Foundry that triages alerts and opens Jira tickets.</p>
+          </div>
         </div>
-        <div class="space-y-4">
-          <figure class="panel p-4 sm:p-5">
-            <figcaption class="text-sm font-medium">How a request moves through the gateway</figcaption>
-            <svg viewBox="0 0 560 210" class="mt-3 w-full" role="img" aria-label="Diagram: a team app request passes Entra ID sign-in, then the AI gateway which checks the per-team key and redacts PII, then reaches the LLM API. The gateway sends traces to OpenTelemetry.">
-              <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9A978E"/></marker></defs>
-              <circle class="packet" r="5" fill="#0A7A55" style="offset-path: path('M54 58 H502');"/>
-              <g font-family="Inter, sans-serif" font-size="12">
-                <rect x="6" y="30" width="96" height="56" rx="10" fill="#fff" stroke="#D8D5CC"/><text x="54" y="55" text-anchor="middle" fill="#14161A" font-weight="600">Team app</text><text x="54" y="72" text-anchor="middle" fill="#5B6170" font-size="11">internal app</text>
-                <rect x="134" y="30" width="104" height="56" rx="10" fill="#fff" stroke="#D8D5CC"/><text x="186" y="55" text-anchor="middle" fill="#14161A" font-weight="600">Entra ID</text><text x="186" y="72" text-anchor="middle" fill="#5B6170" font-size="11">OIDC sign-in</text>
-                <rect x="270" y="18" width="148" height="80" rx="12" fill="#EEF2FF" stroke="#2453D6"/><text x="344" y="45" text-anchor="middle" fill="#2453D6" font-weight="700">AI gateway</text><text x="344" y="63" text-anchor="middle" fill="#14161A" font-size="11">per-team key + limits</text><text x="344" y="80" text-anchor="middle" fill="#14161A" font-size="11">PII redaction</text>
-                <rect x="450" y="30" width="104" height="56" rx="10" fill="#fff" stroke="#D8D5CC"/><text x="502" y="55" text-anchor="middle" fill="#14161A" font-weight="600">LLM API</text><text x="502" y="72" text-anchor="middle" fill="#5B6170" font-size="11">model call</text>
-                <rect x="270" y="140" width="148" height="50" rx="10" fill="#fff" stroke="#D8D5CC" stroke-dasharray="4 3"/><text x="344" y="162" text-anchor="middle" fill="#14161A" font-weight="600">OpenTelemetry</text><text x="344" y="178" text-anchor="middle" fill="#5B6170" font-size="11">every call traced</text>
-              </g>
-              <g stroke="#9A978E" stroke-width="1.5" fill="none" marker-end="url(#ar)">
-                <path d="M102 58H132"/><path d="M238 58H268"/><path d="M418 58H448"/><path d="M344 98V138" stroke-dasharray="4 3"/>
-              </g>
-            </svg>
-          </figure>
-          <figure class="panel p-4 sm:p-5">
-            <figcaption class="text-sm font-medium">SRE agent: from alert to fix, with a person in the loop</figcaption>
-            <ol class="mt-4 grid gap-2 text-sm sm:grid-cols-5">
-              <li class="rounded-lg border border-line bg-paper p-3"><span class="num text-xs text-muted">1</span><br />Alert fires in Azure</li>
-              <li class="rounded-lg border border-line bg-paper p-3"><span class="num text-xs text-muted">2</span><br />Agent triages and summarizes</li>
-              <li class="rounded-lg border-2 border-warm/60 bg-[#FFF4EC] p-3"><span class="num text-xs text-warm">3</span><br /><span class="font-medium">Engineer approves</span></li>
-              <li class="rounded-lg border border-line bg-paper p-3"><span class="num text-xs text-muted">4</span><br />Runbook runs</li>
-              <li class="rounded-lg border border-line bg-paper p-3"><span class="num text-xs text-muted">5</span><br />Jira ticket updated</li>
-            </ol>
-          </figure>
+
+        <figure class="mt-10 md:ml-[210px]">
+          <svg viewBox="0 0 560 200" class="w-full max-w-3xl" role="img" aria-label="Diagram: a team app request passes Entra ID sign-in, then the AI gateway which checks the per-team key and redacts PII, then reaches the LLM API. The gateway sends traces to OpenTelemetry.">
+            <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9A978E"/></marker></defs>
+            <g stroke="#9A978E" stroke-width="1.5" fill="none" marker-end="url(#ar)">
+              <path d="M102 58H132"/><path d="M238 58H268"/><path d="M418 58H448"/><path d="M344 98V134" stroke-dasharray="4 3"/>
+            </g>
+            <circle class="packet" r="4.5" fill="#0A7A55" style="offset-path: path('M54 58 H502');"/>
+            <g font-family="Inter, sans-serif" font-size="12">
+              <rect x="6" y="30" width="96" height="56" rx="8" fill="#FAFAF7" stroke="#CFCBC0"/><text x="54" y="55" text-anchor="middle" fill="#14161A" font-weight="600">Team app</text><text x="54" y="72" text-anchor="middle" fill="#5B6170" font-size="11">internal app</text>
+              <rect x="134" y="30" width="104" height="56" rx="8" fill="#FAFAF7" stroke="#CFCBC0"/><text x="186" y="55" text-anchor="middle" fill="#14161A" font-weight="600">Entra ID</text><text x="186" y="72" text-anchor="middle" fill="#5B6170" font-size="11">OIDC sign-in</text>
+              <rect x="270" y="18" width="148" height="80" rx="10" fill="#EEF2FF" stroke="#2453D6"/><text x="344" y="45" text-anchor="middle" fill="#2453D6" font-weight="700">AI gateway</text><text x="344" y="63" text-anchor="middle" fill="#14161A" font-size="11">per-team key + limits</text><text x="344" y="80" text-anchor="middle" fill="#14161A" font-size="11">PII redaction</text>
+              <rect x="450" y="30" width="104" height="56" rx="8" fill="#FAFAF7" stroke="#CFCBC0"/><text x="502" y="55" text-anchor="middle" fill="#14161A" font-weight="600">LLM API</text><text x="502" y="72" text-anchor="middle" fill="#5B6170" font-size="11">model call</text>
+              <rect x="270" y="136" width="148" height="50" rx="8" fill="#FAFAF7" stroke="#CFCBC0" stroke-dasharray="4 3"/><text x="344" y="158" text-anchor="middle" fill="#14161A" font-weight="600">OpenTelemetry</text><text x="344" y="174" text-anchor="middle" fill="#5B6170" font-size="11">every call traced</text>
+            </g>
+          </svg>
+          <figcaption class="mt-4 border-t border-line pt-3 text-xs text-muted"><span class="text-ink">Fig. 2</span>&nbsp;&nbsp;How a request moves through the gateway.</figcaption>
+        </figure>
+
+        <div class="mt-12 md:ml-[210px]">
+          <p class="font-serif text-[2rem] leading-tight sm:text-[2.6rem]">Nothing touches production until an engineer says yes.</p>
+          <ol class="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-2 text-[.95rem] text-muted" aria-label="SRE agent flow">
+            <li>Alert fires</li><li aria-hidden="true" class="text-[#B8B3A6]">→</li>
+            <li>Agent triages and summarizes</li><li aria-hidden="true" class="text-[#B8B3A6]">→</li>
+            <li class="font-medium text-warm underline decoration-warm/40 decoration-2 underline-offset-4">Engineer approves</li><li aria-hidden="true" class="text-[#B8B3A6]">→</li>
+            <li>Runbook runs</li><li aria-hidden="true" class="text-[#B8B3A6]">→</li>
+            <li>Jira ticket updated</li>
+          </ol>
         </div>
+
+        <dl class="mt-10 grid gap-8 sm:grid-cols-2 md:ml-[210px]">
+          <div class="note"><dt>The call I made</dt><dd>One gateway instead of keys in every app. It gives one place to redact PII, cap spend and trace calls, so adding a model or a team is a config change.</dd></div>
+          <div class="note"><dt>The trade-off</dt><dd>The approval step makes the agents slower than fully autonomous ones. For a company handling student data, that is the right trade, and the agents still do the triage and the writing.</dd></div>
+        </dl>
       </article>
 
       <!-- 03 ZYCUS -->
-      <article class="fade mt-16 grid gap-8 border-t border-line pt-10 md:grid-cols-[1fr_1.15fr]">
-        <div>
-          <p class="num text-sm text-muted">03 · Production · Zycus, enterprise SaaS</p>
-          <h3 class="mt-2 font-serif text-3xl leading-tight">Moving 2,000 servers onto Kubernetes, then bringing them back after ransomware</h3>
-          <p class="mt-4 leading-relaxed text-muted">Zycus runs procurement software for global enterprises across 7 environments, 4 of them production. I led the move from VMs to 50+ Kubernetes clusters with GitOps, and led a team of 5 that standardized how everything was provisioned.</p>
-          <p class="mt-4 leading-relaxed text-muted">Then ransomware took 1,500+ servers and 80 to 90 services per environment offline. As a first responder, I helped restore the fleet in 7 days, then re-architected the network and ran 4 months of hardening.</p>
+      <article class="fade mt-24 border-t border-line pt-12">
+        <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
+          <div>
+            <p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">03</p>
+            <p class="tag mt-3">Production<span class="md:hidden"> · </span><br class="hidden md:block" /> Zycus, enterprise SaaS</p>
+          </div>
+          <div class="max-w-2xl">
+            <h3 class="font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">Moving 2,000 servers onto Kubernetes, then bringing them back after ransomware</h3>
+            <p class="prose-p mt-5">Zycus runs procurement software for global enterprises across 7 environments, 4 of them production. I joined the Linux team as a trainee in 2021, and by 2023 I was leading the move from VMs to 50+ Kubernetes clusters with GitOps, with a team of 5 that standardized how everything was provisioned.</p>
+            <p class="mt-9 font-serif text-[2.4rem] leading-tight sm:text-[3.2rem]">2,000+ servers <span class="text-[#B8B3A6]">→</span> 50+ clusters</p>
+            <p class="mt-3 text-sm text-muted">VMware, KVM and bare metal onto EKS, AKS, GKE, Rancher and OpenShift, with ArgoCD, Kyverno policies, Velero backups, Terraform and Ansible. Provisioning got about 40% faster.</p>
+          </div>
         </div>
-        <div class="space-y-4">
-          <figure class="panel p-4 sm:p-5">
-            <figcaption class="text-sm font-medium">The migration</figcaption>
-            <div class="mt-4 grid grid-cols-[1fr_auto_1fr] items-center gap-3 text-center">
-              <div class="rounded-lg border border-line bg-paper p-4"><p class="num text-2xl font-medium">2,000+</p><p class="text-xs text-muted">servers on VMware, KVM and bare metal</p></div>
-              <span class="text-xl text-muted" aria-hidden="true">→</span>
-              <div class="rounded-lg border border-accent/40 bg-[#EEF2FF] p-4"><p class="num text-2xl font-medium text-accent">50+</p><p class="text-xs text-muted">clusters on EKS, AKS, GKE, Rancher and OpenShift</p></div>
-            </div>
-            <p class="mt-3 flex flex-wrap gap-1.5"><span class="chip">ArgoCD GitOps</span><span class="chip">Kyverno policies</span><span class="chip">Velero backups</span><span class="chip">Terraform + Ansible</span><span class="chip">~40% faster provisioning</span></p>
-          </figure>
-          <figure class="panel p-4 sm:p-5">
-            <figcaption class="text-sm font-medium">The recovery</figcaption>
-            <ol class="relative mt-4 space-y-4 border-l-2 border-line pl-5 text-sm">
-              <li><span class="absolute -left-[7px] mt-1 h-3 w-3 rounded-full bg-warm"></span><span class="font-medium">Attack</span> <span class="text-muted">· 1,500+ servers and 80 to 90 services per environment down</span></li>
-              <li><span class="absolute -left-[7px] mt-1 h-3 w-3 rounded-full bg-accent"></span><span class="font-medium">Days 1 to 7</span> <span class="text-muted">· fleet restored across all 7 environments</span></li>
-              <li><span class="absolute -left-[7px] mt-1 h-3 w-3 rounded-full bg-accent"></span><span class="font-medium">Network rebuilt</span> <span class="text-muted">· Transit Gateway, segmented VPCs, 20 Palo Alto firewalls</span></li>
-              <li><span class="absolute -left-[7px] mt-1 h-3 w-3 rounded-full bg-metric"></span><span class="font-medium">4 months of hardening</span> <span class="text-muted">· Zscaler, CrowdStrike, CyberArk, Veeam DR</span></li>
-            </ol>
-          </figure>
+
+        <div class="mt-14 grid gap-8 md:ml-[210px] md:grid-cols-[1fr_1fr]">
+          <div>
+            <p class="font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">7 days</p>
+            <p class="mt-3 text-sm text-muted">to bring 1,500+ servers back after ransomware, across all 7 environments</p>
+            <p class="prose-p mt-6">In 2022 ransomware took 1,500+ servers and 80 to 90 services per environment offline. I was one of the first responders. After the restore came the slower work: re-architecting the network and 4 months of hardening.</p>
+          </div>
+          <ol class="relative space-y-5 border-l border-line pl-6 text-[.95rem]">
+            <li><span class="absolute -left-[5px] mt-2 h-2.5 w-2.5 rounded-full bg-warm"></span><p class="font-medium">Attack, 2022</p><p class="text-muted">1,500+ servers and 80 to 90 services per environment down</p></li>
+            <li><span class="absolute -left-[5px] mt-2 h-2.5 w-2.5 rounded-full bg-accent"></span><p class="font-medium">Days 1 to 7</p><p class="text-muted">Fleet restored across all 7 environments</p></li>
+            <li><span class="absolute -left-[5px] mt-2 h-2.5 w-2.5 rounded-full bg-accent"></span><p class="font-medium">Network rebuilt</p><p class="text-muted">Transit Gateway, segmented VPCs, 20 Palo Alto firewalls</p></li>
+            <li><span class="absolute -left-[5px] mt-2 h-2.5 w-2.5 rounded-full bg-metric"></span><p class="font-medium">4 months of hardening</p><p class="text-muted">Zscaler, CrowdStrike, CyberArk, Veeam DR</p></li>
+          </ol>
+        </div>
+
+        <div class="mt-12 border-t border-line pt-6 md:ml-[210px]">
+          <p class="tag">Recognition at Zycus</p>
+          <p class="prose-p mt-3">9 project awards from leadership between 2021 and 2023, and a promotion to Software Engineer, SaaS Infra in March 2022. The awards cover the work above:</p>
+          <ul class="mt-4 grid gap-x-8 gap-y-2 text-[.95rem] sm:grid-cols-2">
+            <li><span class="text-muted">2023</span>&nbsp; Kubernetes core implementation team</li>
+            <li><span class="text-muted">2023</span>&nbsp; Kubernetes cloud readiness</li>
+            <li><span class="text-muted">2023</span>&nbsp; CI/CD security: CrowdStrike, CentOS 7.9</li>
+            <li><span class="text-muted">2022</span>&nbsp; Restructured operations after the security incident</li>
+            <li><span class="text-muted">2022</span>&nbsp; iAnalyze spend infrastructure</li>
+            <li><span class="text-muted">2022</span>&nbsp; IOOF and Quantum self-service delivery</li>
+            <li><span class="text-muted">2022</span>&nbsp; Cross-team operational support</li>
+            <li><span class="text-muted">2022</span>&nbsp; Production on 100% AWS Spot, multi-AZ</li>
+            <li><span class="text-muted">2021</span>&nbsp; Infrastructure stability and cost optimization</li>
+          </ul>
         </div>
       </article>
 
       <!-- MORE -->
-      <div class="fade mt-16 border-t border-line pt-10">
+      <div class="fade mt-24 border-t border-line pt-10">
         <h3 class="font-serif text-3xl">More work</h3>
         <ul class="mt-6 divide-y divide-line">
-          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">SPARK RAG framework</span><span class="text-muted">Model-agnostic RAG with PII redaction; compared on-prem GPUs, GCP L4 and Bedrock and moved inference to Bedrock. IEEE UEMCON 2025.</span><span class="num text-sm text-metric">30s → 10s</span></li>
-          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">HERO-S scheduler</span><span class="text-muted">Routes AI jobs across CPU, GPU, cloud and edge by cost, energy and latency. IEEE ISAIA 2026.</span><span class="num text-sm text-metric">72–98% less energy</span></li>
-          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">State Street AI assistant</span><span class="text-muted">Confluence RAG on Azure AI Foundry inside Teams; rolled out Amazon Q to engineering.</span><span class="num text-sm text-metric">44 AWS accounts</span></li>
-          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><a class="link font-medium" href="https://github.com/Nirmitdagli/azure-saas-blueprint" target="_blank" rel="noopener">Azure SaaS Blueprint</a><span class="text-muted">Terraform and GitHub Actions (OIDC) for a multi-tenant Azure SaaS with row-level security.</span><span class="num text-sm text-muted">Open source</span></li>
+          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">SPARK RAG framework</span><span class="text-muted">Model-agnostic RAG with PII redaction; compared on-prem GPUs, GCP L4 and Bedrock and moved inference to Bedrock. IEEE UEMCON 2025.</span><span class="text-sm font-medium text-metric">30s → 10s</span></li>
+          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">HERO-S scheduler</span><span class="text-muted">Routes AI jobs across CPU, GPU, cloud and edge by cost, energy and latency. IEEE ISAIA 2026.</span><span class="text-sm font-medium text-metric">72–98% less energy</span></li>
+          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">State Street AI assistant</span><span class="text-muted">Confluence RAG on Azure AI Foundry inside Teams; rolled out Amazon Q to engineering.</span><span class="text-sm font-medium text-metric">44 AWS accounts</span></li>
+          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><a class="link font-medium" href="https://github.com/Nirmitdagli/azure-saas-blueprint" target="_blank" rel="noopener">Azure SaaS Blueprint</a><span class="text-muted">Terraform and GitHub Actions (OIDC) for a multi-tenant Azure SaaS with row-level security.</span><span class="text-sm text-muted">Open source</span></li>
         </ul>
       </div>
     </section>
 
     <!-- QUOTES -->
-    <section class="mx-auto max-w-5xl px-5 pt-20">
+    <section class="mx-auto max-w-5xl px-5 pt-24">
       <p class="kicker">From people I've worked with</p>
-      <div class="mt-6 grid gap-4 md:grid-cols-3">
-        <figure class="fade panel flex flex-col justify-between p-6">
-          <blockquote class="font-serif text-[1.35rem] leading-snug">“He was our go-to person for Kubernetes cluster administration… hands-on experience in setting up complex networking solutions that span multiple clouds and data centers.”</blockquote>
-          <figcaption class="mt-5 text-sm"><span class="font-medium">Saurabh Tamhankar</span><br /><span class="text-muted">Cloud Platform, Zycus · senior colleague</span></figcaption>
+      <figure class="fade mt-8 max-w-4xl">
+        <blockquote class="font-serif text-[2rem] leading-[1.18] sm:text-[2.7rem]">“He was our go-to person for Kubernetes cluster administration… hands-on experience in setting up complex networking solutions that span multiple clouds and data centers.”</blockquote>
+        <figcaption class="mt-5 text-sm"><span class="font-medium">Saurabh Tamhankar</span><span class="text-muted">, Cloud Platform, Zycus</span></figcaption>
+      </figure>
+      <div class="mt-12 grid gap-10 border-t border-line pt-8 md:grid-cols-2">
+        <figure class="fade">
+          <blockquote class="font-serif text-[1.45rem] leading-snug">“A go-to person for technical challenges. His debugging and development skills are top-notch, and he is always willing to help others.”</blockquote>
+          <figcaption class="mt-4 text-sm"><span class="font-medium">Tushar Gaikawad</span><span class="text-muted">, DevOps Engineer, Zycus</span></figcaption>
         </figure>
-        <figure class="fade panel flex flex-col justify-between p-6">
-          <blockquote class="font-serif text-[1.35rem] leading-snug">“A go-to person for technical challenges. His debugging and development skills are top-notch, and he is always willing to help others.”</blockquote>
-          <figcaption class="mt-5 text-sm"><span class="font-medium">Tushar Gaikawad</span><br /><span class="text-muted">DevOps Engineer, Zycus</span></figcaption>
-        </figure>
-        <figure class="fade panel flex flex-col justify-between p-6">
-          <blockquote class="font-serif text-[1.35rem] leading-snug">“Whenever an issue arose, he was quick to investigate the root cause and propose well-thought-out solutions.”</blockquote>
-          <figcaption class="mt-5 text-sm"><span class="font-medium">Suvrat G Bhat</span><br /><span class="text-muted">Enterprise observability</span></figcaption>
+        <figure class="fade">
+          <blockquote class="font-serif text-[1.45rem] leading-snug">“Whenever an issue arose, he was quick to investigate the root cause and propose well-thought-out solutions.”</blockquote>
+          <figcaption class="mt-4 text-sm"><span class="font-medium">Suvrat G Bhat</span><span class="text-muted">, enterprise observability</span></figcaption>
         </figure>
       </div>
-      <p class="mt-3 text-xs text-muted">From recommendations on <a class="link" href="https://www.linkedin.com/in/nirmit-dagli-62857916a/details/recommendations/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      <p class="mt-6 text-xs text-muted">From recommendations on <a class="link" href="https://www.linkedin.com/in/nirmit-dagli-62857916a/details/recommendations/" target="_blank" rel="noopener">LinkedIn</a>.</p>
     </section>
 
     <!-- WRITING -->
@@ -301,22 +325,22 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="mx-auto max-w-5xl px-5 py-20">
-      <div class="fade rounded-3xl bg-ink px-6 py-10 text-white sm:px-10">
-        <h2 class="font-serif text-4xl leading-tight sm:text-5xl">Working on AI infrastructure? <em class="text-[#9DB4FF]">Let's talk.</em></h2>
-        <div class="mt-8 grid gap-6 sm:grid-cols-2">
-          <div class="space-y-3 text-[.95rem]">
-            <p class="flex flex-wrap items-center gap-3"><a class="underline underline-offset-4" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a><button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn no-print rounded-full border border-white/25 px-3 py-1 text-xs hover:border-white">Copy</button></p>
-            <p><a class="underline underline-offset-4" href="tel:+14753174538">475 317 4538</a></p>
-            <p class="text-white/60">Austin, TX · open to relocating anywhere in the US</p>
+    <section id="contact" class="mx-auto max-w-5xl px-5 pb-16 pt-28">
+      <div class="fade border-t-2 border-ink pt-10">
+        <h2 class="max-w-3xl font-serif text-5xl leading-[1.05] sm:text-[4.2rem]">Working on AI infrastructure? <em class="text-accent">Let's talk.</em></h2>
+        <div class="mt-10 grid gap-8 sm:grid-cols-[1.2fr_1fr]">
+          <div class="space-y-3 text-[1.05rem]">
+            <p class="flex flex-wrap items-center gap-3"><a class="link text-xl" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a><button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn no-print rounded-full border border-line bg-white px-3 py-1 text-xs hover:border-ink">Copy</button></p>
+            <p><a class="hover:text-accent" href="tel:+14753174538">475 317 4538</a></p>
+            <p class="text-muted">Austin, TX · open to relocating anywhere in the US</p>
           </div>
           <div class="no-print flex flex-wrap content-start gap-3">
-            <a class="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-ink hover:bg-[#E8ECF7]" href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
-            <a class="rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium hover:border-white" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="rounded-full border border-white/25 px-5 py-2.5 text-sm font-medium hover:border-white" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener">GitHub</a>
+            <a class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]" href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
-        <p class="mt-10 border-t border-white/15 pt-5 text-sm text-white/60">Outside work I taught science and math in Mumbai for 6 years, play midfield on weekends, and write poetry in Hindi, Urdu and English.</p>
+        <p class="mt-14 max-w-2xl font-serif text-xl leading-snug text-muted">Outside work I taught science and math in Mumbai for 6 years, play midfield on weekends, and write poetry in Hindi, Urdu and English.</p>
       </div>
     </section>
   </main>
@@ -326,7 +350,7 @@
     <p>Built by hand with HTML and Tailwind.</p>
   </footer>
 
-  <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-full bg-ink px-4 py-2 text-sm text-white opacity-0 transition-opacity">Email copied</div>
+  <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-full bg-accent px-4 py-2 text-sm text-white opacity-0 transition-opacity">Email copied</div>
 
   <script>
     // Throughput chart from llm-serving-bench results (Tesla T4)
@@ -337,10 +361,10 @@
         { name: 'vLLM AWQ int4', color: '#0A7A55', dash: '6 5', data: [106, 308, 535, 637] },
         { name: 'SGLang fp16', color: '#B4532A', dash: '', data: [45, 164, 253, 384] },
       ];
-      const W = 560, H = 310, L = 46, R = 70, T = 26, B = 34, max = 700;
+      const W = 760, H = 340, L = 46, R = 60, T = 26, B = 34, max = 700;
       const x = i => L + i * ((W - L - R) / (users.length - 1));
       const y = v => T + (H - T - B) * (1 - v / max);
-      let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full" font-family="Inter, sans-serif">`;
+      let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full max-w-3xl" font-family="Inter, sans-serif">`;
       for (let v = 0; v <= max; v += 100) {
         svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#EEECE6"/>`;
         svg += `<text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#8B8F99">${v}</text>`;
