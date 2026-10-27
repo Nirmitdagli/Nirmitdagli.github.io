@@ -37,6 +37,7 @@
   <style>
     html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
     html { scroll-behavior: smooth; }
+    section[id], [id=experience] { scroll-margin-top: 4.5rem; }
     ::selection { background: #DCE5FF; }
     .kicker { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: #5B6170; }
     .kicker::before { content: ""; width: 22px; height: 1px; background: #B9B6AC; }
@@ -80,19 +81,19 @@
     <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5" aria-label="Primary">
       <a href="#top" class="font-serif text-xl leading-none">Nirmit Dagli</a>
       <div class="hidden items-center gap-6 text-sm text-muted md:flex">
-        <a class="hover:text-ink" href="#work">Work</a>
-        <a class="hover:text-ink" href="#writing">Writing</a>
-        <a class="hover:text-ink" href="#experience">Experience</a>
+        <a class="hover:text-ink" href="#projects">Open source</a>
+        <a class="hover:text-ink" href="#work">At work</a>
         <a class="hover:text-ink" href="#research">Research</a>
+        <a class="hover:text-ink" href="#writing">Writing</a>
         <a class="rounded-full bg-accent px-4 py-1.5 font-medium text-white hover:bg-[#1B44B8]" href="#contact">Contact</a>
       </div>
       <button id="menuBtn" class="rounded-full border border-line px-3 py-1 text-sm md:hidden" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
     </nav>
     <div id="mobileMenu" class="hidden border-t border-line bg-paper px-5 pb-3 md:hidden">
-      <a class="block py-2 text-muted" href="#work">Work</a>
-      <a class="block py-2 text-muted" href="#writing">Writing</a>
-      <a class="block py-2 text-muted" href="#experience">Experience</a>
+      <a class="block py-2 text-muted" href="#projects">Open source</a>
+      <a class="block py-2 text-muted" href="#work">At work</a>
       <a class="block py-2 text-muted" href="#research">Research</a>
+      <a class="block py-2 text-muted" href="#writing">Writing</a>
       <a class="block py-2 text-muted" href="#contact">Contact</a>
     </div>
   </header>
@@ -109,7 +110,7 @@
             <p>Today I'm the first platform hire at Sidecoach Sports, where I build the AI gateway, the agents and the security around them. In my research I run GPU clusters and benchmark how LLMs are served.</p>
           </div>
           <div class="no-print mt-8 flex flex-wrap items-center gap-3">
-            <a href="#work" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">See the work</a>
+            <a href="#projects" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">See the work</a>
             <a href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
             <button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline">Copy email</button>
           </div>
@@ -122,13 +123,13 @@
       </div>
     </section>
 
-    <!-- WORK -->
-    <section id="work" class="mx-auto max-w-5xl px-5 pt-16">
-      <p class="kicker">Selected work</p>
-      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.4rem]">Three problems, what I decided, and what it did.</h2>
+    <!-- OPEN SOURCE -->
+    <section id="projects" class="mx-auto max-w-5xl px-5 pt-16">
+      <p class="kicker">Open source</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.4rem]">Things I built on my own, in public.</h2>
 
       <!-- 01 LLM SERVING -->
-      <article class="fade mt-14 border-t border-line pt-12">
+      <article class="fade mt-12 border-t border-line pt-12">
         <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
           <div>
             <p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">01</p>
@@ -162,12 +163,27 @@
         <p class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm md:ml-[210px]"><a class="link" href="writing/vllm-vs-sglang-t4.html">Read the write-up</a><a class="link" href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener">llm-serving-bench on GitHub</a><a class="link" href="https://github.com/Nirmitdagli/llm-kernels" target="_blank" rel="noopener">llm-kernels on GitHub</a></p>
       </article>
 
+      <div class="fade mt-16 border-t border-line pt-8 md:ml-[210px]">
+        <p class="tag">Also on GitHub</p>
+        <ul class="mt-4 divide-y divide-line">
+          <li class="grid gap-1 py-4 sm:grid-cols-[200px_1fr] sm:items-baseline"><a class="link font-medium" href="https://github.com/Nirmitdagli/llm-kernels" target="_blank" rel="noopener">llm-kernels</a><span class="text-muted">Fused Triton kernels (softmax, RMSNorm, SwiGLU) and a tiled GEMM, benchmarked against cuBLAS and PyTorch on a T4.</span></li>
+          <li class="grid gap-1 py-4 sm:grid-cols-[200px_1fr] sm:items-baseline"><a class="link font-medium" href="https://github.com/Nirmitdagli/azure-saas-blueprint" target="_blank" rel="noopener">azure-saas-blueprint</a><span class="text-muted">Terraform and GitHub Actions (OIDC) for a multi-tenant Azure SaaS with row-level security and defense at the edge.</span></li>
+          <li class="grid gap-1 py-4 sm:grid-cols-[200px_1fr] sm:items-baseline"><a class="link font-medium" href="https://github.com/Nirmitdagli/quantum-thesis-demo" target="_blank" rel="noopener">quantum-thesis-demo</a><span class="text-muted">HERO, my M.S. thesis: placing workloads across CPU, GPU and QPU by cost, energy and latency.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- AT WORK -->
+    <section id="work" class="mx-auto max-w-5xl px-5 pt-28">
+      <p class="kicker">At work</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.4rem]">Production systems, and the calls I made running them.</h2>
+
       <!-- 02 AI GATEWAY + AGENTS -->
-      <article class="fade mt-24 border-t border-line pt-12">
+      <article class="fade mt-12 border-t border-line pt-12">
         <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
           <div>
             <p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">02</p>
-            <p class="tag mt-3">Production<span class="md:hidden"> · </span><br class="hidden md:block" /> Sidecoach Sports</p>
+            <p class="tag mt-3">Production<span class="md:hidden"> · </span><br class="hidden md:block" /> Sidecoach Sports, 2026</p>
           </div>
           <div class="max-w-2xl">
             <h3 class="font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">An AI gateway and agents a youth sports company can trust</h3>
@@ -216,7 +232,7 @@
         <div class="grid gap-6 md:grid-cols-[170px_1fr] md:gap-10">
           <div>
             <p class="font-serif text-6xl leading-none text-[#C9C5BA] md:text-7xl">03</p>
-            <p class="tag mt-3">Production<span class="md:hidden"> · </span><br class="hidden md:block" /> Zycus, enterprise SaaS</p>
+            <p class="tag mt-3">Production<span class="md:hidden"> · </span><br class="hidden md:block" /> Zycus, 2021 to 2024</p>
           </div>
           <div class="max-w-2xl">
             <h3 class="font-serif text-[2.1rem] leading-tight sm:text-[2.6rem]">Moving 2,000 servers onto Kubernetes, then bringing them back after ransomware</h3>
@@ -259,20 +275,14 @@
         </div>
       </article>
 
-      <!-- MORE -->
-      <div class="fade mt-24 border-t border-line pt-10">
-        <h3 class="font-serif text-3xl">More work</h3>
-        <ul class="mt-6 divide-y divide-line">
-          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">SPARK RAG framework</span><span class="text-muted">Model-agnostic RAG with PII redaction; compared on-prem GPUs, GCP L4 and Bedrock and moved inference to Bedrock. IEEE UEMCON 2025.</span><span class="text-sm font-medium text-metric">30s → 10s</span></li>
-          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">HERO-S scheduler</span><span class="text-muted">Routes AI jobs across CPU, GPU, cloud and edge by cost, energy and latency. IEEE ISAIA 2026.</span><span class="text-sm font-medium text-metric">72–98% less energy</span></li>
-          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">State Street AI assistant</span><span class="text-muted">Confluence RAG on Azure AI Foundry inside Teams; rolled out Amazon Q to engineering.</span><span class="text-sm font-medium text-metric">44 AWS accounts</span></li>
-          <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><a class="link font-medium" href="https://github.com/Nirmitdagli/azure-saas-blueprint" target="_blank" rel="noopener">Azure SaaS Blueprint</a><span class="text-muted">Terraform and GitHub Actions (OIDC) for a multi-tenant Azure SaaS with row-level security.</span><span class="text-sm text-muted">Open source</span></li>
-        </ul>
+      <div id="experience" class="fade mt-20 scroll-mt-20 border-t border-line pt-10">
+        <h3 class="font-serif text-3xl">Every role</h3>
+        <ol class="mt-6 divide-y divide-line border-y border-line" id="timeline"></ol>
       </div>
     </section>
 
     <!-- QUOTES -->
-    <section class="mx-auto max-w-5xl px-5 pt-24">
+    <section class="mx-auto max-w-5xl px-5 pt-28">
       <p class="kicker">From people I've worked with</p>
       <figure class="fade mt-8 max-w-4xl">
         <blockquote class="font-serif text-[2rem] leading-[1.18] sm:text-[2.7rem]">“He was our go-to person for Kubernetes cluster administration… hands-on experience in setting up complex networking solutions that span multiple clouds and data centers.”</blockquote>
@@ -291,8 +301,32 @@
       <p class="mt-6 text-xs text-muted">From recommendations on <a class="link" href="https://www.linkedin.com/in/nirmit-dagli-62857916a/details/recommendations/" target="_blank" rel="noopener">LinkedIn</a>.</p>
     </section>
 
+    <!-- RESEARCH -->
+    <section id="research" class="mx-auto max-w-5xl px-5 pt-28">
+      <p class="kicker">Research · 5 papers</p>
+      <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+        <figure class="fade"><img src="img/spark.jpg" alt="Nirmit presenting the SPARK paper at IEEE UEMCON 2025" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Presenting SPARK, IEEE UEMCON 2025</figcaption></figure>
+        <figure class="fade"><img src="img/podium.jpg" alt="Nirmit answering questions after the SPARK talk" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Q&amp;A after the talk</figcaption></figure>
+        <figure class="fade"><img src="img/ibm.jpg" alt="Nirmit outside IBM's Louis V. Gerstner Jr. Center for Learning" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Conference venue, IBM Gerstner Center</figcaption></figure>
+        <figure class="fade"><img src="img/grad.jpg" alt="Nirmit at his M.S. graduation from Quinnipiac University" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover object-top" /><figcaption class="mt-2 text-xs text-muted">M.S. Computer Science, Quinnipiac</figcaption></figure>
+      </div>
+      <ul class="mt-8 divide-y divide-line border-t border-line">
+        <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">SPARK, RAG framework</span><span class="text-muted">Model-agnostic RAG with PII redaction; compared on-prem GPUs, GCP L4 and Bedrock, then moved inference to Bedrock.</span><span class="text-sm font-medium text-metric">30s → 10s</span></li>
+        <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">HERO-S, scheduler</span><span class="text-muted">Routes AI jobs across CPU, GPU, cloud and edge by cost, energy and latency.</span><span class="text-sm font-medium text-metric">72–98% less energy</span></li>
+      </ul>
+      <p class="tag mt-10">Papers</p>
+      <ul class="mt-3 divide-y divide-line border-y border-line">
+        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><span>HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</span><span class="text-sm text-muted">IEEE ISAIA 2026 · accepted</span></li>
+        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><span>HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</span><span class="text-sm text-muted">SEET-26 · accepted</span></li>
+        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models: Algorithms, Hardware, and Data Center Infrastructure ↗</a><span class="text-sm text-muted">Computers (MDPI) · 2026</span></li>
+        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK: Smart Plug-and-Play AI Framework for RAG &amp; Knowledge ↗</a><span class="text-sm text-muted">IEEE UEMCON 2025</span></li>
+        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.1007/978-3-032-08977-9_40" target="_blank" rel="noopener">Quantum Computing: Grover's Algorithm for String Search and Its Practical Limits ↗</a><span class="text-sm text-muted">Springer · 2026</span></li>
+      </ul>
+      <p class="mt-5 text-sm text-muted"><span class="text-ink">Certifications:</span> CKA · CKAD · AWS Solutions Architect Associate · RHCSA &nbsp;·&nbsp; <span class="text-ink">Education:</span> M.S. Computer Science, Quinnipiac University (2026) · B.E., University of Mumbai</p>
+    </section>
+
     <!-- WRITING -->
-    <section id="writing" class="mx-auto max-w-5xl px-5 pt-20">
+    <section id="writing" class="mx-auto max-w-5xl px-5 pt-24">
       <p class="kicker">Writing</p>
       <a href="writing/ransomware-recovery-postmortem.html" class="fade group mt-6 block border-t border-line py-6">
         <p class="num text-xs text-muted">Incident review · 7 min read</p>
@@ -304,31 +338,6 @@
         <h3 class="mt-2 font-serif text-3xl leading-tight group-hover:text-accent">vLLM vs SGLang on a T4: what 2,048 requests showed</h3>
         <p class="mt-2 max-w-3xl text-muted">Why vLLM served 609 vs 384 tok/s at 64 users, and why 4-bit made one user 2.3x faster but 64 users only 5% faster.</p>
       </a>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="mx-auto max-w-5xl px-5 pt-20">
-      <p class="kicker">Experience</p>
-      <ol class="mt-6 divide-y divide-line border-y border-line" id="timeline"></ol>
-    </section>
-
-    <!-- RESEARCH -->
-    <section id="research" class="mx-auto max-w-5xl px-5 pt-20">
-      <p class="kicker">Research · 5 papers</p>
-      <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <figure class="fade"><img src="img/spark.jpg" alt="Nirmit presenting the SPARK paper at IEEE UEMCON 2025" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Presenting SPARK, IEEE UEMCON 2025</figcaption></figure>
-        <figure class="fade"><img src="img/podium.jpg" alt="Nirmit answering questions after the SPARK talk" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Q&amp;A after the talk</figcaption></figure>
-        <figure class="fade"><img src="img/ibm.jpg" alt="Nirmit outside IBM's Louis V. Gerstner Jr. Center for Learning" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Conference venue, IBM Gerstner Center</figcaption></figure>
-        <figure class="fade"><img src="img/grad.jpg" alt="Nirmit at his M.S. graduation from Quinnipiac University" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover object-top" /><figcaption class="mt-2 text-xs text-muted">M.S. Computer Science, Quinnipiac</figcaption></figure>
-      </div>
-      <ul class="mt-8 divide-y divide-line border-y border-line">
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><span>HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</span><span class="text-sm text-muted">IEEE ISAIA 2026 · accepted</span></li>
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><span>HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</span><span class="text-sm text-muted">SEET-26 · accepted</span></li>
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models: Algorithms, Hardware, and Data Center Infrastructure ↗</a><span class="text-sm text-muted">Computers (MDPI) · 2026</span></li>
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK: Smart Plug-and-Play AI Framework for RAG &amp; Knowledge ↗</a><span class="text-sm text-muted">IEEE UEMCON 2025</span></li>
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.1007/978-3-032-08977-9_40" target="_blank" rel="noopener">Quantum Computing: Grover's Algorithm for String Search and Its Practical Limits ↗</a><span class="text-sm text-muted">Springer · 2026</span></li>
-      </ul>
-      <p class="mt-5 text-sm text-muted"><span class="text-ink">Certifications:</span> CKA · CKAD · AWS Solutions Architect Associate · RHCSA &nbsp;·&nbsp; <span class="text-ink">Education:</span> M.S. Computer Science, Quinnipiac University (2026) · B.E., University of Mumbai</p>
     </section>
 
     <!-- CONTACT -->
