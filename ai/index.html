@@ -378,7 +378,7 @@
       </div>
 
       <dl class="mt-12 grid gap-8 sm:grid-cols-2">
-        <div class="note"><dt>Self-hosted LLMs on Kubernetes</dt><dd>Llama 3, Mistral, Gemma and DeepSeek at 4-bit on Kubernetes GPU nodes with the NVIDIA GPU Operator and Cilium. CUDA out-of-memory failures kept taking models down, so I put them behind a process-isolated FastAPI server, which eliminated those failures. On the lab's multi-GPU nodes I also applied speculative decoding in vLLM and SGLang, prefill/decode disaggregation, and tensor and pipeline parallelism with NCCL, scheduled GPU jobs with Slurm, and built and trained a small GPT-style language model from scratch.</dd></div>
+        <div class="note"><dt>Self-hosted LLMs on Kubernetes</dt><dd>Llama 3, Mistral, Gemma and DeepSeek at 4-bit on Kubernetes GPU nodes with the NVIDIA GPU Operator and Cilium. CUDA out-of-memory failures kept taking models down, so I put them behind a process-isolated FastAPI server that handles model loading and swapping, which eliminated those failures. On the lab's multi-GPU nodes I also applied speculative decoding in vLLM and SGLang, prefill/decode disaggregation, and tensor and pipeline parallelism with NCCL, scheduled GPU jobs with Slurm, and built and trained a small GPT-style language model from scratch.</dd></div>
         <div class="note"><dt>Now building</dt><dd>A vLLM serving platform on Kubernetes with autoscaling on request queue depth and DCGM, Prometheus and Grafana GPU dashboards. Plus a GPU failure runbook (XID errors, ECC, drain and replace).</dd></div>
       </dl>
     </section>
