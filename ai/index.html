@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirmit Dagli · Applied AI: agents, evals and GPU inference</title>
+  <meta name="description" content="Nirmit Dagli's applied AI work: a production Claude agent suite with MCP, RAG, golden-set evals and an AI gateway; GPU inference benchmarks (vLLM vs SGLang); and AI adoption inside a global bank." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nirmitdagli.github.io/ai/" />
+  <meta property="og:title" content="Nirmit Dagli · Applied AI: agents, evals and GPU inference" />
+  <meta property="og:description" content="AI agents in production, the evals that prove they work, and the GPUs underneath them." />
+  <meta property="og:image" content="https://nirmitdagli.github.io/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#FAFAF7" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { paper: '#FAFAF7', ink: '#14161A', muted: '#5B6170', line: '#E6E4DD', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A', violet: '#6B4FD8' },
+      fontFamily: { serif: ['"Instrument Serif"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'] } } } };
+  </script>
+  <style>
+    html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: #D5F0E4; }
+    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; line-height: 1.7; }
+    .kicker { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: #5B6170; }
+    .kicker::before { content: ""; width: 22px; height: 1px; background: #B9B6AC; }
+    .prose-p { font-size: 1.06rem; line-height: 1.75; color: #474C57; }
+    .note { border-left: 2px solid #E0DCD1; padding-left: 1.1rem; }
+    .note dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #0A7A55; }
+    .note dd { margin-top: .45rem; line-height: 1.65; color: #474C57; }
+    .link { color: #2453D6; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .link:hover { color: #14161A; }
+    .fade { opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .7s ease; }
+    .fade.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .fade { opacity: 1; transform: none; transition: none; } }
+    @media print { header, .no-print { display: none !important; } body { background: #fff; } .fade { opacity: 1 !important; transform: none !important; } }
+  </style>
+</head>
+<body class="font-sans">
+  <header class="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur">
+    <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5" aria-label="Primary">
+      <a href="../index.html" class="font-serif text-xl leading-none">Nirmit Dagli</a>
+      <div class="flex items-center gap-5 text-sm text-muted">
+        <a class="hidden hover:text-ink sm:inline" href="#agents">Agents</a>
+        <a class="hidden hover:text-ink sm:inline" href="#gpu">GPU inference</a>
+        <a class="hidden hover:text-ink sm:inline" href="#adoption">Adoption</a>
+        <a class="rounded-full bg-accent px-4 py-1.5 font-medium text-white hover:bg-[#1B44B8]" href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="mx-auto max-w-5xl px-5 pb-10 pt-14 sm:pt-20">
+      <div class="grid items-end gap-10 md:grid-cols-[1.5fr_1fr]">
+        <div class="fade">
+          <p class="kicker">Applied AI · agents, evals and GPU inference</p>
+          <h1 class="mt-5 font-serif text-[2.8rem] leading-[1.02] sm:text-6xl md:text-[4.2rem]">AI that ships to <em class="text-metric">production</em>, not just to a demo.</h1>
+          <div class="mt-7 max-w-xl space-y-4 text-[1.05rem] leading-relaxed text-muted">
+            <p>I build AI agents end to end: the tools they call, the knowledge they retrieve, the golden set that proves they work, and the gateway that keeps them safe. Then I run the GPUs underneath them.</p>
+            <p>Most of my AI work happened in places that say no by default: a global bank, and a company that handles children's education data. Getting AI approved there is half the job.</p>
+          </div>
+          <div class="no-print mt-8 flex flex-wrap items-center gap-3">
+            <a href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">llm-serving-bench on GitHub</a>
+            <a href="../index.html" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Full portfolio</a>
+            <a href="../Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline">Résumé (PDF)</a>
+          </div>
+        </div>
+        <figure class="fade">
+          <img src="../img/spark.jpg" alt="Nirmit presenting the SPARK paper at IEEE UEMCON 2025" width="640" height="800" class="aspect-[4/5] max-h-[420px] w-full rounded-2xl object-cover object-top md:max-h-none" />
+          <figcaption class="mt-3 text-xs text-muted">Presenting SPARK, a RAG framework, at IEEE UEMCON 2025</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- AGENTS -->
+    <section id="agents" class="mx-auto max-w-5xl px-5 pt-16">
+      <p class="kicker">Sidecoach Sports · founding engineer</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.2rem]">A Claude agent suite, with an engineer in the loop.</h2>
+      <p class="prose-p mt-5 max-w-3xl">I was the first infrastructure, security and AI hire. The agents run on Claude through Azure AI Foundry and do real operational work: they triage alerts, summarize them, run runbooks, report cost, run security checks, open and update Jira tickets, and propose fixes. Nothing touches production until an engineer approves.</p>
+      <p class="prose-p mt-4 max-w-3xl">The result for the engineering team: of every 20+ alerts, the agents flag the <strong class="font-semibold text-ink">~5 real incidents</strong>, open the tickets, run approved restarts, draft the root-cause analysis and point out recurring patterns. That is about <strong class="font-semibold text-ink">75% less alert noise</strong>.</p>
+
+      <div class="mt-12 grid gap-12 border-t border-line pt-10 md:grid-cols-2">
+        <article class="fade">
+          <p class="tag">Tools · MCP and RAG</p>
+          <h3 class="mt-3 font-serif text-[2.1rem] leading-tight">Agents that can act, grounded in what the company knows</h3>
+          <p class="prose-p mt-4">A custom MCP agent service connects the agents to Azure, Jira and Teams. RAG over internal docs and past incidents grounds every answer and proposed fix, so the agent cites the company's own context instead of guessing.</p>
+        </article>
+        <article class="fade">
+          <p class="tag">Quality · golden set and evals</p>
+          <h3 class="mt-3 font-serif text-[2.1rem] leading-tight">Proof it works, before it ships</h3>
+          <p class="prose-p mt-4">A golden set built from live sources (Kaggle datasets, live vulnerability feeds and real alert events) and an eval harness that runs on prompt, model and retrieval changes, so regressions are caught before release. Fine-tuning is measured against the base model on the same golden set before it goes anywhere near users.</p>
+        </article>
+        <article class="fade">
+          <p class="tag">Safety · AI gateway</p>
+          <h3 class="mt-3 font-serif text-[2.1rem] leading-tight">Every LLM call: sign-in, limits, redaction, a trace</h3>
+          <p class="prose-p mt-4">Built under COPPA and FERPA with no platform team: Entra ID sign-in, per-team keys and spend limits, PII redaction so no student data reaches a model, and an OpenTelemetry trace per request for usage, latency and cost.</p>
+        </article>
+        <article class="fade">
+          <p class="tag">Compliance · audit agent</p>
+          <h3 class="mt-3 font-serif text-[2.1rem] leading-tight">An agent that checks the website for compliance</h3>
+          <p class="prose-p mt-4">A second agent audits the public website for compliance issues, next to the COPPA, FERPA and PCI DSS (SAQ-A) program I own and the SOC 2 readiness work I started.</p>
+        </article>
+      </div>
+
+      <dl class="mt-12 grid gap-8 sm:grid-cols-2">
+        <div class="note"><dt>Why the approval gate matters</dt><dd>An agent that can open tickets and run runbooks is useful exactly as long as people trust it. Human approval on every action is what got the suite into production instead of a sandbox.</dd></div>
+        <div class="note"><dt>Built on</dt><dd>Claude on Azure AI Foundry, MCP, RAG, golden-set evals, fine-tuning, Entra ID, OpenTelemetry, Jira, Teams, GitHub CI/CD.</dd></div>
+      </dl>
+    </section>
+
+    <!-- GPU INFERENCE -->
+    <section id="gpu" class="mx-auto max-w-5xl px-5 pt-24">
+      <p class="kicker">GPU inference</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.2rem]">Same GPU, same model, same budget. Then measure.</h2>
+
+      <div class="mt-12 grid gap-12 border-t border-line pt-10 md:grid-cols-2">
+        <article class="fade">
+          <p class="tag">Open source · llm-serving-bench · Tesla T4</p>
+          <p class="mt-4 font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">609 vs 384</p>
+          <p class="mt-3 text-sm text-muted">output tokens per second at 64 users, vLLM vs SGLang, on the same GPU, model and memory budget.</p>
+          <p class="prose-p mt-6">Across 2,048 requests, vLLM's median user waited <strong class="font-semibold text-ink">1.8 seconds</strong> for the first token at 64 users, against 7.4 seconds on SGLang. AWQ 4-bit made single-user decode <strong class="font-semibold text-ink">2.3x faster</strong> but added only 5% throughput at 64 users, because decode is memory-bandwidth bound.</p>
+          <p class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm"><a class="link" href="../writing/vllm-vs-sglang-t4.html">Read the write-up</a><a class="link" href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener">Harness on GitHub</a></p>
+        </article>
+        <article class="fade">
+          <p class="tag">Quinnipiac · SPARK · IEEE UEMCON 2025</p>
+          <p class="mt-4 font-serif text-[3.6rem] leading-none sm:text-[4.6rem]">30s → 10s</p>
+          <p class="mt-3 text-sm text-muted">average latency for one RAG workload: on-prem GPUs, then GCP L4, then AWS Bedrock.</p>
+          <p class="prose-p mt-6">30 seconds on our own GPUs, 15 on GCP L4, 10 on Bedrock. The lab moved its inference to Bedrock, even though running those GPUs was my job. The right answer is the one the numbers give, not the one that keeps your cluster busy.</p>
+          <p class="mt-4 text-sm"><a class="link" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">Read the SPARK paper ↗</a></p>
+        </article>
+      </div>
+
+      <dl class="mt-12 grid gap-8 sm:grid-cols-2">
+        <div class="note"><dt>Self-hosted LLMs on Kubernetes</dt><dd>Llama 3, Mistral, Gemma and DeepSeek at 4-bit on Kubernetes GPU nodes with the NVIDIA GPU Operator and Cilium. CUDA out-of-memory failures kept taking models down, so I put them behind a process-isolated FastAPI server, which eliminated those failures.</dd></div>
+        <div class="note"><dt>Now building</dt><dd>A vLLM serving platform on Kubernetes with autoscaling on request queue depth and DCGM, Prometheus and Grafana GPU dashboards, plus a 2-node NCCL lab and a GPU failure runbook (XID errors, ECC, drain and replace).</dd></div>
+      </dl>
+    </section>
+
+    <!-- ADOPTION -->
+    <section id="adoption" class="mx-auto max-w-5xl px-5 pt-24">
+      <p class="kicker">Getting AI adopted</p>
+      <h2 class="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] sm:text-[3.2rem]">The hard part is rarely the model.</h2>
+
+      <article class="fade mt-12 grid gap-6 border-t border-line pt-10 md:grid-cols-[210px_1fr] md:gap-10">
+        <div>
+          <p class="tag">State Street · 2025</p>
+          <p class="mt-3 font-serif text-5xl leading-none">44</p>
+          <p class="mt-2 text-sm text-muted">AWS accounts on Amazon Q, under bank-grade security</p>
+        </div>
+        <div class="max-w-2xl">
+          <h3 class="font-serif text-[1.9rem] leading-tight">An internal AI assistant, inside a regulated bank</h3>
+          <p class="prose-p mt-4">I shipped a Confluence RAG assistant on Azure AI Foundry as a Microsoft Teams bot that answers access questions and helps developers write Terraform modules. The build was the easy part. Taking it live meant sign-off from the Confluence, Jira, Azure and network teams, and rolling out Amazon Q meant working through the Security and Compliance teams account by account.</p>
+        </div>
+      </article>
+
+      <article class="fade mt-12 grid gap-6 border-t border-line pt-10 md:grid-cols-[210px_1fr] md:gap-10">
+        <div>
+          <p class="tag">Zycus · 2024</p>
+          <p class="mt-3 font-serif text-5xl leading-none">~80%</p>
+          <p class="mt-2 text-sm text-muted">fewer recurring tickets, about 50 to under 10 a week</p>
+        </div>
+        <div class="max-w-2xl">
+          <h3 class="font-serif text-[1.9rem] leading-tight">The company's first internal AI chatbot</h3>
+          <p class="prose-p mt-4">Built on Azure OpenAI in 2024, alongside Jenkins pipelines that automated the recurring service requests teams kept filing. Automation first, then AI where it actually helped.</p>
+        </div>
+      </article>
+
+      <article class="fade mt-12 grid gap-6 border-t border-line pt-10 md:grid-cols-[210px_1fr] md:gap-10">
+        <div>
+          <p class="tag">Teaching · 2016 to 2023</p>
+          <p class="mt-3 font-serif text-5xl leading-none">7 years</p>
+          <p class="mt-2 text-sm text-muted">teaching science and math</p>
+        </div>
+        <div class="max-w-2xl">
+          <h3 class="font-serif text-[1.9rem] leading-tight">Explaining a system to someone who didn't build it</h3>
+          <p class="prose-p mt-4">That is most of deploying AI with a customer. Seven years in a classroom is where I learned to do it, and I still use it when I walk a security team through why an agent is safe to approve.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- PAPERS -->
+    <section class="mx-auto max-w-5xl px-5 pt-24">
+      <p class="kicker">AI papers</p>
+      <ul class="mt-6 divide-y divide-line border-y border-line">
+        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="link" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK: Smart Plug-and-Play AI Framework for RAG and Knowledge</a><span class="text-sm text-muted">IEEE UEMCON 2025</span></li>
+        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="link" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models (coauthor)</a><span class="text-sm text-muted">Computers (MDPI) 2026</span></li>
+        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="link" href="../quantum/">HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</a><span class="text-sm text-muted">IEEE ISAIA 2026 · accepted</span></li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mx-auto max-w-5xl px-5 pb-16 pt-28">
+      <div class="fade border-t-2 border-ink pt-10">
+        <h2 class="max-w-3xl font-serif text-5xl leading-[1.05] sm:text-[4rem]">Putting AI to work inside a real company? <em class="text-metric">Let's talk.</em></h2>
+        <div class="mt-10 grid gap-8 sm:grid-cols-[1.2fr_1fr]">
+          <div class="space-y-3 text-[1.05rem]">
+            <p><a class="link text-xl" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a></p>
+            <p><a class="hover:text-accent" href="tel:+14753174538">475 317 4538</a></p>
+            <p class="text-muted">Austin, TX · open to relocating anywhere in the US</p>
+          </div>
+          <div class="no-print flex flex-wrap content-start gap-3">
+            <a class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]" href="../Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <p class="mt-12 text-sm text-muted">The infrastructure side of my work (Kubernetes, networking, production security) is on the <a class="link" href="../index.html">main portfolio</a>, and the quantum research is <a class="link" href="../quantum/">here</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto flex max-w-5xl flex-wrap justify-between gap-2 px-5 pb-10 text-xs text-muted">
+    <p>© 2026 Nirmit Dagli</p>
+    <p>Built by hand with HTML and Tailwind.</p>
+  </footer>
+
+  <script>
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 }) : null;
+    document.querySelectorAll('.fade').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+  </script>
+</body>
+</html>
