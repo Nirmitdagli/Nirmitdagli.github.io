@@ -124,13 +124,13 @@
         lesson: 'Build the clean room before you need it: offline, ready, with a runbook next to it.'
       },
       {
-        clock: 'Days 1–7', phase: 'Recovery',
+        clock: 'Days 1–15', phase: 'Recovery',
         text: 'You have a clean way in, backups, and a forensic team working out how it got in. 7 environments to bring back.',
         q: 'How do you restore?',
         options: [
           { t: 'Clean the old servers and turn everything back on.', r: 'One missed infection and you are back to 10:00 on day one, with less goodwill.' },
           { t: 'Restore everything from backup in one go.', r: 'Fast, but if anything in the backups or the network is still compromised, it all comes back together.' },
-          { t: 'Break the infrastructure into pieces. Isolate, check and restore one piece at a time, on new servers.', real: true, r: 'With Zscaler rolled out immediately and the forensic findings closing the way in. By day 7, all 7 environments were back.' },
+          { t: 'Break the infrastructure into pieces. Isolate, check and restore one piece at a time, on new servers.', real: true, r: 'With Zscaler rolled out immediately and the forensic findings closing the way in. By day 15, all 7 environments were back.' },
         ],
         lesson: 'You can\'t turn a compromised network back on and hope.'
       },
@@ -211,7 +211,7 @@
           <p class="mt-4 font-serif text-[4rem] leading-none sm:text-[5.5rem]">${score} <span class="text-[#B8B3A6]">of</span> 6</p>
           <p class="mt-3 text-muted">good calls under pressure</p>
           <p class="mt-8 max-w-xl text-[1.12rem] leading-relaxed">${verdict}</p>
-          <p class="mt-4 max-w-xl leading-relaxed text-muted">We got 4 of 6 ourselves: the first two calls cost us about three hours. The real outcome: 1,500+ servers back across 7 environments in 7 days, then 4 months of hardening.</p>
+          <p class="mt-4 max-w-xl leading-relaxed text-muted">We got 4 of 6 ourselves: the first two calls cost us about three hours. The real outcome: 1,500+ servers back across 7 environments in 15 days, then 4 months of hardening.</p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="ransomware-recovery-postmortem.html" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">Read the full postmortem</a>
             <a href="../Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>

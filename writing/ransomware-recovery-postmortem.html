@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The morning ransomware took 1,500 servers down | Nirmit Dagli</title>
-  <meta name="description" content="A blameless postmortem of a 2022 ransomware incident at an enterprise SaaS company: the first three hours, the decision to shut everything down, rebuilding in pieces over 7 days, and 4 months of hardening." />
+  <meta name="description" content="A blameless postmortem of a 2022 ransomware incident at an enterprise SaaS company: the first three hours, the decision to shut everything down, rebuilding in pieces over 15 days, and 4 months of hardening." />
   <meta property="og:title" content="The morning ransomware took 1,500 servers down" />
-  <meta property="og:description" content="A blameless postmortem: the first three hours, shutting everything down, rebuilding in 7 days, and what changed." />
+  <meta property="og:description" content="A blameless postmortem: the first three hours, shutting everything down, rebuilding in 15 days, and what changed." />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="https://nirmitdagli.github.io/og.png" />
   <meta name="theme-color" content="#FAFAF7" />
@@ -51,11 +51,11 @@
   <main class="mx-auto max-w-3xl px-5 py-14 sm:py-20">
     <p class="tag">Incident review · Enterprise SaaS · 2022</p>
     <h1 class="mt-4 font-serif text-[2.6rem] leading-[1.05] sm:text-[3.6rem]">The morning ransomware took 1,500 servers down</h1>
-    <p class="mt-5 text-lg leading-relaxed text-muted">A blameless postmortem. In 2022, ransomware took 1,500+ servers and 80 to 90 services per environment offline at Zycus, across 7 environments. We had the fleet back in 7 days and spent the next 4 months hardening it. I was one of the first responders.</p>
+    <p class="mt-5 text-lg leading-relaxed text-muted">A blameless postmortem. In 2022, ransomware took 1,500+ servers and 80 to 90 services per environment offline at Zycus, across 7 environments. We had the fleet back in 15 days and spent the next 4 months hardening it. I was one of the first responders.</p>
 
     <div class="mt-10 grid grid-cols-3 gap-6 border-y border-line py-6">
       <div><p class="font-serif text-4xl leading-none sm:text-5xl">~3 h</p><p class="mt-2 text-xs text-muted">from the first call to a confirmed attack</p></div>
-      <div><p class="font-serif text-4xl leading-none sm:text-5xl">7 days</p><p class="mt-2 text-xs text-muted">to restore all 7 environments</p></div>
+      <div><p class="font-serif text-4xl leading-none sm:text-5xl">15 days</p><p class="mt-2 text-xs text-muted">to restore all 7 environments</p></div>
       <div><p class="font-serif text-4xl leading-none sm:text-5xl">4 mo</p><p class="mt-2 text-xs text-muted">of hardening afterwards</p></div>
     </div>
 
@@ -71,7 +71,7 @@
         <li style="--dot:#2453D6"><time>Same day</time><p>I build a single standalone machine, cut off from the network, so we can reach data and VMware without touching anything that might still be infected.</p></li>
       </ol>
 
-      <h2>Days 1 to 7: rebuild in pieces</h2>
+      <h2>Days 1 to 15: rebuild in pieces</h2>
       <p>You can't turn a compromised network back on and hope. We disconnected the infrastructure into pieces, isolated and checked each one, and brought back only what was clean.</p>
       <ul>
         <li><strong>Isolate, check, restore.</strong> One piece at a time, so a missed infection couldn't reach everything again.</li>
@@ -79,7 +79,7 @@
         <li><strong>Backups and new servers.</strong> Restored from backup and rebuilt servers rather than cleaning the old ones.</li>
         <li><strong>Forensics.</strong> I worked with the forensic team to understand how it got in, so the rebuild closed that path.</li>
       </ul>
-      <p>By day 7, the fleet was back across all 7 environments.</p>
+      <p>By day 15, the fleet was back across all 7 environments.</p>
 
       <h2>The next 4 months: hardening</h2>
       <p>Restoring service was the urgent part. The bigger job was making sure the next one couldn't spread the same way, from the cloud network down to the OS on every server.</p>

@@ -28,31 +28,35 @@
       if (old.indexOf(h) > -1 || h.indexOf('p-') === 0) location.replace('plain.html#' + h);
     })();
   </script>
+  <script>try { var _t = localStorage.getItem('nd-theme'); if (_t && _t !== 'paper') document.documentElement.setAttribute('data-theme', _t); } catch (e) {}</script>
   <style>
     :root {
       --paper: #FAFAF7; --ink: #14161A; --muted: #5B6170; --line: #E6E4DD;
       --accent: #2453D6; --metric: #0A7A55; --warm: #B4532A; --violet: #6B4FBB;
+      --card: #FFFFFF; --body: #343842; --soft: #F2F1EC; --hdr: rgba(250,250,247,.88); --gridline: rgba(20,22,26,.045); --stagebg: #FFFFFF; --border2: #cfccc2;
       --serif: "Instrument Serif", Georgia, serif;
       --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
+    html[data-theme="night"] { --paper: #0F1115; --ink: #E8E9EC; --muted: #9AA1AE; --line: #2A2E36; --accent: #6E9BFF; --metric: #3DD39A; --warm: #F08A5D; --violet: #A98BFF; --card: #171A20; --body: #C9CDD5; --soft: #22262E; --hdr: rgba(15,17,21,.86); --gridline: rgba(255,255,255,.035); --stagebg: #141820; --border2: #3A3F49; }
+    html[data-theme="blueprint"] { --paper: #0B3D91; --ink: #F1F6FF; --muted: #B9CCEE; --line: rgba(255,255,255,.22); --accent: #FFD166; --metric: #7CF0C4; --warm: #FF9F6B; --violet: #C9B6FF; --card: #0E4AA8; --body: #E3ECFF; --soft: rgba(255,255,255,.1); --hdr: rgba(11,61,145,.88); --gridline: rgba(255,255,255,.08); --stagebg: #0D44A0; --border2: rgba(255,255,255,.4); }
     * { box-sizing: border-box; }
     html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-    body { background-image: linear-gradient(rgba(20,22,26,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(20,22,26,.045) 1px, transparent 1px); background-size: 40px 40px; min-height: 100vh; }
+    body { background-image: linear-gradient(var(--gridline) 1px, transparent 1px), linear-gradient(90deg, var(--gridline) 1px, transparent 1px); background-size: 40px 40px; min-height: 100vh; }
     a { color: inherit; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .skip:focus { position: fixed; left: 12px; top: 12px; z-index: 60; width: auto; height: auto; clip: auto; background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 6px; }
 
     /* Top bar: recruiter fast lane, always visible */
-    header { position: sticky; top: 0; z-index: 30; background: rgba(250,250,247,.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    header { position: sticky; top: 0; z-index: 30; background: var(--hdr); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
     .bar { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; }
     .brand { font-family: var(--serif); font-size: 22px; line-height: 1; text-decoration: none; }
     .brand small { display: block; font-family: var(--sans); font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: .01em; }
     .actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-    .btn { font: 500 14px/1 var(--sans); padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; text-decoration: none; cursor: pointer; white-space: nowrap; }
-    .btn:hover { border-color: #cfccc2; }
-    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .btn.primary:hover { background: #1B44B8; }
+    .btn { font: 500 14px/1 var(--sans); padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; cursor: pointer; white-space: nowrap; }
+    .btn:hover { border-color: var(--border2); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+    .btn.primary:hover { filter: brightness(.92); }
     .btn:focus-visible, .chip:focus-visible, .dir button:focus-visible, .bldg:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
     main { max-width: 1200px; margin: 0 auto; padding: 18px 20px 40px; }
@@ -60,7 +64,7 @@
     h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.4vw, 50px); line-height: 1.04; margin: 6px 0 8px; max-width: 760px; }
     h1 em { color: var(--accent); }
     .lede { color: var(--muted); font-size: 16px; line-height: 1.55; max-width: 660px; margin: 0; }
-    .chip { display: inline-flex; align-items: center; gap: 8px; font: 500 13px/1 var(--sans); padding: 8px 12px; border-radius: 999px; background: #fff; border: 1px dashed #c9c5b9; cursor: pointer; color: var(--ink); text-decoration: none; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; font: 500 13px/1 var(--sans); padding: 8px 12px; border-radius: 999px; background: var(--card); border: 1px dashed var(--border2); cursor: pointer; color: var(--ink); text-decoration: none; }
     .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--metric); box-shadow: 0 0 0 0 rgba(10,122,85,.5); animation: ping 2s infinite; }
     @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(10,122,85,.45); } 70% { box-shadow: 0 0 0 8px rgba(10,122,85,0); } 100% { box-shadow: 0 0 0 0 rgba(10,122,85,0); } }
 
@@ -68,17 +72,21 @@
     .status b { color: var(--metric); font-weight: 500; }
 
     /* Map */
-    .stage { position: relative; margin-top: 10px; border: 1px solid var(--line); border-radius: 18px; background: radial-gradient(120% 90% at 50% 40%, #fff 0%, rgba(255,255,255,.6) 55%, rgba(250,250,247,0) 100%); overflow: hidden; }
+    .stage { position: relative; margin-top: 10px; border: 1px solid var(--line); border-radius: 18px; background: var(--stagebg); overflow: hidden; }
     .stage svg { display: block; width: 100%; height: auto; max-height: 78vh; user-select: none; }
-    .hint { position: absolute; left: 14px; bottom: 12px; font: 12px/1.3 var(--mono); color: var(--muted); background: rgba(255,255,255,.85); padding: 6px 9px; border-radius: 8px; border: 1px solid var(--line); }
-    .visits { position: absolute; right: 14px; bottom: 12px; font: 12px/1.3 var(--mono); color: var(--muted); background: rgba(255,255,255,.85); padding: 6px 9px; border-radius: 8px; border: 1px solid var(--line); }
+    .themes { position: absolute; right: 14px; top: 12px; display: flex; gap: 4px; padding: 4px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; z-index: 2; }
+    .themes button { font: 500 12px/1 var(--sans); border: 0; background: transparent; color: var(--muted); padding: 7px 10px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+    .themes button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+    .themes .sw2 { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(127,127,127,.5); }
+    .hint { position: absolute; left: 14px; bottom: 12px; font: 12px/1.3 var(--mono); color: var(--muted); background: var(--card); padding: 6px 9px; border-radius: 8px; border: 1px solid var(--line); }
+    .visits { position: absolute; right: 14px; bottom: 12px; font: 12px/1.3 var(--mono); color: var(--muted); background: var(--card); padding: 6px 9px; border-radius: 8px; border: 1px solid var(--line); }
     .visits b { color: var(--ink); font-weight: 500; }
 
     .bldg { cursor: pointer; transition: transform .25s cubic-bezier(.2,.7,.2,1); outline: none; }
     .bldg:hover, .bldg:focus-visible, .bldg.on { transform: translateY(-7px); }
     .bldg .lbl rect { transition: fill .2s, stroke .2s; }
     .bldg:hover .lbl rect, .bldg:focus-visible .lbl rect, .bldg.on .lbl rect { fill: var(--ink); stroke: var(--ink); }
-    .bldg:hover .lbl text, .bldg:focus-visible .lbl text, .bldg.on .lbl text { fill: #fff; }
+    .bldg:hover .lbl text, .bldg:focus-visible .lbl text, .bldg.on .lbl text { fill: var(--paper); }
     .bldg .seen { opacity: 0; transition: opacity .3s; }
     .bldg.visited .seen { opacity: 1; }
     .led { animation: blink 1.6s steps(2, end) infinite; }
@@ -93,8 +101,8 @@
     .dirwrap { margin-top: 22px; }
     .dirwrap h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 0 0 10px; }
     .dir { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; list-style: none; margin: 0; padding: 0; }
-    .dir button { width: 100%; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: inherit; display: flex; gap: 12px; align-items: flex-start; }
-    .dir button:hover { border-color: #cfccc2; }
+    .dir button { width: 100%; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: inherit; display: flex; gap: 12px; align-items: flex-start; }
+    .dir button:hover { border-color: var(--border2); }
     .dir .sw { width: 10px; height: 10px; border-radius: 3px; margin-top: 5px; flex: none; }
     .dir strong { display: block; font-weight: 600; font-size: 14px; }
     .dir span.d { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; line-height: 1.4; }
@@ -102,26 +110,26 @@
     /* Drawer */
     .scrim { position: fixed; inset: 0; background: rgba(20,22,26,.18); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 40; }
     .scrim.open { opacity: 1; pointer-events: auto; }
-    aside.drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(460px, 100%); background: #fff; border-left: 1px solid var(--line); box-shadow: -18px 0 40px rgba(20,22,26,.08); transform: translateX(105%); transition: transform .28s cubic-bezier(.2,.7,.2,1); z-index: 50; display: flex; flex-direction: column; }
+    aside.drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(460px, 100%); background: var(--card); color: var(--ink); border-left: 1px solid var(--line); box-shadow: -18px 0 40px rgba(20,22,26,.08); transform: translateX(105%); transition: transform .28s cubic-bezier(.2,.7,.2,1); z-index: 50; display: flex; flex-direction: column; }
     aside.drawer.open { transform: none; }
     .dhead { padding: 18px 20px 12px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
     .kicker { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
     .dhead h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.05; margin: 8px 0 0; }
-    .x { border: 1px solid var(--line); background: #fff; border-radius: 999px; width: 36px; height: 36px; font-size: 18px; cursor: pointer; flex: none; }
-    .dbody { padding: 16px 20px 28px; overflow-y: auto; line-height: 1.55; font-size: 15px; }
+    .x { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; width: 36px; height: 36px; font-size: 18px; cursor: pointer; flex: none; }
+    .dbody { padding: 16px 20px 28px; color: var(--body); overflow-y: auto; line-height: 1.55; font-size: 15px; }
     .dbody p { margin: 0 0 12px; }
     .dbody .metric { font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--metric); }
     .item { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 0 0 10px; }
     .item h3 { margin: 6px 0 4px; font-size: 15px; font-weight: 600; }
-    .item p { margin: 0; color: #343842; font-size: 14px; }
+    .item p { margin: 0; color: var(--body); font-size: 14px; }
     .links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 14px; }
     .links a { color: var(--accent); text-decoration: none; font-weight: 500; }
     .links a:hover { text-decoration: underline; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 12px; }
-    .tag { font: 12px/1 var(--mono); padding: 5px 8px; border-radius: 6px; background: #F2F1EC; color: #343842; }
+    .tag { font: 12px/1 var(--mono); padding: 5px 8px; border-radius: 6px; background: var(--soft); color: var(--body); }
     .tl { border-left: 1px solid var(--line); padding-left: 14px; margin: 0; list-style: none; }
     .tl li { position: relative; margin: 0 0 12px; font-size: 14px; }
-    .tl li::before { content: ""; position: absolute; left: -19px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: #fff; border: 2px solid var(--accent); }
+    .tl li::before { content: ""; position: absolute; left: -19px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--card); border: 2px solid var(--accent); }
     .tl b { font: 500 12px/1 var(--mono); color: var(--muted); display: block; margin-bottom: 3px; }
     .dnav { display: flex; justify-content: space-between; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--line); }
 
@@ -170,6 +178,11 @@
 
     <div class="stage" id="stage">
       <svg id="map" viewBox="-470 -30 940 492" role="group" aria-label="Isometric map of an AI data center campus. Each building opens a section of the portfolio."></svg>
+      <div class="themes" role="group" aria-label="Color theme">
+        <button type="button" data-theme="paper"><span class="sw2" style="background:#FAFAF7"></span>Paper</button>
+        <button type="button" data-theme="night"><span class="sw2" style="background:#0F1115"></span>Night shift</button>
+        <button type="button" data-theme="blueprint"><span class="sw2" style="background:#0B3D91"></span>Blueprint</button>
+      </div>
       <div class="hint" aria-hidden="true">click a building · Esc to close · ← → to walk</div>
       <div class="visits" aria-live="polite">visited <b id="vcount">0</b>/<span id="vtotal">0</span></div>
     </div>
@@ -232,22 +245,37 @@
     // Point on the front-right face (x = x+w): u along y (0..d), v up
     function fr(b, u, v) { return P(b.x + b.w, b.y + u, v); }
 
-    var WALL = { t: '#FBFAF6', l: '#ECEAE3', r: '#DAD7CE' };
-    var DARK = { t: '#3A3E47', l: '#23262C', r: '#1A1C21' };
+    var THEMES = {
+      paper: { wall: { t: '#FBFAF6', l: '#ECEAE3', r: '#DAD7CE' }, sec: { t: '#FBF4EF', l: '#F0E1D6', r: '#E2CDBE' }, tower: { t: '#FFFFFF', l: '#EAE8E1', r: '#D7D4CA' },
+        plate: '#F4F3EE', plateLine: '#E1DED5', plateL: '#E4E1D8', plateR: '#D5D2C8', grid: 'rgba(20,22,26,.05)', road: '#E7E5DE', dash: '#FFFFFF',
+        lblBg: '#FFFFFF', lblLine: '#D9D6CC', lblText: '#14161A', leader: '#C9C5B9', leaf: '#7FA88E', leaf2: '#97BCA4', trunk: '#8A7A66', shadow: 'rgba(20,22,26,.07)', sign: '#14161A', signText: '#FFFFFF',
+        c: { accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A', violet: '#6B4FBB', ink: '#14161A', muted: '#5B6170' } },
+      night: { wall: { t: '#3A3F4A', l: '#2A2E36', r: '#1F2229' }, sec: { t: '#4A3A33', l: '#3A2D27', r: '#2C221E' }, tower: { t: '#444A56', l: '#30343D', r: '#24272E' },
+        plate: '#1A1D23', plateLine: '#2A2E36', plateL: '#14161B', plateR: '#0F1115', grid: 'rgba(255,255,255,.04)', road: '#252931', dash: '#3D434E',
+        lblBg: '#1F232A', lblLine: '#3A3F49', lblText: '#E8E9EC', leader: '#4A505B', leaf: '#2F6B52', leaf2: '#3E8466', trunk: '#5A4E42', shadow: 'rgba(0,0,0,.35)', sign: '#2453D6', signText: '#FFFFFF',
+        c: { accent: '#6E9BFF', metric: '#3DD39A', warm: '#F08A5D', violet: '#A98BFF', ink: '#E8E9EC', muted: '#9AA1AE' } },
+      blueprint: { wall: { t: '#2C66C4', l: '#1E57B4', r: '#174A9C' }, sec: { t: '#2C66C4', l: '#1E57B4', r: '#174A9C' }, tower: { t: '#3570CC', l: '#225CB8', r: '#1A4EA2' },
+        plate: '#0D44A0', plateLine: 'rgba(255,255,255,.35)', plateL: '#0A3B8C', plateR: '#08327A', grid: 'rgba(255,255,255,.12)', road: '#0B3D91', dash: 'rgba(255,255,255,.55)',
+        lblBg: '#0B3D91', lblLine: 'rgba(255,255,255,.55)', lblText: '#F1F6FF', leader: 'rgba(255,255,255,.45)', leaf: 'rgba(255,255,255,.25)', leaf2: 'rgba(255,255,255,.4)', trunk: 'rgba(255,255,255,.5)', shadow: 'rgba(0,0,0,.18)', sign: '#FFD166', signText: '#0B3D91',
+        c: { accent: '#FFD166', metric: '#7CF0C4', warm: '#FF9F6B', violet: '#C9B6FF', ink: '#F1F6FF', muted: '#B9CCEE' } }
+    };
+    var themeName = document.documentElement.getAttribute('data-theme') || 'paper';
+    var T = THEMES[themeName] || THEMES.paper;
+    var WALL = T.wall;
 
     // ---------------- Content (all facts from the plain view) ----------------
     var L = function (href, text, ext) { return '<a href="' + href + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + text + '</a>'; };
     var B = [
-      { id: 'reception', name: 'Reception', kicker: 'Lobby · about me', color: C.accent, x: 5.6, y: 8.5, w: 2.4, d: 2.0, h: 30,
+      { id: 'reception', name: 'Reception', kicker: 'Lobby · about me', ckey: 'accent', color: C.accent, x: 5.6, y: 8.5, w: 2.4, d: 2.0, h: 30,
         blurb: 'Who I am and the 30-second version.',
         html:
-          '<p>I started on the Linux team at Zycus in 2021. By the end I was running <b>50+ Kubernetes clusters</b>, and when ransomware took <b>1,500+ servers</b> offline, I was one of the first responders who brought them back.</p>' +
+          '<p>I started on the Linux team at Zycus in 2021. By the end I was running <b>50+ Kubernetes clusters</b>, and when ransomware took <b>1,500+ servers</b> offline, I was one of the first responders who brought them back in 15 days.</p>' +
           '<p>Today I\'m the first platform hire at <b>Sidecoach Sports</b> (Waco, TX), where I build the AI gateway, the agents and the security around them. In research I run GPU clusters and benchmark how LLMs are served.</p>' +
           '<div class="tags"><span class="tag">CKA</span><span class="tag">CKAD</span><span class="tag">AWS Solutions Architect</span><span class="tag">RHCSA</span><span class="tag">M.S. CS, Quinnipiac</span></div>' +
           '<div class="item"><div class="kicker">If you only have 30 seconds</div><h3>Platform, SRE and security for production AI</h3><p>2,000+ servers onto 50+ clusters · vLLM vs SGLang 609 vs 384 tok/s · AI gateway with PII redaction · ransomware recovery of 1,500+ servers.</p>' +
           '<div class="links">' + L('Nirmit_Dagli_Resume.pdf', 'Résumé (PDF)', 1) + L('Nirmit_Dagli_AI_Resume.pdf', 'AI résumé (PDF)', 1) + L('plain.html', 'Plain view') + '</div></div>' },
 
-      { id: 'gpu', name: 'GPU Hall', kicker: 'Compute · LLM serving', color: C.metric, x: 1, y: 1, w: 6, d: 2.4, h: 44,
+      { id: 'gpu', name: 'GPU Hall', kicker: 'Compute · LLM serving', ckey: 'metric', color: C.metric, x: 1, y: 1, w: 6, d: 2.4, h: 44,
         blurb: 'vLLM vs SGLang, Triton kernels, self-hosted LLMs.',
         html:
           '<div class="item"><div class="kicker">Open source</div><div class="metric">609 vs 384</div><h3>llm-serving-bench</h3><p>vLLM vs SGLang tok/s at 64 users on the same Tesla T4. AWQ made 1 user 2.3x faster but 64 users only 5% faster.</p><div class="links">' + L('plain.html#live', 'Watch the race') + L('writing/vllm-vs-sglang-t4.html', 'Write-up') + L('https://github.com/Nirmitdagli/llm-serving-bench', 'GitHub', 1) + '</div></div>' +
@@ -255,7 +283,7 @@
           '<div class="item"><div class="kicker">Quinnipiac</div><div class="metric">4 LLMs</div><h3>Self-hosted models on Kubernetes GPU nodes</h3><p>Llama 3, Mistral, Gemma and DeepSeek, 4-bit, with the NVIDIA GPU Operator and Cilium. A process-isolated FastAPI server eliminated the CUDA out-of-memory crashes.</p></div>' +
           '<div class="item"><div class="kicker">IEEE UEMCON 2025</div><div class="metric">30s → 10s</div><h3>SPARK: own GPUs vs managed</h3><p>30s on our GPUs, 15s on GCP L4, 10s on Bedrock. The lab moved inference to Bedrock, even though running those GPUs was my job.</p><div class="links">' + L('ai/', 'Applied AI page') + '</div></div>' },
 
-      { id: 'control', name: 'Control Plane', kicker: 'Kubernetes · platform', color: C.accent, x: 8.6, y: 1, w: 3, d: 2.8, h: 62,
+      { id: 'control', name: 'Control Plane', kicker: 'Kubernetes · platform', ckey: 'accent', color: C.accent, x: 8.6, y: 1, w: 3, d: 2.8, h: 62,
         blurb: '2,000+ servers onto 50+ clusters, platforms from zero.',
         html:
           '<div class="item"><div class="kicker">Zycus</div><div class="metric">2,000+ → 50+</div><h3>Servers onto Kubernetes</h3><p>VMware, KVM and bare metal onto EKS, AKS, GKE, Rancher and OpenShift with ArgoCD GitOps, Kyverno policies and Velero backups. Team of 5 standardizing Terraform, Ansible and Jenkins; provisioning about 40% faster.</p><div class="links">' + L('plain.html#live', 'Watch the migration') + '</div></div>' +
@@ -263,7 +291,7 @@
           '<div class="item"><div class="kicker">Zycus · automation</div><div class="metric">~80%</div><h3>Fewer repeat tickets</h3><p>About 50 recurring service requests a week down to under 10 with Jenkins automation.</p></div>' +
           '<div class="item"><div class="kicker">Zycus · cost</div><h3>100% AWS Spot across multiple AZs</h3><p>Moved production onto Spot capacity.</p><div class="links">' + L('plain.html#projects', 'All projects') + '</div></div>' },
 
-      { id: 'aiops', name: 'AI Ops Center', kicker: 'Gateways · agents', color: C.violet, x: 5, y: 4.6, w: 3, d: 2.4, h: 50,
+      { id: 'aiops', name: 'AI Ops Center', kicker: 'Gateways · agents', ckey: 'violet', color: C.violet, x: 5, y: 4.6, w: 3, d: 2.4, h: 50,
         blurb: 'AI gateway, MCP agents, human-in-loop SRE agents.',
         html:
           '<div class="item"><div class="kicker">Sidecoach · AI</div><div class="metric">1 gateway</div><h3>AI gateway and MCP agents</h3><p>Every LLM call gets Entra ID sign-in, per-team keys and spend limits, PII redaction so no student data reaches a model, and an OpenTelemetry trace. Built under COPPA and FERPA, with an MCP agent service and RAG over internal content.</p></div>' +
@@ -271,7 +299,7 @@
           '<div class="item"><div class="kicker">State Street</div><div class="metric">44</div><h3>AI assistant and Amazon Q</h3><p>Confluence RAG in Microsoft Teams that answers access questions and helps developers write Terraform; Amazon Q rolled out across 44 AWS accounts.</p></div>' +
           '<div class="item"><div class="kicker">Open source</div><h3>QGPT tutor on Bedrock</h3><p>RAG, vision and image generation with model routing by question type, rate limiting and least-privilege IAM.</p><div class="links">' + L('https://github.com/Nirmitdagli/qgpt', 'GitHub', 1) + L('ai/', 'Applied AI page') + '</div></div>' },
 
-      { id: 'noc', name: 'NOC', kicker: 'Network operations · live demos', color: C.accent, x: 1, y: 5, w: 2.6, d: 2.6, h: 38,
+      { id: 'noc', name: 'NOC', kicker: 'Network operations · live demos', ckey: 'accent', color: C.accent, x: 1, y: 5, w: 2.6, d: 2.6, h: 38,
         blurb: 'Four live replays and an on-call game.',
         html:
           '<p>Four things I\'ve run, replayed from real numbers. Pick one and press play.</p>' +
@@ -281,14 +309,14 @@
           '<div class="item"><div class="kicker">04 · You\'re on call</div><h3>It\'s 07:00 and your phone rings</h3><p>Six calls built from a real incident. What do you do?</p><div class="links">' + L('writing/oncall.html', 'Take the on-call shift') + '</div></div>' +
           '<div class="links">' + L('plain.html#live', 'Open the live demos') + '</div>' },
 
-      { id: 'security', name: 'Security Gate', kicker: 'SOC · incident response', color: C.warm, x: 11, y: 9.0, w: 1.1, d: 1.0, h: 26,
+      { id: 'security', name: 'Security Gate', kicker: 'SOC · incident response', ckey: 'warm', color: C.warm, x: 11, y: 9.0, w: 1.1, d: 1.0, h: 26,
         blurb: 'Ransomware recovery and the security program after it.',
         html:
-          '<div class="item"><div class="kicker">Zycus · 2022</div><div class="metric">1,500+</div><h3>Ransomware recovery</h3><p>One of the first responders. We shut everything down on purpose to stop the spread, built a clean standalone machine to reach data and VMware, and rebuilt 7 environments in isolated pieces.</p><div class="links">' + L('writing/ransomware-recovery-postmortem.html', 'Read the postmortem') + L('writing/oncall.html', 'Play the first call') + '</div></div>' +
+          '<div class="item"><div class="kicker">Zycus · 2022</div><div class="metric">1,500+</div><h3>Ransomware recovery</h3><p>One of the first responders. We shut everything down on purpose to stop the spread, built a clean standalone machine to reach data and VMware, and rebuilt 7 environments in isolated pieces, back in 15 days.</p><div class="links">' + L('writing/ransomware-recovery-postmortem.html', 'Read the postmortem') + L('writing/oncall.html', 'Play the first call') + '</div></div>' +
           '<div class="item"><div class="kicker">After the incident</div><h3>Segmented network and DR</h3><p>Transit Gateway, segmented VPCs and 20 Palo Alto firewalls across 10 AWS environments plus 5 on-prem FortiGates; Zscaler, CrowdStrike and CyberArk; a new Veeam backup and DR program.</p><div class="links">' + L('plain.html#live', 'Watch the network demo') + '</div></div>' +
           '<div class="item"><div class="kicker">Sidecoach</div><h3>Security program from zero</h3><p>Enforced MFA, Intune-managed laptops, COPPA, FERPA and PCI DSS, and SOC 2 readiness started.</p></div>' },
 
-      { id: 'research', name: 'Research Lab', kicker: 'Papers · quantum · AI', color: C.violet, x: 9.5, y: 5, w: 2.6, d: 2.6, h: 32,
+      { id: 'research', name: 'Research Lab', kicker: 'Papers · quantum · AI', ckey: 'violet', color: C.violet, x: 9.5, y: 5, w: 2.6, d: 2.6, h: 32,
         blurb: 'SPARK, HERO-S and quantum computing research.',
         html:
           '<div class="item"><div class="kicker">IEEE ISAIA 2026 · accepted</div><h3>HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</h3><p>Routes AI jobs across CPU, GPU, cloud and edge by cost, energy and latency: 72 to 98% less energy.</p></div>' +
@@ -298,7 +326,7 @@
           '<div class="item"><div class="kicker">Springer · 2026</div><h3>Quantum Computing: Grover\'s Algorithm for String Search and Its Practical Limits</h3><div class="links">' + L('https://doi.org/10.1007/978-3-032-08977-9_40', 'Paper', 1) + '</div></div>' +
           '<div class="links">' + L('quantum/', 'Quantum research') + L('ai/', 'Applied AI') + L('plain.html#research', 'Photos and more') + '</div>' },
 
-      { id: 'journey', name: 'Commissioning Log', kicker: 'Journey · 2016 → now', color: C.ink, x: 12.3, y: 1.0, w: 1.2, d: 1.2, h: 92, ly: 40,
+      { id: 'journey', name: 'Commissioning Log', kicker: 'Journey · 2016 → now', ckey: 'ink', color: C.ink, x: 12.3, y: 1.0, w: 1.2, d: 1.2, h: 92, ly: 40,
         blurb: 'From a classroom in Mumbai to running AI infrastructure.',
         html:
           '<ul class="tl">' +
@@ -312,14 +340,14 @@
           '<li><b>2016 → 2023</b>Science and math teacher · Mumbai, about 7 years. B.E., University of Mumbai.</li>' +
           '</ul><div class="links">' + L('plain.html#journey', 'Full journey') + '</div>' },
 
-      { id: 'archive', name: 'Archive', kicker: 'Writing', color: C.muted, x: 1, y: 9, w: 2.4, d: 2.0, h: 26,
+      { id: 'archive', name: 'Archive', kicker: 'Writing', ckey: 'muted', color: C.muted, x: 1, y: 9, w: 2.4, d: 2.0, h: 26,
         blurb: 'Postmortems and benchmark write-ups.',
         html:
-          '<div class="item"><div class="kicker">Incident review · 7 min</div><h3>The morning ransomware took 1,500 servers down</h3><p>A blameless postmortem: three hours from a vague phone call to a confirmed attack, shutting everything down on purpose, and rebuilding 7 environments.</p><div class="links">' + L('writing/ransomware-recovery-postmortem.html', 'Read') + '</div></div>' +
+          '<div class="item"><div class="kicker">Incident review · 7 min</div><h3>The morning ransomware took 1,500 servers down</h3><p>A blameless postmortem: three hours from a vague phone call to a confirmed attack, shutting everything down on purpose, and rebuilding 7 environments in 15 days.</p><div class="links">' + L('writing/ransomware-recovery-postmortem.html', 'Read') + '</div></div>' +
           '<div class="item"><div class="kicker">Benchmark · 6 min</div><h3>vLLM vs SGLang on a T4: what 2,048 requests showed</h3><p>Why vLLM served 609 vs 384 tok/s at 64 users, and why 4-bit helped one user far more than 64.</p><div class="links">' + L('writing/vllm-vs-sglang-t4.html', 'Read') + '</div></div>' +
           '<div class="item"><div class="kicker">Interactive</div><h3>You\'re on call</h3><p>Six calls from a real incident.</p><div class="links">' + L('writing/oncall.html', 'Play') + '</div></div>' },
 
-      { id: 'dispatch', name: 'Dispatch', kicker: 'Contact', color: C.metric, x: 8.6, y: 11.4, w: 2.2, d: 1.6, h: 18,
+      { id: 'dispatch', name: 'Dispatch', kicker: 'Contact', ckey: 'metric', color: C.metric, x: 8.6, y: 11.4, w: 2.2, d: 1.6, h: 18,
         blurb: 'Email, phone, LinkedIn, résumé.',
         html:
           '<p>Working on AI infrastructure? Let\'s talk.</p>' +
@@ -330,25 +358,32 @@
 
     // ---------------- Draw ----------------
     var svg = document.getElementById('map');
+    var nodes = {};
+    function render() {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    nodes = {};
+    WALL = T.wall;
+    C = T.c;
+    B.forEach(function (b) { b.color = C[b.ckey]; });
     var ground = el('g', {}, svg), roads = el('g', {}, svg), traffic = el('g', {}, svg), city = el('g', {}, svg);
 
     // Ground plate with tile grid
     var N = 14;
-    poly([P(0, 0), P(N, 0), P(N, N), P(0, N)], '#F4F3EE', ground, { stroke: '#E1DED5' });
+    poly([P(0, 0), P(N, 0), P(N, N), P(0, N)], T.plate, ground, { stroke: T.plateLine });
     for (var i = 1; i < N; i++) {
-      el('line', { x1: P(i, 0)[0], y1: P(i, 0)[1], x2: P(i, N)[0], y2: P(i, N)[1], stroke: 'rgba(20,22,26,.05)' }, ground);
-      el('line', { x1: P(0, i)[0], y1: P(0, i)[1], x2: P(N, i)[0], y2: P(N, i)[1], stroke: 'rgba(20,22,26,.05)' }, ground);
+      el('line', { x1: P(i, 0)[0], y1: P(i, 0)[1], x2: P(i, N)[0], y2: P(i, N)[1], stroke: T.grid }, ground);
+      el('line', { x1: P(0, i)[0], y1: P(0, i)[1], x2: P(N, i)[0], y2: P(N, i)[1], stroke: T.grid }, ground);
     }
     // Plate thickness
-    poly([P(0, N), P(N, N), P(N, N, -10), P(0, N, -10)], '#E4E1D8', ground);
-    poly([P(N, 0), P(N, N), P(N, N, -10), P(N, 0, -10)], '#D5D2C8', ground);
+    poly([P(0, N), P(N, N), P(N, N, -10), P(0, N, -10)], T.plateL, ground);
+    poly([P(N, 0), P(N, N), P(N, N, -10), P(N, 0, -10)], T.plateR, ground);
 
     // Roads (ground strips) and the packet paths that run on them
     function strip(x1, y1, x2, y2, wdt) {
       var hw = wdt / 2, q;
       if (y1 === y2) q = [P(x1, y1 - hw), P(x2, y1 - hw), P(x2, y1 + hw), P(x1, y1 + hw)];
       else q = [P(x1 - hw, y1), P(x1 + hw, y1), P(x1 + hw, y2), P(x1 - hw, y2)];
-      poly(q, '#E7E5DE', roads, { stroke: 'none' });
+      poly(q, T.road, roads, { stroke: 'none' });
     }
     strip(0.3, 4.15, 13.7, 4.15, 0.55);
     strip(0.3, 8.1, 13.7, 8.1, 0.55);
@@ -357,7 +392,7 @@
     // dashed center lines
     function dash(a, b) {
       var p = P(a[0], a[1]), q = P(b[0], b[1]);
-      el('line', { x1: p[0], y1: p[1], x2: q[0], y2: q[1], stroke: '#FFFFFF', 'stroke-width': 1.4, 'stroke-dasharray': '6 7' }, roads);
+      el('line', { x1: p[0], y1: p[1], x2: q[0], y2: q[1], stroke: T.dash, 'stroke-width': 1.4, 'stroke-dasharray': '6 7' }, roads);
     }
     dash([0.3, 4.15], [13.7, 4.15]); dash([0.3, 8.1], [13.7, 8.1]); dash([8.25, 0.3], [8.25, 13.7]); dash([8.25, 10.55], [13.9, 10.55]);
 
@@ -379,10 +414,10 @@
     // Small decorative trees
     function tree(x, y) {
       var g = el('g', {}, city), b = P(x, y);
-      el('ellipse', { cx: b[0], cy: b[1], rx: 7, ry: 3.5, fill: 'rgba(20,22,26,.08)' }, g);
-      el('rect', { x: b[0] - 1.2, y: b[1] - 8, width: 2.4, height: 8, fill: '#8A7A66' }, g);
-      el('circle', { cx: b[0], cy: b[1] - 13, r: 7, fill: '#7FA88E' }, g);
-      el('circle', { cx: b[0] - 2.5, cy: b[1] - 15, r: 3, fill: '#97BCA4' }, g);
+      el('ellipse', { cx: b[0], cy: b[1], rx: 7, ry: 3.5, fill: T.shadow }, g);
+      el('rect', { x: b[0] - 1.2, y: b[1] - 8, width: 2.4, height: 8, fill: T.trunk }, g);
+      el('circle', { cx: b[0], cy: b[1] - 13, r: 7, fill: T.leaf }, g);
+      el('circle', { cx: b[0] - 2.5, cy: b[1] - 15, r: 3, fill: T.leaf2 }, g);
       return g;
     }
 
@@ -434,15 +469,15 @@
       var c = P(b.x + b.w / 2, b.y + b.d / 2, b.h + (b.extra || 0) + 20 + (b.ly || 0));
       var lg = el('g', { class: 'lbl' }, g);
       var w = b.name.length * 7.3 + 36;
-      el('rect', { x: c[0] - w / 2, y: c[1] - 12, width: w, height: 24, rx: 12, fill: '#FFFFFF', stroke: '#D9D6CC' }, lg);
+      el('rect', { x: c[0] - w / 2, y: c[1] - 12, width: w, height: 24, rx: 12, fill: T.lblBg, stroke: T.lblLine }, lg);
       el('circle', { cx: c[0] - w / 2 + 12, cy: c[1], r: 3.5, fill: b.color }, lg);
-      var t = el('text', { x: c[0] - w / 2 + 22, y: c[1] + 4.2, 'text-anchor': 'start', 'font-family': 'Inter, system-ui, sans-serif', 'font-size': 12, 'font-weight': 600, fill: '#14161A' }, lg);
+      var t = el('text', { x: c[0] - w / 2 + 22, y: c[1] + 4.2, 'text-anchor': 'start', 'font-family': 'Inter, system-ui, sans-serif', 'font-size': 12, 'font-weight': 600, fill: T.lblText }, lg);
       t.textContent = b.name;
       var s = el('g', { class: 'seen' }, lg);
       el('circle', { cx: c[0] + w / 2 - 2, cy: c[1] - 10, r: 6, fill: C.metric }, s);
       el('path', { d: 'M' + (c[0] + w / 2 - 5) + ' ' + (c[1] - 10) + ' l2.2 2.2 l4 -4.4', stroke: '#fff', 'stroke-width': 1.6, fill: 'none', 'stroke-linecap': 'round' }, s);
       var ln = P(b.x + b.w / 2, b.y + b.d / 2, b.h + (b.extra || 0));
-      el('line', { x1: ln[0], y1: ln[1], x2: c[0], y2: c[1] + 12, stroke: '#C9C5B9', 'stroke-width': 1, 'stroke-dasharray': '2 3' }, g);
+      el('line', { x1: ln[0], y1: ln[1], x2: c[0], y2: c[1] + 12, stroke: T.leader, 'stroke-width': 1, 'stroke-dasharray': '2 3' }, g);
     }
 
     var draw = {
@@ -481,7 +516,7 @@
         b.extra = 22;
       },
       security: function (g, b) {
-        box(g, b.x, b.y, b.w, b.d, b.h, 0, { t: '#FBF4EF', l: '#F0E1D6', r: '#E2CDBE' }); stripe(g, b, C.warm);
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, T.sec); stripe(g, b, C.warm);
         poly([fl(b, 0.2, 10), fl(b, b.w - 0.2, 10), fl(b, b.w - 0.2, 20), fl(b, 0.2, 20)], '#F6E2C8', g, { stroke: 'none' });
         // shield on roof
         var s = P(b.x + b.w / 2, b.y + b.d / 2, b.h + 4);
@@ -507,7 +542,7 @@
       },
       journey: function (g, b) {
         // tall cooling tower style log with year bands
-        box(g, b.x, b.y, b.w, b.d, b.h, 0, { t: '#FFFFFF', l: '#EAE8E1', r: '#D7D4CA' });
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, T.tower);
         var years = 6;
         for (var k = 0; k < years; k++) {
           var v = 10 + k * ((b.h - 16) / years);
@@ -557,13 +592,12 @@
     var items = order.map(function (b) { return { k: b.x + b.w + b.y + b.d, b: b }; }).concat(treesAt.map(function (t) { return { k: t[0] + t[1] + 0.2, t: t }; }));
     items.sort(function (a, b) { return a.k - b.k; });
 
-    var nodes = {};
     items.forEach(function (it) {
       if (it.t) { tree(it.t[0], it.t[1]); return; }
       var b = it.b;
       var g = el('g', { class: 'bldg', tabindex: 0, role: 'button', 'aria-label': b.name + ': ' + b.blurb, 'data-id': b.id }, city);
       var sh = [P(b.x + 0.3, b.y + b.d + 0.3), P(b.x + b.w + 0.3, b.y + b.d + 0.3), P(b.x + b.w + 0.3, b.y + 0.3), P(b.x + b.w, b.y)];
-      poly([P(b.x, b.y + b.d), sh[0], sh[1], sh[2], P(b.x + b.w, b.y)], 'rgba(20,22,26,.07)', g, { stroke: 'none' });
+      poly([P(b.x, b.y + b.d), sh[0], sh[1], sh[2], P(b.x + b.w, b.y)], T.shadow, g, { stroke: 'none' });
       draw[b.id](g, b);
       label(g, b);
       g.addEventListener('click', function () { open(b.id); });
@@ -574,12 +608,14 @@
     // Entrance sign
     var sp = P(13.3, 11.3, 0);
     var sg = el('g', {}, city);
-    el('rect', { x: sp[0] - 34, y: sp[1] - 34, width: 68, height: 20, rx: 4, fill: '#14161A' }, sg);
-    var st = el('text', { x: sp[0], y: sp[1] - 20.5, 'text-anchor': 'middle', 'font-family': 'JetBrains Mono, monospace', 'font-size': 9.5, fill: '#fff' }, sg); st.textContent = 'ND-CAMPUS-1';
+    el('rect', { x: sp[0] - 34, y: sp[1] - 34, width: 68, height: 20, rx: 4, fill: T.sign }, sg);
+    var st = el('text', { x: sp[0], y: sp[1] - 20.5, 'text-anchor': 'middle', 'font-family': 'JetBrains Mono, monospace', 'font-size': 9.5, fill: T.signText }, sg); st.textContent = 'ND-CAMPUS-1';
     el('line', { x1: sp[0], y1: sp[1] - 14, x2: sp[0], y2: sp[1], stroke: '#5B6170', 'stroke-width': 1.6 }, sg);
 
     // Reduced motion: stop the packets too
     if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches && svg.pauseAnimations) svg.pauseAnimations();
+    }
+    render();
 
     // ---------------- Directory ----------------
     var tour = ['reception', 'gpu', 'control', 'aiops', 'noc', 'security', 'research', 'journey', 'archive', 'dispatch'];
@@ -602,6 +638,21 @@
       document.getElementById('vcount').textContent = n;
     }
     paintVisits();
+
+    // ---------------- Themes ----------------
+    var tbtns = document.querySelectorAll('.themes button');
+    function setTheme(name) {
+      if (!THEMES[name]) name = 'paper';
+      themeName = name; T = THEMES[name];
+      if (name === 'paper') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', name);
+      try { localStorage.setItem('nd-theme', name); } catch (e) {}
+      tbtns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-theme') === name ? 'true' : 'false'); });
+      render(); paintVisits();
+      if (current && nodes[current]) nodes[current].classList.add('on');
+      document.querySelectorAll('#dir .sw').forEach(function (s, i) { s.style.background = byId[tour[i]].color; });
+    }
+    tbtns.forEach(function (b) { b.addEventListener('click', function () { setTheme(b.getAttribute('data-theme')); }); });
+    tbtns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-theme') === themeName ? 'true' : 'false'); });
 
     // ---------------- Drawer ----------------
     var drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
