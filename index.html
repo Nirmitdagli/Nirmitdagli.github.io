@@ -14,7 +14,7 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://nirmitdagli.github.io/og.png" />
-  <meta name="theme-color" content="#FAFAF7" />
+  <meta name="theme-color" content="#050806" />
   <link rel="canonical" href="https://nirmitdagli.github.io/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +28,7 @@
       if (old.indexOf(h) > -1 || h.indexOf('p-') === 0) location.replace('plain.html#' + h);
     })();
   </script>
-  <script>try { var _t = localStorage.getItem('nd-theme'); if (_t && _t !== 'paper') document.documentElement.setAttribute('data-theme', _t); } catch (e) {}</script>
+  <script>(function () { var ok = ['terminal', 'synthwave', 'dusk'], t = 'terminal'; try { var s = localStorage.getItem('nd-theme'); if (ok.indexOf(s) > -1) t = s; } catch (e) {} document.documentElement.setAttribute('data-theme', t); })();</script>
   <style>
     :root {
       --paper: #FAFAF7; --ink: #14161A; --muted: #5B6170; --line: #E6E4DD;
@@ -182,9 +182,6 @@
     <div class="stage" id="stage">
       <svg id="map" viewBox="-470 -30 940 492" role="group" aria-label="Isometric map of an AI data center campus. Each building opens a section of the portfolio."></svg>
       <div class="themes" role="group" aria-label="Color theme">
-        <button type="button" data-theme="paper"><span class="sw2" style="background:#FAFAF7"></span>Paper</button>
-        <button type="button" data-theme="night"><span class="sw2" style="background:#0F1115"></span>Night shift</button>
-        <button type="button" data-theme="blueprint"><span class="sw2" style="background:#0B3D91"></span>Blueprint</button>
         <button type="button" data-theme="terminal"><span class="sw2" style="background:#33FF88"></span>Terminal</button>
         <button type="button" data-theme="synthwave"><span class="sw2" style="background:#FF4FD8"></span>Synthwave</button>
         <button type="button" data-theme="dusk"><span class="sw2" style="background:#FF9A4D"></span>Dusk</button>
@@ -277,7 +274,7 @@
         lblBg: '#1F1712', lblLine: '#5A4333', lblText: '#FBEFE4', leader: 'rgba(255,154,77,.4)', leaf: '#4E5A2E', leaf2: '#6B7A3E', trunk: '#5A4333', shadow: 'rgba(0,0,0,.4)', sign: '#FF9A4D', signText: '#17110D',
         c: { accent: '#FF9A4D', metric: '#F5C451', warm: '#FF6B4A', violet: '#E08BB0', ink: '#FBEFE4', muted: '#C2A894' } }
     };
-    var themeName = document.documentElement.getAttribute('data-theme') || 'paper';
+    var themeName = document.documentElement.getAttribute('data-theme') || 'terminal';
     var T = THEMES[themeName] || THEMES.paper;
     var WALL = T.wall;
 
@@ -660,7 +657,7 @@
     // ---------------- Themes ----------------
     var tbtns = document.querySelectorAll('.themes button');
     function setTheme(name) {
-      if (!THEMES[name]) name = 'paper';
+      if (!THEMES[name]) name = 'terminal';
       themeName = name; T = THEMES[name];
       if (name === 'paper') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', name);
       try { localStorage.setItem('nd-theme', name); } catch (e) {}
