@@ -15,7 +15,7 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://nirmitdagli.github.io/og.png" />
-  <meta name="theme-color" content="#FAFAF7" />
+  <meta name="theme-color" content="#17110D" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +25,7 @@
     tailwind.config = {
       theme: {
         extend: {
-          colors: { paper: '#FAFAF7', ink: '#14161A', muted: '#5B6170', line: '#E6E4DD', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A' },
+          colors: { paper: '#17110D', ink: '#FBEFE4', muted: '#C2A894', line: '#33261D', accent: '#FF9A4D', metric: '#F5C451', warm: '#FF6B4A' },
           fontFamily: {
             serif: ['"Instrument Serif"', 'Georgia', 'serif'],
             sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
@@ -36,8 +36,8 @@
     };
   </script>
   <style>
-    html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
-    body { background-image: linear-gradient(rgba(20,22,26,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(20,22,26,.05) 1px, transparent 1px); background-size: 40px 40px; background-position: 0 0; }
+    html, body { background: #17110D; color: #FBEFE4; -webkit-font-smoothing: antialiased; }
+    body { background-image: linear-gradient(rgba(255,154,77,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,154,77,.05) 1px, transparent 1px); background-size: 40px 40px; background-position: 0 0; }
     .hero-wrap { position: relative; isolation: isolate; }
     .hero-wrap > canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
     .hero-in > * { opacity: 0; transform: translateY(14px); animation: heroIn .8s cubic-bezier(.2,.7,.2,1) forwards; }
@@ -47,98 +47,98 @@
     @media (prefers-reduced-motion: reduce) { .hero-in > * { opacity: 1; transform: none; animation: none; } }
     html { scroll-behavior: smooth; }
     section[id], [id=experience] { scroll-margin-top: 4.5rem; }
-    .journey { border-left: 1px solid #E6E4DD; padding-left: 1.4rem; }
+    .journey { border-left: 1px solid #33261D; padding-left: 1.4rem; }
     .sec-h { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(2.3rem, 5vw, 3.4rem); line-height: 1.05; }
     .lv-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; }
     @media (min-width: 768px) { .lv-tabs { grid-template-columns: repeat(4, 1fr); } }
-    .lv-tab { position: relative; display: flex; align-items: baseline; gap: .6rem; padding: .8rem 1rem; border-radius: 12px; border: 1px solid #DDD9CE; background: #fff; text-align: left; transition: border-color .2s, transform .2s, box-shadow .2s; }
-    .lv-tab:hover { transform: translateY(-2px); border-color: #B9B6AC; }
-    .lv-tab[aria-selected="true"] { border-color: #14161A; box-shadow: 0 12px 28px -20px rgba(20,22,26,.55); }
-    .lv-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 1rem; right: 1rem; bottom: -1px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #2453D6, #0A7A55); }
-    .lv-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.5rem; line-height: 1; color: #C9C5BA; }
-    .lv-tab[aria-selected="true"] .lv-n { color: #2453D6; }
+    .lv-tab { position: relative; display: flex; align-items: baseline; gap: .6rem; padding: .8rem 1rem; border-radius: 12px; border: 1px solid #3A2B21; background: #1F1712; text-align: left; transition: border-color .2s, transform .2s, box-shadow .2s; }
+    .lv-tab:hover { transform: translateY(-2px); border-color: #5A4333; }
+    .lv-tab[aria-selected="true"] { border-color: #FBEFE4; box-shadow: 0 12px 28px -20px rgba(0,0,0,.6); }
+    .lv-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 1rem; right: 1rem; bottom: -1px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #FF9A4D, #F5C451); }
+    .lv-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.5rem; line-height: 1; color: #4E3A2C; }
+    .lv-tab[aria-selected="true"] .lv-n { color: #FF9A4D; }
     .lv-t { font-weight: 600; font-size: .92rem; }
-    .lv-stage { border: 1px solid #E2DED4; border-radius: 18px; background: rgba(255,255,255,.88); backdrop-filter: blur(2px); padding: 1.4rem; }
+    .lv-stage { border: 1px solid #3A2B21; border-radius: 18px; background: rgba(23,17,13,.88); backdrop-filter: blur(2px); padding: 1.4rem; }
     @media (min-width: 640px) { .lv-stage { padding: 2rem 2.2rem; } }
     .lv-panel { animation: lvIn .4s ease both; }
     @keyframes lvIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-    .pf-chip { border: 1px solid #DDD9CE; background: #fff; border-radius: 999px; padding: .45rem .9rem; font-size: .86rem; color: #5B6170; transition: all .2s; }
-    .pf-chip:hover { border-color: #14161A; color: #14161A; }
-    .pf-chip[aria-pressed="true"] { background: #14161A; border-color: #14161A; color: #fff; }
+    .pf-chip { border: 1px solid #3A2B21; background: #1F1712; border-radius: 999px; padding: .45rem .9rem; font-size: .86rem; color: #C2A894; transition: all .2s; }
+    .pf-chip:hover { border-color: #FBEFE4; color: #FBEFE4; }
+    .pf-chip[aria-pressed="true"] { background: #FBEFE4; border-color: #FBEFE4; color: #17110D; }
     .pf-c { opacity: .6; margin-left: .15rem; }
     .pcards { display: grid; gap: 1rem; align-items: start; }
     @media (min-width: 640px) { .pcards { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 960px) { .pcards { grid-template-columns: repeat(3, 1fr); } }
     .pcards .card { animation: lvIn .35s ease both; scroll-margin-top: 6rem; }
-    .pcards .card.flash { box-shadow: 0 0 0 3px #DCE5FF; border-color: #2453D6; }
+    .pcards .card.flash { box-shadow: 0 0 0 3px #3A2A1E; border-color: #FF9A4D; }
     .jr { position: relative; }
-    .jr::before { content: ""; position: absolute; left: 6.2rem; top: .6rem; bottom: .6rem; width: 1px; background: linear-gradient(#2453D6, #0A7A55 40%, #E0DCD1); }
+    .jr::before { content: ""; position: absolute; left: 6.2rem; top: .6rem; bottom: .6rem; width: 1px; background: linear-gradient(#FF9A4D, #F5C451 40%, #3D2D22); }
     .jr-i { position: relative; display: grid; grid-template-columns: 6.2rem 1fr; gap: 0 1.6rem; padding-bottom: 2.4rem; }
-    .jr-i::before { content: ""; position: absolute; left: calc(6.2rem - 5px); top: .55rem; width: 11px; height: 11px; border-radius: 99px; background: #fff; border: 2px solid #14161A; }
-    .jr-i:first-child::before { background: #2453D6; border-color: #2453D6; box-shadow: 0 0 0 5px #DCE5FF; }
+    .jr-i::before { content: ""; position: absolute; left: calc(6.2rem - 5px); top: .55rem; width: 11px; height: 11px; border-radius: 99px; background: #1F1712; border: 2px solid #FBEFE4; }
+    .jr-i:first-child::before { background: #FF9A4D; border-color: #FF9A4D; box-shadow: 0 0 0 5px #3A2A1E; }
     .jr-y { font-family: "Instrument Serif", Georgia, serif; font-size: 1.7rem; line-height: 1; padding-right: .6rem; }
-    .jr-y span { display: block; font-family: Inter, sans-serif; font-size: .72rem; color: #7A7F8A; margin-top: .35rem; }
+    .jr-y span { display: block; font-family: Inter, sans-serif; font-size: .72rem; color: #A8917F; margin-top: .35rem; }
     .jr-b { padding-left: .4rem; }
     .jr-r { font-weight: 600; font-size: 1.08rem; }
-    .jr-r span { font-weight: 400; color: #5B6170; }
-    .jr-l { margin-top: .6rem; display: grid; gap: .35rem; color: #474C57; font-size: .97rem; line-height: 1.6; }
+    .jr-r span { font-weight: 400; color: #C2A894; }
+    .jr-l { margin-top: .6rem; display: grid; gap: .35rem; color: #E8D6C7; font-size: .97rem; line-height: 1.6; }
     .jr-l li { position: relative; padding-left: 1rem; }
-    .jr-l li::before { content: ""; position: absolute; left: 0; top: .7rem; width: 6px; height: 1px; background: #9A978E; }
+    .jr-l li::before { content: ""; position: absolute; left: 0; top: .7rem; width: 6px; height: 1px; background: #8C7564; }
     .jr-p { margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .4rem; }
-    .jr-p a { font-size: .8rem; padding: .25rem .65rem; border-radius: 999px; border: 1px solid #DDD9CE; background: #fff; color: #2453D6; }
-    .jr-p a:hover { border-color: #2453D6; }
+    .jr-p a { font-size: .8rem; padding: .25rem .65rem; border-radius: 999px; border: 1px solid #3A2B21; background: #1F1712; color: #FF9A4D; }
+    .jr-p a:hover { border-color: #FF9A4D; }
     @media (max-width: 520px) { .jr::before { left: .3rem; } .jr-i { grid-template-columns: 1fr; padding-left: 1.6rem; } .jr-i::before { left: calc(.3rem - 5px); } .jr-y { font-size: 1.4rem; margin-bottom: .4rem; } .jr-y span { display: inline; margin-left: .4rem; } .jr-b { padding-left: 0; } }
     #bl-svg circle { cursor: pointer; }
     @media print { .lv-panel[hidden] { display: block !important; } }
     @media (prefers-reduced-motion: reduce) { .lv-panel, .pcards .card { animation: none; } .lv-tab:hover { transform: none; } }
-    .demo { margin-top: 2.5rem; border-top: 1px solid #E6E4DD; border-bottom: 1px solid #E6E4DD; padding: 2.2rem 0 1.6rem; }
-    .bl-m[aria-checked="true"] { background: #14161A; color: #fff; } .bl-m[aria-checked="false"] { color: #5B6170; }
+    .demo { margin-top: 2.5rem; border-top: 1px solid #33261D; border-bottom: 1px solid #33261D; padding: 2.2rem 0 1.6rem; }
+    .bl-m[aria-checked="true"] { background: #FBEFE4; color: #17110D; } .bl-m[aria-checked="false"] { color: #C2A894; }
     .cards { margin-top: 2.5rem; display: grid; gap: 1rem; }
     @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
-    .card { border: 1px solid #E2DED4; border-radius: 16px; background: #fff; transition: border-color .2s, box-shadow .2s; }
-    .card:hover { border-color: #B9B6AC; }
-    .card[open] { border-color: #14161A; box-shadow: 0 10px 30px -20px rgba(20,22,26,.45); }
+    .card { border: 1px solid #3A2B21; border-radius: 16px; background: #1F1712; transition: border-color .2s, box-shadow .2s; }
+    .card:hover { border-color: #5A4333; }
+    .card[open] { border-color: #FBEFE4; box-shadow: 0 10px 30px -20px rgba(0,0,0,.55); }
     .card summary { list-style: none; cursor: pointer; display: flex; flex-direction: column; gap: .35rem; padding: 1.3rem 1.4rem; }
     .card summary::-webkit-details-marker { display: none; }
     .card-n { margin-top: .4rem; font-family: "Instrument Serif", Georgia, serif; font-size: 2.7rem; line-height: 1; }
     .card-t { margin-top: .35rem; font-weight: 600; }
-    .card-d { font-size: .93rem; line-height: 1.55; color: #5B6170; }
-    .card-more { margin-top: .5rem; font-size: .82rem; font-weight: 500; color: #2453D6; }
+    .card-d { font-size: .93rem; line-height: 1.55; color: #C2A894; }
+    .card-more { margin-top: .5rem; font-size: .82rem; font-weight: 500; color: #FF9A4D; }
     .card-more::after { content: " +"; }
     .card[open] .card-more::after { content: " −"; }
-    .card-body { padding: 0 1.4rem 1.4rem; font-size: .95rem; line-height: 1.65; color: #474C57; border-top: 1px dashed #E6E4DD; padding-top: 1rem; margin: 0 0 0; }
-    .tq-opt { display: grid; grid-template-columns: 2rem 1fr; gap: .75rem; align-items: start; width: 100%; text-align: left; padding: .95rem 1.05rem; border: 1px solid #DDD9CE; border-radius: 12px; background: #fff; transition: border-color .15s, transform .15s; }
-    .tq-opt:hover:not([disabled]) { border-color: #2453D6; transform: translateY(-1px); }
+    .card-body { padding: 0 1.4rem 1.4rem; font-size: .95rem; line-height: 1.65; color: #E8D6C7; border-top: 1px dashed #33261D; padding-top: 1rem; margin: 0 0 0; }
+    .tq-opt { display: grid; grid-template-columns: 2rem 1fr; gap: .75rem; align-items: start; width: 100%; text-align: left; padding: .95rem 1.05rem; border: 1px solid #3A2B21; border-radius: 12px; background: #1F1712; transition: border-color .15s, transform .15s; }
+    .tq-opt:hover:not([disabled]) { border-color: #FF9A4D; transform: translateY(-1px); }
     .tq-opt[disabled] { cursor: default; opacity: .5; }
-    .tq-opt.picked { opacity: 1; border-color: #14161A; }
-    .tq-key { display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 999px; border: 1px solid #DDD9CE; font-size: .8rem; color: #5B6170; }
-    .tq-opt.best .tq-key { background: #0A7A55; border-color: #0A7A55; color: #fff; }
-    .rc-u[aria-checked="true"] { background: #14161A; color: #fff; }
-    .rc-u[aria-checked="false"] { color: #5B6170; }
+    .tq-opt.picked { opacity: 1; border-color: #FBEFE4; }
+    .tq-key { display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 999px; border: 1px solid #3A2B21; font-size: .8rem; color: #C2A894; }
+    .tq-opt.best .tq-key { background: #F5C451; border-color: #F5C451; color: #17110D; }
+    .rc-u[aria-checked="true"] { background: #FBEFE4; color: #17110D; }
+    .rc-u[aria-checked="false"] { color: #C2A894; }
     .rc-text .cur { display: inline-block; width: .5em; height: 1em; vertical-align: -.12em; background: currentColor; opacity: .5; animation: blink 1s steps(1) infinite; }
-    .rc-text .wait { color: #9A978E; font-style: italic; }
+    .rc-text .wait { color: #8C7564; font-style: italic; }
     @keyframes blink { 50% { opacity: 0; } }
     .jy { position: relative; }
-    .jy::before { content: ""; position: absolute; top: .55rem; left: calc(-1.4rem - 5px); width: 9px; height: 9px; border-radius: 999px; background: #14161A; }
+    .jy::before { content: ""; position: absolute; top: .55rem; left: calc(-1.4rem - 5px); width: 9px; height: 9px; border-radius: 999px; background: #FBEFE4; }
     @media (min-width: 1024px) {
-      .journey { border-left: 0; padding-left: 0; border-top: 1px solid #E6E4DD; padding-top: 1.5rem; }
+      .journey { border-left: 0; padding-left: 0; border-top: 1px solid #33261D; padding-top: 1.5rem; }
       .jy::before { top: calc(-1.5rem - 5px); left: 0; }
     }
-    .jy:last-child::before { background: #2453D6; box-shadow: 0 0 0 4px #DCE5FF; }
-    ::selection { background: #DCE5FF; }
-    .kicker { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: #5B6170; }
-    .kicker::before { content: ""; width: 22px; height: 1px; background: #B9B6AC; }
-    .rule { border-top: 1px solid #E6E4DD; }
+    .jy:last-child::before { background: #FF9A4D; box-shadow: 0 0 0 4px #3A2A1E; }
+    ::selection { background: #3A2A1E; }
+    .kicker { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: #C2A894; }
+    .kicker::before { content: ""; width: 22px; height: 1px; background: #5A4333; }
+    .rule { border-top: 1px solid #33261D; }
     .num { font-variant-numeric: tabular-nums; }
-    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; line-height: 1.7; }
-    .prose-p { font-size: 1.06rem; line-height: 1.75; color: #474C57; }
-    .note { border-left: 2px solid #E0DCD1; padding-left: 1.1rem; }
-    .note dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #B4532A; }
-    .note dd { margin-top: .45rem; line-height: 1.65; color: #474C57; }
-    .panel { background: #fff; border: 1px solid #E6E4DD; border-radius: 14px; }
-    .link { color: #2453D6; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    .link:hover { color: #14161A; }
-    .chip { display:inline-block; font-size:.78rem; color:#5B6170; border:1px solid #E6E4DD; background:#fff; border-radius:999px; padding:.2rem .65rem; }
+    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #A8917F; line-height: 1.7; }
+    .prose-p { font-size: 1.06rem; line-height: 1.75; color: #E8D6C7; }
+    .note { border-left: 2px solid #3D2D22; padding-left: 1.1rem; }
+    .note dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #FF6B4A; }
+    .note dd { margin-top: .45rem; line-height: 1.65; color: #E8D6C7; }
+    .panel { background: #1F1712; border: 1px solid #33261D; border-radius: 14px; }
+    .link { color: #FF9A4D; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .link:hover { color: #FBEFE4; }
+    .chip { display:inline-block; font-size:.78rem; color:#C2A894; border:1px solid #33261D; background:#1F1712; border-radius:999px; padding:.2rem .65rem; }
     /* chart draw-in */
     .draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
     .in .draw { transition: stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1); stroke-dashoffset: 0; }
@@ -154,15 +154,15 @@
     }
     @media print {
       header, .no-print { display: none !important; }
-      body { background: #fff; }
+      body { background: #1F1712; }
       .fade { opacity: 1 !important; transform: none !important; }
       section { break-inside: avoid; padding-top: 1rem !important; padding-bottom: 1rem !important; }
-      a { color: #14161A !important; text-decoration: none !important; }
+      a { color: #FBEFE4 !important; text-decoration: none !important; }
     }
   </style>
 </head>
 <body class="font-sans">
-  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-ink focus:px-3 focus:py-2 focus:text-white">Skip to content</a>
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-ink focus:px-3 focus:py-2 focus:text-[#17110D]">Skip to content</a>
 
   <header class="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur">
     <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5" aria-label="Primary">
@@ -174,7 +174,7 @@
         <a class="hover:text-ink" href="#journey">Journey</a>
         <a class="hover:text-ink" href="#research">Research</a>
         <a class="hover:text-ink" href="ai/">Applied AI</a>
-        <a class="rounded-full bg-accent px-4 py-1.5 font-medium text-white hover:bg-[#1B44B8]" href="#contact">Contact</a>
+        <a class="rounded-full bg-accent px-4 py-1.5 font-medium text-[#17110D] hover:bg-[#E07F35]" href="#contact">Contact</a>
       </div>
       <button id="menuBtn" class="rounded-full border border-line px-3 py-1 text-sm md:hidden" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
     </nav>
@@ -202,8 +202,8 @@
             <p>Today I'm the first platform hire at Sidecoach Sports, where I build the AI gateway, the agents and the security around them. In my research I run GPU clusters and benchmark how LLMs are served.</p>
           </div>
           <div class="no-print mt-8 flex flex-wrap items-center gap-3">
-            <a href="#projects" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">See the work</a>
-            <a href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
+            <a href="#projects" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-[#17110D] hover:bg-[#E07F35]">See the work</a>
+            <a href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-[#1F1712] px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
             <a href="#live" data-live="gpu" class="group inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline"><span class="inline-block h-2 w-2 animate-pulse rounded-full bg-metric"></span>Race 2 LLMs ↓</a>
           </div>
           <p class="mt-8 max-w-xl border-t border-line pt-4 text-sm text-muted"><span class="text-ink">Right now:</span> building the AI gateway and SRE agents at Sidecoach, and the next llm-serving-bench round with open-loop load and 8K context.</p>
@@ -238,26 +238,26 @@
             <h2 class="mt-3 max-w-2xl font-serif text-[2.4rem] leading-[1.04] sm:text-[3.2rem]">Same GPU, same model. Which engine serves your users faster?</h2>
           </div>
           <div class="flex items-center gap-3">
-            <div class="flex rounded-full border border-line bg-white p-1 text-sm" role="radiogroup" aria-label="Concurrent users">
+            <div class="flex rounded-full border border-line bg-[#1F1712] p-1 text-sm" role="radiogroup" aria-label="Concurrent users">
               <button class="rc-u rounded-full px-3.5 py-1.5" data-u="1" role="radio" aria-checked="false">1 user</button>
               <button class="rc-u rounded-full px-3.5 py-1.5" data-u="16" role="radio" aria-checked="false">16</button>
               <button class="rc-u rounded-full px-3.5 py-1.5" data-u="64" role="radio" aria-checked="true">64</button>
             </div>
-            <button id="rc-run" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">▶ Run</button>
+            <button id="rc-run" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-[#17110D] hover:bg-[#E07F35]">▶ Run</button>
           </div>
         </div>
 
         <div class="mt-10 grid gap-10 md:grid-cols-2">
           <div class="rc-lane" data-e="vllm">
             <div class="flex items-baseline justify-between gap-3"><p class="font-medium">vLLM <span class="font-normal text-muted">fp16</span></p><p class="text-sm text-muted"><span class="rc-tok font-serif text-3xl text-ink">0</span> tokens served</p></div>
-            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-[#ECE9E1]"><div class="rc-bar h-full w-0 rounded-full bg-accent"></div></div>
-            <div class="rc-text mt-4 h-[9.5rem] overflow-hidden text-[.95rem] leading-relaxed text-[#474C57]" aria-hidden="true"></div>
+            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-[#2A1F18]"><div class="rc-bar h-full w-0 rounded-full bg-accent"></div></div>
+            <div class="rc-text mt-4 h-[9.5rem] overflow-hidden text-[.95rem] leading-relaxed text-[#E8D6C7]" aria-hidden="true"></div>
             <p class="rc-stat mt-3 text-sm text-muted">&nbsp;</p>
           </div>
           <div class="rc-lane" data-e="sglang">
             <div class="flex items-baseline justify-between gap-3"><p class="font-medium">SGLang <span class="font-normal text-muted">fp16</span></p><p class="text-sm text-muted"><span class="rc-tok font-serif text-3xl text-ink">0</span> tokens served</p></div>
-            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-[#ECE9E1]"><div class="rc-bar h-full w-0 rounded-full bg-warm"></div></div>
-            <div class="rc-text mt-4 h-[9.5rem] overflow-hidden text-[.95rem] leading-relaxed text-[#474C57]" aria-hidden="true"></div>
+            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-[#2A1F18]"><div class="rc-bar h-full w-0 rounded-full bg-warm"></div></div>
+            <div class="rc-text mt-4 h-[9.5rem] overflow-hidden text-[.95rem] leading-relaxed text-[#E8D6C7]" aria-hidden="true"></div>
             <p class="rc-stat mt-3 text-sm text-muted">&nbsp;</p>
           </div>
         </div>
@@ -280,7 +280,7 @@
               <p class="flex items-center gap-2 text-sm font-medium text-metric"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-metric"></span>Live demo · Zycus, 2023</p>
               <p class="mt-2 font-serif text-[2rem] leading-tight sm:text-[2.6rem]">Watch 2,000+ servers become 50+ clusters.</p>
             </div>
-            <div class="flex items-center gap-3"><button id="mig-kill" class="rounded-full border border-warm/40 bg-white px-4 py-2.5 text-sm font-medium text-warm hover:border-warm disabled:opacity-40" disabled>Kill a cluster</button><button id="mig-run" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">▶ Run migration</button></div>
+            <div class="flex items-center gap-3"><button id="mig-kill" class="rounded-full border border-warm/40 bg-[#1F1712] px-4 py-2.5 text-sm font-medium text-warm hover:border-warm disabled:opacity-40" disabled>Kill a cluster</button><button id="mig-run" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-[#17110D] hover:bg-[#E07F35]">▶ Run migration</button></div>
           </div>
           <svg id="mig-svg" viewBox="0 0 800 330" class="mt-6 w-full" role="img" aria-label="Animation: 200 dots, each about 10 servers on VMware, KVM and bare metal, move into 50 Kubernetes clusters. Then a GitOps sync, policies and backups are applied to every cluster."></svg>
           <div class="mt-4 grid grid-cols-2 gap-4 border-t border-line pt-4 sm:grid-cols-4">
@@ -304,11 +304,11 @@
               <p class="mt-2 font-serif text-[2rem] leading-tight sm:text-[2.6rem]">Same attack, two networks.</p>
             </div>
             <div class="flex items-center gap-3">
-              <div class="flex rounded-full border border-line bg-white p-1 text-sm" role="radiogroup" aria-label="Network design">
+              <div class="flex rounded-full border border-line bg-[#1F1712] p-1 text-sm" role="radiogroup" aria-label="Network design">
                 <button class="bl-m rounded-full px-3.5 py-1.5" data-m="flat" role="radio" aria-checked="true">2022: flat</button>
                 <button class="bl-m rounded-full px-3.5 py-1.5" data-m="seg" role="radio" aria-checked="false">After: segmented</button>
               </div>
-              <button id="bl-run" class="rounded-full bg-warm px-5 py-2.5 text-sm font-medium text-white hover:bg-[#93421F]">▶ Release it</button>
+              <button id="bl-run" class="rounded-full bg-warm px-5 py-2.5 text-sm font-medium text-[#17110D] hover:bg-[#D9532F]">▶ Release it</button>
             </div>
           </div>
           <svg id="bl-svg" viewBox="0 0 800 300" class="mt-6 w-full" role="img" aria-label="Simulation: 7 environments of servers. On a flat network an infection starting at the data server reaches every environment. With segmentation and firewalls between environments it stays in one."></svg>
@@ -547,7 +547,7 @@
       </ol>
       <div class="fade mt-12 border-t border-line pt-6">
         <p class="tag">Recognition at Zycus</p>
-        <p class="mt-2 text-[.95rem] text-[#474C57]">9 project awards from leadership between 2021 and 2023, covering Kubernetes, CI/CD security, post-incident operations, cost and customer delivery.</p>
+        <p class="mt-2 text-[.95rem] text-[#E8D6C7]">9 project awards from leadership between 2021 and 2023, covering Kubernetes, CI/CD security, post-incident operations, cost and customer delivery.</p>
       </div>
     </section>
 
@@ -573,7 +573,7 @@
 
     <!-- RESEARCH -->
     <section id="research" class="mx-auto max-w-5xl px-5 pt-28">
-      <h2 class="sec-h">Research <span class="text-[#B8B3A6]">· 5 papers</span></h2>
+      <h2 class="sec-h">Research <span class="text-[#6B5443]">· 5 papers</span></h2>
       <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
         <figure class="fade"><img src="img/spark.jpg" alt="Nirmit presenting the SPARK paper at IEEE UEMCON 2025" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Presenting SPARK, IEEE UEMCON 2025</figcaption></figure>
         <figure class="fade"><img src="img/podium.jpg" alt="Nirmit answering questions after the SPARK talk" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Q&amp;A after the talk</figcaption></figure>
@@ -618,14 +618,14 @@
         <h2 class="max-w-3xl font-serif text-5xl leading-[1.05] sm:text-[4.2rem]">Working on AI infrastructure? <em class="text-accent">Let's talk.</em></h2>
         <div class="mt-10 grid gap-8 sm:grid-cols-[1.2fr_1fr]">
           <div class="space-y-3 text-[1.05rem]">
-            <p class="flex flex-wrap items-center gap-3"><a class="link text-xl" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a><button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn no-print rounded-full border border-line bg-white px-3 py-1 text-xs hover:border-ink">Copy</button></p>
+            <p class="flex flex-wrap items-center gap-3"><a class="link text-xl" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a><button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn no-print rounded-full border border-line bg-[#1F1712] px-3 py-1 text-xs hover:border-ink">Copy</button></p>
             <p><a class="hover:text-accent" href="tel:+14753174538">475 317 4538</a></p>
             <p class="text-muted">Austin, TX · open to relocating anywhere in the US</p>
           </div>
           <div class="no-print flex flex-wrap content-start gap-3">
-            <a class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]" href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
-            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener">GitHub</a>
+            <a class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-[#17110D] hover:bg-[#E07F35]" href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+            <a class="rounded-full border border-ink/20 bg-[#1F1712] px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="rounded-full border border-ink/20 bg-[#1F1712] px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener">GitHub</a>
           </div>
         </div>
         <p class="mt-10 max-w-2xl font-serif text-xl leading-snug text-muted">Outside work I taught science and math in Mumbai for about 7 years, play midfield on weekends, and write poetry in Hindi, Urdu and English.</p>
@@ -638,7 +638,7 @@
     <p>Built by hand with HTML and Tailwind.</p>
   </footer>
 
-  <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-full bg-accent px-4 py-2 text-sm text-white opacity-0 transition-opacity">Email copied</div>
+  <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-full bg-accent px-4 py-2 text-sm text-[#17110D] opacity-0 transition-opacity">Email copied</div>
 
   <script>
     // Throughput chart from llm-serving-bench results (Tesla T4)
@@ -646,26 +646,26 @@
       if (!document.getElementById('chart')) return;
       const users = [1, 4, 16, 64];
       const series = [
-        { name: 'vLLM fp16', color: '#2453D6', dash: '', data: [51, 190, 424, 609] },
-        { name: 'vLLM AWQ int4', color: '#0A7A55', dash: '6 5', data: [106, 308, 535, 637] },
-        { name: 'SGLang fp16', color: '#B4532A', dash: '', data: [45, 164, 253, 384] },
+        { name: 'vLLM fp16', color: '#FF9A4D', dash: '', data: [51, 190, 424, 609] },
+        { name: 'vLLM AWQ int4', color: '#F5C451', dash: '6 5', data: [106, 308, 535, 637] },
+        { name: 'SGLang fp16', color: '#FF6B4A', dash: '', data: [45, 164, 253, 384] },
       ];
       const W = 760, H = 340, L = 46, R = 60, T = 26, B = 34, max = 700;
       const x = i => L + i * ((W - L - R) / (users.length - 1));
       const y = v => T + (H - T - B) * (1 - v / max);
       let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full max-w-3xl" font-family="Inter, sans-serif">`;
       for (let v = 0; v <= max; v += 100) {
-        svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#EEECE6"/>`;
-        svg += `<text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#8B8F99">${v}</text>`;
+        svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#2A1F18"/>`;
+        svg += `<text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#9C8574">${v}</text>`;
       }
-      users.forEach((u, i) => { svg += `<text x="${x(i)}" y="${H - 12}" text-anchor="middle" font-size="11" fill="#8B8F99">${u} user${u > 1 ? 's' : ''}</text>`; });
-      svg += `<text x="${L - 8}" y="${T - 12}" text-anchor="end" font-size="11" fill="#8B8F99">tok/s</text>`;
+      users.forEach((u, i) => { svg += `<text x="${x(i)}" y="${H - 12}" text-anchor="middle" font-size="11" fill="#9C8574">${u} user${u > 1 ? 's' : ''}</text>`; });
+      svg += `<text x="${L - 8}" y="${T - 12}" text-anchor="end" font-size="11" fill="#9C8574">tok/s</text>`;
       series.forEach(s => {
         const pts = s.data.map((v, i) => [x(i), y(v)]);
         const d = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
         let len = 0; for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
         svg += `<path class="draw" style="--len:${Math.ceil(len)}" d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5" ${s.dash ? `stroke-dasharray="${s.dash}"` : ''} stroke-linecap="round"/>`;
-        pts.forEach((p, i) => { svg += `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#fff" stroke="${s.color}" stroke-width="2"><title>${s.name}, ${users[i]} users: ${s.data[i]} tok/s</title></circle>`; });
+        pts.forEach((p, i) => { svg += `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#1F1712" stroke="${s.color}" stroke-width="2"><title>${s.name}, ${users[i]} users: ${s.data[i]} tok/s</title></circle>`; });
         const last = pts[pts.length - 1];
         const dy = s.name === 'vLLM fp16' ? 12 : (s.name === 'vLLM AWQ int4' ? -4 : 4);
         svg += `<text x="${last[0] + 8}" y="${last[1] + dy}" font-size="12" font-weight="600" fill="${s.color}">${s.data[s.data.length - 1]}</text>`;
@@ -750,7 +750,7 @@
         // cursor glow: brighter grid near the pointer
         if (mx > -500) {
           const R = 170, x0 = Math.floor((mx - R + ox) / G), x1 = Math.ceil((mx + R + ox) / G), y0 = Math.floor((my - R + oy) / G), y1 = Math.ceil((my + R + oy) / G);
-          const g = ctx.createRadialGradient(mx, my, 0, mx, my, R); g.addColorStop(0, 'rgba(36,83,214,.38)'); g.addColorStop(1, 'rgba(36,83,214,0)');
+          const g = ctx.createRadialGradient(mx, my, 0, mx, my, R); g.addColorStop(0, 'rgba(255,154,77,.38)'); g.addColorStop(1, 'rgba(255,154,77,0)');
           ctx.strokeStyle = g; ctx.lineWidth = 1; ctx.beginPath();
           for (let k = x0; k <= x1; k++) { const x = lx(k) + .5; ctx.moveTo(x, my - R); ctx.lineTo(x, my + R); }
           for (let k = y0; k <= y1; k++) { const y = ly(k) + .5; ctx.moveTo(mx - R, y); ctx.lineTo(mx + R, y); }
@@ -788,18 +788,18 @@
       const NS = 'http://www.w3.org/2000/svg', N = 200, C = 50;
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
-      const kinds = [['VMware', '#9A978E'], ['KVM', '#B8B3A6'], ['Bare metal', '#6E7380']];
-      svg.appendChild(el('text', { x: 20, y: 18, 'font-size': 12, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = 'Before: VMs and bare metal';
-      svg.appendChild(el('text', { x: 440, y: 18, 'font-size': 12, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = 'After: Kubernetes clusters';
-      kinds.forEach((k, i) => { svg.appendChild(el('circle', { cx: 26 + i * 92, cy: 318, r: 4, fill: k[1] })); svg.appendChild(el('text', { x: 34 + i * 92, y: 322, 'font-size': 11, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = k[0]; });
+      const kinds = [['VMware', '#8C7564'], ['KVM', '#6B5443'], ['Bare metal', '#B09884']];
+      svg.appendChild(el('text', { x: 20, y: 18, 'font-size': 12, fill: '#A8917F', 'font-family': 'Inter, sans-serif' })).textContent = 'Before: VMs and bare metal';
+      svg.appendChild(el('text', { x: 440, y: 18, 'font-size': 12, fill: '#A8917F', 'font-family': 'Inter, sans-serif' })).textContent = 'After: Kubernetes clusters';
+      kinds.forEach((k, i) => { svg.appendChild(el('circle', { cx: 26 + i * 92, cy: 318, r: 4, fill: k[1] })); svg.appendChild(el('text', { x: 34 + i * 92, y: 322, 'font-size': 11, fill: '#A8917F', 'font-family': 'Inter, sans-serif' })).textContent = k[0]; });
       const home = [], dest = [], dots = [], cl = [];
       for (let i = 0; i < N; i++) { const c = i % 20, r = Math.floor(i / 20); home.push([28 + c * 15.5, 44 + r * 25]); }
       for (let j = 0; j < C; j++) { const c = j % 10, r = Math.floor(j / 10); const cx = 462 + c * 34, cy = 64 + r * 50;
-        const hex = el('polygon', { points: [0,1,2,3,4,5].map(k => { const a = Math.PI / 3 * k + Math.PI / 6; return (cx + 14 * Math.cos(a)).toFixed(1) + ',' + (cy + 14 * Math.sin(a)).toFixed(1); }).join(' '), fill: '#FAFAF7', stroke: '#D8D4C9', 'stroke-width': 1.5 });
+        const hex = el('polygon', { points: [0,1,2,3,4,5].map(k => { const a = Math.PI / 3 * k + Math.PI / 6; return (cx + 14 * Math.cos(a)).toFixed(1) + ',' + (cy + 14 * Math.sin(a)).toFixed(1); }).join(' '), fill: '#17110D', stroke: '#44332A', 'stroke-width': 1.5 });
         svg.appendChild(hex); cl.push({ hex, cx, cy, n: 0 }); }
       for (let i = 0; i < N; i++) { const j = Math.floor(i / 4), cc = cl[j], a = (i % 4) * Math.PI / 2 + .6; dest.push([cc.cx + 5 * Math.cos(a), cc.cy + 5 * Math.sin(a)]);
         const d = el('circle', { cx: home[i][0], cy: home[i][1], r: 3.6, fill: kinds[(i * 7) % 3][1] }); svg.appendChild(d); dots.push(d); }
-      const sweep = el('rect', { x: 440, y: 40, width: 3, height: 250, fill: '#0A7A55', opacity: 0, rx: 1.5 }); svg.appendChild(sweep);
+      const sweep = el('rect', { x: 440, y: 40, width: 3, height: 250, fill: '#F5C451', opacity: 0, rx: 1.5 }); svg.appendChild(sweep);
       const $ = id => document.getElementById(id);
       const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
       let raf = 0, done = false;
@@ -810,12 +810,12 @@
           const start = (i / N) * 3.2, p = Math.min(1, Math.max(0, (t - start) / 0.9)), e = ease(p);
           const x = home[i][0] + (dest[i][0] - home[i][0]) * e, y = home[i][1] + (dest[i][1] - home[i][1]) * e - Math.sin(Math.PI * e) * 40;
           dots[i].setAttribute('cx', x.toFixed(1)); dots[i].setAttribute('cy', y.toFixed(1));
-          if (p >= 1) { moved++; cl[Math.floor(i / 4)].n++; dots[i].setAttribute('fill', '#2453D6'); } else dots[i].setAttribute('fill', kinds[(i * 7) % 3][1]);
+          if (p >= 1) { moved++; cl[Math.floor(i / 4)].n++; dots[i].setAttribute('fill', '#FF9A4D'); } else dots[i].setAttribute('fill', kinds[(i * 7) % 3][1]);
         }
-        cl.forEach(c => { const on = c.n === 4; if (on) live++; c.hex.setAttribute('fill', on ? '#EEF2FF' : '#FAFAF7'); c.hex.setAttribute('stroke', on ? '#2453D6' : '#D8D4C9'); });
+        cl.forEach(c => { const on = c.n === 4; if (on) live++; c.hex.setAttribute('fill', on ? '#2E2219' : '#17110D'); c.hex.setAttribute('stroke', on ? '#FF9A4D' : '#44332A'); });
         const sw = Math.min(1, Math.max(0, (t - 4.6) / 1.4));
         sweep.setAttribute('opacity', sw > 0 && sw < 1 ? .8 : 0); sweep.setAttribute('x', 440 + sw * 350);
-        cl.forEach(c => { if (sw > 0 && c.cx < 440 + sw * 350) c.hex.setAttribute('stroke', '#0A7A55'); });
+        cl.forEach(c => { if (sw > 0 && c.cx < 440 + sw * 350) c.hex.setAttribute('stroke', '#F5C451'); });
         $('mig-s').textContent = t >= 4.2 ? '2,000+' : Math.round(moved * 10).toLocaleString('en-US');
         $('mig-c').textContent = t >= 4.2 ? '50+' : String(live);
         $('mig-g').textContent = sw >= 1 ? '✓ synced' : (sw > 0 ? 'syncing…' : '·');
@@ -833,14 +833,14 @@
       kill.addEventListener('click', () => {
         kill.disabled = true;
         const j = (Math.random() * C) | 0, c = cl[j];
-        c.hex.setAttribute('fill', '#FBE9E1'); c.hex.setAttribute('stroke', '#B4532A');
+        c.hex.setAttribute('fill', '#3A221A'); c.hex.setAttribute('stroke', '#FF6B4A');
         const mine = [0, 1, 2, 3].map(k => j * 4 + k);
         const others = [j - 1, j + 1, j - 10, j + 10].map(x => (x + C) % C);
         const moves = mine.map((i, k) => { const o = cl[others[k]]; return [i, [dest[i][0], dest[i][1]], [o.cx + (k - 1.5) * 3, o.cy + 9]]; });
         msg.textContent = 'Cluster down. Kubernetes reschedules its workloads onto healthy clusters…';
         tween(moves, 900, () => setTimeout(() => {
           msg.textContent = 'Velero restores the cluster from backup. Workloads move home.';
-          c.hex.setAttribute('fill', '#EEF2FF'); c.hex.setAttribute('stroke', '#0A7A55');
+          c.hex.setAttribute('fill', '#2E2219'); c.hex.setAttribute('stroke', '#F5C451');
           tween(moves.map(([i, a, b]) => [i, b, a]), 900, () => { msg.textContent = 'Back to 50+ healthy clusters.'; kill.disabled = false; });
         }, 900));
       });
@@ -861,20 +861,20 @@
       const gEdges = el('g', {}); svg.appendChild(gEdges);
       for (let z = 0; z < Z; z++) {
         const x0 = 12 + z * (zw + gx);
-        const r = el('rect', { x: x0, y: 30, width: zw, height: 236, rx: 10, fill: 'none', stroke: '#E0DCD1', 'stroke-dasharray': '4 4' }); svg.appendChild(r); zoneEls.push(r);
-        svg.appendChild(el('text', { x: x0 + zw / 2, y: 22, 'text-anchor': 'middle', 'font-size': 11, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = names[z];
-        for (let k = 0; k < PER; k++) { const cx = x0 + 28 + (k % 2) * 48, cy = 62 + Math.floor(k / 2) * 56; const c = el('circle', { cx, cy, r: 9, fill: '#fff', stroke: '#B9B6AC', 'stroke-width': 1.5 }); svg.appendChild(c); nodes.push({ z, k, cx, cy, c, t: Infinity }); }
-        if (z < Z - 1) { const fx = x0 + zw + gx / 2; const f = el('rect', { x: fx - 3, y: 40, width: 6, height: 216, rx: 3, fill: '#B4532A', opacity: 0 }); svg.appendChild(f); fw.push(f); }
+        const r = el('rect', { x: x0, y: 30, width: zw, height: 236, rx: 10, fill: 'none', stroke: '#3D2D22', 'stroke-dasharray': '4 4' }); svg.appendChild(r); zoneEls.push(r);
+        svg.appendChild(el('text', { x: x0 + zw / 2, y: 22, 'text-anchor': 'middle', 'font-size': 11, fill: '#A8917F', 'font-family': 'Inter, sans-serif' })).textContent = names[z];
+        for (let k = 0; k < PER; k++) { const cx = x0 + 28 + (k % 2) * 48, cy = 62 + Math.floor(k / 2) * 56; const c = el('circle', { cx, cy, r: 9, fill: '#1F1712', stroke: '#5A4333', 'stroke-width': 1.5 }); svg.appendChild(c); nodes.push({ z, k, cx, cy, c, t: Infinity }); }
+        if (z < Z - 1) { const fx = x0 + zw + gx / 2; const f = el('rect', { x: fx - 3, y: 40, width: 6, height: 216, rx: 3, fill: '#FF6B4A', opacity: 0 }); svg.appendChild(f); fw.push(f); }
       }
       // edges: within zone neighbours; across zones between facing nodes
       const edges = [];
       nodes.forEach((a, i) => nodes.forEach((b, j) => { if (j <= i) return;
         const same = a.z === b.z && Math.hypot(a.cx - b.cx, a.cy - b.cy) < 80;
         const cross = b.z === a.z + 1 && a.k % 2 === 1 && b.k % 2 === 0 && Math.floor(a.k / 2) === Math.floor(b.k / 2);
-        if (same || cross) { const l = el('line', { x1: a.cx, y1: a.cy, x2: b.cx, y2: b.cy, stroke: '#E0DCD1', 'stroke-width': 1.5 }); gEdges.appendChild(l); edges.push({ i, j, cross, l }); } }));
+        if (same || cross) { const l = el('line', { x1: a.cx, y1: a.cy, x2: b.cx, y2: b.cy, stroke: '#3D2D22', 'stroke-width': 1.5 }); gEdges.appendChild(l); edges.push({ i, j, cross, l }); } }));
       const $ = id => document.getElementById(id);
       let mode = 'flat', raf = 0, started = false;
-      function setMode(m) { mode = m; document.querySelectorAll('.bl-m').forEach(b => b.setAttribute('aria-checked', String(b.dataset.m === m))); fw.forEach(f => f.setAttribute('opacity', m === 'seg' ? .9 : 0)); zoneEls.forEach(r => { r.setAttribute('stroke', m === 'seg' ? '#B4532A' : '#E0DCD1'); r.setAttribute('stroke-dasharray', m === 'seg' ? '' : '4 4'); r.setAttribute('stroke-opacity', m === 'seg' ? .35 : 1); }); edges.forEach(e => { e.l.setAttribute('stroke-dasharray', e.cross && m === 'seg' ? '2 5' : ''); e.l.setAttribute('stroke', e.cross && m === 'seg' ? '#D9B8A8' : '#E0DCD1'); }); reset(); }
+      function setMode(m) { mode = m; document.querySelectorAll('.bl-m').forEach(b => b.setAttribute('aria-checked', String(b.dataset.m === m))); fw.forEach(f => f.setAttribute('opacity', m === 'seg' ? .9 : 0)); zoneEls.forEach(r => { r.setAttribute('stroke', m === 'seg' ? '#FF6B4A' : '#3D2D22'); r.setAttribute('stroke-dasharray', m === 'seg' ? '' : '4 4'); r.setAttribute('stroke-opacity', m === 'seg' ? .35 : 1); }); edges.forEach(e => { e.l.setAttribute('stroke-dasharray', e.cross && m === 'seg' ? '2 5' : ''); e.l.setAttribute('stroke', e.cross && m === 'seg' ? '#6B3A2A' : '#3D2D22'); }); reset(); }
       let src = 1;
       function compute() { // BFS infection times (in hops) from the source server
         nodes.forEach(n => n.t = Infinity); nodes[src].t = 0; const q = [src];
@@ -882,7 +882,7 @@
       }
       function paint(h) { // h = hops elapsed
         const hit = new Set();
-        nodes.forEach(n => { const on = n.t <= h; n.c.setAttribute('fill', on ? '#B4532A' : '#fff'); n.c.setAttribute('stroke', on ? '#93421F' : '#B9B6AC'); if (on) hit.add(n.z); });
+        nodes.forEach(n => { const on = n.t <= h; n.c.setAttribute('fill', on ? '#FF6B4A' : '#1F1712'); n.c.setAttribute('stroke', on ? '#D9532F' : '#5A4333'); if (on) hit.add(n.z); });
         $('bl-n').textContent = hit.size;
         return hit.size;
       }
@@ -973,22 +973,22 @@
       const box = document.getElementById('tq'); if (!box) return;
       const res = document.getElementById('tq-result');
       const copy = {
-        0: ['Same call we made, and it cost us', '#B4532A', 'It got the priority vague reports usually get. About three hours passed before we confirmed ransomware.'],
-        1: ['Best call', '#0A7A55', 'Better than what we did. We waited, and about three hours passed before we confirmed ransomware.'],
-        2: ['Not the best call', '#B4532A', 'A ticket queue is the slowest path there is. We actually waited for a clearer report, and lost about three hours.'],
+        0: ['Same call we made, and it cost us', '#FF6B4A', 'It got the priority vague reports usually get. About three hours passed before we confirmed ransomware.'],
+        1: ['Best call', '#F5C451', 'Better than what we did. We waited, and about three hours passed before we confirmed ransomware.'],
+        2: ['Not the best call', '#FF6B4A', 'A ticket queue is the slowest path there is. We actually waited for a clearer report, and lost about three hours.'],
       };
       box.querySelectorAll('.tq-opt').forEach(b => b.addEventListener('click', () => {
         const k = +b.dataset.k, c = copy[k];
         box.querySelectorAll('.tq-opt').forEach(x => {
           x.disabled = true; if (x === b) x.classList.add('picked'); if (x.dataset.best) x.classList.add('best');
           const tags = [x.dataset.best ? 'Best call' : '', x.dataset.real ? 'What we did' : ''].filter(Boolean);
-          if (tags.length) x.lastElementChild.insertAdjacentHTML('beforeend', `<span class="mt-1 block text-xs font-medium" style="color:${x.dataset.best ? '#0A7A55' : '#B4532A'}">${tags.join(' · ')}</span>`);
+          if (tags.length) x.lastElementChild.insertAdjacentHTML('beforeend', `<span class="mt-1 block text-xs font-medium" style="color:${x.dataset.best ? '#F5C451' : '#FF6B4A'}">${tags.join(' · ')}</span>`);
         });
         res.innerHTML = `<div class="mt-6 border-l-2 pl-5" style="border-color:${c[1]}">
           <p class="tag" style="color:${c[1]}">${c[0]}</p>
-          <p class="mt-2 leading-relaxed text-[#474C57]">${c[2]}</p>
+          <p class="mt-2 leading-relaxed text-[#E8D6C7]">${c[2]}</p>
           <p class="mt-4 font-serif text-xl leading-snug">Next: the main data server goes down. Then it gets worse.</p>
-          <a href="writing/oncall.html?from=1&score=${k === 1 ? 1 : 0}" class="mt-5 inline-block rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">Make the next 5 calls →</a>
+          <a href="writing/oncall.html?from=1&score=${k === 1 ? 1 : 0}" class="mt-5 inline-block rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-[#17110D] hover:bg-[#E07F35]">Make the next 5 calls →</a>
           <a href="writing/ransomware-recovery-postmortem.html" class="ml-3 text-sm text-accent hover:underline">or read the postmortem</a>
         </div>`;
         res.classList.remove('hidden');

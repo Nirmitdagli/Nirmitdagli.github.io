@@ -14,7 +14,7 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://nirmitdagli.github.io/og.png" />
-  <meta name="theme-color" content="#050806" />
+  <meta name="theme-color" content="#17110D" />
   <link rel="canonical" href="https://nirmitdagli.github.io/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +28,7 @@
       if (old.indexOf(h) > -1 || h.indexOf('p-') === 0) location.replace('plain.html#' + h);
     })();
   </script>
-  <script>(function () { var ok = ['terminal', 'synthwave', 'dusk'], t = 'terminal'; try { var s = localStorage.getItem('nd-theme'); if (ok.indexOf(s) > -1) t = s; } catch (e) {} document.documentElement.setAttribute('data-theme', t); })();</script>
+  <script>(function () { var ok = ['terminal', 'synthwave', 'dusk'], t = 'dusk'; try { var s = localStorage.getItem('nd-theme'); if (ok.indexOf(s) > -1) t = s; } catch (e) {} document.documentElement.setAttribute('data-theme', t); })();</script>
   <style>
     :root {
       --paper: #FAFAF7; --ink: #14161A; --muted: #5B6170; --line: #E6E4DD;
@@ -100,12 +100,42 @@
     @keyframes beam { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(2.4); } }
     @media (prefers-reduced-motion: reduce) { .led, .fan, .beam, .chip .dot { animation: none; } .bldg { transition: none; } }
 
+    /* Tour */
+    .tourbtn { position: absolute; left: 14px; top: 12px; z-index: 3; font: 600 14px/1 var(--sans); padding: 11px 16px; border-radius: 999px; border: 0; background: var(--accent); color: var(--paper); cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+    .tourbtn:hover { filter: brightness(1.05); }
+    .tourbtn[hidden] { display: none; }
+    .callout { position: absolute; left: 14px; bottom: 54px; width: min(380px, calc(100% - 28px)); z-index: 4; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px 12px; box-shadow: 0 18px 40px rgba(0,0,0,.35); animation: cin .35s cubic-bezier(.2,.7,.2,1); }
+    .callout[hidden] { display: none; }
+    @keyframes cin { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .c-name { font-family: var(--serif); font-size: 28px; line-height: 1.05; margin-top: 6px; }
+    .c-metric { font-family: var(--serif); font-size: 40px; line-height: 1.05; color: var(--metric); margin-top: 4px; }
+    .c-line { margin: 6px 0 10px; color: var(--body); font-size: 14px; line-height: 1.5; }
+    .c-bar { height: 3px; background: var(--soft); border-radius: 3px; overflow: hidden; }
+    .c-bar span { display: block; height: 100%; width: 0; background: var(--accent); }
+    .c-ctl { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+    .c-ctl .btn { padding: 7px 11px; font-size: 13px; }
+    .touring .themes { opacity: .25; } .touring .hint { display: none; }
+    /* Everything section */
+    #everything { margin-top: 34px; }
+    .evhead h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.6vw, 40px); margin: 6px 0 6px; }
+    .evhead .lede a { color: var(--accent); }
+    .bsec { margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+    .bsec header.bh { position: static; background: none; backdrop-filter: none; border: 0; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    .bsec .bdot { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+    .bsec h3.bt { font-family: var(--serif); font-weight: 400; font-size: 30px; margin: 0; }
+    .bsec .bk { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    .bsec .bo { margin-left: auto; font-size: 13px; color: var(--accent); background: none; border: 0; cursor: pointer; font-weight: 500; }
+    .sbody { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; color: var(--body); line-height: 1.55; font-size: 15px; }
+    .sbody > p, .sbody > .links, .sbody > .tags, .sbody > .tl { grid-column: 1 / -1; margin: 0; }
+    .sbody .item { margin: 0; background: var(--card); }
+    .sbody .metric { font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--metric); }
     /* Directory (also the accessible list) */
     .dirwrap { margin-top: 22px; }
     .dirwrap h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 0 0 10px; }
     .dir { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; list-style: none; margin: 0; padding: 0; }
-    .dir button { width: 100%; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: inherit; display: flex; gap: 12px; align-items: flex-start; }
-    .dir button:hover { border-color: var(--border2); }
+    .dir a { text-decoration: none; }
+    .dir button, .dir a { width: 100%; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: inherit; display: flex; gap: 12px; align-items: flex-start; }
+    .dir button:hover, .dir a:hover { border-color: var(--border2); }
     .dir .sw { width: 10px; height: 10px; border-radius: 3px; margin-top: 5px; flex: none; }
     .dir strong { display: block; font-weight: 600; font-size: 14px; }
     .dir span.d { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; line-height: 1.4; }
@@ -169,7 +199,8 @@
         <p class="lede">This is my work laid out as an AI data center. Every building is something I ran or built, with the number that mattered. Click a building to step inside.</p>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="chip" type="button" data-open="reception"><span class="dot" aria-hidden="true"></span>Short on time? 30-second tour</button>
+        <button class="chip" type="button" data-tour><span class="dot" aria-hidden="true"></span>Short on time? Take the 60-second tour</button>
+        <a class="chip" href="#everything" style="border-style:solid">Skip to everything ↓</a>
       </div>
     </div>
     <p class="status" aria-label="Campus status">
@@ -182,17 +213,36 @@
     <div class="stage" id="stage">
       <svg id="map" viewBox="-470 -30 940 492" role="group" aria-label="Isometric map of an AI data center campus. Each building opens a section of the portfolio."></svg>
       <div class="themes" role="group" aria-label="Color theme">
+        <button type="button" data-theme="dusk"><span class="sw2" style="background:#FF9A4D"></span>Dusk</button>
         <button type="button" data-theme="terminal"><span class="sw2" style="background:#33FF88"></span>Terminal</button>
         <button type="button" data-theme="synthwave"><span class="sw2" style="background:#FF4FD8"></span>Synthwave</button>
-        <button type="button" data-theme="dusk"><span class="sw2" style="background:#FF9A4D"></span>Dusk</button>
+      </div>
+      <button class="tourbtn" type="button" data-tour id="tourStart">▶ Take the 60-second tour</button>
+      <div class="callout" id="callout" role="region" aria-live="polite" aria-label="Guided tour" hidden>
+        <div class="kicker" id="c-kicker"></div>
+        <div class="c-name" id="c-name"></div>
+        <div class="c-metric" id="c-metric"></div>
+        <p class="c-line" id="c-line"></p>
+        <div class="c-bar"><span id="c-prog"></span></div>
+        <div class="c-ctl">
+          <button type="button" class="btn" id="c-pause">Pause</button>
+          <button type="button" class="btn" id="c-next">Next →</button>
+          <button type="button" class="btn" id="c-more">Details</button>
+          <button type="button" class="btn" id="c-exit" aria-label="Exit tour">✕</button>
+        </div>
       </div>
       <div class="hint" aria-hidden="true">click a building · Esc to close · ← → to walk</div>
       <div class="visits" aria-live="polite">visited <b id="vcount">0</b>/<span id="vtotal">0</span></div>
     </div>
 
     <section class="dirwrap" id="directory" aria-labelledby="dir-h">
-      <h2 id="dir-h">Building directory</h2>
+      <h2 id="dir-h">Jump to a building</h2>
       <ul class="dir" id="dir"></ul>
+    </section>
+    <section id="everything" aria-labelledby="ev-h">
+      <div class="evhead"><div class="kicker">Everything, in one scroll</div><h2 id="ev-h">The whole campus, no clicking needed.</h2>
+      <p class="lede">Same content as the buildings, laid out for a fast read. The live demos run on the <a href="plain.html#live">demo floor</a>.</p></div>
+      <div id="sections"></div>
       <noscript><p>The campus map needs JavaScript. Everything is also on the <a href="plain.html">plain view</a>.</p></noscript>
     </section>
   </main>
@@ -274,7 +324,7 @@
         lblBg: '#1F1712', lblLine: '#5A4333', lblText: '#FBEFE4', leader: 'rgba(255,154,77,.4)', leaf: '#4E5A2E', leaf2: '#6B7A3E', trunk: '#5A4333', shadow: 'rgba(0,0,0,.4)', sign: '#FF9A4D', signText: '#17110D',
         c: { accent: '#FF9A4D', metric: '#F5C451', warm: '#FF6B4A', violet: '#E08BB0', ink: '#FBEFE4', muted: '#C2A894' } }
     };
-    var themeName = document.documentElement.getAttribute('data-theme') || 'terminal';
+    var themeName = document.documentElement.getAttribute('data-theme') || 'dusk';
     var T = THEMES[themeName] || THEMES.paper;
     var WALL = T.wall;
 
@@ -638,10 +688,119 @@
     var dir = document.getElementById('dir');
     tour.forEach(function (id) {
       var b = byId[id], li = document.createElement('li');
-      li.innerHTML = '<button type="button" data-open="' + id + '"><span class="sw" style="background:' + b.color + '"></span><span><strong>' + b.name + '</strong><span class="d">' + b.blurb + '</span></span></button>';
+      li.innerHTML = '<a href="#s-' + id + '"><span class="sw" style="background:' + b.color + '"></span><span><strong>' + b.name + '</strong><span class="d">' + b.blurb + '</span></span></a>';
       dir.appendChild(li);
     });
     document.querySelectorAll('[data-open]').forEach(function (btn) { btn.addEventListener('click', function () { open(btn.getAttribute('data-open')); }); });
+
+    // ---------------- Everything, in one scroll ----------------
+    var secs = document.getElementById('sections');
+    function renderSections() {
+      secs.innerHTML = tour.map(function (id) {
+        var b = byId[id];
+        return '<section class="bsec" id="s-' + id + '"><header class="bh"><span class="bdot" style="background:' + b.color + '"></span><h3 class="bt">' + b.name + '</h3><span class="bk">' + b.kicker + '</span><button type="button" class="bo" data-show="' + id + '">Show on map ↑</button></header><div class="sbody">' + b.html + '</div></section>';
+      }).join('');
+      secs.querySelectorAll('[data-show]').forEach(function (btn) {
+        btn.addEventListener('click', function () { document.getElementById('stage').scrollIntoView({ behavior: 'smooth', block: 'center' }); open(btn.getAttribute('data-show')); });
+      });
+    }
+    renderSections();
+
+    // ---------------- Guided tour ----------------
+    var TOUR = {
+      reception: ['50+ clusters', 'Founding Platform Engineer at Sidecoach Sports. Started on the Linux team at Zycus in 2021. CKA, CKAD, AWS SA, RHCSA.'],
+      gpu: ['609 vs 384 tok/s', 'vLLM vs SGLang at 64 users on one Tesla T4, plus Triton kernels at 70 to 78% of peak bandwidth.'],
+      control: ['2,000+ → 50+', 'Servers moved onto Kubernetes across EKS, AKS, GKE, Rancher and OpenShift. Provisioning about 40% faster.'],
+      aiops: ['1 AI gateway', 'Every LLM call gets sign-in, spend limits, PII redaction and a trace. The SRE agents need a human to approve.'],
+      noc: ['4 live demos', 'Race two LLM engines, migrate the clusters, release an attack on two networks, take the on-call shift.'],
+      security: ['1,500+ servers', 'Ransomware first responder: back in 15 days, then a segmented network, 20 Palo Altos and a new DR program.'],
+      research: ['5 papers', 'SPARK at IEEE UEMCON 2025. HERO-S routes AI jobs and cuts energy 72 to 98%.'],
+      journey: ['2016 → now', 'Science teacher in Mumbai, Linux team, platform lead at Zycus, M.S. CS, founding platform engineer.'],
+      archive: ['3 reads', 'A ransomware postmortem, a vLLM vs SGLang deep dive and an interactive on-call shift.'],
+      dispatch: ['Let\'s talk', 'Résumé, email and LinkedIn are one click away. Texas, open to relocating anywhere in the US.']
+    };
+    var FULL = [-470, -30, 940, 492], vb = FULL.slice(), vbAnim = null;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function setVB(v) { vb = v; svg.setAttribute('viewBox', v.map(function (n) { return n.toFixed(1); }).join(' ')); }
+    function flyTo(target, ms) {
+      if (vbAnim) cancelAnimationFrame(vbAnim);
+      if (reduce) { setVB(target); return; }
+      var from = vb.slice(), t0 = performance.now();
+      (function tick(now) {
+        var k = Math.min(1, (now - t0) / ms), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        setVB(from.map(function (f, i) { return f + (target[i] - f) * e; }));
+        if (k < 1) vbAnim = requestAnimationFrame(tick);
+      })(t0);
+    }
+    function focusBox(b) {
+      var c = P(b.x + b.w / 2, b.y + b.d / 2, b.h * 0.6), w = Math.max(700, (b.w + b.d) * 82), hgt = w * FULL[3] / FULL[2];
+      var narrow = stage.clientWidth < 720;
+      // keep the building to the right of the callout card on wide screens, a bit above it on phones
+      return narrow ? [c[0] - w / 2, c[1] - hgt * 0.38, w, hgt] : [c[0] - w * 0.36, c[1] - hgt / 2, w, hgt];
+    }
+    var stage = document.getElementById('stage'), callout = document.getElementById('callout'), startBtn = document.getElementById('tourStart');
+    var tIdx = -1, tTimer = null, tPaused = false, tStart = 0, tLeft = 0, STEP = 5600, progRaf = null;
+    function showStep(i) {
+      tIdx = i;
+      if (i >= tour.length) return finishTour();
+      var id = tour[i], b = byId[id];
+      Object.keys(nodes).forEach(function (k) { nodes[k].classList.toggle('on', k === id); });
+      visited[id] = 1; try { localStorage.setItem('nd-visited', JSON.stringify(visited)); } catch (e) {}
+      paintVisits();
+      flyTo(focusBox(b), 900);
+      document.getElementById('c-kicker').textContent = (i + 1) + ' / ' + tour.length + ' · ' + b.kicker;
+      document.getElementById('c-name').textContent = b.name;
+      document.getElementById('c-metric').textContent = TOUR[id][0];
+      document.getElementById('c-line').textContent = TOUR[id][1];
+      document.getElementById('c-more').hidden = false;
+      document.getElementById('c-next').textContent = i === tour.length - 1 ? 'Finish' : 'Next →';
+      callout.hidden = false; callout.style.animation = 'none'; void callout.offsetWidth; callout.style.animation = '';
+      runTimer(STEP);
+    }
+    function runTimer(ms) {
+      clearTimeout(tTimer); cancelAnimationFrame(progRaf);
+      tLeft = ms; tStart = performance.now();
+      var bar = document.getElementById('c-prog');
+      (function p() { var done = STEP - tLeft + (performance.now() - tStart); bar.style.width = Math.min(100, done / STEP * 100) + '%'; if (!tPaused) progRaf = requestAnimationFrame(p); })();
+      tTimer = setTimeout(function () { showStep(tIdx + 1); }, ms);
+    }
+    function startTour() {
+      if (current) close();
+      stage.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      stage.classList.add('touring'); startBtn.hidden = true; tPaused = false;
+      document.getElementById('c-pause').textContent = 'Pause';
+      showStep(0);
+    }
+    function finishTour() {
+      clearTimeout(tTimer); cancelAnimationFrame(progRaf);
+      flyTo(FULL, 900);
+      Object.keys(nodes).forEach(function (k) { nodes[k].classList.remove('on'); });
+      document.getElementById('c-kicker').textContent = 'Tour complete';
+      document.getElementById('c-name').textContent = 'That\'s the campus.';
+      document.getElementById('c-metric').textContent = '10 / 10';
+      document.getElementById('c-line').innerHTML = '<a href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" style="color:var(--accent)">Résumé</a> · <a href="mailto:daglinirmit@gmail.com" style="color:var(--accent)">Email me</a> · <a href="#everything" style="color:var(--accent)">Read everything ↓</a>';
+      document.getElementById('c-prog').style.width = '100%';
+      document.getElementById('c-more').hidden = true;
+      document.getElementById('c-next').textContent = 'Replay';
+      tIdx = tour.length;
+    }
+    function exitTour() {
+      clearTimeout(tTimer); cancelAnimationFrame(progRaf);
+      callout.hidden = true; stage.classList.remove('touring'); startBtn.hidden = false; tIdx = -1;
+      Object.keys(nodes).forEach(function (k) { nodes[k].classList.toggle('on', k === current); });
+      flyTo(FULL, 700);
+    }
+    document.querySelectorAll('[data-tour]').forEach(function (b) { b.addEventListener('click', startTour); });
+    document.getElementById('c-exit').addEventListener('click', exitTour);
+    document.getElementById('c-next').addEventListener('click', function () { if (tIdx >= tour.length) { startTour(); } else { tPaused = false; document.getElementById('c-pause').textContent = 'Pause'; showStep(tIdx + 1); } });
+    document.getElementById('c-more').addEventListener('click', function () { var id = tour[tIdx]; exitTour(); open(id); });
+    document.getElementById('c-pause').addEventListener('click', function () {
+      if (tIdx < 0 || tIdx >= tour.length) return;
+      if (!tPaused) { tPaused = true; clearTimeout(tTimer); cancelAnimationFrame(progRaf); tLeft -= performance.now() - tStart; this.textContent = 'Play'; }
+      else { tPaused = false; this.textContent = 'Pause'; var bar = document.getElementById('c-prog'); var ms = tLeft; tStart = performance.now(); (function p() { var done = STEP - tLeft + (performance.now() - tStart); bar.style.width = Math.min(100, done / STEP * 100) + '%'; if (!tPaused) progRaf = requestAnimationFrame(p); })(); tTimer = setTimeout(function () { showStep(tIdx + 1); }, ms); }
+    });
+    // Clicking a building during the tour stops the tour and opens it
+    svg.addEventListener('click', function () { if (tIdx > -1) { clearTimeout(tTimer); callout.hidden = true; stage.classList.remove('touring'); startBtn.hidden = false; tIdx = -1; flyTo(FULL, 600); } }, true);
 
     // ---------------- Visits (light per-viewer convenience) ----------------
     var visited = {};
@@ -657,7 +816,7 @@
     // ---------------- Themes ----------------
     var tbtns = document.querySelectorAll('.themes button');
     function setTheme(name) {
-      if (!THEMES[name]) name = 'terminal';
+      if (!THEMES[name]) name = 'dusk';
       themeName = name; T = THEMES[name];
       if (name === 'paper') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', name);
       try { localStorage.setItem('nd-theme', name); } catch (e) {}
@@ -665,6 +824,8 @@
       render(); paintVisits();
       if (current && nodes[current]) nodes[current].classList.add('on');
       document.querySelectorAll('#dir .sw').forEach(function (s, i) { s.style.background = byId[tour[i]].color; });
+      document.querySelectorAll('.bsec .bdot').forEach(function (s, i) { s.style.background = byId[tour[i]].color; });
+      if (tIdx > -1 && tIdx < tour.length) nodes[tour[tIdx]] && nodes[tour[tIdx]].classList.add('on');
     }
     tbtns.forEach(function (b) { b.addEventListener('click', function () { setTheme(b.getAttribute('data-theme')); }); });
     tbtns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-theme') === themeName ? 'true' : 'false'); });
@@ -701,7 +862,7 @@
     document.getElementById('d-next').addEventListener('click', function () { step(1); });
     document.getElementById('d-prev').addEventListener('click', function () { step(-1); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') { if (tIdx > -1) exitTour(); close(); }
       else if (current && (e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) step(e.key === 'ArrowRight' ? 1 : -1);
       else if (current && e.key === 'Tab') {
         var f = drawer.querySelectorAll('a, button'); if (!f.length) return;
