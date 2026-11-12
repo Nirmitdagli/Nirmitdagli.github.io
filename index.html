@@ -14,7 +14,7 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://nirmitdagli.github.io/og.png" />
-  <meta name="theme-color" content="#17110D" />
+  <meta name="theme-color" content="#FFFDF9" />
   <link rel="canonical" href="https://nirmitdagli.github.io/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +28,7 @@
       if (old.indexOf(h) > -1 || h.indexOf('p-') === 0) location.replace('plain.html#' + h);
     })();
   </script>
-  <script>(function () { var ok = ['terminal', 'synthwave', 'dusk'], t = 'dusk'; try { var s = localStorage.getItem('nd-theme'); if (ok.indexOf(s) > -1) t = s; } catch (e) {} document.documentElement.setAttribute('data-theme', t); })();</script>
+  <script>(function () { var ok = ['daylight', 'dusk', 'terminal', 'synthwave'], t = 'daylight'; try { var s = localStorage.getItem('nd-theme'); if (ok.indexOf(s) > -1) t = s; } catch (e) {} document.documentElement.setAttribute('data-theme', t); })();</script>
   <style>
     :root {
       --paper: #FAFAF7; --ink: #14161A; --muted: #5B6170; --line: #E6E4DD;
@@ -40,6 +40,8 @@
     }
     html[data-theme="night"] { --paper: #0F1115; --ink: #E8E9EC; --muted: #9AA1AE; --line: #2A2E36; --accent: #6E9BFF; --metric: #3DD39A; --warm: #F08A5D; --violet: #A98BFF; --card: #171A20; --body: #C9CDD5; --soft: #22262E; --hdr: rgba(15,17,21,.86); --gridline: rgba(255,255,255,.035); --stagebg: #141820; --border2: #3A3F49; }
     html[data-theme="blueprint"] { --paper: #0B3D91; --ink: #F1F6FF; --muted: #B9CCEE; --line: rgba(255,255,255,.22); --accent: #FFD166; --metric: #7CF0C4; --warm: #FF9F6B; --violet: #C9B6FF; --card: #0E4AA8; --body: #E3ECFF; --soft: rgba(255,255,255,.1); --hdr: rgba(11,61,145,.88); --gridline: rgba(255,255,255,.08); --stagebg: #0D44A0; --border2: rgba(255,255,255,.4); }
+    html[data-theme="daylight"] { --paper: #FFFDF9; --ink: #1A1410; --muted: #6B5E52; --line: #EFE4D8; --accent: #E8701F; --metric: #C2560E; --warm: #D9472A; --violet: #B5577E; --card: #FFFFFF; --body: #3D3229; --soft: #FFF1E4; --hdr: rgba(255,253,249,.9); --gridline: rgba(232,112,31,.06); --stagebg: #FFF8F1; --border2: #E8D5C2; }
+    html[data-theme="daylight"] .btn.primary, html[data-theme="daylight"] .tourbtn, html[data-theme="daylight"] .themes button[aria-pressed="true"] { color: #FFFFFF; }
     html[data-theme="terminal"] { --paper: #050806; --ink: #D7FFE6; --muted: #6FAF88; --line: #16301F; --accent: #33FF88; --metric: #33FF88; --warm: #FFB347; --violet: #7DF9FF; --card: #0A110C; --body: #B8EBCB; --soft: #10201A; --hdr: rgba(5,8,6,.88); --gridline: rgba(51,255,136,.05); --stagebg: #070C09; --border2: #24503A; }
     html[data-theme="synthwave"] { --paper: #120B24; --ink: #F5EDFF; --muted: #B8A6D9; --line: #2E2350; --accent: #FF4FD8; --metric: #3BF0FF; --warm: #FFB86B; --violet: #B98CFF; --card: #1B1236; --body: #DCCFF5; --soft: #261A47; --hdr: rgba(18,11,36,.88); --gridline: rgba(255,79,216,.06); --stagebg: #160E2D; --border2: #4A3A7A; }
     html[data-theme="dusk"] { --paper: #17110D; --ink: #FBEFE4; --muted: #C2A894; --line: #33261D; --accent: #FF9A4D; --metric: #F5C451; --warm: #FF6B4A; --violet: #E08BB0; --card: #1F1712; --body: #E8D6C7; --soft: #2A1F18; --hdr: rgba(23,17,13,.88); --gridline: rgba(255,154,77,.05); --stagebg: #1B140F; --border2: #4E3A2C; }
@@ -213,7 +215,8 @@
     <div class="stage" id="stage">
       <svg id="map" viewBox="-470 -30 940 492" role="group" aria-label="Isometric map of an AI data center campus. Each building opens a section of the portfolio."></svg>
       <div class="themes" role="group" aria-label="Color theme">
-        <button type="button" data-theme="dusk"><span class="sw2" style="background:#FF9A4D"></span>Dusk</button>
+        <button type="button" data-theme="daylight"><span class="sw2" style="background:linear-gradient(135deg,#FFFFFF 50%,#E8701F 50%)"></span>Daylight</button>
+        <button type="button" data-theme="dusk"><span class="sw2" style="background:linear-gradient(135deg,#17110D 50%,#FF9A4D 50%)"></span>Dusk</button>
         <button type="button" data-theme="terminal"><span class="sw2" style="background:#33FF88"></span>Terminal</button>
         <button type="button" data-theme="synthwave"><span class="sw2" style="background:#FF4FD8"></span>Synthwave</button>
       </div>
@@ -311,6 +314,10 @@
         plate: '#0D44A0', plateLine: 'rgba(255,255,255,.35)', plateL: '#0A3B8C', plateR: '#08327A', grid: 'rgba(255,255,255,.12)', road: '#0B3D91', dash: 'rgba(255,255,255,.55)',
         lblBg: '#0B3D91', lblLine: 'rgba(255,255,255,.55)', lblText: '#F1F6FF', leader: 'rgba(255,255,255,.45)', leaf: 'rgba(255,255,255,.25)', leaf2: 'rgba(255,255,255,.4)', trunk: 'rgba(255,255,255,.5)', shadow: 'rgba(0,0,0,.18)', sign: '#FFD166', signText: '#0B3D91',
         c: { accent: '#FFD166', metric: '#7CF0C4', warm: '#FF9F6B', violet: '#C9B6FF', ink: '#F1F6FF', muted: '#B9CCEE' } },
+      daylight: { wall: { t: '#FFFFFF', l: '#FBEFE3', r: '#F2DECB' }, sec: { t: '#FFF4EC', l: '#FCE3D2', r: '#F5CDB4' }, tower: { t: '#FFFFFF', l: '#F7EADF', r: '#EBD7C6' },
+        plate: '#FFF6EC', plateLine: '#F2DFCB', plateL: '#F5E3D0', plateR: '#EBD3BC', grid: 'rgba(232,112,31,.08)', road: '#F7E6D4', dash: '#FFFFFF',
+        lblBg: '#FFFFFF', lblLine: '#EED8C3', lblText: '#1A1410', leader: '#E2C3A6', leaf: '#8DB07A', leaf2: '#A9C795', trunk: '#9C7B5E', shadow: 'rgba(160,90,30,.10)', sign: '#E8701F', signText: '#FFFFFF',
+        c: { accent: '#E8701F', metric: '#C2560E', warm: '#D9472A', violet: '#B5577E', ink: '#1A1410', muted: '#8A7A6C' } },
       terminal: { wall: { t: '#0F1F16', l: '#0B1711', r: '#08110C' }, sec: { t: '#1E1A0E', l: '#17130A', r: '#110E07' }, tower: { t: '#13281C', l: '#0E1D15', r: '#0A150F' },
         plate: '#07100B', plateLine: '#1C3A28', plateL: '#050B08', plateR: '#030705', grid: 'rgba(51,255,136,.07)', road: '#0C1A12', dash: 'rgba(51,255,136,.35)',
         lblBg: '#07100B', lblLine: '#2E6B47', lblText: '#9DFFC6', leader: 'rgba(51,255,136,.35)', leaf: '#145C33', leaf2: '#1E7F48', trunk: '#2B4A36', shadow: 'rgba(0,0,0,.5)', sign: '#33FF88', signText: '#050806',
@@ -324,7 +331,7 @@
         lblBg: '#1F1712', lblLine: '#5A4333', lblText: '#FBEFE4', leader: 'rgba(255,154,77,.4)', leaf: '#4E5A2E', leaf2: '#6B7A3E', trunk: '#5A4333', shadow: 'rgba(0,0,0,.4)', sign: '#FF9A4D', signText: '#17110D',
         c: { accent: '#FF9A4D', metric: '#F5C451', warm: '#FF6B4A', violet: '#E08BB0', ink: '#FBEFE4', muted: '#C2A894' } }
     };
-    var themeName = document.documentElement.getAttribute('data-theme') || 'dusk';
+    var themeName = document.documentElement.getAttribute('data-theme') || 'daylight';
     var T = THEMES[themeName] || THEMES.paper;
     var WALL = T.wall;
 
@@ -764,9 +771,9 @@
       (function p() { var done = STEP - tLeft + (performance.now() - tStart); bar.style.width = Math.min(100, done / STEP * 100) + '%'; if (!tPaused) progRaf = requestAnimationFrame(p); })();
       tTimer = setTimeout(function () { showStep(tIdx + 1); }, ms);
     }
-    function startTour() {
+    function startTour(auto) {
       if (current) close();
-      stage.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      if (auto !== true) stage.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
       stage.classList.add('touring'); startBtn.hidden = true; tPaused = false;
       document.getElementById('c-pause').textContent = 'Pause';
       showStep(0);
@@ -790,9 +797,9 @@
       Object.keys(nodes).forEach(function (k) { nodes[k].classList.toggle('on', k === current); });
       flyTo(FULL, 700);
     }
-    document.querySelectorAll('[data-tour]').forEach(function (b) { b.addEventListener('click', startTour); });
+    document.querySelectorAll('[data-tour]').forEach(function (b) { b.addEventListener('click', function () { startTour(false); }); });
     document.getElementById('c-exit').addEventListener('click', exitTour);
-    document.getElementById('c-next').addEventListener('click', function () { if (tIdx >= tour.length) { startTour(); } else { tPaused = false; document.getElementById('c-pause').textContent = 'Pause'; showStep(tIdx + 1); } });
+    document.getElementById('c-next').addEventListener('click', function () { if (tIdx >= tour.length) { startTour(false); } else { tPaused = false; document.getElementById('c-pause').textContent = 'Pause'; showStep(tIdx + 1); } });
     document.getElementById('c-more').addEventListener('click', function () { var id = tour[tIdx]; exitTour(); open(id); });
     document.getElementById('c-pause').addEventListener('click', function () {
       if (tIdx < 0 || tIdx >= tour.length) return;
@@ -816,7 +823,7 @@
     // ---------------- Themes ----------------
     var tbtns = document.querySelectorAll('.themes button');
     function setTheme(name) {
-      if (!THEMES[name]) name = 'dusk';
+      if (!THEMES[name]) name = 'daylight';
       themeName = name; T = THEMES[name];
       if (name === 'paper') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', name);
       try { localStorage.setItem('nd-theme', name); } catch (e) {}
@@ -875,6 +882,8 @@
     function fromHash() { var h = location.hash.replace('#', ''); if (byId[h]) open(h, true); }
     window.addEventListener('hashchange', fromHash);
     fromHash();
+    // The tour starts on its own unless the visitor came in on a deep link (#gpu, #s-gpu ...)
+    if (!location.hash || location.hash === '#tour') setTimeout(function () { if (!current && tIdx < 0) startTour(true); }, 1400);
   })();
   </script>
 </body>
