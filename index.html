@@ -4,1008 +4,651 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nirmit Dagli · AI Infrastructure Engineer</title>
-  <meta name="description" content="Nirmit Dagli, AI infrastructure engineer in Austin, TX. Kubernetes GPU clusters, LLM serving (vLLM, SGLang, TensorRT-LLM), AI gateways and agents, platform security." />
+  <meta name="description" content="Nirmit Dagli, AI infrastructure engineer in Texas. Kubernetes GPU clusters, LLM serving (vLLM, SGLang, TensorRT-LLM), AI gateways and agents, platform security. Explore the work as a walkable AI data center." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://nirmitdagli.github.io/" />
   <meta property="og:title" content="Nirmit Dagli · AI Infrastructure Engineer" />
-  <meta property="og:description" content="GPU clusters, LLM serving benchmarks, AI gateways and agents, and secure production platforms." />
+  <meta property="og:description" content="Walk through my AI data center: GPU hall, control plane, AI ops, NOC, security gate and research lab. Every building is real work with the number that mattered." />
   <meta property="og:image" content="https://nirmitdagli.github.io/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://nirmitdagli.github.io/og.png" />
   <meta name="theme-color" content="#FAFAF7" />
+  <link rel="canonical" href="https://nirmitdagli.github.io/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: { paper: '#FAFAF7', ink: '#14161A', muted: '#5B6170', line: '#E6E4DD', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A' },
-          fontFamily: {
-            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
-            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
-          },
-        },
-      },
-    };
+    // Old deep links (#projects, #live ...) belong to the plain view.
+    (function () {
+      var old = ['top', 'live', 'projects', 'journey', 'research', 'writing', 'contact', 'experience', 'main'];
+      var h = location.hash.replace('#', '');
+      if (old.indexOf(h) > -1 || h.indexOf('p-') === 0) location.replace('plain.html#' + h);
+    })();
   </script>
   <style>
-    html, body { background: #FAFAF7; color: #14161A; -webkit-font-smoothing: antialiased; }
-    body { background-image: linear-gradient(rgba(20,22,26,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(20,22,26,.05) 1px, transparent 1px); background-size: 40px 40px; background-position: 0 0; }
-    .hero-wrap { position: relative; isolation: isolate; }
-    .hero-wrap > canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-    .hero-in > * { opacity: 0; transform: translateY(14px); animation: heroIn .8s cubic-bezier(.2,.7,.2,1) forwards; }
-    .hero-in > *:nth-child(1) { animation-delay: .05s; } .hero-in > *:nth-child(2) { animation-delay: .15s; } .hero-in > *:nth-child(3) { animation-delay: .28s; }
-    .hero-in > *:nth-child(4) { animation-delay: .4s; } .hero-in > *:nth-child(5) { animation-delay: .5s; } .hero-in > *:nth-child(6) { animation-delay: .6s; }
-    @keyframes heroIn { to { opacity: 1; transform: none; } }
-    @media (prefers-reduced-motion: reduce) { .hero-in > * { opacity: 1; transform: none; animation: none; } }
-    html { scroll-behavior: smooth; }
-    section[id], [id=experience] { scroll-margin-top: 4.5rem; }
-    .journey { border-left: 1px solid #E6E4DD; padding-left: 1.4rem; }
-    .sec-h { font-family: "Instrument Serif", Georgia, serif; font-size: clamp(2.3rem, 5vw, 3.4rem); line-height: 1.05; }
-    .lv-tabs { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; }
-    @media (min-width: 768px) { .lv-tabs { grid-template-columns: repeat(4, 1fr); } }
-    .lv-tab { position: relative; display: flex; align-items: baseline; gap: .6rem; padding: .8rem 1rem; border-radius: 12px; border: 1px solid #DDD9CE; background: #fff; text-align: left; transition: border-color .2s, transform .2s, box-shadow .2s; }
-    .lv-tab:hover { transform: translateY(-2px); border-color: #B9B6AC; }
-    .lv-tab[aria-selected="true"] { border-color: #14161A; box-shadow: 0 12px 28px -20px rgba(20,22,26,.55); }
-    .lv-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 1rem; right: 1rem; bottom: -1px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #2453D6, #0A7A55); }
-    .lv-n { font-family: "Instrument Serif", Georgia, serif; font-size: 1.5rem; line-height: 1; color: #C9C5BA; }
-    .lv-tab[aria-selected="true"] .lv-n { color: #2453D6; }
-    .lv-t { font-weight: 600; font-size: .92rem; }
-    .lv-stage { border: 1px solid #E2DED4; border-radius: 18px; background: rgba(255,255,255,.88); backdrop-filter: blur(2px); padding: 1.4rem; }
-    @media (min-width: 640px) { .lv-stage { padding: 2rem 2.2rem; } }
-    .lv-panel { animation: lvIn .4s ease both; }
-    @keyframes lvIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-    .pf-chip { border: 1px solid #DDD9CE; background: #fff; border-radius: 999px; padding: .45rem .9rem; font-size: .86rem; color: #5B6170; transition: all .2s; }
-    .pf-chip:hover { border-color: #14161A; color: #14161A; }
-    .pf-chip[aria-pressed="true"] { background: #14161A; border-color: #14161A; color: #fff; }
-    .pf-c { opacity: .6; margin-left: .15rem; }
-    .pcards { display: grid; gap: 1rem; align-items: start; }
-    @media (min-width: 640px) { .pcards { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 960px) { .pcards { grid-template-columns: repeat(3, 1fr); } }
-    .pcards .card { animation: lvIn .35s ease both; scroll-margin-top: 6rem; }
-    .pcards .card.flash { box-shadow: 0 0 0 3px #DCE5FF; border-color: #2453D6; }
-    .jr { position: relative; }
-    .jr::before { content: ""; position: absolute; left: 6.2rem; top: .6rem; bottom: .6rem; width: 1px; background: linear-gradient(#2453D6, #0A7A55 40%, #E0DCD1); }
-    .jr-i { position: relative; display: grid; grid-template-columns: 6.2rem 1fr; gap: 0 1.6rem; padding-bottom: 2.4rem; }
-    .jr-i::before { content: ""; position: absolute; left: calc(6.2rem - 5px); top: .55rem; width: 11px; height: 11px; border-radius: 99px; background: #fff; border: 2px solid #14161A; }
-    .jr-i:first-child::before { background: #2453D6; border-color: #2453D6; box-shadow: 0 0 0 5px #DCE5FF; }
-    .jr-y { font-family: "Instrument Serif", Georgia, serif; font-size: 1.7rem; line-height: 1; padding-right: .6rem; }
-    .jr-y span { display: block; font-family: Inter, sans-serif; font-size: .72rem; color: #7A7F8A; margin-top: .35rem; }
-    .jr-b { padding-left: .4rem; }
-    .jr-r { font-weight: 600; font-size: 1.08rem; }
-    .jr-r span { font-weight: 400; color: #5B6170; }
-    .jr-l { margin-top: .6rem; display: grid; gap: .35rem; color: #474C57; font-size: .97rem; line-height: 1.6; }
-    .jr-l li { position: relative; padding-left: 1rem; }
-    .jr-l li::before { content: ""; position: absolute; left: 0; top: .7rem; width: 6px; height: 1px; background: #9A978E; }
-    .jr-p { margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .4rem; }
-    .jr-p a { font-size: .8rem; padding: .25rem .65rem; border-radius: 999px; border: 1px solid #DDD9CE; background: #fff; color: #2453D6; }
-    .jr-p a:hover { border-color: #2453D6; }
-    @media (max-width: 520px) { .jr::before { left: .3rem; } .jr-i { grid-template-columns: 1fr; padding-left: 1.6rem; } .jr-i::before { left: calc(.3rem - 5px); } .jr-y { font-size: 1.4rem; margin-bottom: .4rem; } .jr-y span { display: inline; margin-left: .4rem; } .jr-b { padding-left: 0; } }
-    #bl-svg circle { cursor: pointer; }
-    @media print { .lv-panel[hidden] { display: block !important; } }
-    @media (prefers-reduced-motion: reduce) { .lv-panel, .pcards .card { animation: none; } .lv-tab:hover { transform: none; } }
-    .demo { margin-top: 2.5rem; border-top: 1px solid #E6E4DD; border-bottom: 1px solid #E6E4DD; padding: 2.2rem 0 1.6rem; }
-    .bl-m[aria-checked="true"] { background: #14161A; color: #fff; } .bl-m[aria-checked="false"] { color: #5B6170; }
-    .cards { margin-top: 2.5rem; display: grid; gap: 1rem; }
-    @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
-    .card { border: 1px solid #E2DED4; border-radius: 16px; background: #fff; transition: border-color .2s, box-shadow .2s; }
-    .card:hover { border-color: #B9B6AC; }
-    .card[open] { border-color: #14161A; box-shadow: 0 10px 30px -20px rgba(20,22,26,.45); }
-    .card summary { list-style: none; cursor: pointer; display: flex; flex-direction: column; gap: .35rem; padding: 1.3rem 1.4rem; }
-    .card summary::-webkit-details-marker { display: none; }
-    .card-n { margin-top: .4rem; font-family: "Instrument Serif", Georgia, serif; font-size: 2.7rem; line-height: 1; }
-    .card-t { margin-top: .35rem; font-weight: 600; }
-    .card-d { font-size: .93rem; line-height: 1.55; color: #5B6170; }
-    .card-more { margin-top: .5rem; font-size: .82rem; font-weight: 500; color: #2453D6; }
-    .card-more::after { content: " +"; }
-    .card[open] .card-more::after { content: " −"; }
-    .card-body { padding: 0 1.4rem 1.4rem; font-size: .95rem; line-height: 1.65; color: #474C57; border-top: 1px dashed #E6E4DD; padding-top: 1rem; margin: 0 0 0; }
-    .tq-opt { display: grid; grid-template-columns: 2rem 1fr; gap: .75rem; align-items: start; width: 100%; text-align: left; padding: .95rem 1.05rem; border: 1px solid #DDD9CE; border-radius: 12px; background: #fff; transition: border-color .15s, transform .15s; }
-    .tq-opt:hover:not([disabled]) { border-color: #2453D6; transform: translateY(-1px); }
-    .tq-opt[disabled] { cursor: default; opacity: .5; }
-    .tq-opt.picked { opacity: 1; border-color: #14161A; }
-    .tq-key { display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 999px; border: 1px solid #DDD9CE; font-size: .8rem; color: #5B6170; }
-    .tq-opt.best .tq-key { background: #0A7A55; border-color: #0A7A55; color: #fff; }
-    .rc-u[aria-checked="true"] { background: #14161A; color: #fff; }
-    .rc-u[aria-checked="false"] { color: #5B6170; }
-    .rc-text .cur { display: inline-block; width: .5em; height: 1em; vertical-align: -.12em; background: currentColor; opacity: .5; animation: blink 1s steps(1) infinite; }
-    .rc-text .wait { color: #9A978E; font-style: italic; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .jy { position: relative; }
-    .jy::before { content: ""; position: absolute; top: .55rem; left: calc(-1.4rem - 5px); width: 9px; height: 9px; border-radius: 999px; background: #14161A; }
-    @media (min-width: 1024px) {
-      .journey { border-left: 0; padding-left: 0; border-top: 1px solid #E6E4DD; padding-top: 1.5rem; }
-      .jy::before { top: calc(-1.5rem - 5px); left: 0; }
+    :root {
+      --paper: #FAFAF7; --ink: #14161A; --muted: #5B6170; --line: #E6E4DD;
+      --accent: #2453D6; --metric: #0A7A55; --warm: #B4532A; --violet: #6B4FBB;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
-    .jy:last-child::before { background: #2453D6; box-shadow: 0 0 0 4px #DCE5FF; }
-    ::selection { background: #DCE5FF; }
-    .kicker { display: flex; align-items: center; gap: .6rem; font-size: .875rem; color: #5B6170; }
-    .kicker::before { content: ""; width: 22px; height: 1px; background: #B9B6AC; }
-    .rule { border-top: 1px solid #E6E4DD; }
-    .num { font-variant-numeric: tabular-nums; }
-    .tag { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #7A7F8A; line-height: 1.7; }
-    .prose-p { font-size: 1.06rem; line-height: 1.75; color: #474C57; }
-    .note { border-left: 2px solid #E0DCD1; padding-left: 1.1rem; }
-    .note dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: #B4532A; }
-    .note dd { margin-top: .45rem; line-height: 1.65; color: #474C57; }
-    .panel { background: #fff; border: 1px solid #E6E4DD; border-radius: 14px; }
-    .link { color: #2453D6; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    .link:hover { color: #14161A; }
-    .chip { display:inline-block; font-size:.78rem; color:#5B6170; border:1px solid #E6E4DD; background:#fff; border-radius:999px; padding:.2rem .65rem; }
-    /* chart draw-in */
-    .draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
-    .in .draw { transition: stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1); stroke-dashoffset: 0; }
-    .fade { opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .7s ease; }
-    .fade.in { opacity: 1; transform: none; }
-    .packet { offset-rotate: 0deg; animation: travel 4.2s linear infinite; }
-    @keyframes travel { from { offset-distance: 0%; } to { offset-distance: 100%; } }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .draw { stroke-dashoffset: 0 !important; transition: none !important; }
-      .fade { opacity: 1; transform: none; transition: none; }
-      .packet { animation: none; display: none; }
-    }
-    @media print {
-      header, .no-print { display: none !important; }
-      body { background: #fff; }
-      .fade { opacity: 1 !important; transform: none !important; }
-      section { break-inside: avoid; padding-top: 1rem !important; padding-bottom: 1rem !important; }
-      a { color: #14161A !important; text-decoration: none !important; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    body { background-image: linear-gradient(rgba(20,22,26,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(20,22,26,.045) 1px, transparent 1px); background-size: 40px 40px; min-height: 100vh; }
+    a { color: inherit; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .skip:focus { position: fixed; left: 12px; top: 12px; z-index: 60; width: auto; height: auto; clip: auto; background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 6px; }
+
+    /* Top bar: recruiter fast lane, always visible */
+    header { position: sticky; top: 0; z-index: 30; background: rgba(250,250,247,.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .bar { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; }
+    .brand { font-family: var(--serif); font-size: 22px; line-height: 1; text-decoration: none; }
+    .brand small { display: block; font-family: var(--sans); font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: .01em; }
+    .actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .btn { font: 500 14px/1 var(--sans); padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: #fff; text-decoration: none; cursor: pointer; white-space: nowrap; }
+    .btn:hover { border-color: #cfccc2; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: #1B44B8; }
+    .btn:focus-visible, .chip:focus-visible, .dir button:focus-visible, .bldg:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    main { max-width: 1200px; margin: 0 auto; padding: 18px 20px 40px; }
+    .intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 4.4vw, 50px); line-height: 1.04; margin: 6px 0 8px; max-width: 760px; }
+    h1 em { color: var(--accent); }
+    .lede { color: var(--muted); font-size: 16px; line-height: 1.55; max-width: 660px; margin: 0; }
+    .chip { display: inline-flex; align-items: center; gap: 8px; font: 500 13px/1 var(--sans); padding: 8px 12px; border-radius: 999px; background: #fff; border: 1px dashed #c9c5b9; cursor: pointer; color: var(--ink); text-decoration: none; }
+    .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--metric); box-shadow: 0 0 0 0 rgba(10,122,85,.5); animation: ping 2s infinite; }
+    @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(10,122,85,.45); } 70% { box-shadow: 0 0 0 8px rgba(10,122,85,0); } 100% { box-shadow: 0 0 0 0 rgba(10,122,85,0); } }
+
+    .status { display: flex; gap: 18px; flex-wrap: wrap; font: 12px/1.4 var(--mono); color: var(--muted); margin: 14px 0 0; }
+    .status b { color: var(--metric); font-weight: 500; }
+
+    /* Map */
+    .stage { position: relative; margin-top: 10px; border: 1px solid var(--line); border-radius: 18px; background: radial-gradient(120% 90% at 50% 40%, #fff 0%, rgba(255,255,255,.6) 55%, rgba(250,250,247,0) 100%); overflow: hidden; }
+    .stage svg { display: block; width: 100%; height: auto; max-height: 78vh; user-select: none; }
+    .hint { position: absolute; left: 14px; bottom: 12px; font: 12px/1.3 var(--mono); color: var(--muted); background: rgba(255,255,255,.85); padding: 6px 9px; border-radius: 8px; border: 1px solid var(--line); }
+    .visits { position: absolute; right: 14px; bottom: 12px; font: 12px/1.3 var(--mono); color: var(--muted); background: rgba(255,255,255,.85); padding: 6px 9px; border-radius: 8px; border: 1px solid var(--line); }
+    .visits b { color: var(--ink); font-weight: 500; }
+
+    .bldg { cursor: pointer; transition: transform .25s cubic-bezier(.2,.7,.2,1); outline: none; }
+    .bldg:hover, .bldg:focus-visible, .bldg.on { transform: translateY(-7px); }
+    .bldg .lbl rect { transition: fill .2s, stroke .2s; }
+    .bldg:hover .lbl rect, .bldg:focus-visible .lbl rect, .bldg.on .lbl rect { fill: var(--ink); stroke: var(--ink); }
+    .bldg:hover .lbl text, .bldg:focus-visible .lbl text, .bldg.on .lbl text { fill: #fff; }
+    .bldg .seen { opacity: 0; transition: opacity .3s; }
+    .bldg.visited .seen { opacity: 1; }
+    .led { animation: blink 1.6s steps(2, end) infinite; }
+    @keyframes blink { 50% { opacity: .25; } }
+    .fan { transform-box: fill-box; transform-origin: center; animation: spin 2.4s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .beam { animation: beam 2.8s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes beam { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(2.4); } }
+    @media (prefers-reduced-motion: reduce) { .led, .fan, .beam, .chip .dot { animation: none; } .bldg { transition: none; } }
+
+    /* Directory (also the accessible list) */
+    .dirwrap { margin-top: 22px; }
+    .dirwrap h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 0 0 10px; }
+    .dir { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; list-style: none; margin: 0; padding: 0; }
+    .dir button { width: 100%; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: inherit; display: flex; gap: 12px; align-items: flex-start; }
+    .dir button:hover { border-color: #cfccc2; }
+    .dir .sw { width: 10px; height: 10px; border-radius: 3px; margin-top: 5px; flex: none; }
+    .dir strong { display: block; font-weight: 600; font-size: 14px; }
+    .dir span.d { display: block; color: var(--muted); font-size: 13px; margin-top: 2px; line-height: 1.4; }
+
+    /* Drawer */
+    .scrim { position: fixed; inset: 0; background: rgba(20,22,26,.18); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 40; }
+    .scrim.open { opacity: 1; pointer-events: auto; }
+    aside.drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(460px, 100%); background: #fff; border-left: 1px solid var(--line); box-shadow: -18px 0 40px rgba(20,22,26,.08); transform: translateX(105%); transition: transform .28s cubic-bezier(.2,.7,.2,1); z-index: 50; display: flex; flex-direction: column; }
+    aside.drawer.open { transform: none; }
+    .dhead { padding: 18px 20px 12px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .kicker { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    .dhead h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.05; margin: 8px 0 0; }
+    .x { border: 1px solid var(--line); background: #fff; border-radius: 999px; width: 36px; height: 36px; font-size: 18px; cursor: pointer; flex: none; }
+    .dbody { padding: 16px 20px 28px; overflow-y: auto; line-height: 1.55; font-size: 15px; }
+    .dbody p { margin: 0 0 12px; }
+    .dbody .metric { font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--metric); }
+    .item { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 0 0 10px; }
+    .item h3 { margin: 6px 0 4px; font-size: 15px; font-weight: 600; }
+    .item p { margin: 0; color: #343842; font-size: 14px; }
+    .links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 14px; }
+    .links a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .links a:hover { text-decoration: underline; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 12px; }
+    .tag { font: 12px/1 var(--mono); padding: 5px 8px; border-radius: 6px; background: #F2F1EC; color: #343842; }
+    .tl { border-left: 1px solid var(--line); padding-left: 14px; margin: 0; list-style: none; }
+    .tl li { position: relative; margin: 0 0 12px; font-size: 14px; }
+    .tl li::before { content: ""; position: absolute; left: -19px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: #fff; border: 2px solid var(--accent); }
+    .tl b { font: 500 12px/1 var(--mono); color: var(--muted); display: block; margin-bottom: 3px; }
+    .dnav { display: flex; justify-content: space-between; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--line); }
+
+    footer { max-width: 1200px; margin: 0 auto; padding: 0 20px 36px; color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 720px) {
+      .brand small { display: none; }
+      .actions .btn.hide-sm { display: none; }
+      aside.drawer { top: auto; bottom: 0; height: 86%; width: 100%; border-left: 0; border-top: 1px solid var(--line); border-radius: 18px 18px 0 0; transform: translateY(105%); }
+      .hint { display: none; }
     }
   </style>
 </head>
-<body class="font-sans">
-  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-ink focus:px-3 focus:py-2 focus:text-white">Skip to content</a>
-
-  <header class="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur">
-    <nav class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5" aria-label="Primary">
-      <a href="#top" class="font-serif text-xl leading-none">Nirmit Dagli</a>
-      <div class="hidden items-center gap-6 text-sm text-muted md:flex">
-        <a class="hover:text-ink" href="#live">Live</a>
-        <a class="hover:text-ink" href="#projects">Projects</a>
-        <a class="hover:text-ink" href="#journey">Journey</a>
-        <a class="hover:text-ink" href="#research">Research</a>
-        <a class="hover:text-ink" href="ai/">Applied AI</a>
-        <a class="rounded-full bg-accent px-4 py-1.5 font-medium text-white hover:bg-[#1B44B8]" href="#contact">Contact</a>
-      </div>
-      <button id="menuBtn" class="rounded-full border border-line px-3 py-1 text-sm md:hidden" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
-    </nav>
-    <div id="mobileMenu" class="hidden border-t border-line bg-paper px-5 pb-3 md:hidden">
-      <a class="block py-2 text-muted" href="#live">Live experience</a>
-      <a class="block py-2 text-muted" href="#projects">Projects</a>
-      <a class="block py-2 text-muted" href="#journey">Journey</a>
-      <a class="block py-2 text-muted" href="#research">Research</a>
-      <a class="block py-2 text-muted" href="ai/">Applied AI</a>
-      <a class="block py-2 text-muted" href="#contact">Contact</a>
+<body>
+  <a class="sr-only skip" href="#directory">Skip to the building directory</a>
+  <header>
+    <div class="bar">
+      <a class="brand" href="./">Nirmit Dagli<small>AI infrastructure engineer · Texas · open to relocating</small></a>
+      <nav class="actions" aria-label="Quick links">
+        <a class="btn primary" href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <a class="btn" href="plain.html">Plain view</a>
+        <a class="btn hide-sm" href="mailto:daglinirmit@gmail.com">Email</a>
+        <a class="btn hide-sm" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
     </div>
   </header>
 
-  <main id="main">
-    <!-- INTRO -->
-    <div class="hero-wrap" id="hero-wrap"><canvas id="grid-fx" aria-hidden="true"></canvas>
-    <section id="top" class="mx-auto max-w-5xl px-5 pb-16 pt-14 sm:pt-20">
-      <div class="grid items-end gap-10 md:grid-cols-[1.5fr_1fr]">
-        <div class="hero-in">
-          <p class="kicker">AI infrastructure engineer · Austin, TX</p>
-          <h1 class="mt-5 font-serif text-[2.9rem] leading-[1.02] sm:text-6xl md:text-[4.4rem]">I build and secure the infrastructure <em class="text-accent">production AI</em> runs on.</h1>
-          <div class="mt-7 max-w-xl space-y-4 text-[1.05rem] leading-relaxed text-muted">
-            <p>I started on the Linux team at Zycus in 2021. By the end I was running 50+ Kubernetes clusters, and when ransomware took 1,500+ servers offline, I was one of the first responders who brought them back in 7 days.</p>
-            <p>Today I'm the first platform hire at Sidecoach Sports, where I build the AI gateway, the agents and the security around them. In my research I run GPU clusters and benchmark how LLMs are served.</p>
-          </div>
-          <div class="no-print mt-8 flex flex-wrap items-center gap-3">
-            <a href="#projects" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">See the work</a>
-            <a href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener" class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink">Résumé (PDF)</a>
-            <a href="#live" data-live="gpu" class="group inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm font-medium text-accent hover:underline"><span class="inline-block h-2 w-2 animate-pulse rounded-full bg-metric"></span>Race 2 LLMs ↓</a>
-          </div>
-          <p class="mt-8 max-w-xl border-t border-line pt-4 text-sm text-muted"><span class="text-ink">Right now:</span> building the AI gateway and SRE agents at Sidecoach, and the next llm-serving-bench round with open-loop load and 8K context.</p>
-        </div>
-        <figure class="fade">
-          <img src="portrait.jpg" alt="Nirmit Dagli" width="880" height="1100" class="aspect-[4/5] max-h-[420px] w-full rounded-2xl object-cover object-top md:max-h-none" fetchpriority="high" />
-          <figcaption class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted"><span>CKA</span><span>CKAD</span><span>AWS Solutions Architect</span><span>RHCSA</span><span>M.S. CS, Quinnipiac</span></figcaption>
-        </figure>
-      </div>
-
-    </section>
-    </div>
-
-    <!-- LIVE EXPERIENCE -->
-    <section id="live" class="mx-auto max-w-5xl px-5 pt-16">
-      <h2 class="sec-h">Live experience</h2>
-      <p class="mt-3 max-w-2xl text-muted">Four things I've run, replayed from real numbers. Pick one and press play.</p>
-      <div class="lv-tabs mt-7" role="tablist" aria-label="Live demos">
-        <button class="lv-tab" role="tab" id="lt-gpu" aria-controls="lv-gpu" aria-selected="true" data-lv="gpu"><span class="lv-n">01</span><span class="lv-t">GPU · LLM serving</span></button>
-        <button class="lv-tab" role="tab" id="lt-k8s" aria-controls="lv-k8s" aria-selected="false" data-lv="k8s"><span class="lv-n">02</span><span class="lv-t">Kubernetes</span></button>
-        <button class="lv-tab" role="tab" id="lt-net" aria-controls="lv-net" aria-selected="false" data-lv="net"><span class="lv-n">03</span><span class="lv-t">Network security</span></button>
-        <button class="lv-tab" role="tab" id="lt-call" aria-controls="lv-call" aria-selected="false" data-lv="call"><span class="lv-n">04</span><span class="lv-t">You're on call</span></button>
-      </div>
-      <div class="lv-stage mt-4">
-        <div id="lv-gpu" class="lv-panel" role="tabpanel" aria-labelledby="lt-gpu">
-        <!-- GPU RACE -->
-        <div id="race" class="no-print">
+  <main>
+    <div class="intro">
       <div>
-        <div class="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p class="flex items-center gap-2 text-sm font-medium text-metric"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-metric"></span>Live replay · real benchmark data</p>
-            <h2 class="mt-3 max-w-2xl font-serif text-[2.4rem] leading-[1.04] sm:text-[3.2rem]">Same GPU, same model. Which engine serves your users faster?</h2>
-          </div>
-          <div class="flex items-center gap-3">
-            <div class="flex rounded-full border border-line bg-white p-1 text-sm" role="radiogroup" aria-label="Concurrent users">
-              <button class="rc-u rounded-full px-3.5 py-1.5" data-u="1" role="radio" aria-checked="false">1 user</button>
-              <button class="rc-u rounded-full px-3.5 py-1.5" data-u="16" role="radio" aria-checked="false">16</button>
-              <button class="rc-u rounded-full px-3.5 py-1.5" data-u="64" role="radio" aria-checked="true">64</button>
-            </div>
-            <button id="rc-run" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">▶ Run</button>
-          </div>
-        </div>
-
-        <div class="mt-10 grid gap-10 md:grid-cols-2">
-          <div class="rc-lane" data-e="vllm">
-            <div class="flex items-baseline justify-between gap-3"><p class="font-medium">vLLM <span class="font-normal text-muted">fp16</span></p><p class="text-sm text-muted"><span class="rc-tok font-serif text-3xl text-ink">0</span> tokens served</p></div>
-            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-[#ECE9E1]"><div class="rc-bar h-full w-0 rounded-full bg-accent"></div></div>
-            <div class="rc-text mt-4 h-[9.5rem] overflow-hidden text-[.95rem] leading-relaxed text-[#474C57]" aria-hidden="true"></div>
-            <p class="rc-stat mt-3 text-sm text-muted">&nbsp;</p>
-          </div>
-          <div class="rc-lane" data-e="sglang">
-            <div class="flex items-baseline justify-between gap-3"><p class="font-medium">SGLang <span class="font-normal text-muted">fp16</span></p><p class="text-sm text-muted"><span class="rc-tok font-serif text-3xl text-ink">0</span> tokens served</p></div>
-            <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-[#ECE9E1]"><div class="rc-bar h-full w-0 rounded-full bg-warm"></div></div>
-            <div class="rc-text mt-4 h-[9.5rem] overflow-hidden text-[.95rem] leading-relaxed text-[#474C57]" aria-hidden="true"></div>
-            <p class="rc-stat mt-3 text-sm text-muted">&nbsp;</p>
-          </div>
-        </div>
-
-        <div class="mt-8 flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-5">
-          <p id="rc-verdict" class="max-w-2xl font-serif text-2xl leading-snug" aria-live="polite">Press Run to replay the benchmark.</p>
-          <p class="text-xs text-muted"><span id="rc-clock">0.0</span>s real time · <span id="rc-speed">1</span>x playback · Tesla T4, Qwen2.5-1.5B, 512 in / 128 out per user · <a class="link" href="writing/vllm-vs-sglang-t4.html">method</a></p>
-        </div>
+        <div class="kicker">Welcome to the campus</div>
+        <h1>I build and secure the infrastructure <em>production AI</em> runs on.</h1>
+        <p class="lede">This is my work laid out as an AI data center. Every building is something I ran or built, with the number that mattered. Click a building to step inside.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="chip" type="button" data-open="reception"><span class="dot" aria-hidden="true"></span>Short on time? 30-second tour</button>
       </div>
     </div>
+    <p class="status" aria-label="Campus status">
+      <span>status: <b>all systems operational</b></span>
+      <span>clusters: <b>50+</b> run</span>
+      <span>bench: <b>609 vs 384</b> tok/s</span>
+      <span>certs: CKA · CKAD · AWS SA · RHCSA</span>
+    </p>
 
-
-          <p class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm"><span class="text-muted">From llm-serving-bench:</span><a class="link" href="writing/vllm-vs-sglang-t4.html">Read the write-up</a><a class="link" href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener">Code on GitHub</a></p>
-        </div>
-        <div id="lv-k8s" class="lv-panel" role="tabpanel" aria-labelledby="lt-k8s" hidden>
-        <!-- MIGRATION DEMO -->
-        <div id="mig" class="no-print">
-          <div class="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p class="flex items-center gap-2 text-sm font-medium text-metric"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-metric"></span>Live demo · Zycus, 2023</p>
-              <p class="mt-2 font-serif text-[2rem] leading-tight sm:text-[2.6rem]">Watch 2,000+ servers become 50+ clusters.</p>
-            </div>
-            <div class="flex items-center gap-3"><button id="mig-kill" class="rounded-full border border-warm/40 bg-white px-4 py-2.5 text-sm font-medium text-warm hover:border-warm disabled:opacity-40" disabled>Kill a cluster</button><button id="mig-run" class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">▶ Run migration</button></div>
-          </div>
-          <svg id="mig-svg" viewBox="0 0 800 330" class="mt-6 w-full" role="img" aria-label="Animation: 200 dots, each about 10 servers on VMware, KVM and bare metal, move into 50 Kubernetes clusters. Then a GitOps sync, policies and backups are applied to every cluster."></svg>
-          <div class="mt-4 grid grid-cols-2 gap-4 border-t border-line pt-4 sm:grid-cols-4">
-            <div><p class="font-serif text-3xl leading-none"><span id="mig-s">0</span></p><p class="mt-1 text-xs text-muted">servers moved</p></div>
-            <div><p class="font-serif text-3xl leading-none"><span id="mig-c">0</span></p><p class="mt-1 text-xs text-muted">clusters live</p></div>
-            <div><p class="font-serif text-3xl leading-none" id="mig-g">·</p><p class="mt-1 text-xs text-muted">ArgoCD, Kyverno, Velero</p></div>
-            <div><p class="font-serif text-3xl leading-none" id="mig-p">·</p><p class="mt-1 text-xs text-muted">provisioning time</p></div>
-          </div>
-          <p id="mig-msg" class="mt-4 font-serif text-xl leading-snug" aria-live="polite">&nbsp;</p>
-          <p class="mt-2 text-xs text-muted">Illustration: each dot is about 10 servers. Clusters ran on EKS, AKS, GKE, Rancher and OpenShift.</p>
-        </div>
-
-
-        </div>
-        <div id="lv-net" class="lv-panel" role="tabpanel" aria-labelledby="lt-net" hidden>
-        <!-- BLAST RADIUS DEMO -->
-        <div id="blast" class="no-print">
-          <div class="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p class="flex items-center gap-2 text-sm font-medium text-warm"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-warm"></span>Live demo · why we segmented</p>
-              <p class="mt-2 font-serif text-[2rem] leading-tight sm:text-[2.6rem]">Same attack, two networks.</p>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="flex rounded-full border border-line bg-white p-1 text-sm" role="radiogroup" aria-label="Network design">
-                <button class="bl-m rounded-full px-3.5 py-1.5" data-m="flat" role="radio" aria-checked="true">2022: flat</button>
-                <button class="bl-m rounded-full px-3.5 py-1.5" data-m="seg" role="radio" aria-checked="false">After: segmented</button>
-              </div>
-              <button id="bl-run" class="rounded-full bg-warm px-5 py-2.5 text-sm font-medium text-white hover:bg-[#93421F]">▶ Release it</button>
-            </div>
-          </div>
-          <svg id="bl-svg" viewBox="0 0 800 300" class="mt-6 w-full" role="img" aria-label="Simulation: 7 environments of servers. On a flat network an infection starting at the data server reaches every environment. With segmentation and firewalls between environments it stays in one."></svg>
-          <div class="mt-4 flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-4">
-            <p id="bl-verdict" class="max-w-2xl font-serif text-2xl leading-snug" aria-live="polite">Pick a network, then release the attack, or click any server to start it there.</p>
-            <p class="text-sm text-muted"><span id="bl-n" class="font-serif text-3xl text-ink">0</span> of 7 environments infected</p>
-          </div>
-          <p class="mt-3 text-xs text-muted">Illustration, not a recording. The 7 environments are real; node counts are simplified. After 2022: Transit Gateway, segmented VPCs and 20 Palo Alto firewalls.</p>
-        </div>
-
-
-        </div>
-        <div id="lv-call" class="lv-panel" role="tabpanel" aria-labelledby="lt-call" hidden>
-    <!-- ON-CALL TEASER (in Zycus case) -->
-    <div id="oncall" class="no-print">
-      <div class="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-10">
-        <div>
-          <p class="flex items-center gap-2 text-sm font-medium text-warm"><span class="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-warm"></span>Your turn · built from a real incident</p>
-          <h2 class="mt-4 font-serif text-[2.6rem] leading-[1.02] sm:text-[3rem]">You're on call.<br />It's <em class="text-accent">07:00</em>.</h2>
-          <p class="mt-5 max-w-md leading-relaxed text-muted">Your phone rings. Someone says “something is down.” No system name, no error, no screenshot. In 2022, this call was the start of a ransomware attack on 1,500+ servers.</p>
-        </div>
-        <div>
-          <p class="font-serif text-3xl">What do you do?</p>
-          <div class="mt-5 space-y-3" id="tq" role="group" aria-label="What do you do?">
-            <button class="tq-opt" data-k="0" data-real="1"><span class="tq-key">1</span><span>Wait for a clearer report before escalating.</span></button>
-            <button class="tq-opt" data-k="1" data-best="1"><span class="tq-key">2</span><span>Treat it as a possible incident and start checking now.</span></button>
-            <button class="tq-opt" data-k="2"><span class="tq-key">3</span><span>Ask them to file a ticket.</span></button>
-          </div>
-          <div id="tq-result" class="hidden" aria-live="polite"></div>
-        </div>
-      </div>
+    <div class="stage" id="stage">
+      <svg id="map" viewBox="-470 -30 940 492" role="group" aria-label="Isometric map of an AI data center campus. Each building opens a section of the portfolio."></svg>
+      <div class="hint" aria-hidden="true">click a building · Esc to close · ← → to walk</div>
+      <div class="visits" aria-live="polite">visited <b id="vcount">0</b>/<span id="vtotal">0</span></div>
     </div>
 
-          <p class="mt-6 text-sm"><a class="link" href="writing/oncall.html">Play all 6 calls</a> · <a class="link" href="writing/ransomware-recovery-postmortem.html">Read the postmortem</a></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="mx-auto max-w-5xl px-5 pt-28">
-      <h2 class="sec-h">Projects</h2>
-      <p class="mt-3 max-w-2xl text-muted">Everything I've built or run, with the number that mattered. Tap any card for the details.</p>
-      <div class="mt-7 flex flex-wrap gap-2" role="group" aria-label="Filter projects">
-        <button class="pf-chip" data-f="all" aria-pressed="true">All <span class="pf-c"></span></button>
-        <button class="pf-chip" data-f="ai" aria-pressed="false">AI · GPU · LLM <span class="pf-c"></span></button>
-        <button class="pf-chip" data-f="ops" aria-pressed="false">DevOps · Cloud · SRE <span class="pf-c"></span></button>
-        <button class="pf-chip" data-f="sec" aria-pressed="false">Security <span class="pf-c"></span></button>
-        <button class="pf-chip" data-f="res" aria-pressed="false">Research <span class="pf-c"></span></button>
-      </div>
-
-      <div class="pcards mt-8">
-        <!-- AI -->
-        <details class="card" id="p-bench" data-c="ai res">
-          <summary><span class="tag">Open source · AI</span><span class="card-n">609 vs 384</span><span class="card-t">llm-serving-bench</span><span class="card-d">vLLM vs SGLang tok/s at 64 users, same Tesla T4. AWQ: 2.3x faster for 1 user, 5% for 64.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>A harness that runs vLLM and SGLang (TensorRT-LLM supported) on the same GPU, model, prompts and memory budget, timing every streamed token from 1 to 64 users.</p><p class="mt-3 flex flex-wrap gap-x-4 gap-y-1"><a class="link" href="#live" data-live="gpu">Watch the race</a><a class="link" href="writing/vllm-vs-sglang-t4.html">Write-up</a><a class="link" href="https://github.com/Nirmitdagli/llm-serving-bench" target="_blank" rel="noopener">GitHub</a></p></div>
-        </details>
-        <details class="card" id="p-kernels" data-c="ai">
-          <summary><span class="tag">Open source · AI</span><span class="card-n">78%</span><span class="card-t">llm-kernels</span><span class="card-d">Fused Triton kernels at 70 to 78% of the T4's peak memory bandwidth.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Fused softmax, RMSNorm and SwiGLU (forward and backward) at 223 to 250 GB/s, 4.9 to 10.1x faster than PyTorch eager, plus a tiled GEMM compared against cuBLAS.</p><a class="link mt-3 inline-block" href="https://github.com/Nirmitdagli/llm-kernels" target="_blank" rel="noopener">GitHub</a></div>
-        </details>
-        <details class="card" id="p-gpu" data-c="ai">
-          <summary><span class="tag">Quinnipiac · AI</span><span class="card-n">4 LLMs</span><span class="card-t">GPU clusters, self-hosted models</span><span class="card-d">Llama 3, Mistral, Gemma and DeepSeek on Kubernetes GPU nodes, 4-bit.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>NVIDIA GPU Operator and Cilium on Kubernetes. CUDA out-of-memory failures kept taking models down, so I put them behind a process-isolated FastAPI server, which eliminated those failures.</p></div>
-        </details>
-        <details class="card" id="p-spark" data-c="ai res">
-          <summary><span class="tag">Quinnipiac · IEEE UEMCON 2025</span><span class="card-n">30s → 10s</span><span class="card-t">SPARK: own GPUs vs managed</span><span class="card-d">Benchmarked on-prem GPUs, GCP L4 and AWS Bedrock for one RAG workload.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>30s on our GPUs, 15s on GCP L4, 10s on Bedrock. The lab moved its inference to Bedrock, even though running those GPUs was my job. Model-agnostic RAG with PII redaction.</p><a class="link mt-3 inline-block" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">Paper</a></div>
-        </details>
-        <details class="card" id="p-gateway" data-c="ai sec">
-          <summary><span class="tag">Sidecoach · AI</span><span class="card-n">1 gateway</span><span class="card-t">AI gateway and MCP agents</span><span class="card-d">Every LLM call: sign-in, per-team limits, PII redaction, a trace.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Built under COPPA and FERPA with no platform team: Entra ID sign-in, per-team keys and spend limits, PII redaction so no student data reaches a model, an OpenTelemetry trace per request, and an MCP agent service with RAG over internal content.</p></div>
-        </details>
-        <details class="card" id="p-sreagent" data-c="ai ops">
-          <summary><span class="tag">Sidecoach · AI ops</span><span class="card-n">Human-in-loop</span><span class="card-t">SRE agent suite</span><span class="card-d">Triages alerts, opens and updates Jira tickets, proposes fixes with RAG.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>On Azure AI Foundry. Nothing touches production until an engineer approves. A second agent audits the website for compliance.</p></div>
-        </details>
-        <details class="card" id="p-statestreet" data-c="ai ops">
-          <summary><span class="tag">State Street · AI</span><span class="card-n">44</span><span class="card-t">AI assistant and Amazon Q</span><span class="card-d">The only intern to ship an internal AI assistant; Amazon Q across 44 AWS accounts.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Confluence RAG on Azure AI Foundry as a Microsoft Teams bot that answers access questions and helps developers write Terraform, with sign-off from the Confluence, Jira, Azure and network teams. Amazon Q rolled out with security and compliance.</p></div>
-        </details>
-        <details class="card" id="p-qgpt" data-c="ai">
-          <summary><span class="tag">Open source · AI</span><span class="card-n">Multi-modal</span><span class="card-t">QGPT tutor on Bedrock</span><span class="card-d">RAG, vision and image generation, with model routing by question type.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>FastAPI on AWS Bedrock with a Knowledge Base over course material, Claude and Nova models, rate limiting and least-privilege IAM.</p><a class="link mt-3 inline-block" href="https://github.com/Nirmitdagli/qgpt" target="_blank" rel="noopener">GitHub</a></div>
-        </details>
-        <!-- OPS -->
-        <details class="card" id="p-k8s" data-c="ops">
-          <summary><span class="tag">Zycus · Platform</span><span class="card-n">2,000+ → 50+</span><span class="card-t">Servers onto Kubernetes</span><span class="card-d">VMware, KVM and bare metal onto EKS, AKS, GKE, Rancher and OpenShift.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>ArgoCD GitOps, Kyverno policies and Velero backups, with a team of 5 standardizing Terraform, Ansible and Jenkins. Provisioning about 40% faster.</p><a class="link mt-3 inline-block" href="#live" data-live="k8s">Watch the migration</a></div>
-        </details>
-        <details class="card" id="p-platform" data-c="ops">
-          <summary><span class="tag">Sidecoach · Platform</span><span class="card-n">0 → 3</span><span class="card-t">A platform from zero</span><span class="card-d">Dev, staging and prod on Azure with CI/CD and monitoring that didn't exist.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>First infrastructure hire: the Azure platform, GitHub CI/CD, all three environments, Azure and GitHub monitoring from zero, and Jira linked to GitHub so every change has a ticket and a history.</p></div>
-        </details>
-        <details class="card" id="p-jenkins" data-c="ops">
-          <summary><span class="tag">Zycus · Automation</span><span class="card-n">~80%</span><span class="card-t">Fewer repeat tickets</span><span class="card-d">About 50 recurring service requests a week down to under 10.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>With a teammate, I automated recurring service requests through Jenkins pipelines, and wrote the documentation and SOPs for running the infrastructure.</p></div>
-        </details>
-        <details class="card" id="p-network" data-c="ops sec">
-          <summary><span class="tag">Zycus · Cloud networking</span><span class="card-n">10 AWS envs</span><span class="card-t">Multi-account AWS network</span><span class="card-d">Transit Gateway, VPC routing, Site-to-Site VPN and Direct Connect.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Separate accounts per environment and region, 20 Palo Alto firewalls across 10 AWS environments plus 5 on-prem FortiGates, and DNS end to end across Route 53 and Akamai Edge DNS.</p><a class="link mt-3 inline-block" href="#live" data-live="net">Watch the network demo</a></div>
-        </details>
-        <details class="card" id="p-obs" data-c="ops">
-          <summary><span class="tag">Zycus · SRE</span><span class="card-n">End to end</span><span class="card-t">Observability</span><span class="card-d">From the network layer to application logs, and the go-to incident responder.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Prometheus and Grafana for Kubernetes, ELK log pipelines that also fed SIEM detection, and Dynatrace APM.</p></div>
-        </details>
-        <details class="card" id="p-dr" data-c="ops sec">
-          <summary><span class="tag">Zycus · Backup and DR</span><span class="card-n">Veeam</span><span class="card-t">A new backup and DR program</span><span class="card-d">Backup, replication and DR across VMware, KVM/oVirt and AWS.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Led after the ransomware incident. Also implemented NetApp SAN/NAS with hot and cold tiers, and ran data center operations: ESXi hosts, racking, cabling and iDRAC automation.</p></div>
-        </details>
-        <details class="card" id="p-spot" data-c="ops">
-          <summary><span class="tag">Zycus · Cost</span><span class="card-n">100% Spot</span><span class="card-t">Production on AWS Spot</span><span class="card-d">Workloads moved onto Spot instances across multiple AZs.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Recognized with a Zycus project award for cost savings, December 2021 to March 2022.</p></div>
-        </details>
-        <details class="card" id="p-blueprint" data-c="ops sec">
-          <summary><span class="tag">Open source · IaC</span><span class="card-n">OIDC</span><span class="card-t">Azure SaaS Blueprint</span><span class="card-d">Terraform and GitHub Actions for a multi-tenant Azure SaaS.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Row-level security for tenants, defense at the edge, and keyless deploys through GitHub OIDC instead of stored cloud secrets.</p><a class="link mt-3 inline-block" href="https://github.com/Nirmitdagli/azure-saas-blueprint" target="_blank" rel="noopener">GitHub</a></div>
-        </details>
-        <!-- SECURITY -->
-        <details class="card" id="p-ransom" data-c="sec ops">
-          <summary><span class="tag">Zycus · Incident, 2022</span><span class="card-n">7 days</span><span class="card-t">Ransomware recovery</span><span class="card-d">1,500+ servers back across 7 environments, then 4 months of hardening.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>One of the first responders. We shut everything down to stop the spread, built a clean standalone machine to reach data and VMware, and rebuilt in isolated pieces. Then Zscaler, CrowdStrike, CyberArk and a segmented network.</p><p class="mt-3 flex flex-wrap gap-x-4 gap-y-1"><a class="link" href="#live" data-live="call">Play the first call</a><a class="link" href="writing/ransomware-recovery-postmortem.html">Postmortem</a></p></div>
-        </details>
-        <details class="card" id="p-secprog" data-c="sec">
-          <summary><span class="tag">Sidecoach · Security</span><span class="card-n">MFA</span><span class="card-t">A security program from scratch</span><span class="card-d">Password-only to enforced MFA, managed laptops and compliance.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Intune-managed laptops and layered server, container and code security. I own COPPA, FERPA and PCI DSS (SAQ-A) compliance and started SOC 2 readiness.</p></div>
-        </details>
-        <details class="card" id="p-cicdsec" data-c="sec ops">
-          <summary><span class="tag">Zycus · DevSecOps</span><span class="card-n">CI/CD</span><span class="card-t">Security inside the pipeline</span><span class="card-d">CrowdStrike agents in CI/CD, and the fleet upgraded from CentOS 7.4 to 7.9.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Recognized with a Zycus project award in January 2023. Also implemented secure AD and the new Jenkins lower and higher environments.</p></div>
-        </details>
-        <!-- RESEARCH -->
-        <details class="card" id="p-heros" data-c="res sec">
-          <summary><span class="tag">Research · IEEE ISAIA 2026</span><span class="card-n">72–98%</span><span class="card-t">HERO-S scheduler</span><span class="card-d">Less energy for AI intrusion detection by placing each job on the right tier.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>Places AI jobs across CPU, GPU, cloud and edge by cost, energy and latency, using an 8×H100 cost model, compared with cloud-only placement.</p></div>
-        </details>
-        <details class="card" id="p-hero" data-c="res">
-          <summary><span class="tag">Research · M.S. thesis</span><span class="card-n">~10,000x</span><span class="card-t">HERO: CPU, GPU or QPU?</span><span class="card-d">Classical used ~10,000x less energy for intrusion detection. Quantum wins past ~50 qubits.</span><span class="card-more">Details</span></summary>
-          <div class="card-body"><p>A 30-seed measurement framework comparing accuracy, latency, energy and cloud cost across CPU, GPU and QPU tiers.</p><a class="link mt-3 inline-block" href="quantum/">The quantum research</a></div>
-        </details>
-      </div>
-    </section>
-
-    <!-- JOURNEY -->
-    <section id="journey" class="mx-auto max-w-5xl px-5 pt-28">
-      <h2 class="sec-h">Journey</h2>
-      <p class="mt-3 max-w-2xl text-muted">From a classroom in Mumbai to running AI infrastructure. Every role, and what I did there.</p>
-      <ol class="jr mt-10">
-        <li class="jr-i fade">
-          <p class="jr-y">2026 <span>→ now</span></p>
-          <div class="jr-b">
-            <p class="jr-r">Founding Platform Engineer <span>· Sidecoach Sports, Waco TX</span></p>
-            <ul class="jr-l">
-              <li>First infrastructure and security hire: Azure platform, GitHub CI/CD, dev, staging and prod from scratch</li>
-              <li>AI gateway, MCP agent service and an SRE agent suite with a human approval step</li>
-              <li>Security program: enforced MFA, Intune, COPPA, FERPA and PCI DSS; started SOC 2 readiness</li>
-            </ul>
-            <p class="jr-p"><a href="#p-platform">Platform from zero</a><a href="#p-gateway">AI gateway</a><a href="#p-sreagent">SRE agents</a><a href="#p-secprog">Security program</a></p>
-          </div>
-        </li>
-        <li class="jr-i fade">
-          <p class="jr-y">2025</p>
-          <div class="jr-b">
-            <p class="jr-r">Cloud and AI Engineer Intern <span>· State Street, Boston</span></p>
-            <ul class="jr-l">
-              <li>The only intern to ship an internal AI assistant: Confluence RAG in Microsoft Teams</li>
-              <li>Amazon Q across 44 AWS accounts under bank-grade security</li>
-              <li>Labs and video tutorials (Vault, Terraform) for an internal developer learning platform</li>
-            </ul>
-            <p class="jr-p"><a href="#p-statestreet">AI assistant and Amazon Q</a></p>
-          </div>
-        </li>
-        <li class="jr-i fade">
-          <p class="jr-y">2024 <span>→ 2026</span></p>
-          <div class="jr-b">
-            <p class="jr-r">Research Assistant <span>· Quinnipiac University · M.S. Computer Science</span></p>
-            <ul class="jr-l">
-              <li>Kubernetes GPU clusters and self-hosted Llama 3, Mistral, Gemma and DeepSeek</li>
-              <li>Benchmarked vLLM, SGLang and TensorRT-LLM; moved the lab's inference to Bedrock</li>
-              <li>HERO and HERO-S schedulers; 5 papers; grew the group from 2 to 10+</li>
-            </ul>
-            <p class="jr-p"><a href="#p-gpu">GPU clusters</a><a href="#p-bench">llm-serving-bench</a><a href="#p-spark">SPARK</a><a href="#p-heros">HERO-S</a><a href="#p-hero">HERO thesis</a></p>
-          </div>
-        </li>
-        <li class="jr-i fade">
-          <p class="jr-y">2024</p>
-          <div class="jr-b">
-            <p class="jr-r">DevOps Engineer, freelance <span>· Ini8 Labs</span></p>
-            <ul class="jr-l">
-              <li>Infrastructure as code for AWS and DigitalOcean, a k3s proof of concept, and CI security scanning</li>
-            </ul>
-          </div>
-        </li>
-        <li class="jr-i fade">
-          <p class="jr-y">2023 <span>→ 2024</span></p>
-          <div class="jr-b">
-            <p class="jr-r">Senior Software Engineer, SaaS Infra <span>· Zycus, Mumbai · promoted 2023</span></p>
-            <ul class="jr-l">
-              <li>Led 2,000+ servers onto 50+ Kubernetes clusters with GitOps; team of 5; provisioning ~40% faster</li>
-              <li>Security in CI/CD: CrowdStrike agents and the CentOS 7.9 upgrade; Jenkins automation cut repeat tickets ~80%</li>
-              <li>End-to-end observability; the company's first internal AI chatbot on Azure OpenAI (2024)</li>
-            </ul>
-            <p class="jr-p"><a href="#p-k8s">Kubernetes migration</a><a href="#p-cicdsec">CI/CD security</a><a href="#p-jenkins">Automation</a><a href="#p-obs">Observability</a></p>
-          </div>
-        </li>
-        <li class="jr-i fade">
-          <p class="jr-y">2022</p>
-          <div class="jr-b">
-            <p class="jr-r">Software Engineer, SaaS Infra <span>· Zycus · promoted March 2022</span></p>
-            <ul class="jr-l">
-              <li>Ransomware: one of the first responders who brought 1,500+ servers back in 7 days</li>
-              <li>Rebuilt the network (Transit Gateway, 20 Palo Altos) and led a new Veeam backup and DR program</li>
-              <li>Moved production onto 100% AWS Spot across multiple AZs</li>
-            </ul>
-            <p class="jr-p"><a href="#p-ransom">Ransomware recovery</a><a href="#p-network">AWS network</a><a href="#p-dr">Backup and DR</a><a href="#p-spot">100% Spot</a></p>
-          </div>
-        </li>
-        <li class="jr-i fade">
-          <p class="jr-y">2021</p>
-          <div class="jr-b">
-            <p class="jr-r">Trainee → Associate Software Engineer, Cloud Operations <span>· Zycus</span></p>
-            <ul class="jr-l">
-              <li>Started on the Linux team: RHEL, CentOS and Ubuntu servers, LVM storage, SFTP and data servers</li>
-              <li>First project award within 7 months, for infrastructure stability and cost optimization</li>
-            </ul>
-          </div>
-        </li>
-        <li class="jr-i fade">
-          <p class="jr-y">2016 <span>→ 2023</span></p>
-          <div class="jr-b">
-            <p class="jr-r">Science and math teacher <span>· Mumbai · about 7 years</span></p>
-            <ul class="jr-l">
-              <li>Taught science and math from 2016 to 2023, including my first years at Zycus. B.E., University of Mumbai.</li>
-            </ul>
-          </div>
-        </li>
-      </ol>
-      <div class="fade mt-12 border-t border-line pt-6">
-        <p class="tag">Recognition at Zycus</p>
-        <p class="mt-2 text-[.95rem] text-[#474C57]">9 project awards from leadership between 2021 and 2023, covering Kubernetes, CI/CD security, post-incident operations, cost and customer delivery.</p>
-      </div>
-    </section>
-
-    <!-- QUOTES -->
-    <section class="mx-auto max-w-5xl px-5 pt-28">
-      <h2 class="sec-h">From people I've worked with</h2>
-      <figure class="fade mt-8 max-w-4xl">
-        <blockquote class="font-serif text-[2rem] leading-[1.18] sm:text-[2.7rem]">“He was our go-to person for Kubernetes cluster administration… hands-on experience in setting up complex networking solutions that span multiple clouds and data centers.”</blockquote>
-        <figcaption class="mt-5 text-sm"><span class="font-medium">Saurabh Tamhankar</span><span class="text-muted">, Cloud Platform, Zycus</span></figcaption>
-      </figure>
-      <div class="mt-12 grid gap-10 border-t border-line pt-8 md:grid-cols-2">
-        <figure class="fade">
-          <blockquote class="font-serif text-[1.45rem] leading-snug">“A go-to person for technical challenges. His debugging and development skills are top-notch, and he is always willing to help others.”</blockquote>
-          <figcaption class="mt-4 text-sm"><span class="font-medium">Tushar Gaikawad</span><span class="text-muted">, DevOps Engineer, Zycus</span></figcaption>
-        </figure>
-        <figure class="fade">
-          <blockquote class="font-serif text-[1.45rem] leading-snug">“Whenever an issue arose, he was quick to investigate the root cause and propose well-thought-out solutions.”</blockquote>
-          <figcaption class="mt-4 text-sm"><span class="font-medium">Suvrat G Bhat</span><span class="text-muted">, enterprise observability</span></figcaption>
-        </figure>
-      </div>
-      <p class="mt-6 text-xs text-muted">From recommendations on <a class="link" href="https://www.linkedin.com/in/nirmit-dagli-62857916a/details/recommendations/" target="_blank" rel="noopener">LinkedIn</a>.</p>
-    </section>
-
-    <!-- RESEARCH -->
-    <section id="research" class="mx-auto max-w-5xl px-5 pt-28">
-      <h2 class="sec-h">Research <span class="text-[#B8B3A6]">· 5 papers</span></h2>
-      <div class="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <figure class="fade"><img src="img/spark.jpg" alt="Nirmit presenting the SPARK paper at IEEE UEMCON 2025" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Presenting SPARK, IEEE UEMCON 2025</figcaption></figure>
-        <figure class="fade"><img src="img/podium.jpg" alt="Nirmit answering questions after the SPARK talk" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Q&amp;A after the talk</figcaption></figure>
-        <figure class="fade"><img src="img/ibm.jpg" alt="Nirmit outside IBM's Louis V. Gerstner Jr. Center for Learning" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover" /><figcaption class="mt-2 text-xs text-muted">Conference venue, IBM Gerstner Center</figcaption></figure>
-        <figure class="fade"><img src="img/grad.jpg" alt="Nirmit at his M.S. graduation from Quinnipiac University" width="640" height="800" loading="lazy" class="aspect-[4/5] w-full rounded-xl object-cover object-top" /><figcaption class="mt-2 text-xs text-muted">M.S. Computer Science, Quinnipiac</figcaption></figure>
-      </div>
-      <ul class="mt-8 divide-y divide-line border-t border-line">
-        <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">SPARK, RAG framework</span><span class="text-muted">Model-agnostic RAG with PII redaction; compared on-prem GPUs, GCP L4 and Bedrock, then moved inference to Bedrock.</span><span class="text-sm font-medium text-metric">30s → 10s</span></li>
-        <li class="grid gap-2 py-4 sm:grid-cols-[220px_1fr_auto] sm:items-baseline"><span class="font-medium">HERO-S, scheduler</span><span class="text-muted">Routes AI jobs across CPU, GPU, cloud and edge by cost, energy and latency.</span><span class="text-sm font-medium text-metric">72–98% less energy</span></li>
-      </ul>
-      <p class="mt-5 text-sm"><a class="link" href="quantum/">Quantum computing research: when a QPU actually beats a CPU, and when it doesn't →</a></p>
-      <p class="mt-2 text-sm"><a class="link" href="ai/">Applied AI: agents in production, golden-set evals and GPU inference benchmarks →</a></p>
-      <p class="tag mt-10">Papers</p>
-      <ul class="mt-3 divide-y divide-line border-y border-line">
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><span>HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</span><span class="text-sm text-muted">IEEE ISAIA 2026 · accepted</span></li>
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><span>HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</span><span class="text-sm text-muted">SEET-26 · accepted</span></li>
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.3390/computers15100660" target="_blank" rel="noopener">Energy-Efficient AI for Foundation Models: Algorithms, Hardware, and Data Center Infrastructure ↗</a><span class="text-sm text-muted">Computers (MDPI) · 2026</span></li>
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.1109/UEMCON67449.2025.11267528" target="_blank" rel="noopener">SPARK: Smart Plug-and-Play AI Framework for RAG &amp; Knowledge ↗</a><span class="text-sm text-muted">IEEE UEMCON 2025</span></li>
-        <li class="grid gap-1 py-4 sm:grid-cols-[1fr_auto]"><a class="hover:text-accent" href="https://doi.org/10.1007/978-3-032-08977-9_40" target="_blank" rel="noopener">Quantum Computing: Grover's Algorithm for String Search and Its Practical Limits ↗</a><span class="text-sm text-muted">Springer · 2026</span></li>
-      </ul>
-      <p class="mt-5 text-sm text-muted"><span class="text-ink">Certifications:</span> CKA · CKAD · AWS Solutions Architect Associate · RHCSA &nbsp;·&nbsp; <span class="text-ink">Education:</span> M.S. Computer Science, Quinnipiac University (2026) · B.E., University of Mumbai</p>
-    </section>
-
-    <!-- WRITING -->
-    <section id="writing" class="mx-auto max-w-5xl px-5 pt-24">
-      <h2 class="sec-h">Writing</h2>
-      <a href="writing/ransomware-recovery-postmortem.html" class="fade group mt-6 block border-t border-line py-6">
-        <p class="num text-xs text-muted">Incident review · 7 min read</p>
-        <h3 class="mt-2 font-serif text-3xl leading-tight group-hover:text-accent">The morning ransomware took 1,500 servers down</h3>
-        <p class="mt-2 max-w-3xl text-muted">A blameless postmortem: three hours from a vague phone call to a confirmed attack, shutting everything down on purpose, and rebuilding 7 environments in 7 days.</p>
-      </a>
-      <a href="writing/vllm-vs-sglang-t4.html" class="fade group block border-y border-line py-6">
-        <p class="num text-xs text-muted">Oct 2026 · 6 min read</p>
-        <h3 class="mt-2 font-serif text-3xl leading-tight group-hover:text-accent">vLLM vs SGLang on a T4: what 2,048 requests showed</h3>
-        <p class="mt-2 max-w-3xl text-muted">Why vLLM served 609 vs 384 tok/s at 64 users, and why 4-bit made one user 2.3x faster but 64 users only 5% faster.</p>
-      </a>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="mx-auto max-w-5xl px-5 pb-16 pt-28">
-      <div class="fade border-t-2 border-ink pt-10">
-        <h2 class="max-w-3xl font-serif text-5xl leading-[1.05] sm:text-[4.2rem]">Working on AI infrastructure? <em class="text-accent">Let's talk.</em></h2>
-        <div class="mt-10 grid gap-8 sm:grid-cols-[1.2fr_1fr]">
-          <div class="space-y-3 text-[1.05rem]">
-            <p class="flex flex-wrap items-center gap-3"><a class="link text-xl" href="mailto:daglinirmit@gmail.com">daglinirmit@gmail.com</a><button type="button" data-copy="daglinirmit@gmail.com" class="copy-btn no-print rounded-full border border-line bg-white px-3 py-1 text-xs hover:border-ink">Copy</button></p>
-            <p><a class="hover:text-accent" href="tel:+14753174538">475 317 4538</a></p>
-            <p class="text-muted">Austin, TX · open to relocating anywhere in the US</p>
-          </div>
-          <div class="no-print flex flex-wrap content-start gap-3">
-            <a class="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]" href="Nirmit_Dagli_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
-            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://www.linkedin.com/in/nirmit-dagli-62857916a" target="_blank" rel="noopener">LinkedIn</a>
-            <a class="rounded-full border border-ink/20 bg-white px-5 py-2.5 text-sm font-medium hover:border-ink" href="https://github.com/Nirmitdagli" target="_blank" rel="noopener">GitHub</a>
-          </div>
-        </div>
-        <p class="mt-10 max-w-2xl font-serif text-xl leading-snug text-muted">Outside work I taught science and math in Mumbai for about 7 years, play midfield on weekends, and write poetry in Hindi, Urdu and English.</p>
-      </div>
+    <section class="dirwrap" id="directory" aria-labelledby="dir-h">
+      <h2 id="dir-h">Building directory</h2>
+      <ul class="dir" id="dir"></ul>
+      <noscript><p>The campus map needs JavaScript. Everything is also on the <a href="plain.html">plain view</a>.</p></noscript>
     </section>
   </main>
 
-  <footer class="mx-auto flex max-w-5xl flex-wrap justify-between gap-2 px-5 pb-10 text-xs text-muted">
-    <p>© <span id="year">2026</span> Nirmit Dagli</p>
-    <p>Built by hand with HTML and Tailwind.</p>
+  <footer>
+    <span>© 2026 Nirmit Dagli · Hand-built SVG, no frameworks.</span>
+    <span><a href="plain.html">Plain view</a> · <a href="https://github.com/Nirmitdagli/Nirmitdagli.github.io" target="_blank" rel="noopener">View source</a></span>
   </footer>
 
-  <div id="toast" role="status" aria-live="polite" class="pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-full bg-accent px-4 py-2 text-sm text-white opacity-0 transition-opacity">Email copied</div>
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" aria-hidden="true">
+    <div class="dhead">
+      <div><div class="kicker" id="d-kicker"></div><h2 id="d-title"></h2></div>
+      <button class="x" id="d-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="dbody" id="d-body"></div>
+    <div class="dnav">
+      <button class="btn" id="d-prev" type="button">← Previous</button>
+      <button class="btn" id="d-next" type="button">Next building →</button>
+    </div>
+  </aside>
 
   <script>
-    // Throughput chart from llm-serving-bench results (Tesla T4)
-    (function () {
-      if (!document.getElementById('chart')) return;
-      const users = [1, 4, 16, 64];
-      const series = [
-        { name: 'vLLM fp16', color: '#2453D6', dash: '', data: [51, 190, 424, 609] },
-        { name: 'vLLM AWQ int4', color: '#0A7A55', dash: '6 5', data: [106, 308, 535, 637] },
-        { name: 'SGLang fp16', color: '#B4532A', dash: '', data: [45, 164, 253, 384] },
-      ];
-      const W = 760, H = 340, L = 46, R = 60, T = 26, B = 34, max = 700;
-      const x = i => L + i * ((W - L - R) / (users.length - 1));
-      const y = v => T + (H - T - B) * (1 - v / max);
-      let svg = `<svg viewBox="0 0 ${W} ${H}" class="w-full max-w-3xl" font-family="Inter, sans-serif">`;
-      for (let v = 0; v <= max; v += 100) {
-        svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#EEECE6"/>`;
-        svg += `<text x="${L - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="#8B8F99">${v}</text>`;
-      }
-      users.forEach((u, i) => { svg += `<text x="${x(i)}" y="${H - 12}" text-anchor="middle" font-size="11" fill="#8B8F99">${u} user${u > 1 ? 's' : ''}</text>`; });
-      svg += `<text x="${L - 8}" y="${T - 12}" text-anchor="end" font-size="11" fill="#8B8F99">tok/s</text>`;
-      series.forEach(s => {
-        const pts = s.data.map((v, i) => [x(i), y(v)]);
-        const d = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
-        let len = 0; for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
-        svg += `<path class="draw" style="--len:${Math.ceil(len)}" d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5" ${s.dash ? `stroke-dasharray="${s.dash}"` : ''} stroke-linecap="round"/>`;
-        pts.forEach((p, i) => { svg += `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#fff" stroke="${s.color}" stroke-width="2"><title>${s.name}, ${users[i]} users: ${s.data[i]} tok/s</title></circle>`; });
-        const last = pts[pts.length - 1];
-        const dy = s.name === 'vLLM fp16' ? 12 : (s.name === 'vLLM AWQ int4' ? -4 : 4);
-        svg += `<text x="${last[0] + 8}" y="${last[1] + dy}" font-size="12" font-weight="600" fill="${s.color}">${s.data[s.data.length - 1]}</text>`;
-      });
-      svg += `</svg>`;
-      const el = document.getElementById('chart');
-      el.innerHTML = svg;
-      // dashed series: draw-in would override the dash pattern, so skip the animation for it
-      el.querySelectorAll('path[stroke-dasharray]').forEach(p => { if (p.getAttribute('stroke-dasharray') !== String(p.style.getPropertyValue('--len'))) { p.classList.remove('draw'); p.style.opacity = 0; p.style.transition = 'opacity 1.2s ease .6s'; p.dataset.fadein = '1'; } });
-    })();
+  (function () {
+    'use strict';
+    var NS = 'http://www.w3.org/2000/svg';
+    var TW = 64, TH = 32;
+    var C = { ink: '#14161A', accent: '#2453D6', metric: '#0A7A55', warm: '#B4532A', violet: '#6B4FBB', muted: '#5B6170' };
 
-    // Reveal on scroll
-    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('in');
-      e.target.querySelectorAll('[data-fadein]').forEach(p => p.style.opacity = 1);
-      io.unobserve(e.target);
-    }), { threshold: 0.15 }) : null;
-    document.querySelectorAll('.fade, figure.panel').forEach(el => io ? io.observe(el) : el.classList.add('in'));
+    function P(x, y, z) { return [(x - y) * TW / 2, (x + y) * TH / 2 - (z || 0)]; }
+    function pts(a) { return a.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
+    function el(tag, attrs, parent) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function poly(points, fill, parent, extra) {
+      var a = { points: pts(points), fill: fill, stroke: 'rgba(20,22,26,.18)', 'stroke-width': '0.8', 'stroke-linejoin': 'round' };
+      for (var k in extra || {}) a[k] = extra[k];
+      return el('polygon', a, parent);
+    }
+    // Isometric box with three visible faces.
+    function box(g, x, y, w, d, h, z0, col) {
+      z0 = z0 || 0;
+      var top = [P(x, y, z0 + h), P(x + w, y, z0 + h), P(x + w, y + d, z0 + h), P(x, y + d, z0 + h)];
+      var left = [P(x, y + d, z0), P(x + w, y + d, z0), P(x + w, y + d, z0 + h), P(x, y + d, z0 + h)];
+      var right = [P(x + w, y, z0), P(x + w, y + d, z0), P(x + w, y + d, z0 + h), P(x + w, y, z0 + h)];
+      poly(left, col.l, g); poly(right, col.r, g); poly(top, col.t, g);
+    }
+    // Point on the front-left face (y = y+d): u along x (0..w), v up (0..h)
+    function fl(b, u, v) { return P(b.x + u, b.y + b.d, v); }
+    // Point on the front-right face (x = x+w): u along y (0..d), v up
+    function fr(b, u, v) { return P(b.x + b.w, b.y + u, v); }
 
-    // Live experience tabs
-    (function () {
-      const tabs = [...document.querySelectorAll('.lv-tab')]; if (!tabs.length) return;
-      const runBtn = { gpu: 'rc-run', k8s: 'mig-run', net: 'bl-run' };
-      function open(id, play) {
-        tabs.forEach(t => { const on = t.dataset.lv === id; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
-        tabs.forEach(t => { const p = document.getElementById('lv-' + t.dataset.lv); const on = t.dataset.lv === id; if (on) { p.hidden = false; p.style.animation = 'none'; p.offsetHeight; p.style.animation = ''; } else p.hidden = true; });
-        if (play && runBtn[id]) setTimeout(() => document.getElementById(runBtn[id]).click(), 150);
-      }
-      tabs.forEach((t, i) => {
-        t.addEventListener('click', () => open(t.dataset.lv, true));
-        t.addEventListener('keydown', e => { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); open(n.dataset.lv, true); });
-      });
-      document.querySelectorAll('[data-live]').forEach(a => a.addEventListener('click', e => {
-        e.preventDefault(); open(a.dataset.live, true);
-        document.getElementById('live').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-      }));
-    })();
+    var WALL = { t: '#FBFAF6', l: '#ECEAE3', r: '#DAD7CE' };
+    var DARK = { t: '#3A3E47', l: '#23262C', r: '#1A1C21' };
 
-    // Project filter, and journey chips that open a card
-    (function () {
-      const cards = [...document.querySelectorAll('.pcards .card')], chips = [...document.querySelectorAll('.pf-chip')];
-      chips.forEach(c => { const f = c.dataset.f; c.querySelector('.pf-c').textContent = f === 'all' ? cards.length : cards.filter(x => x.dataset.c.split(' ').includes(f)).length; });
-      chips.forEach(c => c.addEventListener('click', () => {
-        chips.forEach(x => x.setAttribute('aria-pressed', String(x === c)));
-        const f = c.dataset.f;
-        cards.forEach(x => { x.hidden = !(f === 'all' || x.dataset.c.split(' ').includes(f)); });
-      }));
-      document.querySelectorAll('.jr-p a[href^="#p-"]').forEach(a => a.addEventListener('click', e => {
-        const card = document.querySelector(a.getAttribute('href')); if (!card) return;
-        e.preventDefault();
-        chips[0].click(); card.open = true;
-        card.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-        card.classList.add('flash'); setTimeout(() => card.classList.remove('flash'), 1600);
-      }));
-    })();
+    // ---------------- Content (all facts from the plain view) ----------------
+    var L = function (href, text, ext) { return '<a href="' + href + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + text + '</a>'; };
+    var B = [
+      { id: 'reception', name: 'Reception', kicker: 'Lobby · about me', color: C.accent, x: 5.6, y: 8.5, w: 2.4, d: 2.0, h: 30,
+        blurb: 'Who I am and the 30-second version.',
+        html:
+          '<p>I started on the Linux team at Zycus in 2021. By the end I was running <b>50+ Kubernetes clusters</b>, and when ransomware took <b>1,500+ servers</b> offline, I was one of the first responders who brought them back.</p>' +
+          '<p>Today I\'m the first platform hire at <b>Sidecoach Sports</b> (Waco, TX), where I build the AI gateway, the agents and the security around them. In research I run GPU clusters and benchmark how LLMs are served.</p>' +
+          '<div class="tags"><span class="tag">CKA</span><span class="tag">CKAD</span><span class="tag">AWS Solutions Architect</span><span class="tag">RHCSA</span><span class="tag">M.S. CS, Quinnipiac</span></div>' +
+          '<div class="item"><div class="kicker">If you only have 30 seconds</div><h3>Platform, SRE and security for production AI</h3><p>2,000+ servers onto 50+ clusters · vLLM vs SGLang 609 vs 384 tok/s · AI gateway with PII redaction · ransomware recovery of 1,500+ servers.</p>' +
+          '<div class="links">' + L('Nirmit_Dagli_Resume.pdf', 'Résumé (PDF)', 1) + L('Nirmit_Dagli_AI_Resume.pdf', 'AI résumé (PDF)', 1) + L('plain.html', 'Plain view') + '</div></div>' },
 
-    // Hero grid: packets of light along the page grid, glow follows the cursor
-    (function () {
-      const wrap = document.getElementById('hero-wrap'), cv = document.getElementById('grid-fx'); if (!cv) return;
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const ctx = cv.getContext('2d'), G = 40, colors = ['36,83,214', '10,122,85', '36,83,214', '180,83,42'];
-      let W = 0, H = 0, dpr = 1, ox = 0, oy = 0, mx = -999, my = -999, run = true, last = 0, packets = [], pulses = [];
-      function size() {
-        const r = wrap.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
-        W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ox = (r.left + scrollX) % G; oy = (r.top + scrollY) % G; // align with the body grid
+      { id: 'gpu', name: 'GPU Hall', kicker: 'Compute · LLM serving', color: C.metric, x: 1, y: 1, w: 6, d: 2.4, h: 44,
+        blurb: 'vLLM vs SGLang, Triton kernels, self-hosted LLMs.',
+        html:
+          '<div class="item"><div class="kicker">Open source</div><div class="metric">609 vs 384</div><h3>llm-serving-bench</h3><p>vLLM vs SGLang tok/s at 64 users on the same Tesla T4. AWQ made 1 user 2.3x faster but 64 users only 5% faster.</p><div class="links">' + L('plain.html#live', 'Watch the race') + L('writing/vllm-vs-sglang-t4.html', 'Write-up') + L('https://github.com/Nirmitdagli/llm-serving-bench', 'GitHub', 1) + '</div></div>' +
+          '<div class="item"><div class="kicker">Open source</div><div class="metric">78%</div><h3>llm-kernels</h3><p>Fused softmax, RMSNorm and SwiGLU in Triton at 70 to 78% of the T4\'s peak memory bandwidth, 4.9 to 10.1x faster than PyTorch eager.</p><div class="links">' + L('https://github.com/Nirmitdagli/llm-kernels', 'GitHub', 1) + '</div></div>' +
+          '<div class="item"><div class="kicker">Quinnipiac</div><div class="metric">4 LLMs</div><h3>Self-hosted models on Kubernetes GPU nodes</h3><p>Llama 3, Mistral, Gemma and DeepSeek, 4-bit, with the NVIDIA GPU Operator and Cilium. A process-isolated FastAPI server eliminated the CUDA out-of-memory crashes.</p></div>' +
+          '<div class="item"><div class="kicker">IEEE UEMCON 2025</div><div class="metric">30s → 10s</div><h3>SPARK: own GPUs vs managed</h3><p>30s on our GPUs, 15s on GCP L4, 10s on Bedrock. The lab moved inference to Bedrock, even though running those GPUs was my job.</p><div class="links">' + L('ai/', 'Applied AI page') + '</div></div>' },
+
+      { id: 'control', name: 'Control Plane', kicker: 'Kubernetes · platform', color: C.accent, x: 8.6, y: 1, w: 3, d: 2.8, h: 62,
+        blurb: '2,000+ servers onto 50+ clusters, platforms from zero.',
+        html:
+          '<div class="item"><div class="kicker">Zycus</div><div class="metric">2,000+ → 50+</div><h3>Servers onto Kubernetes</h3><p>VMware, KVM and bare metal onto EKS, AKS, GKE, Rancher and OpenShift with ArgoCD GitOps, Kyverno policies and Velero backups. Team of 5 standardizing Terraform, Ansible and Jenkins; provisioning about 40% faster.</p><div class="links">' + L('plain.html#live', 'Watch the migration') + '</div></div>' +
+          '<div class="item"><div class="kicker">Sidecoach</div><div class="metric">0 → 3</div><h3>A platform from zero</h3><p>First infrastructure hire: Azure platform, GitHub CI/CD, dev, staging and prod, monitoring that didn\'t exist, and Jira linked to GitHub so every change has a ticket.</p></div>' +
+          '<div class="item"><div class="kicker">Zycus · automation</div><div class="metric">~80%</div><h3>Fewer repeat tickets</h3><p>About 50 recurring service requests a week down to under 10 with Jenkins automation.</p></div>' +
+          '<div class="item"><div class="kicker">Zycus · cost</div><h3>100% AWS Spot across multiple AZs</h3><p>Moved production onto Spot capacity.</p><div class="links">' + L('plain.html#projects', 'All projects') + '</div></div>' },
+
+      { id: 'aiops', name: 'AI Ops Center', kicker: 'Gateways · agents', color: C.violet, x: 5, y: 4.6, w: 3, d: 2.4, h: 50,
+        blurb: 'AI gateway, MCP agents, human-in-loop SRE agents.',
+        html:
+          '<div class="item"><div class="kicker">Sidecoach · AI</div><div class="metric">1 gateway</div><h3>AI gateway and MCP agents</h3><p>Every LLM call gets Entra ID sign-in, per-team keys and spend limits, PII redaction so no student data reaches a model, and an OpenTelemetry trace. Built under COPPA and FERPA, with an MCP agent service and RAG over internal content.</p></div>' +
+          '<div class="item"><div class="kicker">Sidecoach · AI ops</div><h3>Human-in-loop SRE agent suite</h3><p>Triages alerts, opens and updates Jira tickets, proposes fixes with RAG on Azure AI Foundry. Nothing touches production until an engineer approves.</p></div>' +
+          '<div class="item"><div class="kicker">State Street</div><div class="metric">44</div><h3>AI assistant and Amazon Q</h3><p>Confluence RAG in Microsoft Teams that answers access questions and helps developers write Terraform; Amazon Q rolled out across 44 AWS accounts.</p></div>' +
+          '<div class="item"><div class="kicker">Open source</div><h3>QGPT tutor on Bedrock</h3><p>RAG, vision and image generation with model routing by question type, rate limiting and least-privilege IAM.</p><div class="links">' + L('https://github.com/Nirmitdagli/qgpt', 'GitHub', 1) + L('ai/', 'Applied AI page') + '</div></div>' },
+
+      { id: 'noc', name: 'NOC', kicker: 'Network operations · live demos', color: C.accent, x: 1, y: 5, w: 2.6, d: 2.6, h: 38,
+        blurb: 'Four live replays and an on-call game.',
+        html:
+          '<p>Four things I\'ve run, replayed from real numbers. Pick one and press play.</p>' +
+          '<div class="item"><div class="kicker">01 · GPU</div><h3>Race two LLM engines</h3><p>Same GPU, same model: which engine serves your users faster?</p></div>' +
+          '<div class="item"><div class="kicker">02 · Kubernetes</div><h3>Watch 2,000+ servers become 50+ clusters</h3><p>Then kill a cluster and see what happens.</p></div>' +
+          '<div class="item"><div class="kicker">03 · Network security</div><h3>Same attack, two networks</h3><p>Flat 2022 network vs the segmented one we rebuilt.</p></div>' +
+          '<div class="item"><div class="kicker">04 · You\'re on call</div><h3>It\'s 07:00 and your phone rings</h3><p>Six calls built from a real incident. What do you do?</p><div class="links">' + L('writing/oncall.html', 'Take the on-call shift') + '</div></div>' +
+          '<div class="links">' + L('plain.html#live', 'Open the live demos') + '</div>' },
+
+      { id: 'security', name: 'Security Gate', kicker: 'SOC · incident response', color: C.warm, x: 11, y: 9.0, w: 1.1, d: 1.0, h: 26,
+        blurb: 'Ransomware recovery and the security program after it.',
+        html:
+          '<div class="item"><div class="kicker">Zycus · 2022</div><div class="metric">1,500+</div><h3>Ransomware recovery</h3><p>One of the first responders. We shut everything down on purpose to stop the spread, built a clean standalone machine to reach data and VMware, and rebuilt 7 environments in isolated pieces.</p><div class="links">' + L('writing/ransomware-recovery-postmortem.html', 'Read the postmortem') + L('writing/oncall.html', 'Play the first call') + '</div></div>' +
+          '<div class="item"><div class="kicker">After the incident</div><h3>Segmented network and DR</h3><p>Transit Gateway, segmented VPCs and 20 Palo Alto firewalls across 10 AWS environments plus 5 on-prem FortiGates; Zscaler, CrowdStrike and CyberArk; a new Veeam backup and DR program.</p><div class="links">' + L('plain.html#live', 'Watch the network demo') + '</div></div>' +
+          '<div class="item"><div class="kicker">Sidecoach</div><h3>Security program from zero</h3><p>Enforced MFA, Intune-managed laptops, COPPA, FERPA and PCI DSS, and SOC 2 readiness started.</p></div>' },
+
+      { id: 'research', name: 'Research Lab', kicker: 'Papers · quantum · AI', color: C.violet, x: 9.5, y: 5, w: 2.6, d: 2.6, h: 32,
+        blurb: 'SPARK, HERO-S and quantum computing research.',
+        html:
+          '<div class="item"><div class="kicker">IEEE ISAIA 2026 · accepted</div><h3>HERO-S: QPU-Aware Energy-Latency Orchestration for AIoT Intrusion Detection</h3><p>Routes AI jobs across CPU, GPU, cloud and edge by cost, energy and latency: 72 to 98% less energy.</p></div>' +
+          '<div class="item"><div class="kicker">SEET-26 · accepted</div><h3>HERO: Cost-Energy-Latency Trade-offs in Hybrid Quantum-Classical Cloud Workloads</h3></div>' +
+          '<div class="item"><div class="kicker">IEEE UEMCON 2025</div><h3>SPARK: Smart Plug-and-Play AI Framework for RAG &amp; Knowledge</h3><div class="links">' + L('https://doi.org/10.1109/UEMCON67449.2025.11267528', 'Paper', 1) + '</div></div>' +
+          '<div class="item"><div class="kicker">Computers (MDPI) · 2026</div><h3>Energy-Efficient AI for Foundation Models</h3><div class="links">' + L('https://doi.org/10.3390/computers15100660', 'Paper', 1) + '</div></div>' +
+          '<div class="item"><div class="kicker">Springer · 2026</div><h3>Quantum Computing: Grover\'s Algorithm for String Search and Its Practical Limits</h3><div class="links">' + L('https://doi.org/10.1007/978-3-032-08977-9_40', 'Paper', 1) + '</div></div>' +
+          '<div class="links">' + L('quantum/', 'Quantum research') + L('ai/', 'Applied AI') + L('plain.html#research', 'Photos and more') + '</div>' },
+
+      { id: 'journey', name: 'Commissioning Log', kicker: 'Journey · 2016 → now', color: C.ink, x: 12.3, y: 1.0, w: 1.2, d: 1.2, h: 92, ly: 40,
+        blurb: 'From a classroom in Mumbai to running AI infrastructure.',
+        html:
+          '<ul class="tl">' +
+          '<li><b>2026 → now</b>Founding Platform Engineer · Sidecoach Sports, Waco TX. Platform, AI gateway, SRE agents, security program.</li>' +
+          '<li><b>2025</b>Cloud and AI Engineer Intern · State Street, Boston. AI assistant in Teams, Amazon Q across 44 accounts.</li>' +
+          '<li><b>2024 → 2026</b>Research Assistant · Quinnipiac University, M.S. Computer Science. GPU clusters, LLM benchmarks, 5 papers; grew the group from 2 to 10+.</li>' +
+          '<li><b>2024</b>DevOps Engineer, freelance · Ini8 Labs. IaC for AWS and DigitalOcean, k3s, CI security scanning.</li>' +
+          '<li><b>2023 → 2024</b>Senior Software Engineer, SaaS Infra · Zycus. 2,000+ servers onto 50+ clusters; repeat tickets down ~80%.</li>' +
+          '<li><b>2022</b>Software Engineer, SaaS Infra · Zycus. Ransomware first responder; rebuilt the network and DR.</li>' +
+          '<li><b>2021</b>Trainee → Associate, Cloud Operations · Zycus. Started on the Linux team; first project award within 7 months.</li>' +
+          '<li><b>2016 → 2023</b>Science and math teacher · Mumbai, about 7 years. B.E., University of Mumbai.</li>' +
+          '</ul><div class="links">' + L('plain.html#journey', 'Full journey') + '</div>' },
+
+      { id: 'archive', name: 'Archive', kicker: 'Writing', color: C.muted, x: 1, y: 9, w: 2.4, d: 2.0, h: 26,
+        blurb: 'Postmortems and benchmark write-ups.',
+        html:
+          '<div class="item"><div class="kicker">Incident review · 7 min</div><h3>The morning ransomware took 1,500 servers down</h3><p>A blameless postmortem: three hours from a vague phone call to a confirmed attack, shutting everything down on purpose, and rebuilding 7 environments.</p><div class="links">' + L('writing/ransomware-recovery-postmortem.html', 'Read') + '</div></div>' +
+          '<div class="item"><div class="kicker">Benchmark · 6 min</div><h3>vLLM vs SGLang on a T4: what 2,048 requests showed</h3><p>Why vLLM served 609 vs 384 tok/s at 64 users, and why 4-bit helped one user far more than 64.</p><div class="links">' + L('writing/vllm-vs-sglang-t4.html', 'Read') + '</div></div>' +
+          '<div class="item"><div class="kicker">Interactive</div><h3>You\'re on call</h3><p>Six calls from a real incident.</p><div class="links">' + L('writing/oncall.html', 'Play') + '</div></div>' },
+
+      { id: 'dispatch', name: 'Dispatch', kicker: 'Contact', color: C.metric, x: 8.6, y: 11.4, w: 2.2, d: 1.6, h: 18,
+        blurb: 'Email, phone, LinkedIn, résumé.',
+        html:
+          '<p>Working on AI infrastructure? Let\'s talk.</p>' +
+          '<div class="item"><h3>daglinirmit@gmail.com</h3><div class="links">' + L('mailto:daglinirmit@gmail.com', 'Email me') + L('tel:+14753174538', '475 317 4538') + L('https://www.linkedin.com/in/nirmit-dagli-62857916a', 'LinkedIn', 1) + L('https://github.com/Nirmitdagli', 'GitHub', 1) + L('Nirmit_Dagli_Resume.pdf', 'Résumé (PDF)', 1) + '</div></div>' +
+          '<p style="color:#5B6170">Texas · open to relocating anywhere in the US.</p>' +
+          '<p style="color:#5B6170">Outside work I taught science and math in Mumbai for about 7 years, play midfield on weekends, and write poetry in Hindi, Urdu and English.</p>' }
+    ];
+
+    // ---------------- Draw ----------------
+    var svg = document.getElementById('map');
+    var ground = el('g', {}, svg), roads = el('g', {}, svg), traffic = el('g', {}, svg), city = el('g', {}, svg);
+
+    // Ground plate with tile grid
+    var N = 14;
+    poly([P(0, 0), P(N, 0), P(N, N), P(0, N)], '#F4F3EE', ground, { stroke: '#E1DED5' });
+    for (var i = 1; i < N; i++) {
+      el('line', { x1: P(i, 0)[0], y1: P(i, 0)[1], x2: P(i, N)[0], y2: P(i, N)[1], stroke: 'rgba(20,22,26,.05)' }, ground);
+      el('line', { x1: P(0, i)[0], y1: P(0, i)[1], x2: P(N, i)[0], y2: P(N, i)[1], stroke: 'rgba(20,22,26,.05)' }, ground);
+    }
+    // Plate thickness
+    poly([P(0, N), P(N, N), P(N, N, -10), P(0, N, -10)], '#E4E1D8', ground);
+    poly([P(N, 0), P(N, N), P(N, N, -10), P(N, 0, -10)], '#D5D2C8', ground);
+
+    // Roads (ground strips) and the packet paths that run on them
+    function strip(x1, y1, x2, y2, wdt) {
+      var hw = wdt / 2, q;
+      if (y1 === y2) q = [P(x1, y1 - hw), P(x2, y1 - hw), P(x2, y1 + hw), P(x1, y1 + hw)];
+      else q = [P(x1 - hw, y1), P(x1 + hw, y1), P(x1 + hw, y2), P(x1 - hw, y2)];
+      poly(q, '#E7E5DE', roads, { stroke: 'none' });
+    }
+    strip(0.3, 4.15, 13.7, 4.15, 0.55);
+    strip(0.3, 8.1, 13.7, 8.1, 0.55);
+    strip(8.25, 0.3, 8.25, 13.7, 0.55);
+    strip(8.25, 10.55, 13.9, 10.55, 0.55);
+    // dashed center lines
+    function dash(a, b) {
+      var p = P(a[0], a[1]), q = P(b[0], b[1]);
+      el('line', { x1: p[0], y1: p[1], x2: q[0], y2: q[1], stroke: '#FFFFFF', 'stroke-width': 1.4, 'stroke-dasharray': '6 7' }, roads);
+    }
+    dash([0.3, 4.15], [13.7, 4.15]); dash([0.3, 8.1], [13.7, 8.1]); dash([8.25, 0.3], [8.25, 13.7]); dash([8.25, 10.55], [13.9, 10.55]);
+
+    var paths = [
+      { d: [[0.3, 4.15], [13.7, 4.15]], c: C.metric, dur: 7 },
+      { d: [[13.7, 8.1], [0.3, 8.1]], c: C.accent, dur: 8 },
+      { d: [[8.25, 0.3], [8.25, 13.7]], c: C.violet, dur: 7.5 },
+      { d: [[13.9, 10.55], [8.25, 10.55], [8.25, 4.15], [0.3, 4.15]], c: C.warm, dur: 9 },
+      { d: [[0.3, 8.1], [8.25, 8.1], [8.25, 0.3]], c: C.metric, dur: 8.5 }
+    ];
+    paths.forEach(function (p, k) {
+      var dd = 'M' + p.d.map(function (q) { var s = P(q[0], q[1]); return s[0].toFixed(1) + ' ' + s[1].toFixed(1); }).join(' L');
+      for (var j = 0; j < 3; j++) {
+        var c = el('circle', { r: 3.2, fill: p.c, opacity: .85 }, traffic);
+        var am = el('animateMotion', { dur: p.dur + 's', repeatCount: 'indefinite', path: dd, begin: (-(p.dur / 3) * j - k).toFixed(2) + 's' }, c);
       }
-      const lx = k => k * G - ox, ly = k => k * G - oy;
-      function spawn() {
-        const horiz = Math.random() < .55, dir = Math.random() < .5 ? 1 : -1;
-        const cols = Math.ceil(W / G) + 1, rows = Math.ceil(H / G) + 1;
-        const p = { horiz, dir, v: 70 + Math.random() * 90, len: 60 + Math.random() * 90, c: colors[(Math.random() * colors.length) | 0], life: 0 };
-        if (horiz) { p.y = ly(1 + ((Math.random() * (rows - 2)) | 0)); p.x = dir > 0 ? -p.len : W + p.len; }
-        else { p.x = lx(1 + ((Math.random() * (cols - 2)) | 0)); p.y = dir > 0 ? -p.len : H + p.len; }
-        return p;
-      }
-      function frame(t) {
-        if (!run) return;
-        const dt = Math.min(.05, (t - last) / 1000 || 0); last = t;
-        ctx.clearRect(0, 0, W, H);
-        // cursor glow: brighter grid near the pointer
-        if (mx > -500) {
-          const R = 170, x0 = Math.floor((mx - R + ox) / G), x1 = Math.ceil((mx + R + ox) / G), y0 = Math.floor((my - R + oy) / G), y1 = Math.ceil((my + R + oy) / G);
-          const g = ctx.createRadialGradient(mx, my, 0, mx, my, R); g.addColorStop(0, 'rgba(36,83,214,.38)'); g.addColorStop(1, 'rgba(36,83,214,0)');
-          ctx.strokeStyle = g; ctx.lineWidth = 1; ctx.beginPath();
-          for (let k = x0; k <= x1; k++) { const x = lx(k) + .5; ctx.moveTo(x, my - R); ctx.lineTo(x, my + R); }
-          for (let k = y0; k <= y1; k++) { const y = ly(k) + .5; ctx.moveTo(mx - R, y); ctx.lineTo(mx + R, y); }
-          ctx.stroke();
-          ctx.fillStyle = g;
-          for (let a = x0; a <= x1; a++) for (let b = y0; b <= y1; b++) { const x = lx(a), y = ly(b); if (Math.hypot(x - mx, y - my) < R) { ctx.beginPath(); ctx.arc(x + .5, y + .5, 1.6, 0, 6.283); ctx.fill(); } }
+    });
+
+    // Small decorative trees
+    function tree(x, y) {
+      var g = el('g', {}, city), b = P(x, y);
+      el('ellipse', { cx: b[0], cy: b[1], rx: 7, ry: 3.5, fill: 'rgba(20,22,26,.08)' }, g);
+      el('rect', { x: b[0] - 1.2, y: b[1] - 8, width: 2.4, height: 8, fill: '#8A7A66' }, g);
+      el('circle', { cx: b[0], cy: b[1] - 13, r: 7, fill: '#7FA88E' }, g);
+      el('circle', { cx: b[0] - 2.5, cy: b[1] - 15, r: 3, fill: '#97BCA4' }, g);
+      return g;
+    }
+
+    // Building details
+    function racks(g, b, rows) {
+      // dark server windows on the front-left face with blinking LEDs
+      var n = Math.max(2, Math.floor(b.w * 1.6)), gap = b.w / n;
+      for (var r = 0; r < rows; r++) {
+        var v0 = 8 + r * ((b.h - 14) / rows), v1 = v0 + ((b.h - 14) / rows) - 6;
+        for (var k = 0; k < n; k++) {
+          var u0 = k * gap + gap * 0.18, u1 = (k + 1) * gap - gap * 0.18;
+          poly([fl(b, u0, v0), fl(b, u1, v0), fl(b, u1, v1), fl(b, u0, v1)], '#20232A', g, { stroke: 'none' });
+          var m = fl(b, (u0 + u1) / 2, (v0 + v1) / 2);
+          if ((k + r) % 2 === 0) el('circle', { cx: m[0] - 3, cy: m[1], r: 1.3, fill: '#36D399', class: 'led', style: 'animation-delay:' + ((k * 0.37 + r * 0.21) % 1.6).toFixed(2) + 's' }, g);
+          else el('circle', { cx: m[0] + 2, cy: m[1] - 1, r: 1.2, fill: '#6EA0FF', class: 'led', style: 'animation-delay:' + ((k * 0.53 + r * 0.17) % 1.6).toFixed(2) + 's' }, g);
         }
-        // packets with trails
-        while (packets.length < Math.max(8, Math.round(W / 110))) packets.push(spawn());
-        packets.forEach(p => {
-          if (p.horiz) p.x += p.dir * p.v * dt; else p.y += p.dir * p.v * dt;
-          const hx = p.x, hy = p.y, tx = p.horiz ? hx - p.dir * p.len : hx, ty = p.horiz ? hy : hy - p.dir * p.len;
-          const g = ctx.createLinearGradient(tx, ty, hx, hy); g.addColorStop(0, `rgba(${p.c},0)`); g.addColorStop(1, `rgba(${p.c},.55)`);
-          ctx.strokeStyle = g; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(tx + .5, ty + .5); ctx.lineTo(hx + .5, hy + .5); ctx.stroke();
-          ctx.fillStyle = `rgba(${p.c},.85)`; ctx.beginPath(); ctx.arc(hx + .5, hy + .5, 2.2, 0, 6.283); ctx.fill();
-          // occasionally light up the intersection it passes
-          const onX = p.horiz ? Math.abs(((hx + ox) % G + G) % G) < 2 : true, onY = p.horiz ? true : Math.abs(((hy + oy) % G + G) % G) < 2;
-          if (onX && onY && Math.random() < .04) pulses.push({ x: Math.round((hx + ox) / G) * G - ox, y: Math.round((hy + oy) / G) * G - oy, a: 1, c: p.c });
-        });
-        packets = packets.filter(p => p.horiz ? (p.x > -p.len * 2 && p.x < W + p.len * 2) : (p.y > -p.len * 2 && p.y < H + p.len * 2));
-        pulses.forEach(q => { q.a -= dt * 1.1; ctx.strokeStyle = `rgba(${q.c},${Math.max(0, q.a) * .5})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(q.x + .5, q.y + .5, 4 + (1 - q.a) * 10, 0, 6.283); ctx.stroke(); });
-        pulses = pulses.filter(q => q.a > 0);
-        requestAnimationFrame(frame);
       }
-      size(); addEventListener('resize', size);
-      wrap.addEventListener('pointermove', e => { const r = wrap.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
-      wrap.addEventListener('pointerleave', () => { mx = my = -999; });
-      if ('IntersectionObserver' in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; if (v && !run) { run = true; last = performance.now(); requestAnimationFrame(frame); } run = v; }).observe(wrap);
-      requestAnimationFrame(t => { last = t; frame(t); });
-    })();
-
-    // Migration demo: ~200 dots (about 10 servers each) into 50 clusters
-    (function () {
-      const svg = document.getElementById('mig-svg'); if (!svg) return;
-      const NS = 'http://www.w3.org/2000/svg', N = 200, C = 50;
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
-      const kinds = [['VMware', '#9A978E'], ['KVM', '#B8B3A6'], ['Bare metal', '#6E7380']];
-      svg.appendChild(el('text', { x: 20, y: 18, 'font-size': 12, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = 'Before: VMs and bare metal';
-      svg.appendChild(el('text', { x: 440, y: 18, 'font-size': 12, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = 'After: Kubernetes clusters';
-      kinds.forEach((k, i) => { svg.appendChild(el('circle', { cx: 26 + i * 92, cy: 318, r: 4, fill: k[1] })); svg.appendChild(el('text', { x: 34 + i * 92, y: 322, 'font-size': 11, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = k[0]; });
-      const home = [], dest = [], dots = [], cl = [];
-      for (let i = 0; i < N; i++) { const c = i % 20, r = Math.floor(i / 20); home.push([28 + c * 15.5, 44 + r * 25]); }
-      for (let j = 0; j < C; j++) { const c = j % 10, r = Math.floor(j / 10); const cx = 462 + c * 34, cy = 64 + r * 50;
-        const hex = el('polygon', { points: [0,1,2,3,4,5].map(k => { const a = Math.PI / 3 * k + Math.PI / 6; return (cx + 14 * Math.cos(a)).toFixed(1) + ',' + (cy + 14 * Math.sin(a)).toFixed(1); }).join(' '), fill: '#FAFAF7', stroke: '#D8D4C9', 'stroke-width': 1.5 });
-        svg.appendChild(hex); cl.push({ hex, cx, cy, n: 0 }); }
-      for (let i = 0; i < N; i++) { const j = Math.floor(i / 4), cc = cl[j], a = (i % 4) * Math.PI / 2 + .6; dest.push([cc.cx + 5 * Math.cos(a), cc.cy + 5 * Math.sin(a)]);
-        const d = el('circle', { cx: home[i][0], cy: home[i][1], r: 3.6, fill: kinds[(i * 7) % 3][1] }); svg.appendChild(d); dots.push(d); }
-      const sweep = el('rect', { x: 440, y: 40, width: 3, height: 250, fill: '#0A7A55', opacity: 0, rx: 1.5 }); svg.appendChild(sweep);
-      const $ = id => document.getElementById(id);
-      const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      let raf = 0, done = false;
-      function paint(t) { // t in seconds, 0..7
-        let moved = 0, live = 0;
-        cl.forEach(c => c.n = 0);
-        for (let i = 0; i < N; i++) {
-          const start = (i / N) * 3.2, p = Math.min(1, Math.max(0, (t - start) / 0.9)), e = ease(p);
-          const x = home[i][0] + (dest[i][0] - home[i][0]) * e, y = home[i][1] + (dest[i][1] - home[i][1]) * e - Math.sin(Math.PI * e) * 40;
-          dots[i].setAttribute('cx', x.toFixed(1)); dots[i].setAttribute('cy', y.toFixed(1));
-          if (p >= 1) { moved++; cl[Math.floor(i / 4)].n++; dots[i].setAttribute('fill', '#2453D6'); } else dots[i].setAttribute('fill', kinds[(i * 7) % 3][1]);
+    }
+    function windowsRight(g, b, rows, fill) {
+      var n = Math.max(1, Math.floor(b.d * 1.4)), gap = b.d / n;
+      for (var r = 0; r < rows; r++) {
+        var v0 = 8 + r * ((b.h - 12) / rows), v1 = v0 + ((b.h - 12) / rows) - 7;
+        for (var k = 0; k < n; k++) {
+          var u0 = k * gap + gap * 0.22, u1 = (k + 1) * gap - gap * 0.22;
+          poly([fr(b, u0, v0), fr(b, u1, v0), fr(b, u1, v1), fr(b, u0, v1)], fill || '#BFD0F5', g, { stroke: 'none', opacity: .9 });
         }
-        cl.forEach(c => { const on = c.n === 4; if (on) live++; c.hex.setAttribute('fill', on ? '#EEF2FF' : '#FAFAF7'); c.hex.setAttribute('stroke', on ? '#2453D6' : '#D8D4C9'); });
-        const sw = Math.min(1, Math.max(0, (t - 4.6) / 1.4));
-        sweep.setAttribute('opacity', sw > 0 && sw < 1 ? .8 : 0); sweep.setAttribute('x', 440 + sw * 350);
-        cl.forEach(c => { if (sw > 0 && c.cx < 440 + sw * 350) c.hex.setAttribute('stroke', '#0A7A55'); });
-        $('mig-s').textContent = t >= 4.2 ? '2,000+' : Math.round(moved * 10).toLocaleString('en-US');
-        $('mig-c').textContent = t >= 4.2 ? '50+' : String(live);
-        $('mig-g').textContent = sw >= 1 ? '✓ synced' : (sw > 0 ? 'syncing…' : '·');
-        $('mig-p').textContent = t >= 6.3 ? '~40% faster' : '·';
       }
-      const kill = $('mig-kill'), msg = $('mig-msg');
-      function finished() { kill.disabled = false; msg.textContent = 'Migrated. Now break something: kill a cluster.'; }
-      function run() { cancelAnimationFrame(raf); done = true; kill.disabled = true; msg.innerHTML = '&nbsp;'; if (reduce) { paint(7); finished(); return; } const t0 = performance.now(); const tick = n => { const t = (n - t0) / 1000; paint(Math.min(7, t)); if (t < 7) raf = requestAnimationFrame(tick); else finished(); }; raf = requestAnimationFrame(tick); }
-      function tween(list, ms, cb) { // list of [dotIndex, [x0,y0], [x1,y1]]
-        if (reduce) { list.forEach(([i, a, b]) => { dots[i].setAttribute('cx', b[0]); dots[i].setAttribute('cy', b[1]); }); return cb && cb(); }
-        const t0 = performance.now();
-        const st = n => { const p = Math.min(1, (n - t0) / ms), e = ease(p); list.forEach(([i, a, b]) => { dots[i].setAttribute('cx', (a[0] + (b[0] - a[0]) * e).toFixed(1)); dots[i].setAttribute('cy', (a[1] + (b[1] - a[1]) * e - Math.sin(Math.PI * e) * 18).toFixed(1)); }); if (p < 1) requestAnimationFrame(st); else cb && cb(); };
-        requestAnimationFrame(st);
-      }
-      kill.addEventListener('click', () => {
-        kill.disabled = true;
-        const j = (Math.random() * C) | 0, c = cl[j];
-        c.hex.setAttribute('fill', '#FBE9E1'); c.hex.setAttribute('stroke', '#B4532A');
-        const mine = [0, 1, 2, 3].map(k => j * 4 + k);
-        const others = [j - 1, j + 1, j - 10, j + 10].map(x => (x + C) % C);
-        const moves = mine.map((i, k) => { const o = cl[others[k]]; return [i, [dest[i][0], dest[i][1]], [o.cx + (k - 1.5) * 3, o.cy + 9]]; });
-        msg.textContent = 'Cluster down. Kubernetes reschedules its workloads onto healthy clusters…';
-        tween(moves, 900, () => setTimeout(() => {
-          msg.textContent = 'Velero restores the cluster from backup. Workloads move home.';
-          c.hex.setAttribute('fill', '#EEF2FF'); c.hex.setAttribute('stroke', '#0A7A55');
-          tween(moves.map(([i, a, b]) => [i, b, a]), 900, () => { msg.textContent = 'Back to 50+ healthy clusters.'; kill.disabled = false; });
-        }, 900));
-      });
-      paint(0);
-      $('mig-run').addEventListener('click', run);
-      if ('IntersectionObserver' in window) { const o = new IntersectionObserver(es => { if (es[0].isIntersecting && !done) { run(); o.disconnect(); } }, { threshold: 0.5 }); o.observe(svg); }
-    })();
+    }
+    function stripe(g, b, col) {
+      // colored brand band near the roofline on both faces
+      var v0 = b.h - 6, v1 = b.h - 2;
+      poly([fl(b, 0, v0), fl(b, b.w, v0), fl(b, b.w, v1), fl(b, 0, v1)], col, g, { stroke: 'none' });
+      poly([fr(b, 0, v0), fr(b, b.d, v0), fr(b, b.d, v1), fr(b, 0, v1)], col, g, { stroke: 'none', opacity: .8 });
+    }
+    function door(g, b, col) {
+      var u = b.w / 2;
+      poly([fl(b, u - 0.22, 0), fl(b, u + 0.22, 0), fl(b, u + 0.22, 13), fl(b, u - 0.22, 13)], col || '#2B2F37', g, { stroke: 'none' });
+    }
+    function roofFan(g, cx, cy, z) {
+      var c = P(cx, cy, z);
+      box(g, cx - 0.35, cy - 0.35, 0.7, 0.7, 5, z, { t: '#E9E7E0', l: '#D6D3CA', r: '#C7C4BA' });
+      var t = P(cx, cy, z + 5);
+      el('ellipse', { cx: t[0], cy: t[1], rx: 9, ry: 4.5, fill: '#2B2F37' }, g);
+      var f = el('g', { class: 'fan' }, g);
+      el('rect', { x: t[0] - 7, y: t[1] - 0.9, width: 14, height: 1.8, fill: '#9AA0AC', rx: 1 }, f);
+      el('rect', { x: t[0] - 0.9, y: t[1] - 3.5, width: 1.8, height: 7, fill: '#9AA0AC', rx: 1 }, f);
+    }
+    function label(g, b) {
+      var c = P(b.x + b.w / 2, b.y + b.d / 2, b.h + (b.extra || 0) + 20 + (b.ly || 0));
+      var lg = el('g', { class: 'lbl' }, g);
+      var w = b.name.length * 7.3 + 36;
+      el('rect', { x: c[0] - w / 2, y: c[1] - 12, width: w, height: 24, rx: 12, fill: '#FFFFFF', stroke: '#D9D6CC' }, lg);
+      el('circle', { cx: c[0] - w / 2 + 12, cy: c[1], r: 3.5, fill: b.color }, lg);
+      var t = el('text', { x: c[0] - w / 2 + 22, y: c[1] + 4.2, 'text-anchor': 'start', 'font-family': 'Inter, system-ui, sans-serif', 'font-size': 12, 'font-weight': 600, fill: '#14161A' }, lg);
+      t.textContent = b.name;
+      var s = el('g', { class: 'seen' }, lg);
+      el('circle', { cx: c[0] + w / 2 - 2, cy: c[1] - 10, r: 6, fill: C.metric }, s);
+      el('path', { d: 'M' + (c[0] + w / 2 - 5) + ' ' + (c[1] - 10) + ' l2.2 2.2 l4 -4.4', stroke: '#fff', 'stroke-width': 1.6, fill: 'none', 'stroke-linecap': 'round' }, s);
+      var ln = P(b.x + b.w / 2, b.y + b.d / 2, b.h + (b.extra || 0));
+      el('line', { x1: ln[0], y1: ln[1], x2: c[0], y2: c[1] + 12, stroke: '#C9C5B9', 'stroke-width': 1, 'stroke-dasharray': '2 3' }, g);
+    }
 
-    // Blast-radius demo: flat vs segmented network, 7 environments
-    (function () {
-      const svg = document.getElementById('bl-svg'); if (!svg) return;
-      const NS = 'http://www.w3.org/2000/svg', Z = 7, PER = 8;
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
-      const names = ['Prod 1', 'Prod 2', 'Prod 3', 'Prod 4', 'Staging', 'QA', 'Dev'];
-      const nodes = [], zoneEls = [], fw = [];
-      const zw = 104, gx = 10;
-      const gEdges = el('g', {}); svg.appendChild(gEdges);
-      for (let z = 0; z < Z; z++) {
-        const x0 = 12 + z * (zw + gx);
-        const r = el('rect', { x: x0, y: 30, width: zw, height: 236, rx: 10, fill: 'none', stroke: '#E0DCD1', 'stroke-dasharray': '4 4' }); svg.appendChild(r); zoneEls.push(r);
-        svg.appendChild(el('text', { x: x0 + zw / 2, y: 22, 'text-anchor': 'middle', 'font-size': 11, fill: '#7A7F8A', 'font-family': 'Inter, sans-serif' })).textContent = names[z];
-        for (let k = 0; k < PER; k++) { const cx = x0 + 28 + (k % 2) * 48, cy = 62 + Math.floor(k / 2) * 56; const c = el('circle', { cx, cy, r: 9, fill: '#fff', stroke: '#B9B6AC', 'stroke-width': 1.5 }); svg.appendChild(c); nodes.push({ z, k, cx, cy, c, t: Infinity }); }
-        if (z < Z - 1) { const fx = x0 + zw + gx / 2; const f = el('rect', { x: fx - 3, y: 40, width: 6, height: 216, rx: 3, fill: '#B4532A', opacity: 0 }); svg.appendChild(f); fw.push(f); }
+    var draw = {
+      gpu: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, WALL); racks(g, b, 2); windowsRight(g, b, 2, '#C9E5D8'); stripe(g, b, C.metric);
+        for (var k = 0; k < 4; k++) roofFan(g, b.x + 0.9 + k * 1.45, b.y + 1.2, b.h);
+        b.extra = 10;
+      },
+      control: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, WALL); racks(g, b, 3); windowsRight(g, b, 3); stripe(g, b, C.accent);
+        // stacked "control plane" tiers on the roof
+        box(g, b.x + 0.6, b.y + 0.6, b.w - 1.2, b.d - 1.2, 9, b.h, { t: '#F3F5FC', l: '#DCE3F6', r: '#C7D2F0' });
+        box(g, b.x + 1.1, b.y + 1.1, b.w - 2.2, b.d - 2.2, 7, b.h + 9, { t: '#FFFFFF', l: '#C7D2F0', r: '#AFC0EC' });
+        b.extra = 16;
+      },
+      aiops: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, WALL); windowsRight(g, b, 3, '#D9CFF3'); stripe(g, b, C.violet);
+        // glass curtain wall on the front
+        for (var r = 0; r < 3; r++) { var v0 = 7 + r * 13, v1 = v0 + 9; poly([fl(b, 0.2, v0), fl(b, b.w - 0.2, v0), fl(b, b.w - 0.2, v1), fl(b, 0.2, v1)], '#CBBEF0', g, { stroke: 'none', opacity: .9 }); }
+        door(g, b);
+        // neural mesh on the roof
+        var t = [P(b.x + 0.6, b.y + 0.6, b.h), P(b.x + 2.4, b.y + 0.7, b.h), P(b.x + 1.5, b.y + 1.6, b.h), P(b.x + 0.7, b.y + 2.0, b.h), P(b.x + 2.4, b.y + 2.0, b.h)];
+        [[0, 1], [0, 2], [1, 2], [2, 3], [2, 4], [3, 4], [1, 4]].forEach(function (e) { el('line', { x1: t[e[0]][0], y1: t[e[0]][1], x2: t[e[1]][0], y2: t[e[1]][1], stroke: C.violet, 'stroke-width': 1.2, opacity: .7 }, g); });
+        t.forEach(function (p, k) { el('circle', { cx: p[0], cy: p[1], r: 3, fill: C.violet, class: 'led', style: 'animation-delay:' + (k * .3) + 's' }, g); });
+      },
+      noc: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, WALL); windowsRight(g, b, 2); stripe(g, b, C.accent);
+        // wall of screens
+        for (var k = 0; k < 3; k++) { var u0 = 0.25 + k * 0.75, u1 = u0 + 0.6; poly([fl(b, u0, 14), fl(b, u1, 14), fl(b, u1, 26), fl(b, u0, 26)], '#1D2B4F', g, { stroke: 'none' }); var m = fl(b, (u0 + u1) / 2, 20); el('rect', { x: m[0] - 6, y: m[1] - 1, width: 12, height: 2, fill: k === 1 ? '#36D399' : '#6EA0FF', class: 'led' }, g); }
+        door(g, b);
+        // satellite dish + beam
+        var base = P(b.x + b.w / 2, b.y + b.d / 2, b.h);
+        el('line', { x1: base[0], y1: base[1], x2: base[0], y2: base[1] - 16, stroke: '#7A808C', 'stroke-width': 2 }, g);
+        el('ellipse', { cx: base[0] + 4, cy: base[1] - 21, rx: 11, ry: 6, fill: '#E9E7E0', stroke: '#9AA0AC', transform: 'rotate(-28 ' + (base[0] + 4) + ' ' + (base[1] - 21) + ')' }, g);
+        el('circle', { cx: base[0] + 10, cy: base[1] - 30, r: 5, fill: 'none', stroke: C.accent, 'stroke-width': 1.4, class: 'beam' }, g);
+        b.extra = 22;
+      },
+      security: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, { t: '#FBF4EF', l: '#F0E1D6', r: '#E2CDBE' }); stripe(g, b, C.warm);
+        poly([fl(b, 0.2, 10), fl(b, b.w - 0.2, 10), fl(b, b.w - 0.2, 20), fl(b, 0.2, 20)], '#F6E2C8', g, { stroke: 'none' });
+        // shield on roof
+        var s = P(b.x + b.w / 2, b.y + b.d / 2, b.h + 4);
+        el('path', { d: 'M' + s[0] + ' ' + (s[1] - 12) + ' l9 3 v6 c0 6 -4 9 -9 11 c-5 -2 -9 -5 -9 -11 v-6 z', fill: C.warm }, g);
+        el('path', { d: 'M' + (s[0] - 3.5) + ' ' + (s[1] - 2) + ' l2.6 2.6 l5 -5', stroke: '#fff', 'stroke-width': 1.8, fill: 'none', 'stroke-linecap': 'round' }, g);
+        // boom barrier across the entrance road
+        var a = P(b.x - 0.05, 10.25, 9), c2 = P(b.x - 0.05, 10.25, 0);
+        el('line', { x1: c2[0], y1: c2[1], x2: a[0], y2: a[1], stroke: '#5B6170', 'stroke-width': 2.2 }, g);
+        var e1 = P(b.x - 0.05, 10.25, 9), e2 = P(b.x - 2.6, 10.25, 9);
+        el('line', { x1: e1[0], y1: e1[1], x2: e2[0], y2: e2[1], stroke: C.warm, 'stroke-width': 3, 'stroke-dasharray': '6 5', 'stroke-linecap': 'round' }, g);
+        b.extra = 14;
+      },
+      research: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, WALL); windowsRight(g, b, 2, '#D9CFF3'); stripe(g, b, C.violet); door(g, b);
+        for (var k = 0; k < 2; k++) { var u0 = 0.3 + k * 1.2, u1 = u0 + 0.8; poly([fl(b, u0, 14), fl(b, u1, 14), fl(b, u1, 24), fl(b, u0, 24)], '#CBBEF0', g, { stroke: 'none' }); }
+        // observatory dome (quantum lab)
+        var c = P(b.x + b.w / 2, b.y + b.d / 2, b.h);
+        el('ellipse', { cx: c[0], cy: c[1], rx: 30, ry: 15, fill: '#E4E0F3', stroke: 'rgba(20,22,26,.18)' }, g);
+        el('path', { d: 'M' + (c[0] - 26) + ' ' + c[1] + ' A26 24 0 0 1 ' + (c[0] + 26) + ' ' + c[1] + ' Z', fill: '#EFEBFA', stroke: 'rgba(20,22,26,.2)' }, g);
+        el('path', { d: 'M' + (c[0] - 4) + ' ' + (c[1] - 23) + ' L' + (c[0] + 4) + ' ' + (c[1] - 23) + ' L' + (c[0] + 5) + ' ' + c[1] + ' L' + (c[0] - 5) + ' ' + c[1] + ' Z', fill: '#C9BEEA' }, g);
+        el('circle', { cx: c[0], cy: c[1] - 30, r: 2.5, fill: C.violet, class: 'led' }, g);
+        b.extra = 26;
+      },
+      journey: function (g, b) {
+        // tall cooling tower style log with year bands
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, { t: '#FFFFFF', l: '#EAE8E1', r: '#D7D4CA' });
+        var years = 6;
+        for (var k = 0; k < years; k++) {
+          var v = 10 + k * ((b.h - 16) / years);
+          poly([fl(b, 0, v), fl(b, b.w, v), fl(b, b.w, v + 3), fl(b, 0, v + 3)], k === years - 1 ? C.accent : '#C9C5B9', g, { stroke: 'none' });
+          poly([fr(b, 0, v), fr(b, b.d, v), fr(b, b.d, v + 3), fr(b, 0, v + 3)], k === years - 1 ? '#1B44B8' : '#B8B4A8', g, { stroke: 'none' });
+        }
+        var t = P(b.x + b.w / 2, b.y + b.d / 2, b.h);
+        el('line', { x1: t[0], y1: t[1], x2: t[0], y2: t[1] - 14, stroke: '#7A808C', 'stroke-width': 1.6 }, g);
+        el('circle', { cx: t[0], cy: t[1] - 15, r: 3, fill: '#E5484D', class: 'led' }, g);
+        b.extra = 16;
+      },
+      archive: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, WALL); stripe(g, b, C.muted); door(g, b);
+        // book spines on the front
+        var cols = ['#2453D6', '#0A7A55', '#B4532A', '#6B4FBB', '#14161A', '#2453D6', '#B4532A'];
+        for (var k = 0; k < 7; k++) { var u0 = 0.15 + k * 0.3, u1 = u0 + 0.22; if (u1 > b.w / 2 - 0.3 && u0 < b.w / 2 + 0.3) continue; poly([fl(b, u0, 6), fl(b, u1, 6), fl(b, u1, 17), fl(b, u0, 17)], cols[k], g, { stroke: 'none', opacity: .8 }); }
+        windowsRight(g, b, 1, '#E3E1DA');
+      },
+      reception: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, WALL); stripe(g, b, C.accent);
+        poly([fl(b, 0.2, 4), fl(b, b.w - 0.2, 4), fl(b, b.w - 0.2, 20), fl(b, 0.2, 20)], '#CFDAF6', g, { stroke: 'none', opacity: .95 });
+        door(g, b, '#1B44B8'); windowsRight(g, b, 1);
+        // canopy
+        box(g, b.x + b.w / 2 - 0.7, b.y + b.d, 1.4, 0.5, 2, 17, { t: '#2453D6', l: '#1B44B8', r: '#173A9E' });
+        // flag
+        var f = P(b.x + 0.3, b.y + 0.3, b.h);
+        el('line', { x1: f[0], y1: f[1], x2: f[0], y2: f[1] - 22, stroke: '#7A808C', 'stroke-width': 1.4 }, g);
+        el('path', { d: 'M' + f[0] + ' ' + (f[1] - 22) + ' l12 3 l-12 4 z', fill: C.accent }, g);
+        b.extra = 6;
+      },
+      dispatch: function (g, b) {
+        box(g, b.x, b.y, b.w, b.d, b.h, 0, WALL); stripe(g, b, C.metric);
+        // loading bays
+        for (var k = 0; k < 3; k++) { var u0 = 0.2 + k * 0.68, u1 = u0 + 0.5; poly([fl(b, u0, 0), fl(b, u1, 0), fl(b, u1, 11), fl(b, u0, 11)], '#C9C5B9', g, { stroke: 'none' }); }
+        // envelope on the roof
+        var e = P(b.x + b.w / 2, b.y + b.d / 2, b.h + 6);
+        el('rect', { x: e[0] - 11, y: e[1] - 8, width: 22, height: 15, rx: 2, fill: '#fff', stroke: C.metric, 'stroke-width': 1.4 }, g);
+        el('path', { d: 'M' + (e[0] - 11) + ' ' + (e[1] - 8) + ' l11 8 l11 -8', fill: 'none', stroke: C.metric, 'stroke-width': 1.4 }, g);
+        b.extra = 14;
       }
-      // edges: within zone neighbours; across zones between facing nodes
-      const edges = [];
-      nodes.forEach((a, i) => nodes.forEach((b, j) => { if (j <= i) return;
-        const same = a.z === b.z && Math.hypot(a.cx - b.cx, a.cy - b.cy) < 80;
-        const cross = b.z === a.z + 1 && a.k % 2 === 1 && b.k % 2 === 0 && Math.floor(a.k / 2) === Math.floor(b.k / 2);
-        if (same || cross) { const l = el('line', { x1: a.cx, y1: a.cy, x2: b.cx, y2: b.cy, stroke: '#E0DCD1', 'stroke-width': 1.5 }); gEdges.appendChild(l); edges.push({ i, j, cross, l }); } }));
-      const $ = id => document.getElementById(id);
-      let mode = 'flat', raf = 0, started = false;
-      function setMode(m) { mode = m; document.querySelectorAll('.bl-m').forEach(b => b.setAttribute('aria-checked', String(b.dataset.m === m))); fw.forEach(f => f.setAttribute('opacity', m === 'seg' ? .9 : 0)); zoneEls.forEach(r => { r.setAttribute('stroke', m === 'seg' ? '#B4532A' : '#E0DCD1'); r.setAttribute('stroke-dasharray', m === 'seg' ? '' : '4 4'); r.setAttribute('stroke-opacity', m === 'seg' ? .35 : 1); }); edges.forEach(e => { e.l.setAttribute('stroke-dasharray', e.cross && m === 'seg' ? '2 5' : ''); e.l.setAttribute('stroke', e.cross && m === 'seg' ? '#D9B8A8' : '#E0DCD1'); }); reset(); }
-      let src = 1;
-      function compute() { // BFS infection times (in hops) from the source server
-        nodes.forEach(n => n.t = Infinity); nodes[src].t = 0; const q = [src];
-        while (q.length) { const i = q.shift(); edges.forEach(e => { if (mode === 'seg' && e.cross) return; const j = e.i === i ? e.j : e.j === i ? e.i : -1; if (j < 0 || nodes[j].t !== Infinity) return; nodes[j].t = nodes[i].t + 1; q.push(j); }); }
-      }
-      function paint(h) { // h = hops elapsed
-        const hit = new Set();
-        nodes.forEach(n => { const on = n.t <= h; n.c.setAttribute('fill', on ? '#B4532A' : '#fff'); n.c.setAttribute('stroke', on ? '#93421F' : '#B9B6AC'); if (on) hit.add(n.z); });
-        $('bl-n').textContent = hit.size;
-        return hit.size;
-      }
-      function reset() { cancelAnimationFrame(raf); compute(); paint(-1); $('bl-verdict').textContent = mode === 'flat' ? 'A flat network, like 2022. Release the attack.' : 'Segmented, with firewalls between environments. Release the attack.'; }
-      function run() {
-        cancelAnimationFrame(raf); started = true; compute();
-        const maxH = Math.max(...nodes.filter(n => n.t !== Infinity).map(n => n.t));
-        const finish = () => { const z = paint(maxH); $('bl-verdict').textContent = mode === 'flat' ? 'All 7 environments infected. With nothing to isolate, the only stop button left is shutting everything down. That is what we did.' : 'Contained to ' + z + ' of 7 environments. The firewalls between segments give you a smaller stop button.'; };
-        if (reduce) return finish();
-        $('bl-verdict').textContent = 'Spreading…';
-        const t0 = performance.now(), per = mode === 'flat' ? 260 : 380;
-        const tick = n => { const h = Math.floor((n - t0) / per); if (h >= maxH) return finish(); paint(h); raf = requestAnimationFrame(tick); };
-        raf = requestAnimationFrame(tick);
-      }
-      document.querySelectorAll('.bl-m').forEach(b => b.addEventListener('click', () => { setMode(b.dataset.m); run(); }));
-      $('bl-run').addEventListener('click', run);
-      nodes.forEach((n, i) => n.c.addEventListener('click', () => { src = i; run(); }));
-      setMode('flat');
-      if ('IntersectionObserver' in window) { const o = new IntersectionObserver(es => { if (es[0].isIntersecting && !started) { run(); o.disconnect(); } }, { threshold: 0.5 }); o.observe(svg); }
-    })();
+    };
 
-    // GPU race: replays llm-serving-bench results (Tesla T4, Qwen2.5-1.5B, 512 in / 128 out)
-    (function () {
-      const D = { // ttft and tpot in ms (p50), throughput in output tok/s
-        1:  { vllm: { ttft: 132.8,  tpot: 19.96,  tput: 51 },  sglang: { ttft: 255.6,  tpot: 20.07,  tput: 45 } },
-        16: { vllm: { ttft: 998.3,  tpot: 30.13,  tput: 424 }, sglang: { ttft: 2037.3, tpot: 44.94,  tput: 253 } },
-        64: { vllm: { ttft: 1789.5, tpot: 92.08,  tput: 609 }, sglang: { ttft: 7417.1, tpot: 108.54, tput: 384 } },
-      };
-      const VERDICT = {
-        1:  'One user: almost a tie. Both decode at 20 ms per token, but SGLang takes twice as long to start.',
-        16: 'At 16 users vLLM pulls away: 1.7x the throughput, and the first token arrives in 1.0 s instead of 2.0 s.',
-        64: 'At 64 users vLLM finishes in about 13.6 s. SGLang needs about 21.3 s, and its users wait 7.4 s for the first word.',
-      };
-      const words = 'Kubernetes schedules GPU workloads by treating each GPU as an extended resource. The NVIDIA device plugin advertises how many GPUs a node has, and the scheduler only places a pod where its request fits. For inference, the harder problem is not placement but batching: a serving engine keeps many requests in flight on one GPU and interleaves their decode steps, so total throughput rises while each user sees a slightly slower stream. That trade is the core of capacity planning. Measure time to first token, time per output token and tokens per second together, on your own hardware, before you choose an engine or a quantization format.'.split(' ');
-      const TOKENS = 128;
-      const lanes = [...document.querySelectorAll('.rc-lane')];
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let users = 64, raf = 0, started = false;
-      const $ = id => document.getElementById(id);
-      function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
-      function setUsers(u) { users = u; document.querySelectorAll('.rc-u').forEach(b => b.setAttribute('aria-checked', String(+b.dataset.u === u))); }
-      function frame(state, tReal) {
-        lanes.forEach(l => {
-          const d = D[users][l.dataset.e];
-          const total = users * TOKENS, doneAt = d.ttft / 1000 + TOKENS * d.tpot / 1000;
-          const n = tReal * 1000 < d.ttft ? 0 : Math.min(TOKENS, Math.floor((tReal * 1000 - d.ttft) / d.tpot) + 1);
-          const served = users * n;
-          l.querySelector('.rc-tok').textContent = fmt(served);
-          l.querySelector('.rc-bar').style.width = (100 * served / total).toFixed(1) + '%';
-          const txt = l.querySelector('.rc-text');
-          if (n === 0) txt.innerHTML = '<span class="wait">Waiting for the first token… ' + (tReal).toFixed(1) + ' s</span>';
-          else txt.innerHTML = words.slice(0, Math.max(1, Math.round(n * words.length / TOKENS))).join(' ') + (n < TOKENS ? ' <span class="cur"></span>' : '');
-          txt.scrollTop = txt.scrollHeight;
-          const stat = l.querySelector('.rc-stat');
-          if (served >= total) stat.innerHTML = '<span class="font-medium text-ink">Done in ' + doneAt.toFixed(1) + ' s</span> · first token ' + (d.ttft / 1000).toFixed(1) + ' s · ' + d.tput + ' tok/s';
-          else stat.innerHTML = (users > 1 ? 'Showing user 1 of ' + users + ' · ' : '') + (n ? Math.round(1000 / d.tpot) + ' tokens/s for this user' : '&nbsp;');
-        });
-        $('rc-clock').textContent = tReal.toFixed(1);
+    // Draw back to front
+    var order = B.slice().sort(function (a, b) { return (a.x + a.w + a.y + a.d) - (b.x + b.w + b.y + b.d); });
+    // Trees placed among buildings by depth as well
+    var treesAt = [[0.6, 7.6], [3.9, 6.6], [4.6, 9.4], [3.9, 10.2], [12.9, 6.0], [3.6, 11.9], [1.4, 12.4], [11.9, 12.6], [7.2, 0.5], [12.6, 9.2]];
+    var items = order.map(function (b) { return { k: b.x + b.w + b.y + b.d, b: b }; }).concat(treesAt.map(function (t) { return { k: t[0] + t[1] + 0.2, t: t }; }));
+    items.sort(function (a, b) { return a.k - b.k; });
+
+    var nodes = {};
+    items.forEach(function (it) {
+      if (it.t) { tree(it.t[0], it.t[1]); return; }
+      var b = it.b;
+      var g = el('g', { class: 'bldg', tabindex: 0, role: 'button', 'aria-label': b.name + ': ' + b.blurb, 'data-id': b.id }, city);
+      var sh = [P(b.x + 0.3, b.y + b.d + 0.3), P(b.x + b.w + 0.3, b.y + b.d + 0.3), P(b.x + b.w + 0.3, b.y + 0.3), P(b.x + b.w, b.y)];
+      poly([P(b.x, b.y + b.d), sh[0], sh[1], sh[2], P(b.x + b.w, b.y)], 'rgba(20,22,26,.07)', g, { stroke: 'none' });
+      draw[b.id](g, b);
+      label(g, b);
+      g.addEventListener('click', function () { open(b.id); });
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(b.id); } });
+      nodes[b.id] = g;
+    });
+
+    // Entrance sign
+    var sp = P(13.3, 11.3, 0);
+    var sg = el('g', {}, city);
+    el('rect', { x: sp[0] - 34, y: sp[1] - 34, width: 68, height: 20, rx: 4, fill: '#14161A' }, sg);
+    var st = el('text', { x: sp[0], y: sp[1] - 20.5, 'text-anchor': 'middle', 'font-family': 'JetBrains Mono, monospace', 'font-size': 9.5, fill: '#fff' }, sg); st.textContent = 'ND-CAMPUS-1';
+    el('line', { x1: sp[0], y1: sp[1] - 14, x2: sp[0], y2: sp[1], stroke: '#5B6170', 'stroke-width': 1.6 }, sg);
+
+    // Reduced motion: stop the packets too
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches && svg.pauseAnimations) svg.pauseAnimations();
+
+    // ---------------- Directory ----------------
+    var tour = ['reception', 'gpu', 'control', 'aiops', 'noc', 'security', 'research', 'journey', 'archive', 'dispatch'];
+    var byId = {}; B.forEach(function (b) { byId[b.id] = b; });
+    var dir = document.getElementById('dir');
+    tour.forEach(function (id) {
+      var b = byId[id], li = document.createElement('li');
+      li.innerHTML = '<button type="button" data-open="' + id + '"><span class="sw" style="background:' + b.color + '"></span><span><strong>' + b.name + '</strong><span class="d">' + b.blurb + '</span></span></button>';
+      dir.appendChild(li);
+    });
+    document.querySelectorAll('[data-open]').forEach(function (btn) { btn.addEventListener('click', function () { open(btn.getAttribute('data-open')); }); });
+
+    // ---------------- Visits (light per-viewer convenience) ----------------
+    var visited = {};
+    try { visited = JSON.parse(localStorage.getItem('nd-visited') || '{}') || {}; } catch (e) { visited = {}; }
+    document.getElementById('vtotal').textContent = tour.length;
+    function paintVisits() {
+      var n = 0;
+      tour.forEach(function (id) { if (visited[id]) { n++; nodes[id] && nodes[id].classList.add('visited'); } });
+      document.getElementById('vcount').textContent = n;
+    }
+    paintVisits();
+
+    // ---------------- Drawer ----------------
+    var drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+    var current = null, lastFocus = null;
+    function open(id, fromHash) {
+      var b = byId[id]; if (!b) return;
+      if (!current) lastFocus = document.activeElement;
+      current = id;
+      document.getElementById('d-kicker').textContent = b.kicker;
+      document.getElementById('d-title').textContent = b.name;
+      document.getElementById('d-body').innerHTML = b.html;
+      document.getElementById('d-body').scrollTop = 0;
+      drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); scrim.classList.add('open');
+      Object.keys(nodes).forEach(function (k) { nodes[k].classList.toggle('on', k === id); });
+      visited[id] = 1; try { localStorage.setItem('nd-visited', JSON.stringify(visited)); } catch (e) {}
+      paintVisits();
+      if (!fromHash && location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+      document.getElementById('d-close').focus();
+    }
+    function close() {
+      if (!current) return;
+      drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); scrim.classList.remove('open');
+      Object.keys(nodes).forEach(function (k) { nodes[k].classList.remove('on'); });
+      current = null;
+      history.replaceState(null, '', location.pathname + location.search);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    function step(dirn) { var i = tour.indexOf(current); open(tour[(i + dirn + tour.length) % tour.length]); }
+    document.getElementById('d-close').addEventListener('click', close);
+    scrim.addEventListener('click', close);
+    document.getElementById('d-next').addEventListener('click', function () { step(1); });
+    document.getElementById('d-prev').addEventListener('click', function () { step(-1); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+      else if (current && (e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) step(e.key === 'ArrowRight' ? 1 : -1);
+      else if (current && e.key === 'Tab') {
+        var f = drawer.querySelectorAll('a, button'); if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
-      function run() {
-        cancelAnimationFrame(raf); started = true;
-        const ends = lanes.map(l => { const d = D[users][l.dataset.e]; return d.ttft / 1000 + TOKENS * d.tpot / 1000 + 0.001; });
-        const realEnd = Math.max(...ends);
-        const speed = Math.max(1, realEnd / 6);
-        $('rc-speed').textContent = speed < 1.05 ? '1' : speed.toFixed(1);
-        $('rc-verdict').textContent = 'Running ' + users + (users > 1 ? ' concurrent users' : ' user') + ' on each engine…';
-        if (reduce) { frame(null, realEnd); $('rc-verdict').textContent = VERDICT[users]; return; }
-        const t0 = performance.now();
-        const tick = now => {
-          const tReal = Math.min(realEnd, (now - t0) / 1000 * speed);
-          frame(null, tReal);
-          if (tReal < realEnd) raf = requestAnimationFrame(tick); else $('rc-verdict').textContent = VERDICT[users];
-        };
-        raf = requestAnimationFrame(tick);
-      }
-      document.querySelectorAll('.rc-u').forEach(b => b.addEventListener('click', () => { setUsers(+b.dataset.u); run(); }));
-      $('rc-run').addEventListener('click', run);
-      setUsers(64); frame(null, 0);
-      const sec = $('race');
-      if ('IntersectionObserver' in window) {
-        const o = new IntersectionObserver(es => { if (es[0].isIntersecting && !started) { run(); o.disconnect(); } }, { threshold: 0.45 });
-        o.observe(sec);
-      }
-    })();
-
-    // On-call teaser
-    (function () {
-      const box = document.getElementById('tq'); if (!box) return;
-      const res = document.getElementById('tq-result');
-      const copy = {
-        0: ['Same call we made, and it cost us', '#B4532A', 'It got the priority vague reports usually get. About three hours passed before we confirmed ransomware.'],
-        1: ['Best call', '#0A7A55', 'Better than what we did. We waited, and about three hours passed before we confirmed ransomware.'],
-        2: ['Not the best call', '#B4532A', 'A ticket queue is the slowest path there is. We actually waited for a clearer report, and lost about three hours.'],
-      };
-      box.querySelectorAll('.tq-opt').forEach(b => b.addEventListener('click', () => {
-        const k = +b.dataset.k, c = copy[k];
-        box.querySelectorAll('.tq-opt').forEach(x => {
-          x.disabled = true; if (x === b) x.classList.add('picked'); if (x.dataset.best) x.classList.add('best');
-          const tags = [x.dataset.best ? 'Best call' : '', x.dataset.real ? 'What we did' : ''].filter(Boolean);
-          if (tags.length) x.lastElementChild.insertAdjacentHTML('beforeend', `<span class="mt-1 block text-xs font-medium" style="color:${x.dataset.best ? '#0A7A55' : '#B4532A'}">${tags.join(' · ')}</span>`);
-        });
-        res.innerHTML = `<div class="mt-6 border-l-2 pl-5" style="border-color:${c[1]}">
-          <p class="tag" style="color:${c[1]}">${c[0]}</p>
-          <p class="mt-2 leading-relaxed text-[#474C57]">${c[2]}</p>
-          <p class="mt-4 font-serif text-xl leading-snug">Next: the main data server goes down. Then it gets worse.</p>
-          <a href="writing/oncall.html?from=1&score=${k === 1 ? 1 : 0}" class="mt-5 inline-block rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1B44B8]">Make the next 5 calls →</a>
-          <a href="writing/ransomware-recovery-postmortem.html" class="ml-3 text-sm text-accent hover:underline">or read the postmortem</a>
-        </div>`;
-        res.classList.remove('hidden');
-      }));
-    })();
-
-    // Copy email
-    const toast = document.getElementById('toast');
-    document.querySelectorAll('.copy-btn').forEach(b => b.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(b.dataset.copy); toast.textContent = 'Email copied'; }
-      catch { toast.textContent = b.dataset.copy; }
-      toast.style.opacity = 1; setTimeout(() => toast.style.opacity = 0, 1800);
-    }));
-
-    // Mobile menu
-    const btn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
-    btn.addEventListener('click', () => { const open = menu.classList.toggle('hidden') === false; btn.setAttribute('aria-expanded', String(open)); btn.textContent = open ? 'Close' : 'Menu'; });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); btn.textContent = 'Menu'; }));
-
-    document.getElementById('year').textContent = new Date().getFullYear();
+    });
+    // Deep links: #gpu, #security ...
+    function fromHash() { var h = location.hash.replace('#', ''); if (byId[h]) open(h, true); }
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+  })();
   </script>
 </body>
 </html>
